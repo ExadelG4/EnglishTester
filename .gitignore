@@ -1,1 +1,2 @@
 # содержимое файла .gitignore
+/node_modules
