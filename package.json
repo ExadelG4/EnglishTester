@@ -18,5 +18,8 @@
   "devDependencies": {
     "express": "^4.14.0"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "~4.14.0"
+  }
 }
