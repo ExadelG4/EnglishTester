@@ -1,3 +1,5 @@
-# содержимое файла .gitignore
+#  .gitignore
 node_modules/*
 bower_components/*
+/server/.vscode
+.idea/
