@@ -5,7 +5,7 @@
             "name": "Запустить",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/Mongo.js",
+            "program": "${workspaceRoot}/app.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
