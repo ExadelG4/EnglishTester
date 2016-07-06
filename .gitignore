@@ -1,6 +1,3 @@
-# содержимое файла .gitignore
+#  .gitignore
 node_modules/*
-/node_modules
-*.vscode
-.vscode
-.vscode/
+bower_components/*
