@@ -1,0 +1,22 @@
+{
+  "name": "EnglishTester",
+  "description": "",
+  "main": "client\\app.js",
+  "authors": [
+    "DashaRyabtseva <dasha.ryabtseva47@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angularJS",
+    "bootstrap",
+    "html5",
+    "css3",
+    "sass"
+  ],
+  "homepage": "https://github.com/ExadelG4/EnglishTester",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular": "1.5.7",
+    "angular-animate": "^1.5.7"
+  }
+}
