@@ -1,0 +1,12 @@
+#navigation {
+	text-align:right;
+}
+
+.container {
+	background-color: #b9c4c9;
+}
+
+#input-answer {
+	width:  300px;
+    height: 100px;
+}

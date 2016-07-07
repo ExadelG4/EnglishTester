@@ -1,0 +1,11 @@
+#navigation {
+	text-align:center
+}
+
+.container {
+	background-color: #b9c4c9;
+}
+
+#play {
+	background: url(../../../../play.png) no-repeat top right;
+}

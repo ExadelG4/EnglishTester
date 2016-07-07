@@ -16,6 +16,7 @@
   "homepage": "https://github.com/ExadelG4/EnglishTester",
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "angular": "1.5.7"
+    "angular": "1.5.7",
+    "angularAudioRecorder": "^1.4.1"
   }
 }
