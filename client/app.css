@@ -1,5 +1,6 @@
 body, html {
     min-height: 100%;
+    height: 100%;
 }
 
 html {
@@ -15,7 +16,7 @@ body div, table, span, ul, li, input, select, textarea, a, h6, h5, h4, h3, h2, h
     border-radius: 0 !important;
 }
 
-.nav-tabs, button {
+.nav, button {
     font-family: "Garamond";
     font-size: 18px !important;
 }
