@@ -1,0 +1,22 @@
+body, html {
+    min-height: 100%;
+}
+
+html {
+    font-family: "Trebuchet MS";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body div, table, span, ul, li, input, select, textarea, a, h6, h5, h4, h3, h2, h1, label {
+    border-radius: 0 !important;
+}
+
+.nav-tabs, button {
+    font-family: "Garamond";
+    font-size: 18px !important;
+}
+

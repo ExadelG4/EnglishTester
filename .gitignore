@@ -5,3 +5,4 @@ bower_components/*
 .idea/*
 *.iml
 .idea/
+*.xml
