@@ -19,7 +19,11 @@ div {
 }
 
 span {
+    padding: 5px;
+    color: #2b669a;
+}
+
+.glyphicon-user {
     margin-top: 12px;
     font-size: 25px;
-    color: #2b669a;
 }
