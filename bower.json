@@ -17,6 +17,10 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "angular": "1.5.7",
+<<<<<<< HEAD
     "angularAudioRecorder": "^1.4.1"
+=======
+    "angular-animate": "^1.5.7"
+>>>>>>> 4b5c4ce0e8f1fad036504fb6c969535b32a56d69
   }
 }
