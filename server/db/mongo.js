@@ -1,7 +1,12 @@
 
 var mongoose = require('mongoose');
-var user = require('./schemes/user');
+var infrostructure = require('../Infrostructure/databaseService');
 var path = require('../config.json')
+var user = require('./schemes/user');
+
 mongoose.connect(path.dbPath);
-module.exports.user = user;
+
+exports.user = infrostructure(user);
+
+
 	

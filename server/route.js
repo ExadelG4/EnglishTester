@@ -5,13 +5,13 @@ var path = require("path");
 var router = express.Router();
 
 router.get('/getAll', function(req, res) {
-	service.getAll().then(function(data){
-		res.send(data);
-	}).catch(function(e){
-		console.log(e);
-		res.send({error: e});
-	});
-	 // res.sendFile(path.join(__dirname+'/index.html'));
+	
+  		service.getAllUsers().then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
+
 });
 
 router.post('/',function(req, res) {
