@@ -1,9 +1,7 @@
+
 var mongoose = require('mongoose');
 var user = require('./schemes/user');
-
-mongoose.connect('mongodb://localhost:27017/test');
-
-module.exports = {
-	user: user
-};	
+var path = require('../config.json')
+mongoose.connect(path.dbPath);
+module.exports.user = user;
 	

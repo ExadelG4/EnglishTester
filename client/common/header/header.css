@@ -1,0 +1,25 @@
+nav {
+    padding: 10px;
+    background-color: white;
+}
+
+img {
+    height: 50px;
+    width: 100px;
+}
+
+div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.btn-info {
+    margin-right: 20%;
+    margin-bottom: 13px;
+}
+
+span {
+    margin-top: 12px;
+    font-size: 25px;
+    color: #2b669a;
+}
