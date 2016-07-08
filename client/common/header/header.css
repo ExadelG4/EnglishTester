@@ -1,0 +1,65 @@
+nav {
+    padding: 10px;
+    display: inherit;
+    background-color: white;
+}
+
+img {
+    height: 50px;
+    width: 100px;
+}
+
+div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+span {
+    padding: 5px;
+    color: #2b669a;
+}
+
+.btn-info {
+    margin-right: 50px;
+    margin-bottom: 13px;
+}
+
+.glyphicon-user {
+    margin-top: 12px;
+    font-size: 25px;
+}
+
+.dropdown {
+    display: none;
+}
+
+.butLi {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .nav {
+        display: none !important;
+    }
+
+    .dropdown {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .btn-info {
+        margin-right: 25px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .btn-info {
+        display: none;
+    }
+
+    .butLi {
+        display: inherit;
+    }
+}
+

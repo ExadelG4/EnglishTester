@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Exadel Training</title>
+    <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link type="text/css" rel="stylesheet" href="common/header/header.css">
+    <link type="text/css" rel="stylesheet" href="common/footer/footer.css">
+    <link type="text/css" rel="stylesheet" href="common/login/login.css">
+    <link type="text/css" rel="stylesheet" href="app.css">
+
+</head>
+<body ng-controller="appController">
+    <header ng-if="currentPage !== 'login'" ng-include="'common/header/header.html'"></header>
+    <!--<div ng-include="'common/login/login.html'"></div>-->
+    <div ui-view></div>
+    <footer ng-if="currentPage !== 'login'" ng-include="'common/footer/footer.html'"></footer>
+
+
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="app.js"></script>
+    <script src="common/login/login-controller.js"></script>
+</body>
+
+
+</html>

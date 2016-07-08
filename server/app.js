@@ -5,7 +5,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var router = require('./route');
 
-
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 app.use(express.static(__dirname + '/../'));
 
