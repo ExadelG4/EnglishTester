@@ -1,12 +1,53 @@
 #navigation {
-	text-align:right;
+	text-align:center;
+	padding: 10px;
 }
 
-.container {
+.container-fluid {
 	background-color: #b9c4c9;
 }
 
 #input-answer {
-	width:  300px;
-    height: 100px;
+	resize: none;
+	width:  100%;
+    height: 200px;
+}
+
+.text-que {
+	margin-bottom: 5px;
+	margin-top: 25px;
+
+}
+
+.pagination {
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-right: 5%;
+	vertical-align: middle;
+}
+
+.btn {
+	vertical-align: middle;
+}
+
+textarea {
+	padding: 4px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+@media screen and (max-width: 650px) {
+	.pagination {
+		position: absolute;
+		height: 100%;
+	}
+	.btn {
+		position: static;
+	}
+	#input-answer {
+	resize: none;
+	width:  100%;
+    height: 500px;
+}
+
 }

@@ -1,10 +1,23 @@
 #navigation {
-	text-align:center
+	text-align:center;
+	padding: 10px;
 }
 
-.container {
+.container-fluid {
 	background-color: #b9c4c9;
 }
+
+.pagination {
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-right: 5%;
+	vertical-align: middle;
+}
+
+.btn {
+	vertical-align: middle;
+}
+
 
 #play {
 	background: url(../../../../play.png) no-repeat top right;

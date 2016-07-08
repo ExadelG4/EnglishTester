@@ -1,0 +1,16 @@
+@media screen and (max-width: 650px) {
+	.pagination {
+		position: absolute;
+		height: 100%;
+	}
+	.btn {
+		background-color: red;
+		position: static;
+	}
+	#input-answer {
+	resize: none;
+	width:  100%;
+    height: 500px;
+}
+
+}
