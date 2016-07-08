@@ -20,7 +20,7 @@ span {
 }
 
 .btn-info {
-    margin-right: 20%;
+    margin-right: 50px;
     margin-bottom: 13px;
 }
 
@@ -45,6 +45,10 @@ span {
     .dropdown {
         display: inline-block;
         margin-top: 10px;
+    }
+
+    .btn-info {
+        margin-right: 25px;
     }
 
 }
