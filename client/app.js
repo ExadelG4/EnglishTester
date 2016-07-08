@@ -1,7 +1,4 @@
 var app = angular.module("myApp", ['ui.bootstrap', 'ui.router', 'login']);
-app.controller('myController', ['$scope', '$html', function($scope, $html) {
-    $scope.name = 'Vas';
-}]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -20,22 +17,39 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('news', {
             url: "/news",
-            templateUrl: "common/header/news/news.html",
-            controller: "newsController"
+            templateUrl: "common/header/news/news.html"
         })
         .state('check', {
             url: "/check",
-            templateUrl: "common/header/check/check.html",
-            controller: "checkController"
+            templateUrl: "common/header/check/check.html"
         })
         .state('approve', {
             url: "/approve",
-            templateUrl: "common/header/approve/approve.html",
-            controller: "approveController"
+            templateUrl: "common/header/approve/approve.html"
         })
         .state('addQuestion', {
             url: "/addQuestion",
-            templateUrl: "common/header/addQuestion/addQuestion.html",
-            controller: "addQuestionController"
+            templateUrl: "common/header/addQuestion/addQuestion.html"
         });
 });
+
+app.controller('appController', ['$scope', '$state', function($scope, $state) {
+    $scope.user = {
+        name: "Vasya",
+        password: "pupl"
+    };
+    $scope.currentPage = null;
+    $scope.state = $state;
+    $scope.$watch('state.current.name', function(newVal, oldVal) {
+        if(newVal !== oldVal) {
+            switch(true) {
+                case($state.current.name === 'login'):
+                    $scope.currentPage = 'login';
+                    break;
+                case($state.current.name === 'statistics'):
+                    $scope.currentPage = 'statistics';
+                    break;
+            }
+        }
+    });
+}]);
