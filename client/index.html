@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
@@ -12,9 +12,10 @@
     <link type="text/css" rel="stylesheet" href="app.css">
 
 </head>
-<body>
+<body ng-app="myApp">
     <header ng-include="'common/header/header.html'"></header>
-    <div ng-include="'common/login/login.html'"></div>
+    <!--<div ng-include="'common/login/login.html'"></div>-->
+    <div ui-view></div>
     <footer ng-include="'common/footer/footer.html'"></footer>
 
 
