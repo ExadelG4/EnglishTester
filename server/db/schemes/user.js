@@ -8,6 +8,7 @@ var UserSchema = new Schema(
 			type: String,
 			lowercase: true,
 			unique: true,
+			dropDups: true,
 			required: true
 		},
 		password: {

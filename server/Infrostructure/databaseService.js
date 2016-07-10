@@ -1,4 +1,6 @@
 var q = require('q');
+var jwt = require('jsonwebtoken');
+var key = require('../config.json');
 
 var DatabasService = function (model){
     this.model = model;
@@ -29,6 +31,31 @@ DatabasService.prototype.add = function(email_, password_){
             }
             defer.resolve({ success: true, message: 'Successfully created new user.' });
         });
+    return defer.promise;
+}
+
+DatabasService.prototype.authenticate = function (email_, password_) {
+    var defer = q.defer();
+    this.model.findOne({
+    email: email_
+    }, function(err, user) {
+        if (err) defer.reject(err);
+        
+        if (!user) {
+            defer.resolve({ success: false, message: 'Authentication failed. User not found.' });
+        } else {
+            user.comparePassword(password_, function(err, isMatch) {
+                if (isMatch && !err) {
+                    var token = jwt.sign(user, key.secret, {
+                        expiresIn: 10080 // in seconds
+                        });
+                        defer.resolve({ success: true, token: 'JWT ' + token });
+                } else {
+                    defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
+                }
+            });
+        }
+    });
     return defer.promise;
 }
 

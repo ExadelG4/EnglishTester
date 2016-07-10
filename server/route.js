@@ -28,21 +28,10 @@ router.get('/getAll', function(req, res) {
 });
 
 //athentication--------------------------------
-router.post('/login',function(req, res) {
+router.post('/register',function(req, res) {
 	if(!req.body.email || !req.body.password) {
     	res.json({ success: false, message: 'Please enter email and password.' });
   	} else {
-		// var newUser = new User({
-		// 	email: req.body.email,
-      	// 	password: req.body.password
-    	// });
-
-    	// newUser.save(function(err) {
-		// 	if (err) {
-        // 		return res.json({ success: false, message: 'That email address already exists.'});
-      	// 	}
-		// 	res.json({ success: true, message: 'Successfully created new user.' });
-    	// });
 		service.addNewUser(req.body.email, req.body.password).then(function(data){
 			res.json(data);
 		}).catch(function(err){
@@ -52,6 +41,15 @@ router.post('/login',function(req, res) {
 
   }
 
+});
+
+router.post('/login',function (req, res) {
+
+	service.authenticate(req.body.email, req.body.password).then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
+		res.json(err);
+	});
 });
 
 module.exports = router;
