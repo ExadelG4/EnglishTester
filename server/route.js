@@ -14,8 +14,25 @@ router.get('/getAll', function(req, res) {
 
 });
 
-router.post('/а',function(req, res) {
+router.post('/userFun',function(req, res) {
+		var info = req.body;
+		var method = req.body.method;
 		
+		if(method == "getUser"){
+			
+			service.getUser(info.name).then(function(data){
+			  res.send(data);
+		  }).catch(function (err) {
+			  res.send(err);
+		  });
+		}
+		else if(method == "addUser"){
+			service.addUser(info.data).then(function(data){
+			  res.send(data);
+		  }).catch(function (err) {
+			  res.send(err);
+		  });
+		}
 });
 
 module.exports = router;
