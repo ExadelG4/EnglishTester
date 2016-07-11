@@ -3,12 +3,17 @@ var app = express();
 var mongo = require('./db/mongo');
 var path = require('path');
 var bodyParser = require('body-parser');
-var router = require('./route');
+var router = require('./api/route');
+var passport = require('passport');
+
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 app.use(express.static(__dirname + '/../'));
 
+
+app.use(passport.initialize());
+require('./passport')(passport);
 
 app.use('/',router);
 
