@@ -26,7 +26,6 @@ router.get('/getAll', function(req, res) {
 		  });
 
 });
-
 //athentication--------------------------------
 router.post('/register',function(req, res) {
 	if(!req.body.email || !req.body.password) {
@@ -37,7 +36,6 @@ router.post('/register',function(req, res) {
 		}).catch(function(err){
 			res.json(err);
 		});
-
 
   }
 
@@ -50,6 +48,7 @@ router.post('/login',function (req, res) {
 	}).catch(function (err) {
 		res.json(err);
 	});
+
 });
 
 module.exports = router;
