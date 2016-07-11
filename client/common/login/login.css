@@ -27,7 +27,7 @@ input {
     background: rgba(12, 70, 120, 0.7);
 }
 
-    .login-card input {
+    .login-container input {
         display: block;
         padding: 5px;
         position: relative;
