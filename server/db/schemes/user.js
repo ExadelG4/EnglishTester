@@ -4,7 +4,7 @@ var UserSchema = new Schema(
 	{
   		_id: String,
   		name: String,
-  		pass: String
+  		pass: String,
   		type: {type: String, default: 'guest'},
   		status: {type: Boolean, default: true}
 	});

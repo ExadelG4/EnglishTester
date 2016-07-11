@@ -13,7 +13,11 @@ router.get('/getAll', function(req, res) {
 		  });
 
 });
+router.get('/login', function(req, res) {
+	
+  		res.send("AZAZAZA");
 
+});
 router.post('/userFun',function(req, res) {
 		var info = req.body;
 		var method = req.body.method;
