@@ -16,6 +16,16 @@ DatabasService.prototype.find = function(){
 
     return defer.promise;
 }
+DatabasService.prototype.remove = function(){
+    var defer = q.defer();
+    this.model.remove({},function(err){
+        if(err) defer.reject(err);
+        defer.resolve({message : "Collection removed"});
+
+    });
+
+   return defer.promise;
+}
 DatabasService.prototype.findOne = function(info){
     var defer = q.defer();
     this.model.findOne({email: info},function(err ,data){
@@ -30,15 +40,15 @@ DatabasService.prototype.findOne = function(info){
 DatabasService.prototype.save = function(info){
     var defer = q.defer();
     var user = new  this.model({
-    	name : info.name,
-    	pass : info.pass,
-    	type : info.type
+    	email : info.name,
+    	password: info.pass,
+    	role : info.type
     });
     
     user.save(function(err){
         if(err) defer.reject(err);
 
-        defer.resolve(data);
+        defer.resolve(info);
 
     });
 
