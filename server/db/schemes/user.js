@@ -24,6 +24,7 @@ var UserSchema = new Schema(
 			enum: ['User', 'Teacher', 'Admin','Guest'],
 			default: 'Guest'
 		}
+
 	});
 
 	UserSchema.pre('save', function (next) {

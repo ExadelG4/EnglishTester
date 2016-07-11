@@ -12,8 +12,6 @@ app.use(express.static(__dirname + '/../'));
 
 app.use('/',router);
 
-
-
 app.get('*', function(req, res) {  
 	res.sendFile(path.join(__dirname + '/../client/index.html'));
 });
