@@ -1,0 +1,15 @@
+.breadcrumb {
+    margin: 0;
+    background-color: white;
+}
+
+.stickyFot {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+    .stickyFot > div {
+        width: 100%;
+    }
