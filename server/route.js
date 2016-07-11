@@ -15,7 +15,7 @@ router.get('/getAll', function(req, res) {
 });
 router.get('/login', function(req, res) {
 	
-  		res.send("AZAZAZA");
+  		res.send("AZAZA");
 
 });
 router.post('/userFun',function(req, res) {

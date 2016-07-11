@@ -1,35 +1,39 @@
-var app = angular.module("myApp", ['ui.bootstrap', 'ui.router', 'login']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'statistics', 'news', 'check', 'approve', 'addQuestion']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/login");
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
         .state('login', {
-            url: "/login",
-            templateUrl: "common/login/login.html",
-            controller: "loginController"
+            url: '/login',
+            templateUrl: 'common/login/login.html',
+            controller: 'loginController'
         })
         .state('statistics', {
-            url: "/statistics",
-            templateUrl: "common/header/statistics/statistics.html",
-            controller: "statisticsController"
+            url: '/statistics',
+            templateUrl: 'common/header/statistics/statistics.html',
+            controller: 'statisticsController'
         })
         .state('news', {
-            url: "/news",
-            templateUrl: "common/header/news/news.html"
+            url: '/news',
+            templateUrl: 'common/header/news/news.html',
+            controller: 'newsController'
         })
         .state('check', {
-            url: "/check",
-            templateUrl: "common/header/check/check.html"
+            url: '/check',
+            templateUrl: 'common/header/check/check.html',
+            controller: 'checkController'
         })
         .state('approve', {
-            url: "/approve",
-            templateUrl: "common/header/approve/approve.html"
+            url: '/approve',
+            templateUrl: 'common/header/approve/approve.html',
+            controller: 'approveController'
         })
         .state('addQuestion', {
-            url: "/addQuestion",
-            templateUrl: "common/header/addQuestion/addQuestion.html"
+            url: '/addQuestion',
+            templateUrl: 'common/header/addQuestion/addQuestion.html',
+            controller: 'addQuestionController'
         });
 });
 
