@@ -5,7 +5,7 @@ angular.module('login', []).controller('loginController', ['$scope', '$state', '
     $scope.login = function() {
         //send user on server
         console.log($scope.user.name+' '+$scope.user.password);
-        $state.go('statistics');
+        $state.go('news');
         $http.get('http://localhost:3000/login')
             .then(function(result) {
                 console.log(result.data);
