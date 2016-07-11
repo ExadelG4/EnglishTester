@@ -2,8 +2,13 @@ var user = require('../db/mongo').user;
 function getAllUsers(){
 	return user.find();
 }
+
+function addNewUser(email, pass, name){
+	return user.add(email, pass, name);
+
 function addNewUser(email, pass){
 	return user.add(email, pass);
+
 }
 function authenticate(email, pass){
 	return user.authenticate(email, pass);
