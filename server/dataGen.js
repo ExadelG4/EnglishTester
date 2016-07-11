@@ -19,9 +19,10 @@ prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 
 	for(i =0; i<result.Admin; i++){
 		service.addNewUser2({
-								name: "admin"+(i+1)+"@exadel.com", 
+								email: "admin"+(i+1)+"@exadel.com", 
 							  	pass: "apass"+(i+1),
-							  	type: "Admin"
+							  	type: "Admin",
+							  	name: "admin"+(i+1)
 							  					}).then(function(data){
 			//	console.log("Add" + data);
 			}).catch(function(err){
@@ -31,9 +32,10 @@ prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 	}
 	for(i =0; i<result.User; i++){
 		service.addNewUser2({
-								name: "user"+(i+1)+"@exadel.com", 
+								email: "user"+(i+1)+"@exadel.com", 
 							  	pass: "upass"+(i+1),
-							  	type: "User"
+							  	type: "User",
+							  	name: "user"+(i+1)
 							  					}).then(function(data){
 			//	console.log("Add" + data);
 			}).catch(function(err){
@@ -43,9 +45,10 @@ prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 	}
 	for(i =0; i<result.Teacher; i++){
 		service.addNewUser2({
-								name: "teacher"+(i+1)+"@exadel.com", 
+								email: "teacher"+(i+1)+"@exadel.com", 
 							  	pass: "tpass"+(i+1),
-							  	type: "Teacher"
+							  	type: "Teacher",
+							  	name: "teacher"+(i+1)
 							  					}).then(function(data){
 			//	console.log("Add" + data);
 			}).catch(function(err){
@@ -55,9 +58,10 @@ prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 	}
 	for(i =0; i<result.Guest; i++){
 		service.addNewUser2({
-								name: "guest"+(i+1)+"@gmail.com", 
+								email: "guest"+(i+1)+"@gmail.com", 
 							  	pass: "gpass"+(i+1),
-							  	type: "Guest"
+							  	type: "Guest",
+							  	name: "guest"+(i+1)
 							  					}).then(function(data){
 			//	console.log("Add" + data);
 			}).catch(function(err){

@@ -40,9 +40,10 @@ DatabasService.prototype.findOne = function(info){
 DatabasService.prototype.save = function(info){
     var defer = q.defer();
     var user = new  this.model({
-    	email : info.name,
+    	email : info.email,
     	password: info.pass,
-    	role : info.type
+    	role : info.type,
+        name : info.name
     });
     
     user.save(function(err){
