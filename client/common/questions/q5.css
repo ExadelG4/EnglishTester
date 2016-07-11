@@ -1,20 +1,22 @@
-#navigation {
-	text-align:center;
-	padding: 10px;
-}
-
-.container-fluid {
+.container {
 	background-color: #b9c4c9;
 }
 
-.pagination {
-	margin-top: 0;
-	margin-bottom: 0;
-	margin-right: 5%;
-	vertical-align: middle;
+.text-que {
+	margin-bottom: 5px;
+	margin-top: 25px;	
+	font-size: 30px;
+
 }
 
-.btn {
-	vertical-align: middle;
+.pagination, .btn {
+	float: right;
+	margin: 10px 5px 5px 0;
+}
+
+@media screen and (max-width: 992px) {
+	.btn {
+		margin-top: 5px;
+	}
 }
 
