@@ -56,11 +56,12 @@ DatabasService.prototype.save = function(info){
 }
 
 
-DatabasService.prototype.add = function(email_, password_){
+DatabasService.prototype.add = function(email_, password_,name_){
     var defer = q.defer();
     var newUser = new this.model({
         email: email_,
-        password: password_
+        password: password_,
+        name: name_
         });
 
         // Attempt to save the user
@@ -88,7 +89,7 @@ DatabasService.prototype.authenticate = function (email_, password_) {
                     var token = jwt.sign(user, key.secret, {
                         expiresIn: 10080 // in seconds
                         });
-                        defer.resolve({ success: true, token: 'JWT ' + token });
+                        defer.resolve({ id:user.id, name: user.name, email: user.email, role:user.role, token: 'JWT ' + token });
                 } else {
                     defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
                 }
