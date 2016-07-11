@@ -4,6 +4,19 @@ var service = require('./services/userService');
 var path = require("path");
 var router = express.Router();
 
+var bodyParser = require('body-parser');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
+var key = require('./config.json');
+
+
+router.use(passport.initialize());
+require('./passport')(passport);
+
+// router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
+// router.use(bodyParser.urlencoded({extended: true}));
+
 router.get('/getAll', function(req, res) {
 	
   		service.getAllUsers().then(function(data){
@@ -13,30 +26,30 @@ router.get('/getAll', function(req, res) {
 		  });
 
 });
-router.get('/login', function(req, res) {
-	
-  		res.send("AZAZA");
+
+
+router.post('/register',function(req, res) {
+	if(!req.body.email || !req.body.password) {
+    	res.json({ success: false, message: 'Please enter email and password.' });
+  	} else {
+		service.addNewUser(req.body.email, req.body.password).then(function(data){
+			res.json(data);
+		}).catch(function(err){
+			res.json(err);
+		});
+
+  }
 
 });
-router.post('/userFun',function(req, res) {
-		var info = req.body;
-		var method = req.body.method;
-		
-		if(method == "getUser"){
-			
-			service.getUser(info.name).then(function(data){
-			  res.send(data);
-		  }).catch(function (err) {
-			  res.send(err);
-		  });
-		}
-		else if(method == "addUser"){
-			service.addUser(info.data).then(function(data){
-			  res.send(data);
-		  }).catch(function (err) {
-			  res.send(err);
-		  });
-		}
+
+router.post('/login',function (req, res) {
+
+	service.authenticate(req.body.email, req.body.password).then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
+		res.json(err);
+	});
+
 });
 
 module.exports = router;
