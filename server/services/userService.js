@@ -23,10 +23,15 @@ function authenticate(email, pass){
         } else {
             user.comparePassword(pass, function(err, isMatch) {
                 if (isMatch && !err) {
+
                     var token = jwt.sign(user, key.secret, {
                         expiresIn: 10080 // in seconds
-                        });
-                        defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token });
+                    });
+                    
+                    var refreshToken = jwt.sign(user, key.refreshsecret, {
+                        expiresIn: 10080 // in seconds
+                    });
+                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: 'JWT ' + refreshToken});
                 } else {
                      defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
                 }
@@ -38,6 +43,8 @@ function authenticate(email, pass){
 
     return defer.promise;
 }
+
+
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
