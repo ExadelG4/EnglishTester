@@ -12,27 +12,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('statistics', {
             url: '/statistics',
-            templateUrl: 'common/header/statistics/statistics.html',
+            templateUrl: 'common/statistics/statistics.html',
             controller: 'statisticsController'
         })
         .state('news', {
             url: '/news',
-            templateUrl: 'common/header/news/news.html',
+            templateUrl: 'common/news/news.html',
             controller: 'newsController'
         })
         .state('check', {
             url: '/check',
-            templateUrl: 'common/header/check/check.html',
+            templateUrl: 'common/check/check.html',
             controller: 'checkController'
         })
         .state('approve', {
             url: '/approve',
-            templateUrl: 'common/header/approve/approve.html',
+            templateUrl: 'common/approve/approve.html',
             controller: 'approveController'
         })
         .state('addQuestion', {
             url: '/addQuestion',
-            templateUrl: 'common/header/addQuestion/addQuestion.html',
+            templateUrl: 'common/addQuestion/addQuestion.html',
             controller: 'addQuestionController'
         });
 });

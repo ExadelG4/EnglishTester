@@ -1,12 +1,13 @@
 nav {
     padding: 10px;
     display: inherit;
-    background-color: white;
+    background-color: #F4EADE;
 }
 
 img {
-    height: 50px;
-    width: 100px;
+    height: 40px;
+    width: 120px;
+    margin-top: 10px;
 }
 
 div {
@@ -19,14 +20,27 @@ span {
     color: #2b669a;
 }
 
-.btn-info {
+a {
+    color: #2F496E;
+}
+
+.glyphicon-user:before {
+    color: #2F496E;
+}
+
+.btn-info, .btn-info:hover {
     margin-right: 50px;
     margin-bottom: 13px;
+    background-color: #ED8C72 !important;
+    background-image: none ! important;
+    border-color: #F4EADE;
+    color: #F4EADE;
 }
 
 .glyphicon-user {
     margin-top: 12px;
     font-size: 25px;
+    color: #2b669a;
 }
 
 .dropdown {
@@ -35,6 +49,11 @@ span {
 
 .butLi {
     display: none;
+}
+
+.breadcrumb {
+    background-color: #F4EADE !important;
+    color: #2b669a !important;
 }
 
 @media (max-width: 767px) {
