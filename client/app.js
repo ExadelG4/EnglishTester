@@ -24,6 +24,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'modules/tests/tests.html',
             controller: 'testsController'
         })
+
 });
 
 app.controller('appController', ['$scope', '$state', function($scope, $state) {
