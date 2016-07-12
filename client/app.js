@@ -17,7 +17,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('admin', {
             url: '/admin',
-            templateUrl: 'modules/admin/admin.html',
             controller: 'adminController'
         })
         .state('tests', {

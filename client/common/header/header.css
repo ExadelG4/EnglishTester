@@ -43,7 +43,7 @@ a {
     color: #2b669a;
 }
 
-.dropdown {
+.sandwich {
     display: none;
 }
 
@@ -56,18 +56,21 @@ a {
     color: #2b669a !important;
 }
 
+.active {
+    background-color: white !important;
+}
+
 @media (max-width: 767px) {
     .nav {
         display: none !important;
     }
 
-    .dropdown {
-        display: inline-block;
-        margin-top: 10px;
-    }
-
     .btn-info {
         margin-right: 25px;
+    }
+
+    .sandwich {
+        display: inherit;
     }
 
 }
@@ -77,7 +80,7 @@ a {
         display: none;
     }
 
-    .butLi {
+    .sandwich {
         display: inherit;
     }
 }

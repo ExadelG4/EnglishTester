@@ -1,26 +1,42 @@
-<nav class="container-fluid">
+<nav class="container-fluid" ng-controller="headerController">
     <div class="col-sm-2 col-md-2 col-lg-2">
         <a href="#"><img src="assets/images/exadel_logo2.png" alt="Exadel" /></a>
     </div>
-    <div class="col-md-7 col-lg-7">
-        <ul class="nav nav-tabs">
-            <li class="active"><a ui-sref="home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-            <li><a ui-sref="admin"><span class="glyphicon glyphicon-check"></span>Admin</a></li>
-            <li><a ui-sref="tests"><span class="glyphicon glyphicon-pencil"></span>Tests</a></li>
+
+    <div class="collapse navbar-collapse col-md-7 col-lg-7" id="navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="dropdown"><a ui-sref="home" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-home"></span>Home<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Dropdown Link 1</a></li>
+                    <li><a href="#">Dropdown Link 2</a></li>
+                    <li><a href="#">Dropdown Link 3</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a ui-sref="admin"  class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-check"></span>Admin<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a ui-sref="assignStd">Assign student</a></li>
+                    <li><a ui-sref="assignTch">Assign teacher</a></li>
+                    <li><a ui-sref="newUser">New user</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a ui-sref="tests" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>Tests<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Add question</a></li>
+                    <li><a href="#">Edit question</a></li>
+                    <li><a href="#">New test</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 
-    <div class="pull-right dropdown col-sm-1">
+    <div class="pull-right dropdown sandwich col-sm-1">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <li><a href="#">Home</a></li>
             <li><a href="#">Admin</a></li>
-            <li><a href="#">Assign test</a></li>
-            <li><a href="#">Approval for the passing the test</a></li>
-            <li><a href="#">Add question</a></li>
-            <li class="butLi"><a href="#">Add person</a></li>
+            <li><a href="#">Tests</a></li>
         </ul>
     </div>
 
