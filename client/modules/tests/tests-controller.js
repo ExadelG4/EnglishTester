@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('check', []).controller('checkController', ['$scope', '$state', function($scope, $state) {
+angular.module('tests', []).controller('testsController', ['$scope', '$state', function($scope, $state) {
 
 }]);

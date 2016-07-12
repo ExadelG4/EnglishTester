@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'statistics', 'news', 'check', 'approve', 'addQuestion']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'home', 'admin', 'tests']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -10,31 +10,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'common/login/login.html',
             controller: 'loginController'
         })
-        .state('statistics', {
-            url: '/statistics',
-            templateUrl: 'common/statistics/statistics.html',
-            controller: 'statisticsController'
+        .state('home', {
+            url: '/home',
+            templateUrl: 'modules/home/home.html',
+            controller: 'homeController'
         })
-        .state('news', {
-            url: '/news',
-            templateUrl: 'common/news/news.html',
-            controller: 'newsController'
+        .state('admin', {
+            url: '/admin',
+            templateUrl: 'modules/admin/admin.html',
+            controller: 'adminController'
         })
-        .state('check', {
-            url: '/check',
-            templateUrl: 'common/check/check.html',
-            controller: 'checkController'
+        .state('tests', {
+            url: '/tests',
+            templateUrl: 'modules/tests/tests.html',
+            controller: 'testsController'
         })
-        .state('approve', {
-            url: '/approve',
-            templateUrl: 'common/approve/approve.html',
-            controller: 'approveController'
-        })
-        .state('addQuestion', {
-            url: '/addQuestion',
-            templateUrl: 'common/addQuestion/addQuestion.html',
-            controller: 'addQuestionController'
-        });
 });
 
 app.controller('appController', ['$scope', '$state', function($scope, $state) {
@@ -50,8 +40,14 @@ app.controller('appController', ['$scope', '$state', function($scope, $state) {
                 case($state.current.name === 'login'):
                     $scope.currentPage = 'login';
                     break;
-                case($state.current.name === 'statistics'):
-                    $scope.currentPage = 'statistics';
+                case($state.current.name === 'home'):
+                    $scope.currentPage = 'home';
+                    break;
+                case($state.current.name === 'admin'):
+                    $scope.currentPage = 'admin';
+                    break;
+                case($state.current.name === 'tests'):
+                    $scope.currentPage = 'tests';
                     break;
             }
         }
