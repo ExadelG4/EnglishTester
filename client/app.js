@@ -34,7 +34,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/addQuestion',
             templateUrl: 'common/addQuestion/addQuestion.html',
             controller: 'addQuestionController'
-        });
+        })
 });
 
 app.controller('appController', ['$scope', '$state', function($scope, $state) {
