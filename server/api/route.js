@@ -26,7 +26,8 @@ router.get('/getAll',passport.authenticate('jwt', { session: false }), function(
 		  });
 
 });
-//athentication--------------------------------
+
+
 router.post('/register',function(req, res) {
 	if(!req.body.email || !req.body.password) {
     	res.json({ success: false, message: 'Please enter email and password.' });
