@@ -1,18 +1,15 @@
 (function() {
-    angular.module('assignStdService', []).service('$http', function($http) {
+    angular.module('admin').service('assignStdService', ['$http', function($http) {
         var service = this;
 
-        function getListStudents() {
-            return $http.get('http://localhost:8080/user_controller/select_all_users_login').success(function(students) {
-                this.students = students;
-                console.log (students);
+        service.getListStudents = function() {
+            return $http.get('http://localhost:3000/getUsers').then(function(result) {
+                return result.data;
             });
         }
-
-        service.getListStudents = getListStudents;
 
         return service;
 
 
-    })
+    }])
 })();
