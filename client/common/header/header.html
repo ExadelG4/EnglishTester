@@ -1,25 +1,29 @@
-<nav class="container-fluid" ng-controller="headerController as headCtrl">
-    <div class="col-sm-2 col-md-2 col-lg-2">
+<nav class="container-fluid navbar" ng-controller="headerController as headCtrl">
+    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
         <a href="#"><img src="assets/images/exadel_logo2.png" alt="Exadel" /></a>
     </div>
 
-    <div class="collapse navbar-collapse col-md-7 col-lg-7" id="navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/home')}"><a ui-sref="home" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-home"></span>Home<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Dropdown Link 1</a></li>
-                    <li><a href="#">Dropdown Link 2</a></li>
-                    <li><a href="#">Dropdown Link 3</a></li>
-                </ul>
+    <div class="col-xs-1 col-sm-7 col-md-7 col-lg-7 navigation-bar">
+        <ul class="nav-tabs nav">
+            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/home')}">
+                <a ui-sref="home">
+                    <span class="glyphicon glyphicon-home"></span>Home
+                </a>
             </li>
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/admin')}"><a ui-sref="admin"  class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-check"></span>Admin<b class="caret"></b></a>
+            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/admin')}">
+                <a ui-sref="admin"  class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-check"></span>Admin<b class="caret"></b>
+                </a>
                 <ul class="dropdown-menu">
                     <li><a ui-sref="assignStd">Assign student</a></li>
                     <li><a ui-sref="assignTch">Assign teacher</a></li>
                     <li><a ui-sref="newUser">New user</a></li>
                 </ul>
             </li>
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/tests')}"><a ui-sref="tests" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>Tests<b class="caret"></b></a>
+            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/tests')}">
+                <a ui-sref="tests" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-pencil"></span>Tests<b class="caret"></b>
+                </a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Add question</a></li>
                     <li><a href="#">Edit question</a></li>
@@ -29,24 +33,28 @@
         </ul>
     </div>
 
-    <div class="pull-right dropdown sandwich col-sm-1">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Admin</a></li>
-            <li><a href="#">Tests</a></li>
-        </ul>
-    </div>
-
-    <div class="pull-right col-sm-10 col-md-3 col-lg-3">
-        <button class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span></button>
+    <div class="pull-right col-sm-3 col-md-3 col-lg-3">
+        <a class="pull-right" data-toggle="dropdown" href="">
+            <span class="glyphicon glyphicon-user"></span>
+        </a>
             <ul class="dropdown-menu">
                 <li><a>Edit profile</a></li>
-                <li><a>Check microfone</a></li>
+                <li><a>Check microphone</a></li>
                 <li><a>Log out</a></li>
             </ul>
+    </div>
+
+    <div class="pull-right col-xs-3 sandwich">
+        <a class="pull-right" data-toggle="dropdown" href="">
+            <span class="glyphicon glyphicon-tasks"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+            </li>
+            <li><a href="#"><span class="glyphicon glyphicon-check"></span>Admin</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-pencil"></span>Tests</a></li>
+        </ul>
     </div>
 
 </nav>
