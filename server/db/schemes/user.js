@@ -31,8 +31,8 @@ var UserSchema = new Schema(
 		var user = this;
 		if (this.isModified('password') || this.isNew) {
 			bcrypt.genSalt(10, function (erruser, salt) {
-				if (err) {
-					return next(err);
+				if (erruser) {
+					return next(erruser);
 				}
 				bcrypt.hash(user.password, salt, null,function(err, hash) {
 				if (err) {
