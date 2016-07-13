@@ -2,38 +2,67 @@ var mongo = require('./db/mongo');
 var prompt = require('prompt');
 var service = require('./services/userService');
 var bodyParser = require('body-parser');
-prompt.start();
-console.log("Input numbers of roles: ")
-prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
-   console.log('Nubers of roles:');
-   console.log(' Admin: ' + result.Admin);
-   console.log(' User: ' + result.User);
-   console.log(' Teacher: ' + result.Teacher);
-   console.log(' Guest: ' + result.Guest);
-  
-   service.removeCollection().then(function(data){
-	  }).catch(function (err) {
-		 console.log(err);
-	});
-	var addUser = function(_name,_pass,_type,count){
+var q = require('q');
+
+var addUser = function(_name,_pass,_type,count){
+			var defer = q.defer();
+			var prom = [];
 			for(i =0; i<count; i++){
-			service.addNewUser2({
-									email: _name+(i+1)+"@exadel.com", 
-								  	pass: _pass+(i+1),
-								  	type: _type,
-								  	name: _name+(i+1)
-								  					}).then(function(data){
-			
-				}).catch(function(err){
-					console.log(err);
-				});
+				prom.push(service.addNewUser2({
+							email: _name+(i+1)+"@exadel.com", 
+							pass: _pass+(i+1),
+							type: _type,
+							name: _name+(i+1)
+							}));
 
 			}
-	}
-	addUser("admin","apass","Admin",result.Admin);
-	addUser("user","upass","User",result.User);
-	addUser("teacher","tpass","Teacher",result.Teacher);
-	addUser("guest","gpass","Guest",result.Guest);
-	
-});
+			return q.all(prom);
+		
+}
+var addAll = function(admin,user,teacher,guest){
+		addUser("admin","apass","Admin",admin).then(function(data){
+		  	 console.log(admin + " Admins created");
+		  }).catch(function (err) {
+			 console.log(err);
+		});
+		addUser("user","upass","User",user).then(function(data){
+		 	 console.log(user + " Users created");
+		  }).catch(function (err) {
+			 console.log(err);
+		});
+		addUser("teacher","tpass","Teacher",teacher).then(function(data){
+			 console.log(teacher+ " Teachers created");
+		  }).catch(function (err) {
+			 console.log(err);
+		});
+		addUser("guest","gpass","Guest",guest).then(function(data){
+		  	 console.log(guest + " Guests created");
+		  }).catch(function (err) {
+			 console.log(err);
+		});
+}
+var args = process.argv.slice(2);
+if(args == '-d'){
+	console.log('Default dataGen. Please, wait...');
+	service.removeCollection().then(function(data){
+		  }).catch(function (err) {
+			 console.log(err);
+	});
+	addAll(3,10,3,3);
+
+}
+else {
+	prompt.start();
+	console.log("Input numbers of roles: ");
+	prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
+	  	console.log('Please, wait...');
+	   service.removeCollection().then(function(data){
+		  }).catch(function (err) {
+			 console.log(err);
+		});
+		addAll(result.Admin,result.User,result.Teacher,result.Guest);
+		
+	});
+}
+
 
