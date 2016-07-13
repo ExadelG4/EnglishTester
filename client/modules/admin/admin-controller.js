@@ -18,6 +18,6 @@ adminModule.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('newUser', {
             url: '/admin/newUser',
-            templateUrl: 'modules/newUser/newUser.html'
+            templateUrl: 'modules/admin/newUser/newUser.html'
         })
 });
