@@ -2,13 +2,11 @@ var user = require('../db/mongo').user;
 function getAllUsers(){
 	return user.find();
 }
-
+function getAllRole(role){
+	return user.findRole(role);
+}	
 function addNewUser(email, pass, name){
-	return user.add(email, pass, name);}
-
-function addNewUser(email, pass){
-	return user.add(email, pass);
-
+	return user.add(email, pass, name);
 }
 function addNewUser2(info){
 	return user.save(info);
@@ -24,3 +22,4 @@ module.exports.addNewUser = addNewUser;
 module.exports.authenticate = authenticate;
 module.exports.removeCollection = removeCollection;
 module.exports.addNewUser2 = addNewUser2;
+module.exports.getAllRole = getAllRole;

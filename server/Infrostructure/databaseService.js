@@ -16,6 +16,17 @@ DatabasService.prototype.find = function(){
 
     return defer.promise;
 }
+DatabasService.prototype.findRole = function(_role){
+    var defer = q.defer();
+    this.model.find({role: _role},'name email',function(err ,data){
+        if(err) defer.reject(err);
+
+        defer.resolve(data);
+
+    });
+
+    return defer.promise;
+}
 DatabasService.prototype.remove = function(){
     var defer = q.defer();
     this.model.remove({},function(err){

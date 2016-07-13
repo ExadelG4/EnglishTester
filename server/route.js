@@ -26,7 +26,22 @@ router.get('/getAll', function(req, res) {
 		  });
 
 });
+router.get('/getUsers', function(req, res) {
+  		service.getAllRole('User').then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
 
+});
+router.get('/getTeachers', function(req, res) {
+  		service.getAllRole('Teacher').then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
+
+});
 
 router.post('/register',function(req, res) {
 	if(!req.body.email || !req.body.password) {
