@@ -25,7 +25,7 @@ function authenticate(email, pass){
     var defer = q.defer();
 	user.authenticate(email, pass).then(function(user){        
 		if (!user) {           
-            defer.resolve({ success: false, message: 'Authentication failed. User not found.' });
+            defer.reject();//resolve('User not found');//{ success: false, message: 'Authentication failed. User not found.' });
         } else {
             user.comparePassword(pass, function(err, isMatch) {
                 if (isMatch && !err) {
@@ -39,7 +39,7 @@ function authenticate(email, pass){
                     });
                     defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: 'JWT ' + refreshToken});
                 } else {
-                     defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
+                     defer.reject();//resolve('Passwords did not match');//{ success: false, message: 'Authentication failed. Passwords did not match.' });
                 }
             });
         }

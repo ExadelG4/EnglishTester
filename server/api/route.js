@@ -47,7 +47,8 @@ router.post('/login',function (req, res) {
 	service.authenticate(req.body.email, req.body.password).then(function (data) {
 		res.json(data);
 	}).catch(function (err) {
-		res.json(err);
+		// res.json(err);
+		res.status(401).send("unauthorized");
 	});
 	
 });
