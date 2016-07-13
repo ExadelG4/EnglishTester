@@ -1,6 +1,10 @@
-.breadcrumb {
-    margin: 0;
-    background-color: white;
+footer {
+    position: fixed;
+    bottom: 5px;
+}
+
+li::before {
+    content: "" !important;
 }
 
 .stickyFot {
