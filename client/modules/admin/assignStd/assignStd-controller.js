@@ -1,3 +1,6 @@
-/**
- * Created by Yoga 3 Pro on 12.07.2016.
- */
+(function(){
+    angular.module('admin').controller('assignStdController', ['$scope', 'assignStdService', function($scope, assignStdService) {
+        this.students = function() {
+            return assignStdService.getListStudents();
+    }}]);
+})();
