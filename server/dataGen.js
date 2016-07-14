@@ -47,10 +47,11 @@ var args = process.argv.slice(2);
 if(args == '-d'){
 	console.log('Default dataGen. Please, wait...');
 	service.removeCollection().then(function(data){
+		addAll(3,10,3,3);
 		  }).catch(function (err) {
 			 console.log(err);
 	});
-	addAll(3,10,3,3);
+	
 
 }
 else {
@@ -59,10 +60,11 @@ else {
 	prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 	  	console.log('Please, wait...');
 	   service.removeCollection().then(function(data){
+	   		addAll(result.Admin,result.User,result.Teacher,result.Guest);
 		  }).catch(function (err) {
 			 console.log(err);
 		});
-		addAll(result.Admin,result.User,result.Teacher,result.Guest);
+	
 		
 	});
 }
