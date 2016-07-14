@@ -2,17 +2,16 @@
     'use strict';
 
     angular.module('infrastructure')
-        .service('userService', ['httpService', 'authContext', 
-            function(httpService, authContext) {
+        .service('userService', ['httpService', 'context', 
+            function(httpService, context) {
 
                 return {
                     login: function (login, password) {
                         return httpService.post('http://localhost:3000/login', {email: login, password: password})
                             .then(
                                 function(result) {
-                                    localStorage.setItem('context', result.data);
-                                    authContext.init(result.data.user);
-                                    
+                                    localStorage.setItem('context', JSON.stringify(result.data));
+                                    context.init(result.data.user);
                                 }
                             );
                     },

@@ -4,14 +4,14 @@
     angular.module('home', []);
 
     angular.module('home')
-        .controller('homeController', ['$scope', '$state', 'authContext', 'authService',
-            function($scope, $state, authContext, authService) {
-                $scope.role = authContext.getRole();
+        .controller('homeController', ['$scope', '$state', 'context', 'userService',
+            function($scope, $state, context, userService) {
+                $scope.role = context.getRole();
                 
-                authService.getAll().then(function (data) {
+                userService.getAll().then(function (data) {
                     $scope.all = data;
                 });
-                authService.getUsers().then(function (data) {
+                userService.getUsers().then(function (data) {
                     $scope.users = data;
                 });
             }]);

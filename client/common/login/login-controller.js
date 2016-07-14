@@ -9,6 +9,7 @@
             userService.login($scope.user.name, $scope.user.password).then(function () {
                 $state.go('home');
                 //todo: redirect to necessary page
+                //todo: rejection function
             });
         };
     }]);

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('infrastructure')
-        .factory('authContext', [
+        .factory('context', [
             function() {
                 var user = {
                     id: "",
@@ -12,11 +12,11 @@
                 };
 
                 return {
-                    init: function (data) {
-                        user.id = data.id;
-                        user.username = data.name;
-                        user.role = data.role;
-                        user.email = data.email;
+                    init: function (userData) {
+                        user.id = userData.id;
+                        user.username = userData.name;
+                        user.role = userData.role;
+                        user.email = userData.email;
                     },
                     getRole: function () {
                         return user.role;

@@ -6,14 +6,14 @@
             function($http) {
                 return {
                     get: function (url) {
-                        var context = localStorage.getItem('context');
+                        var context = JSON.parse(localStorage.getItem('context'));
                         if (!context) {
                             return $http.get(url);
                         }
                         return $http.get(url, {headers: {'Authorization': context.token}});
                     },
                     post: function (url, obj) {
-                        var context = localStorage.getItem('context');
+                        var context = JSON.parse(localStorage.getItem('context'));
                         if (!context) {
                             return $http.post(url, obj);
                         }

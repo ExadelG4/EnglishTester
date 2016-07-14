@@ -2,28 +2,31 @@
     'use strict';
 
     angular.module('infrastructure', [])
-        .factory('authService', ['$http', 'authContext',
-            function($http, authContext) {
+        .factory('authService', ['$http', 'context',
+            function($http, context) {
 
                 return {
                     init: function () {
-                        var context = localStorage.getItem('context');
-                        if (context) {
-                            
-                            //todo: check expired
+                        var localContext = JSON.parse(localStorage.getItem('context'));
+                        if (localContext) {
+                            if(localContext.expiredTime < new Date()) {
+                                $state.go('login');
+                            } else {
+                                //todo: run checkRefresh
+                                context.init(localContext.user);
+                                //todo: redirect to necessary page
+                            }
                         } else {
                             $state.go('login');
                         }
                     },
-                    login: function (login, password) {
-                        return $http.post('http://localhost:3000/login', {email: login, password: password})
-                            .then(
-                                function(result) {
-                                    localStorage.setItem('context', result.data);
-                                    authContext.init(result.data.user);
-                                    this.init();
-                                }
-                            );
+                    refresh: function () {
+                        var localContext = JSON.parse(localStorage.getItem('context'));
+                        if (!localContext) {
+                            $state.go('login');
+                            return;
+                        }
+                        
                     }
                 };
     }]);
