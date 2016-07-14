@@ -31,7 +31,7 @@ function authenticate(email, pass){
                     var refreshToken = jwt.sign(user, key.refreshsecret, {
                         expiresIn: 10080 // in seconds
                     });
-                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: 'JWT ' + refreshToken});
+                    defer.resolve({ user:{id:user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: 'JWT ' + refreshToken});
                 } else {
                      defer.reject();//resolve('Passwords did not match');//{ success: false, message: 'Authentication failed. Passwords did not match.' });
                 }
