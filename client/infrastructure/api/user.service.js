@@ -24,6 +24,15 @@
                             )
                     },
 
+                    getTeachers: function () {
+                        return httpService.get('http://localhost:3000/getTeachers')
+                            .then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+
                     getAll: function () {
                         return httpService.get('http://localhost:3000/getAll')
                             .then(
