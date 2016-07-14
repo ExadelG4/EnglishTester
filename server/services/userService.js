@@ -36,7 +36,7 @@ function authenticate(email, pass){
                     });
                     var now = new Date();
                     now.setSeconds(now.getSeconds() + expires);
-                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: 'JWT ' + refreshToken, expiredTime: now });
+                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: now });
                 } else {
                      defer.reject();
                 }
