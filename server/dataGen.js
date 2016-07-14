@@ -22,22 +22,22 @@ var addUser = function(_name,_pass,_type,count){
 		
 }
 var addAll = function(admin,user,teacher,guest){
-		addUser("admin","apass","Admin",admin).then(function(data){
+		addUser("admin","apass","admin",admin).then(function(data){
 		  	 console.log(admin + " Admins created");
 		  }).catch(function (err) {
 			 console.log(err);
 		});
-		addUser("user","upass","User",user).then(function(data){
+		addUser("user","upass","user",user).then(function(data){
 		 	 console.log(user + " Users created");
 		  }).catch(function (err) {
 			 console.log(err);
 		});
-		addUser("teacher","tpass","Teacher",teacher).then(function(data){
+		addUser("teacher","tpass","teacher",teacher).then(function(data){
 			 console.log(teacher+ " Teachers created");
 		  }).catch(function (err) {
 			 console.log(err);
 		});
-		addUser("guest","gpass","Guest",guest).then(function(data){
+		addUser("guest","gpass","guest",guest).then(function(data){
 		  	 console.log(guest + " Guests created");
 		  }).catch(function (err) {
 			 console.log(err);
