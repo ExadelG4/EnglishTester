@@ -6,9 +6,13 @@
     angular.module('home')
         .controller('homeController', ['$scope', '$state', 'authContext', 'authService',
             function($scope, $state, authContext, authService) {
-                var ctrl = this;
+                $scope.role = authContext.getRole();
                 
-                ctrl.role = authContext.getRole();
-                $scope.role = authService.getRole();
+                authService.getAll().then(function (data) {
+                    $scope.all = data;
+                });
+                authService.getUsers().then(function (data) {
+                    $scope.users = data;
+                });
             }]);
 })();
