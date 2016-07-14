@@ -3,6 +3,7 @@ var prompt = require('prompt');
 var service = require('./services/userService');
 var bodyParser = require('body-parser');
 var q = require('q');
+var faker = require('faker');
 
 var addUser = function(_name,_pass,_type,count){
 			var defer = q.defer();
@@ -12,7 +13,8 @@ var addUser = function(_name,_pass,_type,count){
 							email: _name+(i+1)+"@exadel.com", 
 							pass: _pass+(i+1),
 							type: _type,
-							name: _name+(i+1)
+							firstName: faker.fake("{{name.firstName}}"),
+							lastName: faker.fake("{{name.lastName}}")
 							}));
 
 			}
@@ -45,10 +47,11 @@ var args = process.argv.slice(2);
 if(args == '-d'){
 	console.log('Default dataGen. Please, wait...');
 	service.removeCollection().then(function(data){
+		addAll(3,10,3,3);
 		  }).catch(function (err) {
 			 console.log(err);
 	});
-	addAll(3,10,3,3);
+	
 
 }
 else {
@@ -57,10 +60,11 @@ else {
 	prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 	  	console.log('Please, wait...');
 	   service.removeCollection().then(function(data){
+	   		addAll(result.Admin,result.User,result.Teacher,result.Guest);
 		  }).catch(function (err) {
 			 console.log(err);
 		});
-		addAll(result.Admin,result.User,result.Teacher,result.Guest);
+	
 		
 	});
 }

@@ -47,7 +47,7 @@ router.post('/register',function(req, res) {
 	if(!req.body.email || !req.body.password) {
     	res.json({ success: false, message: 'Please enter email and password.' });
   	} else {
-		service.addNewUser(req.body.email, req.body.password, req.body.name).then(function(data){
+		service.addNewUser(req.body.email, req.body.password, req.body.firstName).then(function(data){
 			res.json(data);
 		}).catch(function(err){
 			res.json(err);
