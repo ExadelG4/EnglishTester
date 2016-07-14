@@ -10,7 +10,8 @@ adminModule.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('assignStd', {
             url: '/admin/assignStd',
-            templateUrl: 'modules/admin/assignStd/assignStd.html'
+            templateUrl: 'modules/admin/assignStd/assignStd.html',
+            controller: 'assignStdController'
         })
         .state('assignTch', {
             url: '/admin/assignTch',

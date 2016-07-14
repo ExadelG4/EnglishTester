@@ -3,6 +3,9 @@ var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
 
+var expires = 7200;
+
+
 function getAllUsers(){
 	return user.find();
 }
@@ -19,21 +22,23 @@ function authenticate(email, pass){
     var defer = q.defer();
 	user.authenticate(email, pass).then(function(user){        
 		if (!user) {           
-            defer.reject();//resolve('User not found');//{ success: false, message: 'Authentication failed. User not found.' });
+            defer.reject();
         } else {
             user.comparePassword(pass, function(err, isMatch) {
                 if (isMatch && !err) {
 
                     var token = jwt.sign(user, key.secret, {
-                        expiresIn: 10080 // in seconds
+                        expiresIn: expires 
                     });
                     
                     var refreshToken = jwt.sign(user, key.refreshsecret, {
-                        expiresIn: 10080 // in seconds
+                        expiresIn: expires 
                     });
-                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: 'JWT ' + refreshToken});
+                    var now = new Date();
+                    now.setSeconds(now.getSeconds() + expires);
+                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: 'JWT ' + refreshToken, expiredTime: now });
                 } else {
-                     defer.reject();//resolve('Passwords did not match');//{ success: false, message: 'Authentication failed. Passwords did not match.' });
+                     defer.reject();
                 }
             });
         }
