@@ -12,6 +12,11 @@
                                 function(result) {
                                     localStorage.setItem('context', JSON.stringify(result.data));
                                     authService.init();
+                                    return true;
+                                },
+                                function () {
+                                    console.log('Wrong credentials!');
+                                    return false;
                                 }
                             );
                     },
