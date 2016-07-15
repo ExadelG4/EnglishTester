@@ -18,8 +18,8 @@
                     var intervalID = setInterval(function () {
                         var localContext = JSON.parse(localStorage.getItem('context'));
                         if (localContext) {
-                            var expTime = localContext.expiredTime.getTime();
-                            var now = (new Date()).getTime();
+                            var expTime = localContext.expiredTime;
+                            var now = new Date().getTime();
                             if (expTime > now) {
                                 if (expTime - now < 120 * 1000) {
                                     refresh(localContext);
@@ -28,6 +28,9 @@
                                 clearInterval(intervalID);
                                 $location.path('/login');
                             }
+                        } else {
+                            clearInterval(intervalID);
+                            $location.path('/login');
                         }
                     }, 5 * 1000);
                 }
@@ -37,17 +40,20 @@
                     init: function () {
                         var localContext = JSON.parse(localStorage.getItem('context'));
                         if (localContext) {
-                            //todo: get time on UTC datetime
-                            if(localContext.expiredTime.getTime() > new Date().getTime()) {
+                            if(localContext.expiredTime < new Date().getTime()) {
                                 this.isAuthenticated = false;
                             } else {
                                 checkRefresh();
                                 context.init(localContext.user);
-                                this.isAuthenticate = true;
+                                this.isAuthenticated = true;
                             }
                         } else {
                             this.isAuthenticated = false;
                         }
+                    },
+                    logout: function () {
+                        localStorage.removeItem('context');
+                        $location.path('/login');
                     }
                 };
     }]);
