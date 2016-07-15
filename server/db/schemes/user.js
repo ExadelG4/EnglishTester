@@ -15,14 +15,18 @@ var UserSchema = new Schema(
 			type: String,
 			required: true
   		},
-		name:{
+		firstName:{
+			type:String,
+			required: true
+		},
+		lastName:{
 			type:String,
 			required: true
 		},
 		role: {
 			type: String,
-			enum: ['User', 'Teacher', 'Admin','Guest'],
-			default: 'Guest'
+			enum: ['user', 'teacher', 'admin','guest'],
+			default: 'guest'
 		}
 
 	});
@@ -30,9 +34,9 @@ var UserSchema = new Schema(
 	UserSchema.pre('save', function (next) {
 		var user = this;
 		if (this.isModified('password') || this.isNew) {
-			bcrypt.genSalt(10, function (err, salt) {
-				if (err) {
-					return next(err);
+			bcrypt.genSalt(10, function (erruser, salt) {
+				if (erruser) {
+					return next(erruser);
 				}
 				bcrypt.hash(user.password, salt, null,function(err, hash) {
 				if (err) {

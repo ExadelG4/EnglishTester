@@ -1,4 +1,5 @@
 {
 	"secret": "supersecretkey",
+	"refreshsecret": "supersecretrefreshkey",
 	"dbPath" : "mongodb://localhost:27017/test"
 }

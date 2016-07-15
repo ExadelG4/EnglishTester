@@ -16,6 +16,17 @@ DatabasService.prototype.find = function(){
 
     return defer.promise;
 }
+DatabasService.prototype.findRole = function(_role){
+    var defer = q.defer();
+    this.model.find({role: _role},{'_id':0,'firstName': 1, 'lastName':1, 'email':1},function(err ,data){
+        if(err) defer.reject(err);
+
+        defer.resolve(data);
+
+    });
+
+    return defer.promise;
+}
 DatabasService.prototype.remove = function(){
     var defer = q.defer();
     this.model.remove({},function(err){
@@ -43,7 +54,8 @@ DatabasService.prototype.save = function(info){
     	email : info.email,
     	password: info.pass,
     	role : info.type,
-        name : info.name
+        firstName : info.firstName,
+        lastName : info.lastName
     });
     
     user.save(function(err){
@@ -62,7 +74,7 @@ DatabasService.prototype.add = function(email_, password_,name_){
     var newUser = new this.model({
         email: email_,
         password: password_,
-        name: name_
+        firstName: name_
         });
 
         // Attempt to save the user
@@ -81,21 +93,23 @@ DatabasService.prototype.authenticate = function (email_, password_) {
     email: email_
     }, function(err, user) {
         if (err) defer.reject(err);
+
+        defer.resolve(user);
         
-        if (!user) {
-            defer.resolve({ success: false, message: 'Authentication failed. User not found.' });
-        } else {
-            user.comparePassword(password_, function(err, isMatch) {
-                if (isMatch && !err) {
-                    var token = jwt.sign(user, key.secret, {
-                        expiresIn: 10080 // in seconds
-                        });
-                        defer.resolve({ id:user.id, name: user.name, email: user.email, role:user.role, token: 'JWT ' + token });
-                } else {
-                    defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
-                }
-            });
-        }
+        // if (!user) {
+        //     defer.resolve({ success: false, message: 'Authentication failed. User not found.' });
+        // } else {
+        //     user.comparePassword(password_, function(err, isMatch) {
+        //         if (isMatch && !err) {
+        //             var token = jwt.sign(user, key.secret, {
+        //                 expiresIn: 10080 // in seconds
+        //                 });
+        //                 defer.resolve({ id:user.id, name: user.name, email: user.email, role:user.role, token: 'JWT ' + token });
+        //         } else {
+        //             defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
+        //         }user
+        //     });user
+        // }
     });
     return defer.promise;
 }

@@ -11,11 +11,14 @@
     <link type="text/css" rel="stylesheet" href="common/login/login.css">
     <link type="text/css" rel="stylesheet" href="modules/tests/addQuestion/addQuestion.css">
     <link type="text/css" rel="stylesheet" href="app.css">
+    <link type="text/css" rel="stylesheet" href="index.css">
+    <link type="text/css" rel="stylesheet" href="modules/admin/assignStd/assignStd.css">
+
 
 </head>
 <body ng-controller="appController">
     <header ng-if="currentPage !== 'login'" ng-include="'common/header/header.html'"></header>
-    <div ui-view></div>
+    <div ui-view class="main"></div>
     <footer ng-if="currentPage !== 'login'" ng-include="'common/footer/footer.html'"></footer>
 
 
@@ -27,9 +30,12 @@
     <script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="../bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
     <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="common/login/login-service.js"></script>
-    <script type="text/javascript" src="common/login/login-controller.js"></script>
     <script type="text/javascript" src="modules/admin/admin-controller.js"></script>
+    <script type="text/javascript" src="modules/admin/assignStd/assignStd-service.js"></script>
+    <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
+    <script type="text/javascript" src="modules/admin/assignTch/assignTch-controller.js"></script>
+    <script type="text/javascript" src="modules/admin/newUser/newUser-controller.js"></script>
+    <script type="text/javascript" src="common/login/login-controller.js"></script>
     <script type="text/javascript" src="modules/home/home-controller.js"></script>
     <script type="text/javascript" src="common/header/header-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
@@ -42,6 +48,11 @@
 
 
 
+    <script type="text/javascript" src="infrastructure/authService.js"></script>
+    <script type="text/javascript" src="infrastructure/context.js"></script>
+    <script type="text/javascript" src="infrastructure/http.service.js"></script>
+    <script type="text/javascript" src="infrastructure/api/user.service.js"></script>
+    <script type="text/javascript" src="run.js"></script>
 
 </body>
 
