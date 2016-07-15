@@ -1,21 +1,51 @@
 <div class="formWrapper">
 <div class="formSelect" ng-controller="assignStdController">
+<div class="myHide">
+    <div class="myGlass">
+        <img class="stepsImage" src= "assets/images/back.jpg" />
+    </div>
+    <div class="onGlass">
+        <a class="myCollapse left-collapse" ng-model="rightCol" ng-click="toLeft()">&#8656;</a>
+        <a class="myCollapse right-collapse" ng-model="leftCol" ng-click="toRight()">&#8658;</a>
+        <div class="step1">
+            <h1><b>Step1</b></h1>
+            <div class="form-group sel1">
+                <label for="sel1">Choose student:</label>
+                <select ng-model="selectedItem" class="form-control" id="sel1" ng-options="student.name for student in students" ng-change="hasChanged(selectedItem)"></select>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>
+        </div>
+</div>
+
 
     <!--<div></div>-->
     <!--<input type="text" ng-model="search" class="input-medium search-query">-->
-    <div class="form-group sel1">
-        <label for="sel1">Choose student:</label>
-        <select ng-model="selectedItem" class="form-control" id="sel1" ng-options="student.name for student in students" ng-change="hasChanged(selectedItem)"></select>
-    </div>
+    <!--<div class="glass left">-->
+    <!--<div class="step1">-->
+    <!--<h1><b>Step1</b></h1>-->
+    <!--<div class="form-group sel1">-->
+    <!--<label for="sel1">Choose student:</label>-->
+    <!--<select ng-model="selectedItem" class="form-control" id="sel1" ng-options="student.name for student in students" ng-change="hasChanged(selectedItem)"></select>-->
+    <!--</div>-->
+    <!--<button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>-->
+    <!--</div>-->
+    <!--</div>-->
 
-    <div class="form-group sel2">
-        <label for="sel1">Choose tests:</label>
-        <select class="form-control" id="sel2">
-            <option>Test1</option>
-            <option>Test2</option>
-            <option>Test3</option>
-            <option>Test4</option>
-        </select>
-    </div>
-    <button class="btn btn-primary btn-block" type="submit">Submit</button>
-</div></div>
+    <!--<div class="=wrapper2">-->
+        <!--<div class="step2">-->
+            <!--<h1><b>Step2</b></h1>-->
+            <!--<div class="form-group sel2">-->
+                <!--<label for="sel2">Choosen students</label>-->
+                <!--<select ng-model="studentList" class="form-control" id="sel2" multiple="multiple" ng-options="user for user in chooseUserList"></select>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="wrapper3">-->
+        <!--<div class="step3">-->
+            <!--<h1><b>Step3</b></h1>-->
+            <!--<button class="btn btn-primary btn-block" type="submit">Submit</button>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+</div>
