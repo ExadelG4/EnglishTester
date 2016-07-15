@@ -16,7 +16,8 @@
   },
   "homepage": "https://github.com/ExadelG4/EnglishTester#readme",
   "devDependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "q": "^1.4.1"
   },
   "description": "",
   "dependencies": {
