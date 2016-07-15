@@ -3,5 +3,8 @@
         .run(['authService',
             function (authService) {
                 authService.init();
+                
+                
+
             }]);
 })();

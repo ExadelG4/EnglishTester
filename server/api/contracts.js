@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 
 // var moment = require( 'moment' );
 
-var expires = 7200;
+var expires = require('../config.json').expires;;
 
 
 function refresh(token){
