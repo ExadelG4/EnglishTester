@@ -1,5 +1,5 @@
-'use strict';
-
-angular.module('tests', []).controller('testsController', ['$scope', '$state', function($scope, $state) {
-
-}]);
+(function () {
+	'use strict';
+	angular.module('tests', ['ui.bootstrap', 'ui.router'])
+		.controller('testsController', ['$scope', '$state', function($scope, $state) {}]);
+})();

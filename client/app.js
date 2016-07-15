@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'infrastructure', 'home', 'admin', 'tests']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'infrastructure', 'home', 'admin', 'tests', 'angularSoundManager']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
