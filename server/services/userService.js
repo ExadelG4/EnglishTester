@@ -3,7 +3,7 @@ var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
 
-var expires = 7200;
+var expires = require('../config.json').expires;
 
 
 function getAllUsers(){

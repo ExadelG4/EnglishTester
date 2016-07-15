@@ -2,7 +2,7 @@ var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'infras
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/login');
+    //$urlRouterProvider.otherwise('/login');
 
     $stateProvider
         .state('login', {
