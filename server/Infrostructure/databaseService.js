@@ -18,7 +18,7 @@ DatabasService.prototype.find = function(){
 }
 DatabasService.prototype.findRole = function(_role){
     var defer = q.defer();
-    this.model.find({role: _role},'name email',function(err ,data){
+    this.model.find({role: _role},{'_id':0,'firstName': 1, 'lastName':1, 'email':1},function(err ,data){
         if(err) defer.reject(err);
 
         defer.resolve(data);
@@ -54,7 +54,8 @@ DatabasService.prototype.save = function(info){
     	email : info.email,
     	password: info.pass,
     	role : info.type,
-        name : info.name
+        firstName : info.firstName,
+        lastName : info.lastName
     });
     
     user.save(function(err){
@@ -73,7 +74,7 @@ DatabasService.prototype.add = function(email_, password_,name_){
     var newUser = new this.model({
         email: email_,
         password: password_,
-        name: name_
+        firstName: name_
         });
 
         // Attempt to save the user

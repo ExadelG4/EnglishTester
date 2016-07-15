@@ -15,14 +15,18 @@ var UserSchema = new Schema(
 			type: String,
 			required: true
   		},
-		name:{
+		firstName:{
+			type:String,
+			required: true
+		},
+		lastName:{
 			type:String,
 			required: true
 		},
 		role: {
 			type: String,
-			enum: ['User', 'Teacher', 'Admin','Guest'],
-			default: 'Guest'
+			enum: ['user', 'teacher', 'admin','guest'],
+			default: 'guest'
 		}
 
 	});

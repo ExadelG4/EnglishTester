@@ -27,7 +27,7 @@ router.get('/getAll',passport.authenticate('jwt', { session: false }), function(
 
 });
 router.get('/getUsers', function(req, res) {
-  		service.getAllRole('User').then(function(data){
+  		service.getAllRole('user').then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));
@@ -35,7 +35,7 @@ router.get('/getUsers', function(req, res) {
 
 });
 router.get('/getTeachers', function(req, res) {
-  		service.getAllRole('Teacher').then(function(data){
+  		service.getAllRole('teacher').then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));
@@ -47,7 +47,7 @@ router.post('/register',function(req, res) {
 	if(!req.body.email || !req.body.password) {
     	res.json({ success: false, message: 'Please enter email and password.' });
   	} else {
-		service.addNewUser(req.body.email, req.body.password, req.body.name).then(function(data){
+		service.addNewUser(req.body.email, req.body.password, req.body.firstName).then(function(data){
 			res.json(data);
 		}).catch(function(err){
 			res.json(err);

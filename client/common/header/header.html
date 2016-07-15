@@ -1,17 +1,17 @@
 <nav class="container-fluid navbar" ng-controller="headerController as headCtrl">
     <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
-        <a href="#"><img src="assets/images/exadel_logo2.png" alt="Exadel" /></a>
+        <a ui-sref="home"><img src="assets/images/exadel_logo2.png" alt="Exadel" /></a>
     </div>
 
     <div class="col-xs-1 col-sm-7 col-md-7 col-lg-7 navigation-bar">
         <ul class="nav-tabs nav">
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/home')}">
+            <li class="dropdown" ng-class="{active: isActiveTab('/home')}">
                 <a ui-sref="home">
                     <span class="glyphicon glyphicon-home"></span>Home
                 </a>
             </li>
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/admin')}">
-                <a ui-sref="admin"  class="dropdown-toggle" data-toggle="dropdown">
+            <li class="dropdown" ng-class="{active: isActiveTab('/admin')}">
+                <a href=""  class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-check"></span>Admin<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
@@ -20,12 +20,12 @@
                     <li><a ui-sref="newUser">New user</a></li>
                 </ul>
             </li>
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/tests')}">
-                <a ui-sref="tests" class="dropdown-toggle" data-toggle="dropdown">
+            <li class="dropdown" ng-class="{active: isActiveTab('/tests')}">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-pencil"></span>Tests<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Add question</a></li>
+                    <li><a ui-sref="addQuestion">Add question</a></li>
                     <li><a href="#">Edit question</a></li>
                     <li><a href="#">New test</a></li>
                 </ul>
@@ -40,7 +40,7 @@
             <ul class="dropdown-menu">
                 <li><a>Edit profile</a></li>
                 <li><a>Check microphone</a></li>
-                <li><a>Log out</a></li>
+                <li><a href="" ng-click="logout()">Log out</a></li>
             </ul>
     </div>
 
