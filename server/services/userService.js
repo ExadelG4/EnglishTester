@@ -2,7 +2,7 @@ var user = require('../db/mongo').user;
 var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
-
+var PubSub = require('pubsub-js');
 var expires = 7200;
 
 
@@ -56,6 +56,8 @@ function removeCollection(){
 	return user.remove();
 }
 
+PubSub.subscribe( 'fun1', getAllRole);
+PubSub.publish( 'fun1', function(){console.log("azaza")});
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
 module.exports.authenticate = authenticate;
