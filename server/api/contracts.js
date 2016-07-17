@@ -2,7 +2,9 @@ var key = require('../config.json');
 var q = require('q');
 var jwt = require('jsonwebtoken');
 
-var expires = 7200;
+// var moment = require( 'moment' );
+
+var expires = require('../config.json').expires;;
 
 
 function refresh(token){
@@ -21,12 +23,13 @@ function refresh(token){
                         expiresIn: expires 
                     });
 
-            var now = new Date();
-           // now.setMilliseconds(decoded.iat);
+            var now = new Date;
             now.setSeconds(now.getSeconds() + expires);
+            var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
+            now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
 
-        defer.resolve({token: 'JWT ' + newtoken, refreshToken: 'JWT ' + newtokenrefresh, expiredTime: now});
+        defer.resolve({token: 'JWT ' + newtoken, refreshToken: 'JWT ' + newtokenrefresh, expiredTime:  utc_timestamp});
   
         }
         

@@ -1,7 +1,12 @@
 (function () {
     angular.module('myApp')
-        .run(['authService',
-            function (authService) {
+        .run(['authService', '$location',
+            function (authService, $location) {
                 authService.init();
+
+                if (!authService.isAuthenticated) {
+                    $location.path('/login');
+                }
+                
             }]);
 })();

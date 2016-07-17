@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('infrastructure')
-        .service('userService', ['httpService', 'context', 
-            function(httpService, context) {
+        .service('userService', ['httpService', 'context',  'authService',
+            function(httpService, context, authService) {
 
                 return {
                     login: function (login, password) {
@@ -11,7 +11,12 @@
                             .then(
                                 function(result) {
                                     localStorage.setItem('context', JSON.stringify(result.data));
-                                    context.init(result.data.user);
+                                    authService.init();
+                                    return true;
+                                },
+                                function () {
+                                    console.log('Wrong credentials!');
+                                    return false;
                                 }
                             );
                     },

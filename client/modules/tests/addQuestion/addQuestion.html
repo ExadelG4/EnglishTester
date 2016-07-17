@@ -1,0 +1,96 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="col-xs-12 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+			<p class="ads">Choose type of question </p>
+			<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"> Choose </button>
+				<ul class="dropdown-menu">
+                	<li ng-repeat="que in qCtrl.typeOfQuestion"><a ng-click="qCtrl.setSelectedType(que)">{{que.text}}</a></li>
+            	</ul>
+		</div>
+		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+
+			<p ng-if="qCtrl.selectedQue.text === ''" class="ads">Form for a new question will be here</p>
+			<p class="ads" ng-if="qCtrl.selectedQue.text !== ''">You choose : {{qCtrl.selectedQue.text}}</p>
+
+			<div ng-if="qCtrl.selectedQue.type === 1">
+				<form> 
+					<div>
+						<p class="ads">Text of question</p>
+						<textarea placeholder="Write here.."></textarea>
+					</div>
+					<br>
+					<p class="ads">Add answer options</p>
+					<a ng-click="qCtrl.addAnswerItem()">
+                    	<span class="glyphicon glyphicon-plus"></span>                	
+                    </a>
+                    <a ng-click="qCtrl.removeAnswerItem()">
+                    	<span class="glyphicon glyphicon-minus"></span>                	
+                    </a>
+                    <br>
+                    <div class="input-group" ng-repeat="smth in qCtrl.answers">
+      					<span class="input-group-addon">
+        					<input type="radio" name="answer" aria-label="...">
+      					</span>
+      					<input type="text" class="form-control" aria-label="..."> 
+      				</div>
+      				<button class="btn btn-sucesse">Submit</button>
+      			</form>
+    		</div>
+
+    		<div ng-if="qCtrl.selectedQue.type === 2">
+				<form> 
+					<div>
+						<p class="ads">Text of question</p>
+						<textarea placeholder="Write here.."></textarea>
+					</div>
+					<br>
+					<p class="ads">Add answer options</p>
+					<a ng-click="qCtrl.addAnswerItem()">
+                    	<span class="glyphicon glyphicon-plus"></span>                	
+                    </a>
+                    <a ng-click="qCtrl.removeAnswerItem()">
+                    	<span class="glyphicon glyphicon-minus"></span>                	
+                    </a>
+                    <br>
+                    <div class="input-group" ng-repeat="smth in qCtrl.answers">
+      					<span class="input-group-addon">
+        					<input type="checkbox" name="answer" aria-label="...">
+      					</span>
+      					<input type="text" class="form-control" aria-label="..."> 
+      				</div>
+      				<button class="btn btn-sucesse">Submit</button>
+      			</form>
+    		</div>
+
+    		<div ng-if="qCtrl.selectedQue.type === 3">
+				<form> 
+					<div>
+						<p class="ads">Text of question</p>
+						<textarea placeholder="Write here.."></textarea>
+					</div>
+      				<button class="btn btn-sucesse">Submit</button>
+      			</form>
+    		</div>
+
+    		<div ng-if="qCtrl.selectedQue.type === 4">
+				<form> 
+					<div>
+						<p class="ads">Theme for essay</p>
+						<textarea placeholder="Write here.."></textarea>
+					</div>
+      				<button class="btn btn-sucesse">Submit</button>
+      			</form>
+    		</div>
+    		<sound-manager>
+    			<button music-player add-song="qCtrl.song">+</button>
+    			<div class="seekBase" seek-track>
+    				<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
+				</div>
+				<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+				<button stop-music>Stop</button>
+
+    		</sound-manager>
+
+		</div>
+	</div>
+</div>
