@@ -35,7 +35,6 @@ h1, h2, h3, h4, h5 {
 
 input {
     border: none;
-    border-bottom: 1px solid black;
     background-color: rgba(201, 185, 165, 0.2) !important;
 }
 

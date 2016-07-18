@@ -1,0 +1,12 @@
+.error-mes {
+    display: block;
+    color: red;
+}
+
+.formAddUser {
+    padding-top: 50px;
+}
+
+    .formAddUser > label {
+        color:  rgba(179, 77, 73, 1);
+    }

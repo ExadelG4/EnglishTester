@@ -12,16 +12,23 @@ input {
 
 .formSelect {
     padding: 30px;
-    margin-left: 20%;
 }
 
-.sel1, .sel2 {
-    padding: 15px;
+.form-group .sel1, .form-group .sel2 {
+    margin: 15px;
 
 }
 
 .btn-block {
-    width: initial;
+    width: 100%;
     text-align: center;
-    margin-left: 27%;
+}
+
+.sel1, .sel2 {
+    margin-left: 15%;
+}
+
+.submit-tch {
+    width: 200px;
+    margin-left: 41%;
 }

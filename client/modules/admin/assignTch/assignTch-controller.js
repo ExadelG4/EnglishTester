@@ -18,7 +18,7 @@
         $scope.chooseTeacher = function(item) {
             $scope.tchName = item.firstName + ' ' + item.lastName;
             $scope.tchMail = item.email;
-        }
+        };
 
         $scope.chooseUser = function(item) {
             $scope.stdName = item.firstName + ' ' + item.lastName;
