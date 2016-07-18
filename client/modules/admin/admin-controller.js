@@ -15,7 +15,8 @@ adminModule.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('assignTch', {
             url: '/admin/assignTch',
-            templateUrl: 'modules/admin/assignTch/assignTch.html'
+            templateUrl: 'modules/admin/assignTch/assignTch.html',
+            controller: 'assignTchController'
         })
         .state('newUser', {
             url: '/admin/newUser',
