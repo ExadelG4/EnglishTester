@@ -1,0 +1,27 @@
+.formWrapper {
+    padding: 30px;
+}
+
+input {
+    margin-top: 15px;
+    display: block;
+    height: 45px;
+    padding: 5px;
+    text-align: center;
+}
+
+.formSelect {
+    padding: 30px;
+    margin-left: 20%;
+}
+
+.sel1, .sel2 {
+    padding: 15px;
+
+}
+
+.btn-block {
+    width: initial;
+    text-align: center;
+    margin-left: 27%;
+}

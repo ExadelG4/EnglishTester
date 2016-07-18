@@ -1,9 +1,13 @@
 (function () {
     angular.module('myApp')
-        .run(['$rootScope', 'authService', '$location', '$state',
-            function ($rootScope, authService, $location, $state) {
-                authService.init();
 
+        .run(['authService', '$location', '$rootScope', '$state',
+            function (authService, $location, $rootScope) {
+                $rootScope.isLoginPage = function () {
+                    return $location.$$url === '/login';
+                };
+
+                authService.init();
                 if (!authService.isAuthenticated) {
                     $location.path('/login');
                 }
@@ -35,5 +39,6 @@
 
 
                 
+
             }]);
 })();

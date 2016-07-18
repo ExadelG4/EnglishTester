@@ -1,6 +1,7 @@
 footer {
     position: fixed;
     bottom: 5px;
+    background-color: rgba(23, 31, 36, 1);
 }
 
 li::before {

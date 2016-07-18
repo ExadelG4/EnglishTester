@@ -1,22 +1,19 @@
 <div class="formWrapper">
-    <div class="formSelect">
+    <div class="formSelect" ng-controller="assignTchController">
         <div class="form-group sel1">
             <label for="sel1">Choose teacher:</label>
-            <select class="form-control" id="sel1">
-                <option>Egor</option>
-                <option>Mlada</option>
-                <option>Artem</option>
-                <option>Anton</option>
-            </select>
+            <select class="form-control" id="sel1" ng-model="selectedItem2" ng-options="teacher.firstName for teacher in teachers" ng-click="chooseTeacher(selectedItem2)"></select>
+            <input type="text" size="40" ng-model="tchName" placeholder="Teacher's name" disabled>
+            <input type="text" size="40" ng-model="tchMail" placeholder="Teacher's mail" disabled>
+            <input type="text" size="40" ng-model="tchTel" placeholder="Teacher's telephone" disabled>
         </div>
         <div class="form-group sel2">
             <label for="sel1">Choose student:</label>
-            <select class="form-control" id="sel2">
-                <option>Stud1</option>
-                <option>Stud2</option>
-                <option>Stud3</option>
-                <option>Stud4</option>
-            </select>
+            <select class="form-control" id="sel2" ng-model="selectedItem3" ng-options="student.firstName for student in students" ng-click="chooseUser(selectedItem3)"></select>
+            <input type="text" size="40" ng-model="stdName" placeholder="User's name" disabled>
+            <input type="text" size="40" ng-model="stdMail" placeholder="User's mail" disabled>
+            <input type="text" size="40" ng-model="stdTel" placeholder="User's telephone" disabled>
         </div>
         <button class="btn btn-primary btn-block" type="submit">Submit</button>
-    </div></div>
+    </div>
+</div>

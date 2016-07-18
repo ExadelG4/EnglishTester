@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'infrastructure', 'home', 'admin', 'tests', 'angularSoundManager']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -57,3 +58,17 @@ app.controller('appController', ['$scope', '$state', function($scope, $state) {
         }
     });
 }]);
+=======
+(function () {
+    angular.module('myApp', [
+        'ui.bootstrap',
+        'ui.router',
+        'login',
+        'infrastructure',
+        'home',
+        'admin',
+        'tests',
+        'angularSoundManager'
+    ]);
+})();
+>>>>>>> develop

@@ -31,6 +31,7 @@
     "mongoose": "^4.5.3",
     "passport": "~0.3.2",
     "passport-jwt": "~2.1.0",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "pubsub-js": "^1.5.3"
   }
 }
