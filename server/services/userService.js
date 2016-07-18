@@ -6,6 +6,7 @@ var key = require('../config.json');
 var expires = require('../config.json').expires;
 
 
+
 function getAllUsers(){
 	return user.find();
 }

@@ -9,7 +9,8 @@
             		url: '/tests/addQuestion',
             		templateUrl: 'modules/tests/addQuestion/addQuestion.html',
             		controller: 'addQuestionController',
-            		controllerAs: 'qCtrl'
+            		controllerAs: 'qCtrl',
+					role:['admin']
         		})
 		});
 })();
