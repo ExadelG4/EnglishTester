@@ -2,7 +2,7 @@
 	'use strict';
 	angular.module('tests')
 		.config(function($stateProvider, $urlRouterProvider) {
-    		$urlRouterProvider.otherwise('/tests');
+    		//$urlRouterProvider.otherwise('/tests');
 
 			$stateProvider
         		.state('addQuestion', {

@@ -14,5 +14,7 @@
                 userService.getUsers().then(function (data) {
                     $scope.users = data;
                 });
+                $scope.userName = 'Tina Kandelaki';
+                $scope.tchName = 'Jhon Tramb';
             }]);
 })();
