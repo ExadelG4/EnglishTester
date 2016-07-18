@@ -2,7 +2,7 @@
     angular.module('myApp')
 
         .run(['authService', '$location', '$rootScope', '$state',
-            function (authService, $location, $rootScope) {
+            function (authService, $location, $rootScope,$state) {
                 $rootScope.isLoginPage = function () {
                     return $location.$$url === '/login';
                 };
