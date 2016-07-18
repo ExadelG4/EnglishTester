@@ -8,21 +8,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('login', {
             url: '/login',
             templateUrl: 'common/login/login.html',
-            controller: 'loginController'
+            controller: 'loginController',
+            role: ['admin', 'user', 'teacher', 'guest']
         })
         .state('home', {
             url: '/home',
             templateUrl: 'modules/home/home.html',
-            controller: 'homeController'
+            controller: 'homeController',
+            role: ['admin', 'user', 'teacher', 'guest']
         })
         .state('admin', {
             url: '/admin',
-            controller: 'adminController'
+            controller: 'adminController',
+            role: ['admin']
         })
         .state('tests', {
             url: '/tests',
             templateUrl: 'modules/tests/tests.html',
-            controller: 'testsController'
+            controller: 'testsController',
+            role: ['user', 'guest','admin']
         })
 
 });
