@@ -41,3 +41,7 @@ input {
 select {
     border-radius: 4px !important;
 }
+
+label {
+    color:  rgba(179, 77, 73, 1);
+}
