@@ -15,8 +15,6 @@
                         } else {
                             $scope.isNonValidCreds = true;
                         }
-                    }, function () {
-
                     });
                 };
             }

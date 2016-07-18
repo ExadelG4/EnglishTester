@@ -16,10 +16,10 @@
 
 
 </head>
-<body ng-controller="appController">
-    <header ng-if="currentPage !== 'login'" ng-include="'common/header/header.html'"></header>
+<body>
+    <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
     <div ui-view class="main"></div>
-    <footer ng-if="currentPage !== 'login'" ng-include="'common/footer/footer.html'"></footer>
+    <footer ng-if="!isLoginPage()" ng-include="'common/footer/footer.html'"></footer>
 
 
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
@@ -30,6 +30,7 @@
     <script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="../bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="route.js"></script>
     <script type="text/javascript" src="modules/admin/admin-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignStd/assignStd-service.js"></script>
     <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
