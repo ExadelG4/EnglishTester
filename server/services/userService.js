@@ -64,8 +64,6 @@ function removeCollection(){
 	return user.remove();
 }
 
-PubSub.subscribe( 'fun1', getAllRole);
-PubSub.publish( 'fun1', function(){console.log("azaza")});
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
 module.exports.authenticate = authenticate;
