@@ -18,12 +18,14 @@ a {
 .wrapperMenu {
     padding: 0;
     text-align: center;
+    height: 150px;
 }
 
 .dropdown-menu {
     position: relative;
     z-index: 2;
     background-color: inherit;
+    position: absolute;
 }
 
     .dropdown-menu > li > a {
