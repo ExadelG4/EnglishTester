@@ -19,11 +19,19 @@
                         }
                         return $http.post(url, obj, {headers: {'Authorization': context.token}});
                     },
-                    put: function () {
-                        console.log('PUT - is not available from httpService. Coming soon.')
+                    put: function (url, obj) {
+                        var context = JSON.parse(localStorage.getItem('context'));
+                        if (!context) {
+                            return $http.put(url, obj);
+                        }
+                        return $http.put(url, obj, {headers: {'Authorization': context.token}});
                     },
                     delete: function () {
-                        console.log('DELETE - is not available from httpService. Coming soon.')
+                        var context = JSON.parse(localStorage.getItem('context'));
+                        if (!context) {
+                            return $http.delete(url);
+                        }
+                        return $http.post(url, {headers: {'Authorization': context.token}});
                     }
                 };
             }]);
