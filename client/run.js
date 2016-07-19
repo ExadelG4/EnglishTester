@@ -15,30 +15,35 @@
                 $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams){
                     // event.preventDefault();
-                   var role = JSON.parse(localStorage.getItem('context')).user.role;
-                   var stateRoles = toState.role.slice();
-                   var f = true;
-                   stateRoles.forEach(function(element) {
-                       if(role == element){
-                           f = false;
-                           $location.path(toState.url);
-                        // event.preventDefault();
-                        // $state.go('login');
-                        
-                       }                       
-                   }); 
-                   if(f){
-                       $location.path('/login');
-                    // event.preventDefault();
-                    // $state.go('home');
-                   }
+                    if(!JSON.parse(localStorage.getItem('context'))){
+                        $location.path('/login');
+                    } else{
+                                                      
+                        var role = JSON.parse(localStorage.getItem('context')).user.role;
+                        var stateRoles = toState.role.slice();
+                        var f = true;
+                        stateRoles.forEach(function(element) {
+                            if(role == element){
+                                f = false;
+                                $location.path(toState.url);
+                                // event.preventDefault();
+                                // $state.go('login');
+
+                            }
+                        });
+                        if(f){
+                            if (!authService.isAuthenticated) {
+                                    $location.path('/login');
+                                }else{
+                                    $location.path('/home');
+                                }
+                            
+                            // event.preventDefault();
+                            // $state.go('home');
+                        }
+                    }
                    
-                })
-
-
-
-
-                
+                })                
 
             }]);
 })();

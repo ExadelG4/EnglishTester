@@ -11,16 +11,19 @@ adminModule.config(function($stateProvider, $urlRouterProvider) {
         .state('assignStd', {
             url: '/admin/assignStd',
             templateUrl: 'modules/admin/assignStd/assignStd.html',
-            controller: 'assignStdController'
+            controller: 'assignStdController',
+            role:['admin']
         })
         .state('assignTch', {
             url: '/admin/assignTch',
             templateUrl: 'modules/admin/assignTch/assignTch.html',
-            controller: 'assignTchController'
+            controller: 'assignTchController',
+            role:['admin']
         })
         .state('newUser', {
             url: '/admin/newUser',
             templateUrl: 'modules/admin/newUser/newUser.html',
-            controller: 'newUserController'
+            controller: 'newUserController',
+            role:['admin']
         })
 });
