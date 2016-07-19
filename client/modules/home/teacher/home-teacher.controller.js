@@ -4,10 +4,20 @@
     angular.module('home')
         .controller('homeTeacherController', ['$scope',
             function($scope) {
-                $scope.msg = "Teacher";
+                $scope.isShowList = true;
+                
+                $scope.changeIsShowList = function () {
+                    $scope.isShowList = !$scope.isShowList;
+                };
+                
                 $scope.testList = [
-                    {type: 'one'},
-                    {type: 'two'}
+                    {
+                        level: 'Intermediate',
+                        date: new Date()
+                    },
+                    {
+                        level: 'Upper-Intermediate',
+                        date: new Date()}
                 ];
             }]);
 })();
