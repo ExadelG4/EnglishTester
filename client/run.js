@@ -24,9 +24,9 @@
                            $location.path(toState.url);
                         // event.preventDefault();
                         // $state.go('login');
-                        
-                       }                       
-                   }); 
+
+                       }
+                   });
                    if(f){
                        $location.path('/login');
                     // event.preventDefault();

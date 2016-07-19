@@ -4,7 +4,7 @@
         userService.getTeachers().then(function(data) {
             data.forEach(function(item, i){
                 $scope.teachers[i] = item;
-                console.log($scope.teachers[i]);
+                //console.log($scope.teachers[i]);
             });
         });
 
