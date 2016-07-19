@@ -16,6 +16,7 @@ input {
 
 .form-group .sel1, .form-group .sel2 {
     margin: 15px;
+    display: inline-block;
 
 }
 

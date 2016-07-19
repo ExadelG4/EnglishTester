@@ -11,22 +11,14 @@
                 })();
                 console.log($scope.role);
 
-                $scope.isActiveTab = function (name) {
-                    //return $(this).style("text-decoration: underline");
-                };
-
                 $scope.logout = function () {
                     authService.logout();
-                };
-
-                $scope.changeLink = function (){
-                    state.go('/assignStd');
                 };
 
                 $scope.admin =  [
                     {
                         name: 'HOME',
-                        link: 'homeAdmin',
+                        link: 'home',
                         tabs: []
                     },
                     {
@@ -35,8 +27,8 @@
                             nameT: 'Assign student',
                             link: 'assignStd'
                         }, {
-                            nameT: 'Assign student',
-                            link: 'assignStd'
+                            nameT: 'Assign teacher',
+                            link: 'assignTch'
                         }, {
                             nameT: 'New user',
                             link: 'newUser'
@@ -57,12 +49,46 @@
 
                 ];
 
+            //    $scope.user = [
+            //        {
+            //            name: 'HOME',
+            //            link: 'homeUser'
+            //        },
+            //        {
+            //            name: 'Request test',
+            //            link: 'requestTest'
+            //        }
+            //
+            //    ];
+            //
+            //    $scope.guest = [
+            //        {
+            //            name: 'HOME',
+            //            link: 'homeGuest'
+            //        }
+            //
+            //    ];
+            //
+            //    $scope.teacher = [
+            //        {
+            //            name: 'HOME',
+            //            link: 'homeTeacher'
+            //        }
+            //
+            //    ];
+            //
                 switch($scope.role) {
                     case 'admin':
                         $scope.headerMenu = $scope.admin;
                         break;
                     case 'user':
                         $scope.headerMenu = $scope.user;
+                        break;
+                    case 'guest':
+                        $scope.headerMenu = $scope.guest;
+                        break;
+                    case 'teacher':
+                        $scope.headerMenu = $scope.teacher;
                         break;
                 }
             }]);
