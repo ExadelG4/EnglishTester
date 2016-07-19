@@ -2,19 +2,18 @@
 	width: inherit;
 }
 
-.row-fluid {
-	background-color: #f4eade;
-	width: inherit;
-}
-
 .container-fluid {
 	width: inherit;
 	color: darkblue !important; 
 }
 
+.row-fluid {
+	width: inherit;
+}
+
 .ads{
 	margin-top: 10px;
-	font-family: "Open Sans",sans-serif;
+	font-family: 'Raleway', sans-serif;
     font-size: 16px
 }
 
@@ -25,7 +24,6 @@
 .input-group {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 80%;
 }
 
 textarea {
@@ -34,6 +32,15 @@ textarea {
 	resize: none;
 	width: 400px;
 	height: 200px;
+	border-color: rgb(204,204,204);
+}
+
+.sm-textarea {
+	height: 100px;
+}
+
+.btn-success {
+	display: block;
 }
 
 @media screen and (max-width: 450px) {

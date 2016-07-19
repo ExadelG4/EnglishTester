@@ -7,28 +7,38 @@
         <ul class="nav-tabs nav">
             <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/home')}">
                 <a ui-sref="home">
-                    <span class="glyphicon glyphicon-home"></span>Home
+                    <span class="glyphicon glyphicon-home"></span>HOME
                 </a>
             </li>
             <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/admin')}">
                 <a href=""  class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-check"></span>Admin<b class="caret"></b>
+                    <span class="glyphicon glyphicon-check"></span>ADMIN<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a ui-sref="assignStd">Assign student</a></li>
-                    <li><a ui-sref="assignTch">Assign teacher</a></li>
-                    <li><a ui-sref="newUser">New user</a></li>
+                    <li><a ui-sref="assignStd">ASSIGN STUDENT</a></li>
+                    <li><a ui-sref="assignTch">ASIIGN TEACHER</a></li>
+                    <li><a ui-sref="newUser">NEW USER</a></li>
                 </ul>
             </li>
             <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/tests')}">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-pencil"></span>Tests<b class="caret"></b>
+                    <span class="glyphicon glyphicon-pencil"></span>TESTS<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a ui-sref="addQuestion">Add question</a></li>
-                    <li><a href="#">Edit question</a></li>
-                    <li><a href="#">New test</a></li>
+                    <li><a ui-sref="addQuestion">ADD QUESTION</a></li>
+                    <li><a href="#">EDIT QUESTION</a></li>
+                    <li><a href="#">NEW TESTS</a></li>
                 </ul>
+            </li>
+            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/statistic')}">
+                <a ui-sref="statistic">
+                    STATISTIC
+                </a>
+            </li>
+            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/userHome')}">
+                <a ui-sref="userHome">
+                    USER-HOME
+                </a>
             </li>
         </ul>
     </div>

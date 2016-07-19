@@ -5,7 +5,7 @@ body, html {
 }
 
 html {
-    font-family: "Trebuchet MS";
+font-family: 'Raleway' !important, sans-serif;
 }
 
 * {
@@ -18,8 +18,8 @@ body div, table, span, ul, li, input, select, textarea, a, h6, h5, h4, h3, h2, h
     border-radius: 0 !important;
 }
 
-.nav, button, ol, label, option {
-    font-family: "Garamond";
+.nav, ol, label, option {
+    font-family: 'Raleway', sans-serif;
     font-size: 120% !important;
 }
 

@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'infrastructure', 'home', 'admin', 'tests', 'angularSoundManager']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ui.router', 'login', 'infrastructure', 'home', 'admin', 'tests','statistic','userHome', 'angularSoundManager','angularFileUpload']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -24,6 +24,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'modules/tests/tests.html',
             controller: 'testsController'
         })
+        .state('statistic', {
+            url: '/statistic',
+            templateUrl: 'modules/statistic/statistic.html',
+            controller: 'statisticController'
+        })
+        .state('userHome', {
+            url: '/userHome',
+            templateUrl: 'modules/userHome/userHome.html',
+            controller: 'userHomeController'
+        })
+        .state('passTestPart1', {
+            url: '/passTestPart1',
+            templateUrl: 'modules/userHome/passTest/passTestPart1.html',
+            controller: 'passTestController'
+
+        })
 
 });
 
@@ -48,6 +64,12 @@ app.controller('appController', ['$scope', '$state', function($scope, $state) {
                     break;
                 case($state.current.name === 'tests'):
                     $scope.currentPage = 'tests';
+                    break;
+                case($state.current.name === 'statistic'):
+                    $scope.currentPage = 'statistic';
+                    break;
+                case($state.current.name === 'userHome'):
+                    $scope.currentPage = 'userHome';
                     break;
             }
         }
