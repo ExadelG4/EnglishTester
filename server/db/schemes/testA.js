@@ -21,10 +21,8 @@ var TestAScheme = new Schema(
 			type:String,
 			required: true
 		},
-		answers: [{
-			answer: String,
-			valid: Boolean 
-		}]
+		options: [],
+		answers: []
 
 	});
 	
