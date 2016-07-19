@@ -28,7 +28,12 @@
                        }
                    });
                    if(f){
-                       $location.path('/login');
+                       if (!authService.isAuthenticated) {
+                            $location.path('/login');
+                        }else{
+                             $location.path('/home');
+                        }
+                      
                     // event.preventDefault();
                     // $state.go('home');
                    }
