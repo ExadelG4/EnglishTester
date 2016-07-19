@@ -1,0 +1,10 @@
+<uib-pagination items-per-page="1" ng-model="currentPage" total-items="totalCount"> 
+
+</uib-pagination>
+
+
+<div ng-repeat="question in questionsPart1 track by $index">
+	<div ng-if="$index === $parent.currentPage - 1" ng-include="urls[question.type]">
+	</div>
+</div>
+

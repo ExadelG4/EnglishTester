@@ -20,6 +20,18 @@
                     },
                     getRole: function () {
                         return user.role;
+                    },
+                    isAdmin: function () {
+                        return user.role === 'admin';
+                    },
+                    isUser: function () {
+                        return user.role === 'user';
+                    },
+                    isTeacher: function () {
+                        return user.role === 'teacher';
+                    },
+                    isGuest: function () {
+                        return user.role === 'guest';
                     }
                 };
             }]);

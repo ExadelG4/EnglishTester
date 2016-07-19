@@ -1,0 +1,15 @@
+<div class="contaoner-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-offset-sm-2 col-sm-8">
+			<form>
+				<!-- {{que.num}}{{que.text}}-->
+				<div class="">
+					{{$index + 1}}. {{question.text}}
+				</div>
+				<div ng-repeat="ans in question.answers">
+					<input type="radio" name="ans"> {{ans}} 
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

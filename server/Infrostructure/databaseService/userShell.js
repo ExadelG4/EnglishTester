@@ -1,6 +1,6 @@
 var q = require('q');
 var jwt = require('jsonwebtoken');
-var key = require('../config.json');
+var key = require('../../config.json');
 
 var DatabasService = function (model){
     this.model = model;

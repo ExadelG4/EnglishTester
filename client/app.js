@@ -7,6 +7,9 @@
         'home',
         'admin',
         'tests',
-        'angularSoundManager'
+        'angularSoundManager',
+        'statistic',
+        'userHome',
+        'angularFileUpload'
     ]);
 })();
