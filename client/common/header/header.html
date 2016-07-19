@@ -1,69 +1,62 @@
-<nav class="container-fluid navbar" ng-controller="headerController as headCtrl">
-    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
-        <a href="#"><img src="assets/images/exadel_logo2.png" alt="Exadel" /></a>
+<nav class="container-fluid navbar header-container" ng-controller="headerController as headCtrl">
+
+    <div class="logoProfile">
+        <div class="pull-right col-xs-2 col-sm-1 col-md-1 col-lg-1">
+            <a class="pull-right" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a>Edit profile</a></li>
+                <li><a>Check microphone</a></li>
+                <li><a href="" ng-click="logout()">Log out</a></li>
+            </ul>
+        </div>
+
+        <div class="pull-right col-xs-2 sandwich">
+            <a class="pull-right" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-tasks"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-check"></span>Admin</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span>Tests</a></li>
+            </ul>
+        </div>
     </div>
 
-    <div class="col-xs-1 col-sm-7 col-md-7 col-lg-7 navigation-bar">
-        <ul class="nav-tabs nav">
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/home')}">
-                <a ui-sref="home">
-                    <span class="glyphicon glyphicon-home"></span>HOME
-                </a>
-            </li>
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/admin')}">
-                <a href=""  class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-check"></span>ADMIN<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a ui-sref="assignStd">ASSIGN STUDENT</a></li>
-                    <li><a ui-sref="assignTch">ASIIGN TEACHER</a></li>
-                    <li><a ui-sref="newUser">NEW USER</a></li>
-                </ul>
-            </li>
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/tests')}">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-pencil"></span>TESTS<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a ui-sref="addQuestion">ADD QUESTION</a></li>
-                    <li><a href="#">EDIT QUESTION</a></li>
-                    <li><a href="#">NEW TESTS</a></li>
-                </ul>
-            </li>
-            <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/statistic')}">
-                <a ui-sref="statistic">
-                    STATISTIC
-                </a>
-            </li>
+    <div class=" col-sm-6 col-md-6 col-lg-6 wrapperMenu navigation-bar pull-right">
+        <ul class="headerNav">
+                <li class="dropdown" ng-if="role == 'admin'" ng-class="{active: isActiveTab('/home')}">
+                    <a ui-sref="home">HOME</a></li>
+                <li class="dropdown" ng-if="role == 'admin'" ng-class="{active: isActiveTab('/admin')}">
+                    <a class="dropdown-toggle" data-toggle="dropdown">ADMIN</a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="assignStd">Assign student</a></li>
+                        <li><a ui-sref="assignTch">Assign teacher</a></li>
+                        <li><a ui-sref="newUser">New user</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" ng-if="role == 'admin'">
+                    <a class="dropdown-toggle" data-toggle="dropdown">TESTS</a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="addQuestion">Add question</a></li>
+                            <li><a href="#">Edit question</a></li>
+                            <li><a href="#">New test</a></li>
+                        </ul>
+                </li>
+                <li class="dropdown" ng-if="role == 'user'" ng-class="{active: isActiveTab('/home')}">
+                    <a ui-sref="homeUser" class="dropdown-toggle" data-toggle="dropdown">HOME</a>
+                </li>
+                <li class="dropdown" ng-if="role == 'user'" ng-class="{active: isActiveTab('/home')}">
+                    <a ui-sref="statisticsUser" class="dropdown-toggle" data-toggle="dropdown">Statistics</a>
+                </li>
             <li class="dropdown" ng-class="{active: headCtrl.isActiveTab('/userHome')}">
                 <a ui-sref="userHome">
                     USER-HOME
                 </a>
             </li>
-        </ul>
-    </div>
-
-    <div class="pull-right col-sm-3 col-md-3 col-lg-3">
-        <a class="pull-right" data-toggle="dropdown" href="">
-            <span class="glyphicon glyphicon-user"></span>
-        </a>
-            <ul class="dropdown-menu">
-                <li><a>Edit profile</a></li>
-                <li><a>Check microphone</a></li>
-                <li><a>Log out</a></li>
-            </ul>
-    </div>
-
-    <div class="pull-right col-xs-3 sandwich">
-        <a class="pull-right" data-toggle="dropdown" href="">
-            <span class="glyphicon glyphicon-tasks"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
-            </li>
-            <li><a href="#"><span class="glyphicon glyphicon-check"></span>Admin</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-pencil"></span>Tests</a></li>
         </ul>
     </div>
 

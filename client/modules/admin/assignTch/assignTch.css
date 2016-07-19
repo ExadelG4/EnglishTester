@@ -1,0 +1,34 @@
+.formWrapper {
+    padding: 30px;
+}
+
+input {
+    margin-top: 15px;
+    display: block;
+    height: 45px;
+    padding: 5px;
+    text-align: center;
+}
+
+.formSelect {
+    padding: 30px;
+}
+
+.form-group .sel1, .form-group .sel2 {
+    margin: 15px;
+
+}
+
+.btn-block {
+    width: 100%;
+    text-align: center;
+}
+
+.sel1, .sel2 {
+    margin-left: 15%;
+}
+
+.submit-tch {
+    width: 200px;
+    margin-left: 41%;
+}

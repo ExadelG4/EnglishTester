@@ -1,60 +1,76 @@
-nav {
-    background-color: white;
-}
-
-img {
-    width: 120px;
-    margin-top: 18px;
-}
-
 .header-container div {
     display: inline-block;
     vertical-align: middle;
 }
 
-span {
-    padding: 5px;
-    color: #2b669a;
-}
-
-.navigation-bar a {
-    padding-top: 0 !important;
-}
-
 a {
-    color: #2F496E;
+    color: white;
+}
+
+.header-container {
+    height: 250px;
+    margin: 0;
+    background-image: url(/assets/images/headerBack4.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.wrapperMenu {
+    padding: 0;
+    text-align: center;
+    height: 150px;
+}
+
+.dropdown-menu {
+    position: relative;
+    z-index: 2;
+    background-color: inherit;
+    position: absolute;
+}
+
+    .dropdown-menu > li > a {
+        font-size: 15px;
+        color: white;
+    }
+
+.headerNav li {
+    font-size: 20px;
+    display: inline-block;
+    margin-right: 1%;
+    margin-left: 1%;
+    width: 136px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.headerNav > li > a {
+    padding: 10px;
+    border: 1px solid white;
+}
+
+    .headerNav > li > a:hover {
+        color: white;
+        text-decoration: underline;
+    }
+
+.logoProfile {
+    width: 100%;
 }
 
 .glyphicon {
-    color: #2F496E;
+    color: white;
 }
 
-nav li::before {
-    content: "" !important;
-}
-
-.glyphicon {
-    margin-top: 12px;
-    font-size: 25px;
-    color: #2b669a;
-}
-
-.dropdown-menu .glyphicon {
-    font-size: 14px;
-}
+    .glyphicon-user, .glyphicon-tasks {
+        padding: 5px;
+        margin-top: 7px;
+        font-size: 25px;
+    }
 
 .sandwich {
     display: none;
 }
 
-.butLi {
-    display: none;
-}
-
-.breadcrumb {
-    background-color: #F4EADE !important;
-    color: #2b669a !important;
-}
 
 @media (max-width: 767px) {
     .nav {
@@ -69,6 +85,10 @@ nav li::before {
         display: inherit;
     }
 
+    .wrapperMenu {
+        display: none;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -78,6 +98,10 @@ nav li::before {
 
     .sandwich {
         display: inherit;
+    }
+
+    .wrapperHeader {
+        display: none;
     }
 }
 

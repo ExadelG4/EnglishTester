@@ -1,21 +1,22 @@
 <div class="formWrapper">
-<div class="formSelect" ng-controller="assignStdController">
+    <div class="formSelect" ng-controller="assignTchController">
+        <div class="step1">
+            <div class="form-group sel3">
+                <label >Choose student:</label>
+                <select class="form-control" ng-model="selectedItem4" ng-options="student.firstName for student in students" ng-change="hasChanged(selectedItem4)"></select>
+                <input type="text" size="40" ng-model="stdName" placeholder="User's name" disabled>
+                <input type="text" size="40" ng-model="stdMail" placeholder="User's mail" disabled>
+                <input type="text" size="40" ng-model="stdTel" placeholder="User's telephone" disabled>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>
+        </div>
 
-    <!--<div></div>-->
-    <!--<input type="text" ng-model="search" class="input-medium search-query">-->
-    <div class="form-group sel1">
-        <label for="sel1">Choose student:</label>
-        <select ng-model="selectedItem" class="form-control" id="sel1" ng-options="student.name for student in students" ng-change="hasChanged(selectedItem)"></select>
+        <div class="step2">
+            <div class="form-group sel4">
+                <label for="sel4">Choosen students</label>
+                <select ng-model="studentList" class="form-control" id="sel4" multiple="multiple" ng-options="user for user in chooseUserList"></select>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">Submit</button>
+        </div>
     </div>
-
-    <div class="form-group sel2">
-        <label for="sel1">Choose tests:</label>
-        <select class="form-control" id="sel2">
-            <option>Test1</option>
-            <option>Test2</option>
-            <option>Test3</option>
-            <option>Test4</option>
-        </select>
-    </div>
-    <button class="btn btn-primary btn-block" type="submit">Submit</button>
-</div></div>
+</div>

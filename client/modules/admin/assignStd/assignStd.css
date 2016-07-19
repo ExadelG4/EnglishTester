@@ -1,28 +1,7 @@
-.formSelect {
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
+.btn-block {
+    width: 100%;
 }
 
-body {
-    position: relative;
-}
-
-.sel1 {
-    padding: 10px;
-}
-.sel2 {
-    padding: 10px;
-}
-
-.formWrapper {
-    position: relative;
-    width: inherit;
-    height: calc(100% - 76px);
-}
-
-.btn-primary {
-    width: 80px;
-    margin-left: 95px;
+.step2 {
+    padding: 65px;
 }

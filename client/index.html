@@ -21,13 +21,17 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Raleway:500" rel="stylesheet">
     <link href="bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="modules/admin/assignTch/assignTch.css">
+    <link type="text/css" rel="stylesheet" href="modules/home/home.css">
+
+
 
 
 </head>
-<body ng-controller="appController">
-    <header ng-if="currentPage !== 'login'" ng-include="'common/header/header.html'"></header>
+<body>
+    <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
     <div ui-view class="main"></div>
-    <footer ng-if="currentPage !== 'login'" ng-include="'common/footer/footer.html'"></footer>
+    <footer ng-if="!isLoginPage()" ng-include="'common/footer/footer.html'"></footer>
 
 
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
@@ -38,17 +42,17 @@
     <script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="../bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="route.js"></script>
     <script type="text/javascript" src="modules/admin/admin-controller.js"></script>
-    <script type="text/javascript" src="modules/admin/assignStd/assignStd-service.js"></script>
-    <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
-    <script type="text/javascript" src="modules/admin/assignTch/assignTch-controller.js"></script>
     <script type="text/javascript" src="modules/admin/newUser/newUser-controller.js"></script>
     <script type="text/javascript" src="common/login/login-controller.js"></script>
     <script type="text/javascript" src="modules/home/home-controller.js"></script>
+    <script type="text/javascript" src="modules/home/teacher/home-teacher.controller.js"></script>
     <script type="text/javascript" src="common/header/header-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignTch/assignTch-controller.js"></script>
     <script type="text/javascript" src="modules/admin/newUser/newUser-controller.js"></script>
+    <script type="text/javascript" src="infrastructure/auth.service.js"></script>
     <script type="text/javascript" src="modules/tests/tests-controller.js"></script>
     <script type="text/javascript" src="modules/tests/addQuestion/addQuestion-controller.js"></script>
     <script type="text/javascript" src="modules/statistic/statistic-controller.js"></script>
@@ -66,6 +70,7 @@
     <script type="text/javascript" src="infrastructure/http.service.js"></script>
     <script type="text/javascript" src="infrastructure/api/user.service.js"></script>
     <script type="text/javascript" src="run.js"></script>
+
 
 </body>
 

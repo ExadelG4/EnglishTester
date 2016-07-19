@@ -2,8 +2,7 @@ var user = require('../db/mongo').user;
 var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
-
-var expires = 7200;
+var expires = require('../config.json').expires;
 
 
 function getAllUsers(){
@@ -35,9 +34,16 @@ function authenticate(email, pass){
                         expiresIn: expires 
                     });
 
-                    var now = new Date();
+                    // var now = new Date();
+
+                    var now = new Date;
                     now.setSeconds(now.getSeconds() + expires);
-                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: now });
+                    var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
+                    now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+
+                    
+                    
+                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
 
                 } else {
                      defer.reject();
@@ -50,12 +56,9 @@ function authenticate(email, pass){
 
     return defer.promise;
 }
-
-
 function removeCollection(){
 	return user.remove();
 }
-
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
 module.exports.authenticate = authenticate;
