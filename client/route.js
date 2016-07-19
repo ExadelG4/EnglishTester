@@ -4,7 +4,7 @@
     angular.module('myApp').config(
         function($stateProvider, $urlRouterProvider) {
 
-            //$urlRouterProvider.otherwise('/login');
+            $urlRouterProvider.otherwise('/login');
 
             $stateProvider
                 .state('login', {

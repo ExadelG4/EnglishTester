@@ -3,13 +3,11 @@
 }
 
 .row-fluid {
-	background-color: #f4eade;
 	width: inherit;
 }
 
 .container-fluid {
 	width: inherit;
-	color: darkblue !important; 
 }
 
 .ads{

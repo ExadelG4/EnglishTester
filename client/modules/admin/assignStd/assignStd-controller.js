@@ -4,39 +4,21 @@
         userService.getUsers().then(function(data) {
             data.forEach(function(item, i) {
                 $scope.students[i] = item;
+                //$scope.students[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
-
         $scope.chooseUserList = [];
 
         $scope.hasChanged = function(item){
-            var fullName = item.firstName + '' + item.lastName;
+            var fullName = item.firstName + ' ' + item.lastName;
             $scope.chooseUserList.push(fullName);
-           console.log($(this));
+            $scope.stdName = item.firstName + ' ' + item.lastName;
+            $scope.stdMail = item.email;
         };
 
         $scope.reset = function(){
             $scope.chooseUserList = [];
         };
-
-        $scope.toRight = function() {
-            $('.myHide').css('transform', 'translate(0px');
-            $('.myHide').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
-            $('.right-collapse').hide();
-            $('.left-collapse').show();
-        };
-
-        $scope.toLeft = function() {
-            $('.myHide').css('transform', 'translate(-250px)');
-            $('.myHide').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
-            $('.left-collapse').hide();
-            $('.right-collapse').show();
-        };
-
-        (function(){
-            $('.right-collapse').hide();
-            $('.left-collapse').show();
-        })();
     }]);
 })();
 

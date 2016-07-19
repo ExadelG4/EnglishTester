@@ -1,3 +1,5 @@
-/**
- * Created by Yoga 3 Pro on 12.07.2016.
- */
+(function () {
+    'use strict';
+    angular.module('admin')
+        .controller('newUserController', ['$scope', function($scope) {
+     }])})();
