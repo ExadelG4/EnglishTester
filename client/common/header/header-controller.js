@@ -19,11 +19,51 @@
                     authService.logout();
                 };
 
-                jQuery('ul > li').hover(function() {
-                    jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
-                }, function() {
-                    jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
-                });
+                $scope.changeLink = function (){
+                    state.go('/assignStd');
+                };
 
+                $scope.admin =  [
+                    {
+                        name: 'HOME',
+                        link: 'homeAdmin',
+                        tabs: []
+                    },
+                    {
+                        name: 'ADMIN',
+                        tabs: [{
+                            nameT: 'Assign student',
+                            link: 'assignStd'
+                        }, {
+                            nameT: 'Assign student',
+                            link: 'assignStd'
+                        }, {
+                            nameT: 'New user',
+                            link: 'newUser'
+                        }]
+                    },
+                    {
+                        name: 'TESTS',
+                        tabs: [{
+                                nameT: 'Add question',
+                                link: 'addQuestion'
+                            },
+                            {
+                                nameT: 'Edit question',
+                                link: 'editQuestion'
+                            }
+                        ]
+                    }
+
+                ];
+
+                switch($scope.role) {
+                    case 'admin':
+                        $scope.headerMenu = $scope.admin;
+                        break;
+                    case 'user':
+                        $scope.headerMenu = $scope.user;
+                        break;
+                }
             }]);
 })();
