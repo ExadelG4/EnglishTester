@@ -2,9 +2,7 @@ var user = require('../db/mongo').user;
 var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
-
 var expires = require('../config.json').expires;
-
 
 
 function getAllUsers(){
@@ -58,12 +56,9 @@ function authenticate(email, pass){
 
     return defer.promise;
 }
-
-
 function removeCollection(){
 	return user.remove();
 }
-
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
 module.exports.authenticate = authenticate;
