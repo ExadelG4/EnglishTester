@@ -63,8 +63,6 @@ DatabasService.prototype.save = function(){
     return defer.promise;
 }
 
-<<<<<<< HEAD:server/Infrostructure/databaseService.js
-=======
 
 DatabasService.prototype.add = function(email_, password_,name_, secname_){
     var defer = q.defer();
@@ -85,7 +83,6 @@ DatabasService.prototype.add = function(email_, password_,name_, secname_){
     return defer.promise;
 }
 
->>>>>>> develop:server/Infrostructure/databaseService/userShell.js
 DatabasService.prototype.authenticate = function (email_, password_) {
     var defer = q.defer();
     this.model.findOne({
