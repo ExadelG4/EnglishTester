@@ -8,7 +8,7 @@ var testA = require('./schemes/testA');
 var testB = require('./schemes/testB');
 var stack = require('./schemes/stack');
 var results = require('./schemes/results');
-var requset = require('./schemes/requset');
+var requset = require('./schemes/request');
 
 mongoose.connect(path.dbPath);
 
