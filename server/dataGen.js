@@ -10,30 +10,13 @@ var addUser = function(_name,_pass,_type,count){
 			var prom = [];
 			
 			for(i =0; i<count; i++){
-				
-				if((_type == 'user') || (_type == 'guest') )prom.push(service.addNewUser({
+				prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
 							password: _pass+(i+1),
 							role: _type,
 							firstName: faker.fake("{{name.firstName}}"),
 							lastName: faker.fake("{{name.lastName}}")
 							
-							}));
-				else if (_type == 'teacher'){
-					prom.push(service.addNewUser({
-							email: _name+(i+1)+"@exadel.com", 
-							password: _pass+(i+1),
-							role: _type,
-							firstName: faker.fake("{{name.firstName}}"),
-							lastName: faker.fake("{{name.lastName}}")
-							}));
-				}
-					else prom.push(service.addNewUser({
-							email: _name+(i+1)+"@exadel.com", 
-							password: _pass+(i+1),
-							role: _type,
-							firstName: faker.fake("{{name.firstName}}"),
-							lastName: faker.fake("{{name.lastName}}")
 							}));
 				}
 
