@@ -11,7 +11,7 @@
                     url: '/login',
                     templateUrl: 'common/login/login.html',
                     controller: 'loginController',
-                    role: ['admin', 'user', 'teacher', 'guest']
+                    noAuth: true
                 })
                 .state('home', {
                     url: '/home',
