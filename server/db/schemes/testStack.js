@@ -4,11 +4,6 @@ var Schema = mongoose.Schema;
 
 var stackScheme = new Schema(
 	{
-		_id: {
-			type: String,
-			unique: true,
-			required: true
-		},
 		data : Date,
 		level : {
 			type: Number,

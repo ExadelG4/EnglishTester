@@ -13,41 +13,27 @@ var addUser = function(_name,_pass,_type,count){
 				
 				if((_type == 'user') || (_type == 'guest') )prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
-							pass: _pass+(i+1),
-							type: _type,
+							password: _pass+(i+1),
+							role: _type,
 							firstName: faker.fake("{{name.firstName}}"),
-							lastName: faker.fake("{{name.lastName}}"),
-							statistics : {
-											total: {
-												mark : 0,
-												level: 'beginner'
-											},
-											tests: [{
-												autoMark: 0,
-												teacherMark: 0,
-												data: Date.now()
-											}]
-										}
+							lastName: faker.fake("{{name.lastName}}")
+							
 							}));
 				else if (_type == 'teacher'){
 					prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
-							pass: _pass+(i+1),
-							type: _type,
+							password: _pass+(i+1),
+							role: _type,
 							firstName: faker.fake("{{name.firstName}}"),
-							lastName: faker.fake("{{name.lastName}}"),
-							statistics : {
-											checkCount: 1
-										}
+							lastName: faker.fake("{{name.lastName}}")
 							}));
 				}
 					else prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
-							pass: _pass+(i+1),
-							type: _type,
+							password: _pass+(i+1),
+							role: _type,
 							firstName: faker.fake("{{name.firstName}}"),
-							lastName: faker.fake("{{name.lastName}}"),
-							statistics : {}
+							lastName: faker.fake("{{name.lastName}}")
 							}));
 				}
 

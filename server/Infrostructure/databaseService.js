@@ -5,26 +5,10 @@ var key = require('../config.json');
 var DatabasService = function (model){
     this.model = model;
 }
-DatabasService.prototype.find = function(){
+DatabasService.prototype.find = function(query, fields, options){
     var defer = q.defer();
-    this.model.find({},function(err ,data){
+    this.model.find(query, fields, options,function(err ,data){
         if(err) defer.reject(err);
-
-        defer.resolve(data);
-
-    });
-
-    return defer.promise;
-}
-DatabasService.prototype.findRole = function(){
-    var defer = q.defer();
-    var args = [];
-    for (var i = 0; i < arguments.length; i++) {
-        args[i] = arguments[i];
-    }
-    this.model.find(arguments[0],arguments[1],function(err ,data){
-        if(err) defer.reject(err);
-
         defer.resolve(data);
 
     });
@@ -41,45 +25,14 @@ DatabasService.prototype.remove = function(){
 
    return defer.promise;
 }
-DatabasService.prototype.findOne = function(info){
+DatabasService.prototype.save = function(query){
     var defer = q.defer();
-    this.model.findOne({email: info},function(err ,data){
-        if(err) defer.reject(err);
-
-        defer.resolve(data);
-
-    });
-
-    return defer.promise;
-}
-DatabasService.prototype.save = function(){
-    var defer = q.defer();
-    var doc = new  this.model(arguments[0]);
+    var doc = new  this.model(query);
     doc.save(function(err){
         if(err) defer.reject(err);
         defer.resolve();
     });
 
-    return defer.promise;
-}
-
-
-DatabasService.prototype.add = function(email_, password_,name_, secname_){
-    var defer = q.defer();
-    var newUser = new this.model({
-        email: email_,
-        password: password_,
-        firstName: name_,
-        lastName: secname_
-        });
-
-        // Attempt to save the user
-        newUser.save(function(err) {
-            if (err) {
-                defer.reject({ success: false, message: 'That email address already exists.'});
-            }
-            defer.resolve({ success: true, message: 'Successfully created new user.' });
-        });
     return defer.promise;
 }
 
