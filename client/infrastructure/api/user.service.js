@@ -45,6 +45,10 @@
                                     return result.data;
                                 }
                             )
+                    },
+
+                    newUser: function (firstName_, secondName_, email_, number_) {
+                        return httpService.post('http://localhost:3000/register', {password: 11111, email: email_, firstName: firstName_, secondName: secondName_, phone: number_});
                     }
                 };
             }]);
