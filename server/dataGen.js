@@ -11,7 +11,7 @@ var addUser = function(_name,_pass,_type,count){
 			
 			for(i =0; i<count; i++){
 				
-				if((_type == 'user') || (_type == 'guest') )prom.push(service.addNewUser2({
+				if((_type == 'user') || (_type == 'guest') )prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
 							pass: _pass+(i+1),
 							type: _type,
@@ -30,7 +30,7 @@ var addUser = function(_name,_pass,_type,count){
 										}
 							}));
 				else if (_type == 'teacher'){
-					prom.push(service.addNewUser2({
+					prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
 							pass: _pass+(i+1),
 							type: _type,
@@ -41,7 +41,7 @@ var addUser = function(_name,_pass,_type,count){
 										}
 							}));
 				}
-					else prom.push(service.addNewUser2({
+					else prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
 							pass: _pass+(i+1),
 							type: _type,

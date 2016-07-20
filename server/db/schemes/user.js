@@ -39,8 +39,8 @@ var UserSchema = new Schema(
 			checkCount: Number
 		},
 		window: {
-			start: Date,
-			end: Date
+			startDate: Date,
+			endDate: Date
 		},
 		status: {
 			type: String,

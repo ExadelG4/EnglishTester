@@ -1,6 +1,6 @@
 var q = require('q');
 var jwt = require('jsonwebtoken');
-var key = require('../../config.json');
+var key = require('../config.json');
 
 var DatabasService = function (model){
     this.model = model;
@@ -16,9 +16,13 @@ DatabasService.prototype.find = function(){
 
     return defer.promise;
 }
-DatabasService.prototype.findRole = function(_role){
+DatabasService.prototype.findRole = function(){
     var defer = q.defer();
-    this.model.find({role: _role},{'_id':0,'firstName': 1, 'lastName':1, 'email':1},function(err ,data){
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+        args[i] = arguments[i];
+    }
+    this.model.find(arguments[0],arguments[1],function(err ,data){
         if(err) defer.reject(err);
 
         defer.resolve(data);
@@ -48,43 +52,14 @@ DatabasService.prototype.findOne = function(info){
 
     return defer.promise;
 }
-DatabasService.prototype.save = function(info){
+DatabasService.prototype.save = function(){
     var defer = q.defer();
-    var user = new  this.model({
-    	email : info.email,
-    	password: info.pass,
-    	role : info.type,
-        firstName : info.firstName,
-        lastName : info.lastName,
-        statistics : info.statistics
-    });
-    
-    user.save(function(err){
+    var doc = new  this.model(arguments[0]);
+    doc.save(function(err){
         if(err) defer.reject(err);
-
-        defer.resolve(info);
-
+        defer.resolve();
     });
 
-    return defer.promise;
-}
-
-
-DatabasService.prototype.add = function(email_, password_,name_){
-    var defer = q.defer();
-    var newUser = new this.model({
-        email: email_,
-        password: password_,
-        firstName: name_
-        });
-
-        // Attempt to save the user
-        newUser.save(function(err) {
-            if (err) {
-                defer.reject({ success: false, message: 'That email address already exists.'});
-            }
-            defer.resolve({ success: true, message: 'Successfully created new user.' });
-        });
     return defer.promise;
 }
 
