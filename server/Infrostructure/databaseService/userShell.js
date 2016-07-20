@@ -55,7 +55,8 @@ DatabasService.prototype.save = function(info){
     	password: info.pass,
     	role : info.type,
         firstName : info.firstName,
-        lastName : info.lastName
+        lastName : info.lastName,
+        statistics : info.statistics
     });
     
     user.save(function(err){
@@ -69,12 +70,13 @@ DatabasService.prototype.save = function(info){
 }
 
 
-DatabasService.prototype.add = function(email_, password_,name_){
+DatabasService.prototype.add = function(email_, password_,name_, secname_){
     var defer = q.defer();
     var newUser = new this.model({
         email: email_,
         password: password_,
-        firstName: name_
+        firstName: name_,
+        lastName: secname_
         });
 
         // Attempt to save the user
