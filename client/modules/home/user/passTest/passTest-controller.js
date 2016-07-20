@@ -1,10 +1,9 @@
 (function () {
-	'use strict'
+	'use strict';
 
-	var startStatisticModule = angular.module('userHome');
-	startStatisticModule.controller('passTestController', ['$scope', '$state', function($scope, $state) {
+	angular.module('home').controller('passTestController', ['$scope', '$state', function($scope, $state) {
 		
-		var startUrl = 'modules/userHome/passTest/templateTests/templateTest';
+		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
 
 		$scope.urls = {
 				'oneOfMany': startUrl + '1.html',
@@ -67,7 +66,5 @@
 			};
 
 
-	}
-	]
-	);
+	}]);
 })();

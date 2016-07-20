@@ -7,7 +7,6 @@
     <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <link type="text/css" rel="stylesheet" href="common/header/header.css">
-    <link type="text/css" rel="stylesheet" href="common/footer/footer.css">
     <link type="text/css" rel="stylesheet" href="common/login/login.css">
     <link type="text/css" rel="stylesheet" href="modules/tests/addQuestion/addQuestion.css">
     <link type="text/css" rel="stylesheet" href="app.css">
@@ -31,8 +30,6 @@
 <body ng-controller="appController">
     <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
     <div ui-view class="main"></div>
-    <footer ng-if="!isLoginPage()" ng-include="'common/footer/footer.html'"></footer>
-
 
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -46,22 +43,24 @@
     <script type="text/javascript" src="app.controller.js"></script>
     <script type="text/javascript" src="modules/admin/admin-controller.js"></script>
     <script type="text/javascript" src="modules/admin/newUser/newUser-controller.js"></script>
+    <script type="text/javascript" src="common/header/header-controller.js"></script>
     <script type="text/javascript" src="common/login/login-controller.js"></script>
     <script type="text/javascript" src="modules/home/home-controller.js"></script>
     <script type="text/javascript" src="modules/home/teacher/teacher-home.controller.js"></script>
     <script type="text/javascript" src="modules/home/admin/admin-home.controller.js"></script>
     <script type="text/javascript" src="modules/home/user/user-home.controller.js"></script>
-    <script type="text/javascript" src="common/header/header-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignTch/assignTch-controller.js"></script>
-    <script type="text/javascript" src="modules/admin/newUser/newUser-controller.js"></script>
     <script type="text/javascript" src="infrastructure/auth.service.js"></script>
     <script type="text/javascript" src="modules/tests/tests-controller.js"></script>
     <script type="text/javascript" src="modules/tests/addQuestion/addQuestion-controller.js"></script>
     <script type="text/javascript" src="modules/statistic/statistic-controller.js"></script>
     <script type="text/javascript" src="modules/tests/tests-route.js"></script>
-    <script type="text/javascript" src="modules/userHome/userHome-controller.js"></script>
-    <script type="text/javascript" src="modules/userHome/passTest/passTest-controller.js"></script>
+    <script type="text/javascript" src="modules/home/user/user-home.controller.js"></script>
+    <script type="text/javascript" src="modules/home/user/passTest/passTest-controller.js"></script>
+    <script type="text/javascript" src="modules/admin/admin-route.js"></script>
+    <script type="text/javascript" src="modules/home/user/user-route.js"></script>
+
 
 
 
@@ -70,6 +69,7 @@
 
     <script type="text/javascript" src="infrastructure/context.js"></script>
     <script type="text/javascript" src="infrastructure/http.service.js"></script>
+    <script type="text/javascript" src="infrastructure/navigation.factory.js"></script>
     <script type="text/javascript" src="infrastructure/api/user.service.js"></script>
     <script type="text/javascript" src="run.js"></script>
 

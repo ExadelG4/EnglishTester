@@ -11,15 +11,12 @@ function getAllUsers(){
 function getAllRole(_role){
 	return user.findRole({role: _role},{'_id':0,'firstName': 1, 'lastName':1, 'email':1});
 }	
-function addNewUser(info){
-	return user.save({
-        email : info.email,
-        password: info.pass,
-        role : info.type,
-        firstName : info.firstName,
-        lastName : info.lastName,
-        statistics : info.statistics
-    });
+
+function addNewUser(email, pass, name, secName){
+	return user.add(email, pass, name, secName);	
+}
+function addNewUser2(info){
+	return user.save(info);
 }
 function authenticate(email, pass){
     var defer = q.defer();
