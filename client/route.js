@@ -19,11 +19,6 @@
                     controller: 'homeController',
                     role: ['admin', 'user', 'teacher', 'guest']
                 })
-                .state('admin', {
-                    url: '/admin',
-                    controller: 'adminController',
-                    role: ['admin']
-                })
 
         }
     );

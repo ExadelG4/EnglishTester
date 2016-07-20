@@ -49,34 +49,30 @@
 
                 ];
 
-            //    $scope.user = [
-            //        {
-            //            name: 'HOME',
-            //            link: 'homeUser'
-            //        },
-            //        {
-            //            name: 'Request test',
-            //            link: 'requestTest'
-            //        }
-            //
-            //    ];
-            //
-            //    $scope.guest = [
-            //        {
-            //            name: 'HOME',
-            //            link: 'homeGuest'
-            //        }
-            //
-            //    ];
-            //
-            //    $scope.teacher = [
-            //        {
-            //            name: 'HOME',
-            //            link: 'homeTeacher'
-            //        }
-            //
-            //    ];
-            //
+                $scope.user = [
+                    {
+                        name: 'HOME',
+                        link: 'home'
+                    }
+
+                 ];
+
+                $scope.guest = [
+                    {
+                        name: 'HOME',
+                        link: 'home'
+                    }
+
+                 ];
+
+                $scope.teacher = [
+                    {
+                        name: 'HOME',
+                        link: 'home'
+                    }
+
+                 ];
+
                 switch($scope.role) {
                     case 'admin':
                         $scope.headerMenu = $scope.admin;
