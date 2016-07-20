@@ -10,7 +10,7 @@ var stack = require('./schemes/testStack');
 mongoose.connect(path.dbPath);
 
 exports.user = infrostructure(user);
-exports.testA = infrostructure(testA);
+exports.testA  = infrostructure(testA);
 exports.testB = infrostructure(testB);
 exports.stack = infrostructure(stack);
 
