@@ -1,8 +1,5 @@
-'use strict';
-
 (function(){
     angular.module('admin').config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/home');
 
         $stateProvider
             .state('assignStd', {
