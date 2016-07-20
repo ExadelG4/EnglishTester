@@ -5,3 +5,7 @@
 .step2 {
     padding: 65px;
 }
+
+.formSelect {
+    display: inline-block;
+}
