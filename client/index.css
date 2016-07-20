@@ -1,7 +1,7 @@
 .main {
     width: 100%;
-    min-height: calc(100% - 250px);
     position: relative;
     background-color: rgba(201, 185, 165, 0.2);
     padding: 50px;
+    margin-top: 70px;
 }
