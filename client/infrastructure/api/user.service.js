@@ -48,7 +48,17 @@
                     },
 
                     newUser: function (firstName_, secondName_, email_, number_) {
-                        return httpService.post('http://localhost:3000/register', {password: 11111, email: email_, firstName: firstName_, secondName: secondName_, phone: number_});
+                        return httpService.post('http://localhost:3000/register', {password: 11111, email: email_,
+                        firstName: firstName_, secondName: secondName_, phone: number_})
+                            .then(function(result){
+                                console.log('new user created')
+                                return true;
+                            },
+                            function () {
+                                console.log('create new user failed');
+                                return false;
+                             }
+                        );
                     }
                 };
             }]);

@@ -9,7 +9,13 @@
                 // newUsr.secondName = $scope.secondMd;
                 // newUsr.email = $scope.emailMd;
                 // newUsr.phone = $scope.phnumberMd;
-                userService.newUser($scope.firstMd, $scope.secondMd, $scope.emailMd, $scope.phnumberMd);
+                userService.newUser($scope.firstMd, $scope.secondMd, $scope.emailMd, $scope.phnumberMd).then(function(result){
+                    if (result){
+                        alert('ok');
+                    } else{
+                        alert('fail');
+                    }
+                });
 
 
             }

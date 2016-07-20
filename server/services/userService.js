@@ -11,8 +11,8 @@ function getAllUsers(){
 function getAllRole(role){
 	return user.findRole(role);
 }	
-function addNewUser(email, pass, name){
-	return user.add(email, pass, name);	
+function addNewUser(email, pass, name, secName){
+	return user.add(email, pass, name, secName);	
 }
 function addNewUser2(info){
 	return user.save(info);
