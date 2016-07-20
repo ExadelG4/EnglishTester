@@ -8,5 +8,6 @@
                 };
                 
                 $scope.headerMenu = navigationFactory.getNavigationMenu();
-            }]);
+            }
+        ]);
 })();
