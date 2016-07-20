@@ -35,7 +35,16 @@ DatabasService.prototype.save = function(query){
 
     return defer.promise;
 }
+DatabasService.prototype.findOne = function(query, fields, options){
+    var defer = q.defer();
+    this.model.findOne(query, fields, options,function(err ,data){
+        if(err) defer.reject(err);
+        defer.resolve(data);
 
+    });
+
+    return defer.promise;
+}
 DatabasService.prototype.authenticate = function (email_, password_) {
     var defer = q.defer();
     this.model.findOne({
