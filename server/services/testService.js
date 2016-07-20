@@ -6,7 +6,7 @@ function getAllQuestions(){
 	return testA.find({},{},{});
 }
 function getQFromLevel(_level,rand){
-	return testA.find({level: _level},{'_id':1,'type': 1, 'question':1, 'options':1, 'answers': 0},{skip : rand, limit : 1 });
+	return testA.find({level: _level},{'type':1, 'question':1, 'options':1},{skip : rand, limit : 1 });
 }
 function addNewQuestion(info){
 	return testA.save(info);	
