@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="modules/admin/assignStd/assignStd.css">
     <link type="text/css" rel="stylesheet" href="modules/admin/newUser/newUser.css">
     <link type="text/css" rel="stylesheet" href="modules/statistic/statistic.css">
-    <link type="text/css" rel="stylesheet" href="modules/userHome/userHome.css">
+    <link type="text/css" rel="stylesheet" href="modules/home/user/user-home.css">
 
 
 
@@ -28,7 +28,7 @@
 
 
 </head>
-<body>
+<body ng-controller="appController">
     <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
     <div ui-view class="main"></div>
     <footer ng-if="!isLoginPage()" ng-include="'common/footer/footer.html'"></footer>
@@ -43,11 +43,14 @@
     <script type="text/javascript" src="../bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="route.js"></script>
+    <script type="text/javascript" src="app.controller.js"></script>
     <script type="text/javascript" src="modules/admin/admin-controller.js"></script>
     <script type="text/javascript" src="modules/admin/newUser/newUser-controller.js"></script>
     <script type="text/javascript" src="common/login/login-controller.js"></script>
     <script type="text/javascript" src="modules/home/home-controller.js"></script>
-    <script type="text/javascript" src="modules/home/teacher/home-teacher.controller.js"></script>
+    <script type="text/javascript" src="modules/home/teacher/teacher-home.controller.js"></script>
+    <script type="text/javascript" src="modules/home/admin/admin-home.controller.js"></script>
+    <script type="text/javascript" src="modules/home/user/user-home.controller.js"></script>
     <script type="text/javascript" src="common/header/header-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
     <script type="text/javascript" src="modules/admin/assignTch/assignTch-controller.js"></script>
@@ -66,7 +69,6 @@
     <script type="text/javascript" src="../bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
     <!--<script src="../bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js" type="text/javascript"></script>-->
 
-    <script type="text/javascript" src="infrastructure/authService.js"></script>
     <script type="text/javascript" src="infrastructure/context.js"></script>
     <script type="text/javascript" src="infrastructure/http.service.js"></script>
     <script type="text/javascript" src="infrastructure/api/user.service.js"></script>
