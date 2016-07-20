@@ -4,10 +4,14 @@
     angular.module('home', []);
 
     angular.module('home')
-        .controller('homeController', ['$scope', '$state', 'context', 'userService',
-            function($scope, $state, context, userService) {
-                $scope.role = context.getRole();
-                
+        .controller('homeController', ['$scope', '$state', 'userService', 'context',
+            function($scope, $state, userService, context) {
+                $scope.isAdmin = context.isAdmin;
+                $scope.isUser = context.isUser;
+                $scope.isTeacher = context.isTeacher;
+                $scope.isGuest = context.isGuest;
+
+
                 userService.getAll().then(function (data) {
                     $scope.all = data;
                 });

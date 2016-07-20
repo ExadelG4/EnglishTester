@@ -1,10 +1,18 @@
-div {
+.header-container div {
     display: inline-block;
     vertical-align: middle;
 }
 
 a {
     color: white;
+}
+
+.dropdown-menu {
+    z-index: 10;
+}
+
+.dropdown-backdrop {
+    z-index: 0;
 }
 
 .header-container {
@@ -18,12 +26,14 @@ a {
 .wrapperMenu {
     padding: 0;
     text-align: center;
+    height: 150px;
 }
 
 .dropdown-menu {
     position: relative;
     z-index: 2;
     background-color: inherit;
+    position: absolute;
 }
 
     .dropdown-menu > li > a {
@@ -66,7 +76,7 @@ a {
     }
 
 .sandwich {
-    display: none;
+    display: none !important;
 }
 
 
@@ -80,7 +90,7 @@ a {
     }
 
     .sandwich {
-        display: inherit;
+        display: inherit !important;
     }
 
     .wrapperMenu {
@@ -95,7 +105,7 @@ a {
     }
 
     .sandwich {
-        display: inherit;
+        display: inherit !important;
     }
 
     .wrapperHeader {

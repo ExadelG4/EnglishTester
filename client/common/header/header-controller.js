@@ -11,19 +11,85 @@
                 })();
                 console.log($scope.role);
 
-                $scope.isActiveTab = function (name) {
-                    //return $(this).style("text-decoration: underline");
-                };
-
                 $scope.logout = function () {
                     authService.logout();
                 };
 
-                jQuery('ul > li').hover(function() {
-                    jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
-                }, function() {
-                    jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
-                });
+                $scope.admin =  [
+                    {
+                        name: 'HOME',
+                        link: 'home',
+                        tabs: []
+                    },
+                    {
+                        name: 'ADMIN',
+                        tabs: [{
+                            nameT: 'Assign student',
+                            link: 'assignStd'
+                        }, {
+                            nameT: 'Assign teacher',
+                            link: 'assignTch'
+                        }, {
+                            nameT: 'New user',
+                            link: 'newUser'
+                        }]
+                    },
+                    {
+                        name: 'TESTS',
+                        tabs: [{
+                                nameT: 'Add question',
+                                link: 'addQuestion'
+                            },
+                            {
+                                nameT: 'Edit question',
+                                link: 'editQuestion'
+                            }
+                        ]
+                    }
 
+                ];
+
+            //    $scope.user = [
+            //        {
+            //            name: 'HOME',
+            //            link: 'homeUser'
+            //        },
+            //        {
+            //            name: 'Request test',
+            //            link: 'requestTest'
+            //        }
+            //
+            //    ];
+            //
+            //    $scope.guest = [
+            //        {
+            //            name: 'HOME',
+            //            link: 'homeGuest'
+            //        }
+            //
+            //    ];
+            //
+            //    $scope.teacher = [
+            //        {
+            //            name: 'HOME',
+            //            link: 'homeTeacher'
+            //        }
+            //
+            //    ];
+            //
+                switch($scope.role) {
+                    case 'admin':
+                        $scope.headerMenu = $scope.admin;
+                        break;
+                    case 'user':
+                        $scope.headerMenu = $scope.user;
+                        break;
+                    case 'guest':
+                        $scope.headerMenu = $scope.guest;
+                        break;
+                    case 'teacher':
+                        $scope.headerMenu = $scope.teacher;
+                        break;
+                }
             }]);
 })();

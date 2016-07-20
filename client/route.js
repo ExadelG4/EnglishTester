@@ -4,7 +4,7 @@
     angular.module('myApp').config(
         function($stateProvider, $urlRouterProvider) {
 
-            $urlRouterProvider.otherwise('/login');
+            //$urlRouterProvider.otherwise('/login');
 
             $stateProvider
                 .state('login', {
@@ -29,6 +29,22 @@
                     templateUrl: 'modules/tests/tests.html',
                     controller: 'testsController',
                     role: ['user', 'guest']
+                })
+                .state('statistic', {
+                    url: '/statistic',
+                    templateUrl: 'modules/statistic/statistic.html',
+                    controller: 'statisticController'
+                })
+                .state('userHome', {
+                    url: '/userHome',
+                    templateUrl: 'modules/userHome/userHome.html',
+                    controller: 'userHomeController'
+                })
+                .state('passTestPart1', {
+                    url: '/passTestPart1',
+                    templateUrl: 'modules/userHome/passTest/passTestPart1.html',
+                    controller: 'passTestController'
+
                 })
         }
     );

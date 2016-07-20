@@ -5,7 +5,7 @@ var adminModule = angular.module('admin', ['ui.bootstrap', 'ui.router']).control
 }]);
 
 adminModule.config(function($stateProvider, $urlRouterProvider) {
-    //$urlRouterProvider.otherwise('/admin');
+    $urlRouterProvider.otherwise('/home');
 
     $stateProvider
         .state('assignStd', {
