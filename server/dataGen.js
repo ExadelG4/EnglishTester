@@ -8,16 +8,50 @@ var faker = require('faker');
 var addUser = function(_name,_pass,_type,count){
 			var defer = q.defer();
 			var prom = [];
+			
 			for(i =0; i<count; i++){
-				prom.push(service.addNewUser2({
+				
+				if((_type == 'user') || (_type == 'guest') )prom.push(service.addNewUser2({
 							email: _name+(i+1)+"@exadel.com", 
 							pass: _pass+(i+1),
 							type: _type,
 							firstName: faker.fake("{{name.firstName}}"),
-							lastName: faker.fake("{{name.lastName}}")
+							lastName: faker.fake("{{name.lastName}}"),
+							statistics : {
+											total: {
+												mark : 0,
+												level: 'beginner'
+											},
+											tests: [{
+												autoMark: 0,
+												teacherMark: 0,
+												data: Date.now()
+											}]
+										}
 							}));
+				else if (_type == 'teacher'){
+					prom.push(service.addNewUser2({
+							email: _name+(i+1)+"@exadel.com", 
+							pass: _pass+(i+1),
+							type: _type,
+							firstName: faker.fake("{{name.firstName}}"),
+							lastName: faker.fake("{{name.lastName}}"),
+							statistics : {
+											checkCount: 1
+										}
+							}));
+				}
+					else prom.push(service.addNewUser2({
+							email: _name+(i+1)+"@exadel.com", 
+							pass: _pass+(i+1),
+							type: _type,
+							firstName: faker.fake("{{name.firstName}}"),
+							lastName: faker.fake("{{name.lastName}}"),
+							statistics : {}
+							}));
+				}
 
-			}
+			
 			return q.all(prom);
 		
 }

@@ -55,7 +55,8 @@ DatabasService.prototype.save = function(info){
     	password: info.pass,
     	role : info.type,
         firstName : info.firstName,
-        lastName : info.lastName
+        lastName : info.lastName,
+        statistics : info.statistics
     });
     
     user.save(function(err){

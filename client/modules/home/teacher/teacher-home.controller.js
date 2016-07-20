@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('home')
-        .controller('homeTeacherController', ['$scope',
+        .controller('teacherHomeController', ['$scope',
             function($scope) {
                 $scope.isShowList = true;
                 
@@ -17,7 +17,8 @@
                     },
                     {
                         level: 'Upper-Intermediate',
-                        date: new Date()}
+                        date: new Date()
+                    }
                 ];
             }]);
 })();

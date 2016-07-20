@@ -36,7 +36,7 @@
                 }
 
                 return {
-                    isAuthenticate: false,
+                    isAuthenticated: false,
                     init: function () {
                         var localContext = JSON.parse(localStorage.getItem('context'));
                         if (localContext) {
@@ -53,6 +53,8 @@
                     },
                     logout: function () {
                         localStorage.removeItem('context');
+                        this.isAuthenticated = false;
+                        //todo: maybe clear all context (set empty data)
                         $location.path('/login');
                     }
                 };

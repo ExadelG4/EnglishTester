@@ -25,8 +25,28 @@ var UserSchema = new Schema(
 		},
 		role: {
 			type: String,
+			required: true,
 			enum: ['user', 'teacher', 'admin','guest'],
 			default: 'guest'
+		},
+		number: {
+			type: String,
+			default: '+375291111111'
+		},
+		statistics : { 
+			level: Number,
+			tests: [{level: Number, autoMark: Number, teacherMark: Number, date: Date }],
+			checkCount: Number
+		},
+		window: {
+			start: Date,
+			end: Date
+		},
+		status: {
+			type: String,
+			required: true,
+			enum: ['free','want','process'],
+			default: 'free'
 		}
 
 	});
