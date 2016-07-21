@@ -1,22 +1,21 @@
 <div class="contaoner-fluid">
-	<div class="row"> <!--HERE WIIL BE TEMPLATE-->
+	<div class="row">
 		<div class="col-xs-12 col-offset-sm-2 col-sm-8">
 			<form>
-				<!-- {{que.num}}{{que.text}}-->
-				<div class="">
+				<label>
 					{{$index + 1}}. {{question.text}}
-				</div>
+				</label>
 				<sound-manager>
-    			<button music-player add-song="song">+</button>
-    			<div class="seekBase" seek-track>
-    				<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
-				</div>
-				<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
-				<button stop-music>Stop</button>
-
-    		</sound-manager>
-				<textarea name="ans">
-				</textarea>
+    				<button music-player add-song="createSong(question.audio, song)">+</button>
+    				<div class="seekBase" seek-track>
+    					<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
+					</div>
+					<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+					<button stop-music>Stop</button>
+    			</sound-manager>
+    			<div ng-repeat="ans in question.answers">
+					<input type="radio" name="ans" ng-model="omg.tempChoise" ng-value="$index"> {{ans}} 
+				</div>	
 			</form>
 		</div>
 	</div>
