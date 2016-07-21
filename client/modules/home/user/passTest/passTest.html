@@ -1,7 +1,13 @@
-<uib-pagination items-per-page="1" ng-model="currentPage" total-items="totalCount"> 
-
+<uib-pagination items-per-page="1" ng-model="currentPage" total-items="totalCount" ng-change="pageChanged(copyCurrentPage)"> 
 </uib-pagination>
 
+<form name="num">
+	<label for="numPage">Enter number of question</label>
+	<input name="numPage" ng-model="neededNumPage" ng-pattern="'[0-9]{1,10}'" ng-change="validNeededNumPage = true;">
+	<button class="btn" ng-click="setNumPage(neededNumPage)" ng-disabled="num.numPage.$invalid">Go</button>
+	<span ng-show="!validNeededNumPage" class="error-mes">Question not found</span>
+
+</form>
 
 <div ng-repeat="question in questionsPart1 track by $index">
 	<div ng-if="$index === $parent.currentPage - 1" ng-include="urls[question.type]">

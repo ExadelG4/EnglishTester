@@ -1,6 +1,5 @@
 (function () {
     angular.module('myApp', [
-        'ui.bootstrap',
         'ui.router',
         'login',
         'infrastructure',
@@ -8,6 +7,8 @@
         'admin',
         'tests',
         'angularSoundManager',
-        'angularFileUpload'
+        'angularFileUpload',
+        'ui.bootstrap',
+        'nya.bootstrap.select'
     ]);
 })();

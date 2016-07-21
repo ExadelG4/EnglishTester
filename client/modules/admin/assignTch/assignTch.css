@@ -11,13 +11,13 @@ input {
 }
 
 .formSelect {
+    display: inline-block;
+    width: 100%;
     padding: 30px;
 }
 
-.form-group .sel1, .form-group .sel2 {
-    margin: 15px;
-    display: inline-block;
-
+.sel1 > ol, .sel2 > ol {
+    width: 100% !important;
 }
 
 .btn-block {
@@ -26,7 +26,8 @@ input {
 }
 
 .sel1, .sel2 {
-    margin-left: 15%;
+    margin-left: 5%;
+    display: inline-block;
 }
 
 .submit-tch {
