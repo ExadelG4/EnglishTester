@@ -3,6 +3,7 @@ var contracts = require('./contracts');
 var service = require('../services/userService');
 var path = require("path");
 var router = express.Router();
+var testService = require('../services/testService')
 
 // var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -89,5 +90,13 @@ router.get('/refresh', passport.authenticate('jwt', { session: false }), functio
 	 });	
 });
 
+
+route.get('/getTest', function(req, res){
+	testService.getTest().then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.json(err);
+	});
+})
 
 module.exports = router;
