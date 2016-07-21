@@ -1,6 +1,8 @@
 var express = require('express');
 var contracts = require('./contracts');
 var service = require('../services/userService');
+var stackService = require('../services/stackService');
+var testService = require('../services/testService');
 var path = require("path");
 var router = express.Router();
 
@@ -13,9 +15,6 @@ var key = require('../config.json');
 router.use(passport.initialize());
 require('../passport')(passport);
 
-// router.use(bodyParser.urlencoded({ extended: false }));
-// router.use(bodyParser.json());
-// router.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/getAll',passport.authenticate('jwt', { session: false }), function(req, res) {
 	
@@ -76,10 +75,6 @@ router.post('/login',function (req, res) {
 	
 });
 
-// router.post('/refresh',function(req, res){
-// 	contracts.refresh()
-// });
-
 
 router.get('/refresh', passport.authenticate('jwt', { session: false }), function(req, res) {
 	 contracts.refresh(req.header('refresh')).then(function(data){
@@ -87,6 +82,21 @@ router.get('/refresh', passport.authenticate('jwt', { session: false }), functio
 	 }).catch(function(err){
 		 res.json(err);
 	 });	
+});
+
+router.post('/assignStudents',function(req, res) {
+	 if(!req.body.students){
+	 	res.json({ success: false, message: 'Please enter email and password.' });
+	 } 
+	 else{
+	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
+			  res.json('add');
+		  }).catch(function (err) {
+			  res.json('eror');
+		  });
+
+  }
+
 });
 
 

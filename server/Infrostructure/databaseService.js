@@ -15,6 +15,16 @@ DatabasService.prototype.find = function(query, fields, options){
 
     return defer.promise;
 }
+DatabasService.prototype.findById = function(id, fields, options){
+    var defer = q.defer();
+    this.model.findById(id, fields, options,function(err ,data){
+        if(err) defer.reject(err);
+        defer.resolve(data);
+
+    });
+
+    return defer.promise;
+}
 DatabasService.prototype.remove = function(){
     var defer = q.defer();
     this.model.remove({},function(err){
@@ -29,6 +39,16 @@ DatabasService.prototype.save = function(query){
     var defer = q.defer();
     var doc = new  this.model(query);
     doc.save(function(err){
+        if(err) defer.reject(err);
+        defer.resolve();
+    });
+
+    return defer.promise;
+}
+DatabasService.prototype.create = function(query){
+    var defer = q.defer();
+    ;
+    this.model.create(query,function(err){
         if(err) defer.reject(err);
         defer.resolve();
     });
