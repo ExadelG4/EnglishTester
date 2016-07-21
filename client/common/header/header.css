@@ -1,115 +1,63 @@
-.header-container div {
+.header {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+}
+
+.header a {
+    color: black;
+    font-size: 1.3em;
+}
+
+.header a:hover {
+    text-decoration: none;
+}
+
+.header-block {
+    padding: 0 30px;
+    margin-top: 25px;
+}
+
+.header-nav-lg ul {
+    float: right;
+}
+
+.header-nav-lg li {
     display: inline-block;
-    vertical-align: middle;
+    margin-left: 30px;
 }
 
-a {
-    color: white;
+.header-nav-lg a:hover {
+    color: dodgerblue;
 }
 
-.dropdown-menu {
-    z-index: 10;
-}
-
-.dropdown-backdrop {
-    z-index: 0;
-}
-
-.header-container {
-    height: 250px;
-    margin: 0;
-    background-image: url(/assets/images/headerBack4.jpg);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
-
-.wrapperMenu {
-    padding: 0;
-    text-align: center;
-    height: 150px;
-}
-
-.dropdown-menu {
-    position: relative;
-    z-index: 2;
-    background-color: inherit;
-    position: absolute;
-}
-
-    .dropdown-menu > li > a {
-        font-size: 15px;
-        color: white;
-    }
-
-.headerNav li {
-    font-size: 20px;
-    display: inline-block;
-    margin-right: 1%;
-    margin-left: 1%;
-    width: 136px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.headerNav > li > a {
-    padding: 10px;
-    border: 1px solid white;
-}
-
-    .headerNav > li > a:hover {
-        color: white;
-        text-decoration: underline;
-    }
-
-.logoProfile {
+.dropdown-menu-right li {
+    margin-left: 0;
     width: 100%;
 }
 
-.glyphicon {
-    color: white;
+.header-nav-sm {
+    display: none;
 }
 
-    .glyphicon-user, .glyphicon-tasks {
-        padding: 5px;
-        margin-top: 7px;
-        font-size: 25px;
-    }
-
-.sandwich {
-    display: none !important;
+.header-nav-sm .glyphicon {
+    float: right;
 }
 
+.header-nav-sm  .dropdown-menu {
+    float: right;
+}
 
 @media (max-width: 767px) {
-    .nav {
+    .header-nav-lg {
         display: none !important;
     }
-
-    .btn-info {
-        margin-right: 25px;
-    }
-
-    .sandwich {
+    .header-nav-sm {
         display: inherit !important;
-    }
-
-    .wrapperMenu {
-        display: none;
-    }
-
-}
-
-@media (max-width: 480px) {
-    .btn-info {
-        display: none;
-    }
-
-    .sandwich {
-        display: inherit !important;
-    }
-
-    .wrapperHeader {
-        display: none;
     }
 }
 

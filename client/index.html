@@ -7,7 +7,6 @@
     <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <link type="text/css" rel="stylesheet" href="common/header/header.css">
-    <link type="text/css" rel="stylesheet" href="common/footer/footer.css">
     <link type="text/css" rel="stylesheet" href="common/login/login.css">
     <link type="text/css" rel="stylesheet" href="modules/tests/addQuestion/addQuestion.css">
     <link type="text/css" rel="stylesheet" href="app.css">
@@ -31,8 +30,6 @@
 <body ng-controller="appController">
     <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
     <div ui-view class="main"></div>
-    <footer ng-if="!isLoginPage()" ng-include="'common/footer/footer.html'"></footer>
-
 
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -72,6 +69,7 @@
 
     <script type="text/javascript" src="infrastructure/context.js"></script>
     <script type="text/javascript" src="infrastructure/http.service.js"></script>
+    <script type="text/javascript" src="infrastructure/navigation.factory.js"></script>
     <script type="text/javascript" src="infrastructure/api/user.service.js"></script>
     <script type="text/javascript" src="run.js"></script>
 

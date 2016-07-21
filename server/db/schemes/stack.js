@@ -4,17 +4,10 @@ var Schema = mongoose.Schema;
 
 var stackScheme = new Schema(
 	{
-		_id: {
-			type: String,
-			unique: true,
-			required: true
-		},
 		data : Date,
-		level : {
-			type: Number,
-			required: true
-		},
-		answers: [{esse: String,record: String, q1: String, q2: String, q3: String}]
+		level : Number,
+		userId: String,
+		answers: [{_id: String, answer: String }]
 
 	});
 	

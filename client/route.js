@@ -3,9 +3,6 @@
 
     angular.module('myApp').config(
         function($stateProvider, $urlRouterProvider) {
-
-            //$urlRouterProvider.otherwise('/login');
-
             $stateProvider
                 .state('login', {
                     url: '/login',
@@ -18,8 +15,8 @@
                     templateUrl: 'modules/home/home.html',
                     controller: 'homeController',
                     role: ['admin', 'user', 'teacher', 'guest']
-                })
-
+                });
+            $urlRouterProvider.otherwise('/home');
         }
-    );
+    )
 })();
