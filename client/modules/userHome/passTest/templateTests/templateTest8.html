@@ -5,11 +5,8 @@
 				<label>
 					{{$index + 1}}. {{question.text}}
 				</label>
-				<div ng-repeat="ans in question.answers"">
-					<input type="radio" name="ans" ng-model="omg.tempChoise" ng-value="$index"> {{ans}} 
-					{{omg.tempChoise}} 
-				</div>
-				{{omg.tempChoise}}
+				<button>Start record </button>
+				<button>Stop record</button>
 			</form>
 		</div>
 	</div>
