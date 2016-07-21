@@ -5,6 +5,8 @@
             data.forEach(function(item, i){
                 $scope.teachers[i] = item;
                 //console.log($scope.teachers[i]);
+
+                $scope.teachers[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
 
@@ -12,18 +14,20 @@
         userService.getUsers().then(function(data) {
             data.forEach(function(item, i) {
                 $scope.students[i] = item;
+                $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
 
         $scope.chooseTeacher = function(item) {
-            $scope.tchName = item.firstName + ' ' + item.lastName;
+            $scope.tchName = item.fullName;
             $scope.tchMail = item.email;
         };
 
         $scope.chooseUser = function(item) {
-            $scope.stdName = item.firstName + ' ' + item.lastName;
+            $scope.stdName = item.fullName;
             $scope.stdMail = item.email;
         }
+
 
     }]);
 })();
