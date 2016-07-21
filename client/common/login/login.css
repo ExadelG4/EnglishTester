@@ -4,8 +4,6 @@ html {
 }
 
 .login-wrapper{
-    /*background: url(../../assets/images/login-page.jpg) no-repeat 100% 100%;*/
-    background-color: rgba(217, 202, 193, 0.7) !important;
     position: absolute;
     width: 100%;
     top: 0;
@@ -36,7 +34,7 @@ input {
     position: absolute;
     padding: 30px;
     border-radius: 15px;
-    background-color: rgba(97, 74, 62, 0.9) !important;
+    background-color: rgba(57, 76, 122, 0.9) !important;
 }
 
     .login-container input {
