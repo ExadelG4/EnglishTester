@@ -91,12 +91,12 @@ router.get('/refresh', passport.authenticate('jwt', { session: false }), functio
 });
 
 
-route.get('/getTest', function(req, res){
+router.get('/getTest', function(req, res){
 	testService.getTest().then(function(data){
 		res.json(data);
 	}).catch(function(err){
 		res.json(err);
 	});
-})
+});
 
 module.exports = router;
