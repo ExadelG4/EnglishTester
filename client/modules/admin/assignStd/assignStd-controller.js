@@ -19,6 +19,10 @@
             $scope.chooseUserList = [];
         };
 
+        (function () {
+              $('#datetimepicker1').datetimepicker();
+        })();
+
 
     }]);
 })();

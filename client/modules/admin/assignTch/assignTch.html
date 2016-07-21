@@ -1,9 +1,8 @@
 <div class="formWrapper">
     <div class="formSelect" ng-controller="assignTchController">
         <div class="form-group sel1">
-            <label for="sel1">Choose teacher:</label>
 
-            <ol class="nya-bs-select" id="sel1" ng-model="selectedItem2" data-live-search="true" ng-change="chooseTeacher(selectedItem2)">
+            <ol class="nya-bs-select" title="Choose teacher" ng-model="selectedItem2" data-live-search="true" ng-change="chooseTeacher(selectedItem2)">
                 <li nya-bs-option="teacher in teachers">
                     <a>
                         {{ teacher.fullName }}
@@ -17,9 +16,8 @@
             <input type="text" size="40" ng-model="tchTel" placeholder="Teacher's telephone" disabled>
         </div>
         <div class="form-group sel2">
-            <label for="sel1">Choose student:</label>
 
-            <ol class="nya-bs-select" id="sel12" ng-model="selectedItem3" data-live-search="true" ng-change="chooseUser(selectedItem3)">
+            <ol class="nya-bs-select" title="Choose student" ng-model="selectedItem3" data-live-search="true" ng-change="chooseUser(selectedItem3)">
                 <li nya-bs-option="student in students">
                     <a>
                         {{ student.fullName }}

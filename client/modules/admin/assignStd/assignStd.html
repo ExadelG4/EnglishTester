@@ -1,10 +1,9 @@
 <div class="formWrapper">
     <div class="formSelect" ng-controller="assignTchController">
         <div class="step1">
-            <div class="form-group sel3">
-                <label >Choose student:</label>
+            <div class="form-group sel2">
 
-                <ol class="nya-bs-select" id="sel13" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
+                <ol class="nya-bs-select" title="Choose student" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
                     <li nya-bs-option="student in students">
                         <a>
                             {{ student.fullName }}
@@ -16,16 +15,33 @@
                 <input type="text" size="40" ng-model="stdName" placeholder="User's name" disabled>
                 <input type="text" size="40" ng-model="stdMail" placeholder="User's mail" disabled>
                 <input type="text" size="40" ng-model="stdTel" placeholder="User's telephone" disabled>
+
+                <div class="container">
+                    <div class="row">
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>
             </div>
-            <button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>
         </div>
+
 
         <div class="step2">
             <div class="form-group sel4">
                 <label for="sel4">Choosen students</label>
                 <select ng-model="studentList" class="form-control" id="sel4" multiple="multiple" ng-options="user for user in chooseUserList"></select>
+                <button class="btn btn-primary btn-block" type="submit">Submit</button>
             </div>
-            <button class="btn btn-primary btn-block" type="submit">Submit</button>
         </div>
 
 
