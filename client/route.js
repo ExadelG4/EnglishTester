@@ -33,17 +33,20 @@
                 .state('statistic', {
                     url: '/statistic',
                     templateUrl: 'modules/statistic/statistic.html',
-                    controller: 'statisticController'
+                    controller: 'statisticController',
+                    role: ['user']
                 })
                 .state('userHome', {
                     url: '/userHome',
                     templateUrl: 'modules/userHome/userHome.html',
-                    controller: 'userHomeController'
+                    controller: 'userHomeController',
+                    role: ['user', 'guest']
                 })
                 .state('passTestPart1', {
                     url: '/passTestPart1',
                     templateUrl: 'modules/userHome/passTest/passTestPart1.html',
-                    controller: 'passTestController'
+                    controller: 'passTestController',
+                    role: ['user', 'guest']
 
                 })
         }
