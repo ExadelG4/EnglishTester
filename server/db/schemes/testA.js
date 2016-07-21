@@ -4,17 +4,13 @@ var Schema = mongoose.Schema;
 
 var TestAScheme = new Schema(
 	{
-		_id: {
-			type: Number,
-			unique: true,
-			required: true
-		},
 		type: {
 			type: String,
 			required: true
   		},
-		dif:{
-			type:String,
+		level:{
+			type:Number,
+			enum: [1, 2, 3, 4, 5],
 			required: true
 		},
 		question:{

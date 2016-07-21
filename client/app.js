@@ -8,8 +8,6 @@
         'admin',
         'tests',
         'angularSoundManager',
-        'statistic',
-        'userHome',
         'angularFileUpload'
     ]);
 })();

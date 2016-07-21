@@ -6,16 +6,14 @@ var expires = require('../config.json').expires;
 
 
 function getAllUsers(){
-	return user.find();
+	return user.find({},{},{});
 }
-function getAllRole(role){
-	return user.findRole(role);
+function getAllRole(_role){
+	return user.find({role: _role},{'_id':0,'firstName': 1, 'lastName':1, 'email':1},{});
 }	
-function addNewUser(email, pass, name){
-	return user.add(email, pass, name);	
-}
-function addNewUser2(info){
-	return user.save(info);
+
+function addNewUser(info){
+	return user.save(info);	
 }
 function authenticate(email, pass){
     var defer = q.defer();
@@ -63,5 +61,4 @@ module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
 module.exports.authenticate = authenticate;
 module.exports.removeCollection = removeCollection;
-module.exports.addNewUser2 = addNewUser2;
 module.exports.getAllRole = getAllRole;

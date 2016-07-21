@@ -8,16 +8,19 @@ var faker = require('faker');
 var addUser = function(_name,_pass,_type,count){
 			var defer = q.defer();
 			var prom = [];
+			
 			for(i =0; i<count; i++){
-				prom.push(service.addNewUser2({
+				prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
-							pass: _pass+(i+1),
-							type: _type,
+							password: _pass+(i+1),
+							role: _type,
 							firstName: faker.fake("{{name.firstName}}"),
 							lastName: faker.fake("{{name.lastName}}")
+							
 							}));
+				}
 
-			}
+			
 			return q.all(prom);
 		
 }
