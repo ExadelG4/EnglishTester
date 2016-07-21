@@ -5,6 +5,7 @@ var stackService = require('../services/stackService');
 var testService = require('../services/testService');
 var path = require("path");
 var router = express.Router();
+var testService = require('../services/testService')
 
 // var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -99,5 +100,13 @@ router.post('/assignStudents',function(req, res) {
 
 });
 
+
+router.get('/getTest', function(req, res){
+	testService.getTest().then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.json(err);
+	});
+});
 
 module.exports = router;

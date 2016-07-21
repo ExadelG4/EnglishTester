@@ -92,6 +92,17 @@ DatabasService.prototype.authenticate = function (email_, password_) {
     return defer.promise;
 }
 
+
+
+DatabasService.prototype.count = function (query) {
+    var defer = q.defer();
+    this.model.count(query, function(err ,data){
+        if(err) defer.reject(err);
+        defer.resolve(data);
+    });
+    return defer.promise;
+}
+
 module.exports = function(model){
     return new DatabasService(model);
 };
