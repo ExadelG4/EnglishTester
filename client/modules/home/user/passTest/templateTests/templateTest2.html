@@ -2,11 +2,11 @@
 	<div class="row"> <!--HERE WIIL BE TEMPLATE-->
 		<div class="col-xs-12 col-offset-sm-2 col-sm-8">
 			<form>
-				<div class="">
+				<label>
 					{{$index + 1}}. {{question.text}}
-				</div>
+				</label>
 				<div ng-repeat="ans in question.answers">
-					<input type="checkbox" name="ans"> {{ans}} 
+					<input type="checkbox" name="ans" ng-model="omg.tempChoise[$index]"> {{ans}}
 				</div>
 			</form>
 		</div>

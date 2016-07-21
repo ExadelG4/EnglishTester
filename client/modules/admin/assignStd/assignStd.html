@@ -3,7 +3,16 @@
         <div class="step1">
             <div class="form-group sel3">
                 <label >Choose student:</label>
-                <select class="form-control" ng-model="selectedItem4" ng-options="student.firstName for student in students" ng-change="hasChanged(selectedItem4)"></select>
+
+                <ol class="nya-bs-select" id="sel13" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
+                    <li nya-bs-option="student in students">
+                        <a>
+                            {{ student.fullName }}
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                </ol>
+
                 <input type="text" size="40" ng-model="stdName" placeholder="User's name" disabled>
                 <input type="text" size="40" ng-model="stdMail" placeholder="User's mail" disabled>
                 <input type="text" size="40" ng-model="stdTel" placeholder="User's telephone" disabled>
@@ -18,5 +27,7 @@
             </div>
             <button class="btn btn-primary btn-block" type="submit">Submit</button>
         </div>
+
+
     </div>
 </div>
