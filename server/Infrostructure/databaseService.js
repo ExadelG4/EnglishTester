@@ -12,7 +12,6 @@ DatabasService.prototype.find = function(query, fields, options){
         defer.resolve(data);
 
     });
-
     return defer.promise;
 }
 DatabasService.prototype.findById = function(id, fields, options){
@@ -65,32 +64,17 @@ DatabasService.prototype.findOne = function(query, fields, options){
 
     return defer.promise;
 }
-DatabasService.prototype.authenticate = function (email_, password_) {
-    var defer = q.defer();
-    this.model.findOne({
-    email: email_
-    }, function(err, user) {
-        if (err) defer.reject(err);
+// DatabasService.prototype.authenticate = function (email_, password_) {
+//     var defer = q.defer();
+//     this.model.findOne({
+//     email: email_
+//     }, function(err, user) {
+//         if (err) defer.reject(err);
 
-        defer.resolve(user);
-        
-        // if (!user) {
-        //     defer.resolve({ success: false, message: 'Authentication failed. User not found.' });
-        // } else {
-        //     user.comparePassword(password_, function(err, isMatch) {
-        //         if (isMatch && !err) {
-        //             var token = jwt.sign(user, key.secret, {
-        //                 expiresIn: 10080 // in seconds
-        //                 });
-        //                 defer.resolve({ id:user.id, name: user.name, email: user.email, role:user.role, token: 'JWT ' + token });
-        //         } else {
-        //             defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
-        //         }user
-        //     });user
-        // }
-    });
-    return defer.promise;
-}
+//         defer.resolve(user);
+//     });
+//     return defer.promise;
+// }
 
 
 

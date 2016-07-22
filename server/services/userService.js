@@ -23,7 +23,10 @@ function addNewUsers(info){
 }
 function authenticate(email, pass){
     var defer = q.defer();
-	user.authenticate(email, pass).then(function(user){        
+	// user.authenticate(email, pass).
+    
+    
+        user.findOne({email: email},{},{}).then(function(user){        
 		if (!user) {           
             defer.reject();
         } else {
@@ -65,29 +68,43 @@ function removeCollection(){
 }
 
 function getUserStatus(_userId){
+    var pr = q.defer();
     userInfo(_userId).then(function(data){
         stackService.findOpenTests({userId: _userId},{},{}).then(function(data){
-            if(data.length != 0)
+            if(data.length != 0){
                 console.log('User in openTests');
+                pr.resolve('User in openTests');
+            }                
             else 
                 stackService.findRequest({userId: _userId},{},{}).then(function(data){
-                    if(data.length != 0)
-                         console.log('User in request');
+                    if(data.length != 0){
+                        console.log('User in request');
+                        pr.resolve('User in request');
+                    }                         
                     else 
                         stackService.findStack({userId: _userId},{},{}).then(function(data){
-                             if(data.length != 0)    
-                                console.log('User in stack');                         
-                            else 
+                             if(data.length != 0){
+                                    console.log('User in stack'); 
+                                    pr.resolve('User in stack'); 
+                             }else {
                                  console.log('User free!');
-
-                        }).catch(function (err){});
-                    }).catch(function (err) {});           
-                }).catch(function (err) {});                                     
+                                 pr.resolve('User free!');
+                             }  
+                        }).catch(function (err){
+                            pr.reject(err);
+                        });
+                    }).catch(function (err) {
+                        pr.reject(err);
+                    });           
+                }).catch(function (err) {
+                    pr.reject(err);
+                });                                     
     }).catch(function(err){
         console.log('User NOT FOUND');
+        pr.reject(err);
     });
 
-
+    return pr.promise;
     
 }
 module.exports.getAllUsers = getAllUsers;
