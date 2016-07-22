@@ -1,4 +1,4 @@
-.header {
+header {
     position: fixed;
     z-index: 100;
     top: 0;
@@ -8,16 +8,16 @@
     background-color: white;
 }
 
-.header a {
+header a {
     color: black;
     font-size: 1.4em;
 }
 
-.header a:hover {
+header a:hover {
     text-decoration: none;
 }
 
-.header a:focus {
+header a:focus {
     text-decoration: none;
 }
 
@@ -32,6 +32,27 @@
 
 .header-block a {
     outline:none;
+}
+
+.panel {
+    box-shadow: none;
+}
+
+.panel-default {
+    border: none;
+}
+
+.panel-default > .panel-heading {
+    background: transparent none;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+    background-color: white;
+    border: none;
+    margin-top: 35px;
+    margin-right: -5px;
 }
 
 /*.nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .nav > li > a, .nav > li > a:hover, .nav > li > a:focus {*/
@@ -55,7 +76,7 @@
 }
 
 .header-block .dropdown-menu {
-    margin-top: 22px;
+    margin-top: 21px;
     margin-right: -5px;
     border: none;
     font-size: 1em;
@@ -95,6 +116,8 @@
 .header-nav-sm {
     display: none;
     font-family: 'Pavanam', sans-serif;
+    padding-right: 0;
+    padding-top: 0;
 }
 
 .header-nav-sm ul {
@@ -107,6 +130,38 @@
 
 .header-nav-sm .dropdown-menu {
     margin-top: 50px;
+}
+
+.header-nav-sm .accordion-toggle, .header-nav-sm .text-muted {
+    color: black;
+}
+
+.header-nav-sm .accordion-toggle :hover, .header-nav-sm .text-muted :hover {
+    color: dodgerblue !important;
+}
+
+.main-nav-sm .panel-body {
+    position: fixed;
+    width: 100%;
+    left: 0;
+}
+
+.menu-panel-sm .panel-body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-top: 1px solid !important;
+    border-bottom: 1px solid !important;
+    position: relative;
+}
+
+.submenu-sm {
+    margin-left: 5px;
+}
+
+.submenu-panel-sm {
+    width: 100%;
+    text-align: center;
 }
 
 @media (max-width: 767px) {
