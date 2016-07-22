@@ -90,9 +90,11 @@ router.post('/assignStudents',function(req, res) {
 	 	res.json({ success: false, message: 'Please enter email and password.' });
 	 } 
 	 else{
+	  		console.log(req.body.students);
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
 			  res.json('add');
 				console.log('azaza');
+				console.log(data);
 		  }).catch(function (err) {
 			  res.json('eror');
 		  });
@@ -118,6 +120,14 @@ router.post('/addQuestion',function(req, res) {
 
 router.get('/getTest', function(req, res){
 	testService.getTest().then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.json(err);
+	});
+});
+
+router.get('/getUserStatus/:id', function(req, res){
+	service.getUserStatus(req.params.id).then(function(data){
 		res.json(data);
 	}).catch(function(err){
 		res.json(err);
