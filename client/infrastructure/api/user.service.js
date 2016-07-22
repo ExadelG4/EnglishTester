@@ -63,7 +63,7 @@
                     },
 
                     assignStudents: function(list) {
-                        return httpService.post('http://localhost:3000/assignStudents', {students: list});
+                        return httpService.post(host + '/assignStudents', {students: list});
                     }
                 };
             }]);
