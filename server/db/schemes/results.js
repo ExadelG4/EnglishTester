@@ -4,7 +4,10 @@ var Schema = mongoose.Schema;
 
 var resultsScheme = new Schema(
 	{
-		data : Date,
+		date : {
+			type: Date,
+			default: Date.now()
+		},
 		userId: String,
 		result: {
 			autoMark: Number,

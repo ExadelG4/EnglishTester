@@ -4,7 +4,10 @@ var Schema = mongoose.Schema;
 
 var requestScheme = new Schema(
 	{
-		data : Date,
+		date : {
+			type: Date,
+			default: Date.now()
+		},
 		userId: String
 
 	});
