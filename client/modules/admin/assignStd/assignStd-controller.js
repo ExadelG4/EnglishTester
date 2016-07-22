@@ -30,7 +30,7 @@
         };
 
         $scope.addStudent = function() {
-            var newStudent = new stdConstructor(currentStudent.firstName, $scope.dateStart, $scope.dateEnd);
+            var newStudent = new stdConstructor(currentStudent._id, $scope.dateStart, $scope.dateEnd);
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
 
