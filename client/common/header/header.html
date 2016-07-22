@@ -1,10 +1,12 @@
 <header class="header" ng-controller="headerController">
-    <div class="header-block">
+    <div class="header-block navbar">
         <div class="col-sm-4 col-xs-6">
             <a ui-sref="home">
                 <span>KPACUBO</span>
             </a>
         </div>
+
+        <!--Full navigation menu-->
         <div class="header-nav-lg col-sm-8">
             <ul>
                 <li uib-dropdown ng-repeat="menuItem in headerMenu">
@@ -34,17 +36,42 @@
             </ul>
         </div>
 
-        <!--Todo: pull right deopdown-menu!-->
-
+        <!--Small navigation menu-->
         <div class="header-nav-sm col-xs-6">
-            <a href="" uib-dropdown>
-                <span uib-dropdown-toggle class="glyphicon glyphicon-menu-hamburger"></span>
-                <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
-                    <li ng-repeat="menuItem in headerMenu">
-                        {{menuItem.name}}
-                    </li>
-                </ul>
-            </a>
+            <!--Todo: create normal navigation menu
+            <!--Todo: Maybe accordion-->
+
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li class="dropdown">-->
+                    <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" >-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
+                        <!--<li ng-repeat="menuItem in headerMenu" ng-class="{'dropdown-submenu': !menuItem.state}">-->
+                            <!--<a ng-if="menuItem.state" ui-sref="{{menuItem.state}}">{{menuItem.name}}</a>-->
+                            <!--<a ng-if="!menuItem.state" href="">{{menuItem.name}}</a>-->
+                            <!--<ul ng-if="!menuItem.state" class="dropdown-menu">-->
+                                <!--<li ng-repeat="subMenuItem in menuItem.tabs">-->
+                                    <!--<a ui-sref="{{subMenuItem.state}}">{{subMenuItem.name}}</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+
+            <ul>
+                <li uib-dropdown is-open="isSmall" on-toggle="toggled(open)">
+                    <a href="" uib-dropdown-toggle>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </a>
+                    <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
+                        <li ng-repeat="menuItem in smallMenu">
+                            <a href="" ng-click="chooseSmall(menuItem)">{{menuItem.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </header>

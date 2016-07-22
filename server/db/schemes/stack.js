@@ -4,10 +4,18 @@ var Schema = mongoose.Schema;
 
 var stackScheme = new Schema(
 	{
-		data : Date,
+		date : {
+			type: Date,
+			default: Date.now()
+		},
 		level : Number,
 		userId: String,
-		answers: [{_id: String, answer: String }]
+		answersAuto: [{_qId: String, answer: []}],
+		answers: [{_id: String, answer: String }],
+		teacherId: {
+			type: String,
+			default: 'none'
+		}
 
 	});
 	

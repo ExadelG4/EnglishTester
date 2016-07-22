@@ -9,3 +9,7 @@
 .formSelect {
     display: inline-block;
 }
+
+.step1, .step2 {
+    display: inline-block;
+}

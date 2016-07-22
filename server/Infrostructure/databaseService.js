@@ -12,6 +12,15 @@ DatabasService.prototype.find = function(query, fields, options){
         defer.resolve(data);
 
     });
+    return defer.promise;
+}
+DatabasService.prototype.findById = function(id, fields, options){
+    var defer = q.defer();
+    this.model.findById(id, fields, options,function(err ,data){
+        if(err) defer.reject(err);
+        defer.resolve(data);
+
+    });
 
     return defer.promise;
 }
@@ -35,6 +44,16 @@ DatabasService.prototype.save = function(query){
 
     return defer.promise;
 }
+DatabasService.prototype.create = function(query){
+    var defer = q.defer();
+    ;
+    this.model.create(query,function(err){
+        if(err) defer.reject(err);
+        defer.resolve();
+    });
+
+    return defer.promise;
+}
 DatabasService.prototype.findOne = function(query, fields, options){
     var defer = q.defer();
     this.model.findOne(query, fields, options,function(err ,data){
@@ -45,29 +64,25 @@ DatabasService.prototype.findOne = function(query, fields, options){
 
     return defer.promise;
 }
-DatabasService.prototype.authenticate = function (email_, password_) {
-    var defer = q.defer();
-    this.model.findOne({
-    email: email_
-    }, function(err, user) {
-        if (err) defer.reject(err);
+// DatabasService.prototype.authenticate = function (email_, password_) {
+//     var defer = q.defer();
+//     this.model.findOne({
+//     email: email_
+//     }, function(err, user) {
+//         if (err) defer.reject(err);
 
-        defer.resolve(user);
-        
-        // if (!user) {
-        //     defer.resolve({ success: false, message: 'Authentication failed. User not found.' });
-        // } else {
-        //     user.comparePassword(password_, function(err, isMatch) {
-        //         if (isMatch && !err) {
-        //             var token = jwt.sign(user, key.secret, {
-        //                 expiresIn: 10080 // in seconds
-        //                 });
-        //                 defer.resolve({ id:user.id, name: user.name, email: user.email, role:user.role, token: 'JWT ' + token });
-        //         } else {
-        //             defer.resolve({ success: false, message: 'Authentication failed. Passwords did not match.' });
-        //         }user
-        //     });user
-        // }
+//         defer.resolve(user);
+//     });
+//     return defer.promise;
+// }
+
+
+
+DatabasService.prototype.count = function (query) {
+    var defer = q.defer();
+    this.model.count(query, function(err ,data){
+        if(err) defer.reject(err);
+        defer.resolve(data);
     });
     return defer.promise;
 }

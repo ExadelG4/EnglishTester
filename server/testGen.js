@@ -27,7 +27,7 @@ var addQuestion = function(_level,count){
 
 			
 			return q.all(prom);
-		
+		3
 }
 var addAll = function(){
 		addQuestion(1,arguments[0]).then(function(data){

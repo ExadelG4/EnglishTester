@@ -51,7 +51,7 @@
                         return httpService.post('http://localhost:3000/register', {password: 11111, email: email_,
                         firstName: firstName_, secondName: secondName_, phone: number_})
                             .then(function(result){
-                                console.log('new user created')
+                                console.log('new user created');
                                 return true;
                             },
                             function () {
@@ -68,6 +68,10 @@
                                     return result.data;
                                 }
                             )
+                    },
+
+                    assignStudents: function(list) {
+                        return httpService.post('http://localhost:3000/assignStudents', {students: list});
                     }
                 };
             }]);
