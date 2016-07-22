@@ -99,6 +99,20 @@ router.post('/assignStudents',function(req, res) {
   }
 
 });
+router.post('/addQuestion',function(req, res) {
+	 if(!req.body.finalQue){
+	 	res.json({ success: false, message: 'Please correct data.' });
+	 } 
+	 else{
+	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
+			  res.json('add');
+		  }).catch(function (err) {
+			  res.json('eror');
+		  });
+
+  }
+
+})
 
 
 router.get('/getTest', function(req, res){
