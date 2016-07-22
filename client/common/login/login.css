@@ -4,15 +4,18 @@ html {
 }
 
 .login-wrapper{
-    background: url(../../assets/images/skyscraper_2.jpg) no-repeat 100% 100%;
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
 }
 
+.login-container input {
+    color: white;
+}
+
 body, .login-wrapper {
-    background-size: cover;
+    background-size: 100% 100%;
     height: 100%;
 }
 
@@ -31,7 +34,7 @@ input {
     position: absolute;
     padding: 30px;
     border-radius: 15px;
-    background: rgba(47, 73, 110, 0.8);
+    background-color: rgba(57, 76, 122, 0.9) !important;
 }
 
     .login-container input {

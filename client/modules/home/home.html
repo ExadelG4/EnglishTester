@@ -1,5 +1,6 @@
-<h3>Role from context: {{role}}</h3>
-<p>ALL (with jwt):</p>
-<p>{{all}}</p>
-<p>USERS (without jwt):</p>
-<p>{{users}}</p>
+<div ng-if="isAdmin()" ng-include="'modules/home/admin/admin-home.html'"></div>
+<div ng-if="isUser()" ng-include="'modules/home/user/user-home.html'"></div>
+<div ng-if="isTeacher()" ng-include="'modules/home/teacher/teacher-home.html'"></div>
+<div ng-if="isGuest()">
+    <h2>Guest home</h2>
+</div>

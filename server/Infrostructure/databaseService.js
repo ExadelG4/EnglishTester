@@ -5,22 +5,20 @@ var key = require('../config.json');
 var DatabasService = function (model){
     this.model = model;
 }
-DatabasService.prototype.find = function(){
+DatabasService.prototype.find = function(query, fields, options){
     var defer = q.defer();
-    this.model.find({},function(err ,data){
+    this.model.find(query, fields, options,function(err ,data){
         if(err) defer.reject(err);
-
         defer.resolve(data);
 
     });
 
     return defer.promise;
 }
-DatabasService.prototype.findRole = function(_role){
+DatabasService.prototype.findById = function(id, fields, options){
     var defer = q.defer();
-    this.model.find({role: _role},{'_id':0,'firstName': 1, 'lastName':1, 'email':1},function(err ,data){
+    this.model.findById(id, fields, options,function(err ,data){
         if(err) defer.reject(err);
-
         defer.resolve(data);
 
     });
@@ -37,56 +35,36 @@ DatabasService.prototype.remove = function(){
 
    return defer.promise;
 }
-DatabasService.prototype.findOne = function(info){
+DatabasService.prototype.save = function(query){
     var defer = q.defer();
-    this.model.findOne({email: info},function(err ,data){
+    var doc = new  this.model(query);
+    doc.save(function(err){
         if(err) defer.reject(err);
+        defer.resolve();
+    });
 
+    return defer.promise;
+}
+DatabasService.prototype.create = function(query){
+    var defer = q.defer();
+    ;
+    this.model.create(query,function(err){
+        if(err) defer.reject(err);
+        defer.resolve();
+    });
+
+    return defer.promise;
+}
+DatabasService.prototype.findOne = function(query, fields, options){
+    var defer = q.defer();
+    this.model.findOne(query, fields, options,function(err ,data){
+        if(err) defer.reject(err);
         defer.resolve(data);
 
     });
 
     return defer.promise;
 }
-DatabasService.prototype.save = function(info){
-    var defer = q.defer();
-    var user = new  this.model({
-    	email : info.email,
-    	password: info.pass,
-    	role : info.type,
-        firstName : info.firstName,
-        lastName : info.lastName
-    });
-    
-    user.save(function(err){
-        if(err) defer.reject(err);
-
-        defer.resolve(info);
-
-    });
-
-    return defer.promise;
-}
-
-
-DatabasService.prototype.add = function(email_, password_,name_){
-    var defer = q.defer();
-    var newUser = new this.model({
-        email: email_,
-        password: password_,
-        firstName: name_
-        });
-
-        // Attempt to save the user
-        newUser.save(function(err) {
-            if (err) {
-                defer.reject({ success: false, message: 'That email address already exists.'});
-            }
-            defer.resolve({ success: true, message: 'Successfully created new user.' });
-        });
-    return defer.promise;
-}
-
 DatabasService.prototype.authenticate = function (email_, password_) {
     var defer = q.defer();
     this.model.findOne({
@@ -110,6 +88,17 @@ DatabasService.prototype.authenticate = function (email_, password_) {
         //         }user
         //     });user
         // }
+    });
+    return defer.promise;
+}
+
+
+
+DatabasService.prototype.count = function (query) {
+    var defer = q.defer();
+    this.model.count(query, function(err ,data){
+        if(err) defer.reject(err);
+        defer.resolve(data);
     });
     return defer.promise;
 }

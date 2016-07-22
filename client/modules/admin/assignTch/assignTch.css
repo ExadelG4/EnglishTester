@@ -11,17 +11,26 @@ input {
 }
 
 .formSelect {
+    display: inline-block;
+    width: 100%;
     padding: 30px;
-    margin-left: 20%;
 }
 
-.sel1, .sel2 {
-    padding: 15px;
-
+.sel1 > ol, .sel2 > ol {
+    width: 100% !important;
 }
 
 .btn-block {
-    width: initial;
+    width: 100%;
     text-align: center;
-    margin-left: 27%;
+}
+
+.sel1, .sel2 {
+    margin-left: 5%;
+    display: inline-block;
+}
+
+.submit-tch {
+    width: 200px;
+    margin-left: 41%;
 }

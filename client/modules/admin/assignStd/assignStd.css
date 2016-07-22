@@ -1,51 +1,15 @@
-.step1 {
-    margin-left: 55px;
+.btn-block {
+    width: 100%;
 }
 
-.myGlass {
-    width: 300px;
-    height: 300px;
-    filter:blur(4px);
-    -o-filter:blur(4px);
-    -ms-filter:blur(4px);
-    -moz-filter:blur(4px);
-    -webkit-filter:blur(4px);
-    background-color: rgba(201, 185, 165, 0.99);
+.step2 {
+    padding: 65px;
 }
 
-.stepsImage {
-    width: 300px;
-    height: 300px;
+.formSelect {
+    display: inline-block;
 }
 
-.onGlass {
-    color: white;
-    padding: 30px;
-    top:0;
-    width: 300px;
-    height: 300px;
-    position:absolute;
-    z-index:3;
-}
-
-.myHide {
-    margin-top: 5%;
-    -webkit-transition: 1s ease-out;
-    -moz-transition: 1s ease-out;
-    -o-transition: 1s ease-out;
-    transition: 1s ease-out;
-
-    position: absolute;
-    z-index: 1;
-}
-
-.myCollapse, .myCollapse:hover {
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 55px;
-    text-decoration: none;
-    color: white;
-    z-index: 2;
+.step1, .step2 {
+    display: inline-block;
 }

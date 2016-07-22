@@ -1,20 +1,34 @@
 (function () {
     'use strict';
     angular.module('myApp')
-        .controller('headerController', ['$scope', '$state', 'authService',
-            function($scope, $state, authService) {
-                $scope.isActiveTab = function (name) {
-                    //return $(this).style("text-decoration: underline");
-                };
-
+        .controller('headerController', ['$scope', '$state', 'authService', 'navigationFactory',
+            function($scope, $state, authService, navigationFactory) {
                 $scope.logout = function () {
                     authService.logout();
                 };
+                
+                $scope.headerMenu = navigationFactory.getNavigationMenu();
+                $scope.smallMenu = $scope.headerMenu;
+                $scope.isSmall = false;
 
-                jQuery('ul > li').hover(function() {
-                    jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
-                }, function() {
-                    jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
-                })
-            }]);
+                $scope.chooseSmall = function (menuItem) {
+                    if (menuItem.tabs) {
+                        $scope.smallMenu = menuItem.tabs;
+                        setTimeout(function () {
+                            $scope.isSmall = true;
+                        }, 0);
+                    } else {
+                        $state.go(menuItem.state);
+                        $scope.isSmall = false;
+                    }
+                };
+
+                $scope.toggled = function (open) {
+                    if (!open && $scope.isSmall == false) {
+                        $scope.smallMenu = $scope.headerMenu;
+                        // $scope.isSmall = false;
+                    }
+                };
+            }
+        ]);
 })();

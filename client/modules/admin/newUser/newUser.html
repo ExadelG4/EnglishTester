@@ -1,1 +1,24 @@
-<h3>newUser</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-6 col-md-offset-2 col-md-5 col-lg-offset-2 col-lg-5">
+
+            <form name="user" class="formAddUser" novalidate>
+                <label>First name: </label>
+                <span ng-show="user.first.$error.required && user.first.$dirty" class="error-mes">This field is required</span>
+                <input type="text" name="first" ng-model="firstMd" class="form-control" aria-label="..." placeholder="Ivan" required/>
+                <label>Second name: </label>
+                <span ng-show="user.second.$error.required && user.second.$dirty" class="error-mes">This field is required</span>
+                <input type="text" name="second" ng-model="secondMd" class="form-control" aria-label="..." placeholder="Petrov" required>
+                <label>E-mail adress: </label>
+                <span ng-show="user.email.$error.required && user.email.$dirty" class="error-mes">This field is required</span>
+                <span ng-show="user.email.$invalid && user.email.$dirty && !user.email.$error.required" class="error-mes">Enter valid e-mail address</span>
+                <input type="email" name="email" ng-model="emailMd" class="form-control" aria-label="..." placeholder="someadress@post.com" required>
+                <label>Phone number: </label>
+                <span ng-show="user.phnumber.$error.required && user.phnumber.$dirty" class="error-mes">This field is required</span>
+                <span ng-show="user.phnumber.$invalid && user.phnumber.$dirty && !user.phnumber.$error.required" class="error-mes">Enter valid phone number</span>
+                <input type="text" name="phnumber" ng-model="phnumberMd" class="form-control" aria-label="..." placeholder="+375299379992" ng-pattern="'[+]{1}[375]{1}[0-9]{11,11}'" required>
+                <button class="btn btn-success" ng-disabled="user.$invalid" ng-click = "newUser()">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

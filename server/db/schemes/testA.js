@@ -1,0 +1,26 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+
+var TestAScheme = new Schema(
+	{
+		type: {
+			type: String,
+			required: true
+  		},
+		level:{
+			type:Number,
+			enum: [1, 2, 3, 4, 5],
+			required: true
+		},
+		question:{
+			type:String,
+			required: true
+		},
+		options: [],
+		answers: []
+
+	});
+	
+var testA = mongoose.model('testA', TestAScheme);
+module.exports = testA;

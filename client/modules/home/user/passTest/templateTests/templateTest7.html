@@ -1,0 +1,21 @@
+<div class="contaoner-fluid">
+	<div class="row"> <!--HERE WIIL BE TEMPLATE-->
+		<div class="col-xs-12 col-offset-sm-2 col-sm-8">
+			<form>
+				<label>
+					{{$index + 1}}. {{question.text}}
+				</label>
+				<sound-manager>
+    					<button music-player add-song="createSong(question.audio, song)">+</button>
+    				<div class="seekBase" seek-track>
+    					<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
+					</div>
+					<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+					<button stop-music>Stop</button>
+    			</sound-manager>
+    			<textarea name="ans" ng-model="omg.tempChoise">
+				</textarea>		
+			</form>
+		</div>
+	</div>
+</div>

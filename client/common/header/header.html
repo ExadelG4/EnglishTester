@@ -1,55 +1,77 @@
-<nav class="container-fluid navbar" ng-controller="headerController as headCtrl">
-
-    <div class="logoProfile">
-        <div class="pull-right col-xs-2 col-sm-1 col-md-1 col-lg-1">
-            <a class="pull-right" data-toggle="dropdown" href="">
-                <span class="glyphicon glyphicon-user"></span>
+<header class="header" ng-controller="headerController">
+    <div class="header-block navbar">
+        <div class="col-sm-4 col-xs-6">
+            <a ui-sref="home">
+                <span>KPACUBO</span>
             </a>
-            <ul class="dropdown-menu">
-                <li><a>Edit profile</a></li>
-                <li><a>Check microphone</a></li>
-                <li><a href="" ng-click="logout()">Log out</a></li>
-            </ul>
         </div>
 
-        <div class="pull-right col-xs-2 sandwich">
-            <a class="pull-right" data-toggle="dropdown" href="">
-                <span class="glyphicon glyphicon-tasks"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
-                </li>
-                <li><a href="#"><span class="glyphicon glyphicon-check"></span>Admin</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span>Tests</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class=" col-sm-6 col-md-6 col-lg-6 wrapperMenu navigation-bar pull-right">
-        <ul class="headerNav">
-                <li class="dropdown" ng-class="{active: isActiveTab('/home')}">
-                    <a ui-sref="home" class="dropdown-toggle" data-toggle="dropdown">HOME</a>
-                <li class="dropdown" ng-class="{active: isActiveTab('/admin')}">
-                    <a class="dropdown-toggle" data-toggle="dropdown">ADMIN</a>
-                    <ul class="dropdown-menu">
-                        <li><a ui-sref="assignStd">Assign student</a></li>
-                        <li><a ui-sref="assignTch">Assign teacher</a></li>
-                        <li><a ui-sref="newUser">New user</a></li>
+        <!--Full navigation menu-->
+        <div class="header-nav-lg col-sm-8">
+            <ul>
+                <li uib-dropdown ng-repeat="menuItem in headerMenu">
+                    <a ng-if="menuItem.state" ui-sref="{{menuItem.state}}">{{menuItem.name}}</a>
+                    <a ng-if="!menuItem.state" href="" uib-dropdown-toggle>{{menuItem.name}}</a>
+                    <ul ng-if="!menuItem.state" uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
+                        <li ng-repeat="subMenuItem in menuItem.tabs">
+                            <a ui-sref="{{subMenuItem.state}}">{{subMenuItem.name}}</a>
+                        </li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">TESTS</a>
-                        <ul class="dropdown-menu">
-                            <li><a ui-sref="addQuestion">Add question</a></li>
-                            <li><a href="#">Edit question</a></li>
-                            <li><a href="#">New test</a></li>
-                        </ul>
-                </li>
-                <li class="dropdown" ng-class="{active: isActiveTab('/tests')}">
-                    <a class="dropdown-toggle" data-toggle="dropdown">NEW USER</a>
-                </li>
-        </ul>
-    </div>
 
-</nav>
+                <li uib-dropdown>
+                    <a href="" uib-dropdown-toggle>Profile</a>
+                    <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a href="">Edit profile</a>
+                        </li>
+                        <li>
+                            <a href="">Check microphone</a>
+                        </li>
+                        <li>
+                            <a href="" ng-click="logout()">Log out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!--Small navigation menu-->
+        <div class="header-nav-sm col-xs-6">
+            <!--Todo: create normal navigation menu
+            <!--Todo: Maybe accordion-->
+
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li class="dropdown">-->
+                    <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" >-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
+                        <!--<li ng-repeat="menuItem in headerMenu" ng-class="{'dropdown-submenu': !menuItem.state}">-->
+                            <!--<a ng-if="menuItem.state" ui-sref="{{menuItem.state}}">{{menuItem.name}}</a>-->
+                            <!--<a ng-if="!menuItem.state" href="">{{menuItem.name}}</a>-->
+                            <!--<ul ng-if="!menuItem.state" class="dropdown-menu">-->
+                                <!--<li ng-repeat="subMenuItem in menuItem.tabs">-->
+                                    <!--<a ui-sref="{{subMenuItem.state}}">{{subMenuItem.name}}</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+
+            <ul>
+                <li uib-dropdown is-open="isSmall" on-toggle="toggled(open)">
+                    <a href="" uib-dropdown-toggle>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </a>
+                    <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
+                        <li ng-repeat="menuItem in smallMenu">
+                            <a href="" ng-click="chooseSmall(menuItem)">{{menuItem.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
