@@ -100,6 +100,20 @@ router.post('/assignStudents',function(req, res) {
 
 });
 
+router.post('/assignTeacher',function (req, res) {
+	if(!req.body.userId||!req.body.teacheId||req.body.userId===undefined||req.body.teacheId===undefined){
+	 	res.status(400).send("Bad Request");
+	 } 
+	 else{
+	  		stackService.assignTeacher(req.body).then(function(data){
+			  res.send('ok');
+		  }).catch(function (err) {
+			  res.status(400).send("Bad Request");
+		  });
+
+  }
+})
+
 
 router.get('/getTest', function(req, res){
 	testService.getTest().then(function(data){
