@@ -4,7 +4,6 @@
 
         .run(['authService', '$location', '$rootScope', 'context', '$state',
             function (authService, $location, $rootScope, context, $state) {
-                //todo html5
                 authService.init();
                 if (!authService.isAuthenticated) {
                     $location.path('/login');

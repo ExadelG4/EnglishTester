@@ -72,23 +72,23 @@ function getUserStatus(_userId){
     userInfo(_userId).then(function(data){
         stackService.findOpenTests({userId: _userId},{},{}).then(function(data){
             if(data.length != 0){
-                console.log('User in openTests');
-                pr.resolve('User in openTests');
+                
+                pr.resolve('open');
             }                
             else 
                 stackService.findRequest({userId: _userId},{},{}).then(function(data){
                     if(data.length != 0){
-                        console.log('User in request');
-                        pr.resolve('User in request');
+                        
+                        pr.resolve('req');
                     }                         
                     else 
                         stackService.findStack({userId: _userId},{},{}).then(function(data){
                              if(data.length != 0){
-                                    console.log('User in stack'); 
-                                    pr.resolve('User in stack'); 
+                                    
+                                    pr.resolve('stack'); 
                              }else {
-                                 console.log('User free!');
-                                 pr.resolve('User free!');
+                                 
+                                 pr.resolve('free');
                              }  
                         }).catch(function (err){
                             pr.reject(err);
