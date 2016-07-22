@@ -9,14 +9,14 @@
                 
                 $scope.headerMenu = navigationFactory.getNavigationMenu();
 
-                $scope.hui = true;
+                $scope.isShowSmallNav = true;
                 
                 $scope.selectMenu = function (menuItem) {
                     if (menuItem.state) {
-                        $scope.hui = false;
+                        $scope.isShowSmallNav = false;
                         $state.go(menuItem.state);
                         setTimeout(function() {
-                            $scope.hui = true;
+                            $scope.isShowSmallNav = true;
                         }, 0);
                     }
                 };
