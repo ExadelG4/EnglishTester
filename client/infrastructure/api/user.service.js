@@ -59,6 +59,10 @@
                                 return false;
                              }
                         );
+                    },
+
+                    assignStudents: function(list) {
+                        return httpService.post('http://localhost:3000/assignStudents', {students: list});
                     }
                 };
             }]);

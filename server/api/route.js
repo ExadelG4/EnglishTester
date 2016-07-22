@@ -92,6 +92,7 @@ router.post('/assignStudents',function(req, res) {
 	 else{
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
 			  res.json('add');
+				console.log('azaza');
 		  }).catch(function (err) {
 			  res.json('eror');
 		  });
