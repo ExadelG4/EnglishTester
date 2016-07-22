@@ -3,7 +3,7 @@
 }
 
 .step2 {
-    padding: 65px;
+    padding: 15px;
 }
 
 .formSelect {
@@ -13,3 +13,7 @@
 .step1, .step2 {
     display: inline-block;
 }
+
+/*.firstCalendar, .secondCalendar {*/
+    /*margin-bottom: 5%;*/
+/*}*/

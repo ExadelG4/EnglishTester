@@ -1,16 +1,16 @@
 (function(){
     angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
         $scope.students = [];
+        $scope.showList = [];
+        var chooseUserList = [];
+        var currentStudent;
+
         userService.getUsers().then(function(data) {
             data.forEach(function(item, i) {
                 $scope.students[i] = item;
                 $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
-
-        var chooseUserList = [];
-        $scope.showList = [];
-        var currentStudent;
 
         var stdConstructor = function(stdId, stdData, stdData2){
             this.id =  stdId;
@@ -33,6 +33,7 @@
             var newStudent = new stdConstructor(currentStudent._id, $scope.dateStart, $scope.dateEnd);
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
+            console.log($('.dateStart').val);
 
             $scope.stdName = '';
             $scope.stdMail = '';
@@ -41,21 +42,14 @@
         };
 
         $scope.submitStudentsList = function() {
-            console.log(chooseUserList);
+            userService.assignStudents(chooseUserList);
             $scope.showList = [];
-            userService.assignStudents(chooseUserList).then(function(result){
-                if (result){
-                    alert('ok');
-                } else{
-                    alert('fail');
-                }
-            });
+            chooseUserList = [];
         };
 
-
         (function () {
-              $('#datetimepicker1').datetimepicker();
               $('#datetimepicker2').datetimepicker();
+              $('#datetimepicker3').datetimepicker();
         })();
 
 

@@ -1,6 +1,6 @@
-<div class="formWrapper">
-    <div class="formSelect" ng-controller="assignTchController">
-        <div class="step1 col-md-5">
+<div class="formWrapper col-sm-12 col-md-12 col-lg-12">
+    <div class="formSelect col-sm-12 col-md-12 col-lg-12" ng-controller="assignTchController">
+        <div class="step1 col-sm-5 col-md-5 col-lg-5">
             <div class="form-group sel2">
 
                 <ol class="nya-bs-select" title="Choose student" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
@@ -12,32 +12,35 @@
                     </li>
                 </ol>
 
-                <input type="text" size="40" ng-model="stdName" placeholder="User's name" disabled>
-                <input type="text" size="40" ng-model="stdMail" placeholder="User's mail" disabled>
-                <input type="text" size="40" ng-model="stdTel" placeholder="User's telephone" disabled>
+                <input class="col-sm-12 col-md-12 col-lg-12" type="text" size="40" ng-model="stdName" placeholder="User's name" disabled>
+                <input class="col-sm-12 col-md-12 col-lg-12" type="text" size="40" ng-model="stdMail" placeholder="User's mail" disabled>
+                <input class="col-sm-12 col-md-12 col-lg-12" type="text" size="40" ng-model="stdTel" placeholder="User's telephone" disabled>
 
-                        <div class=''>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' class="form-control" ng-model="dateStart" />
+
+                <div class='firstCalendar'>
+                    <div class="form-group">
+                        <div class='input-group' id='datetimepicker2'>
+                            <input type='text' class="form-control col-sm-12 col-md-12 col-lg-12" ng-model="dateEnd" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class='secondCalendar'>
+                    <div class="form-group">
+                        <div class='input-group' id='datetimepicker3'>
+                            <input type='text' class="form-control col-sm-12 col-md-12 col-lg-12" ng-model="dateEnd" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-                                </div>
-                            </div>
                         </div>
+                    </div>
+                </div>
 
 
-                        <div class=''>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepicker2'>
-                                    <input type='text' class="form-control" ng-model="dateEnd" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
 
                 <button class="btn btn-primary btn-block" type="submit" ng-click="addStudent()">Add student</button>
                 <button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>
@@ -45,7 +48,7 @@
         </div>
 
 
-        <div class="step2 col-md-5">
+        <div class="step2 col-sm-3 col-md-3 col-lg-3 pull-right">
             <div class="form-group sel4">
                 <label for="sel4">Choosen students</label>
                 <select ng-model="studentList" class="form-control" id="sel4" multiple="multiple" ng-options="user for user in showList"></select>
