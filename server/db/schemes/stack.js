@@ -10,7 +10,7 @@ var stackScheme = new Schema(
 		},
 		level : Number,
 		userId: String,
-		answersAuto: [{_qId: String, answer: []}]
+		answersAuto: [{_qId: String, answer: []}],
 		answers: [{_id: String, answer: String }],
 		teacherId: {
 			type: String,
