@@ -1,6 +1,7 @@
 (function () {
     angular.module('myApp')
 
+
         .run(['authService', '$location', '$rootScope', 'context', '$state',
             function (authService, $location, $rootScope, context, $state) {
                 //todo html5

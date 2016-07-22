@@ -3,21 +3,30 @@ var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
 var expires = require('../config.json').expires;
+var stackService = require('./stackService');
 
 
 function getAllUsers(){
 	return user.find({},{},{});
 }
 function getAllRole(_role){
-	return user.find({role: _role},{'_id':0,'firstName': 1, 'lastName':1, 'email':1},{});
+	return user.find({role: _role},{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{});
 }	
-
+function userInfo(id){
+    return user.findOne({_id: id},{},{});
+}
 function addNewUser(info){
 	return user.save(info);	
 }
+function addNewUsers(info){
+    return user.create(info); 
+}
 function authenticate(email, pass){
     var defer = q.defer();
-	user.authenticate(email, pass).then(function(user){        
+	// user.authenticate(email, pass).
+    
+    
+        user.findOne({email: email},{},{}).then(function(user){        
 		if (!user) {           
             defer.reject();
         } else {
@@ -57,8 +66,52 @@ function authenticate(email, pass){
 function removeCollection(){
 	return user.remove();
 }
+
+function getUserStatus(_userId){
+    var pr = q.defer();
+    userInfo(_userId).then(function(data){
+        stackService.findOpenTests({userId: _userId},{},{}).then(function(data){
+            if(data.length != 0){
+                
+                pr.resolve('open');
+            }                
+            else 
+                stackService.findRequest({userId: _userId},{},{}).then(function(data){
+                    if(data.length != 0){
+                        
+                        pr.resolve('req');
+                    }                         
+                    else 
+                        stackService.findStack({userId: _userId},{},{}).then(function(data){
+                             if(data.length != 0){
+                                    
+                                    pr.resolve('stack'); 
+                             }else {
+                                 
+                                 pr.resolve('free');
+                             }  
+                        }).catch(function (err){
+                            pr.reject(err);
+                        });
+                    }).catch(function (err) {
+                        pr.reject(err);
+                    });           
+                }).catch(function (err) {
+                    pr.reject(err);
+                });                                     
+    }).catch(function(err){
+        console.log('User NOT FOUND');
+        pr.reject(err);
+    });
+
+    return pr.promise;
+    
+}
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
+module.exports.addNewUsers = addNewUsers;
 module.exports.authenticate = authenticate;
 module.exports.removeCollection = removeCollection;
 module.exports.getAllRole = getAllRole;
+module.exports.userInfo = userInfo;
+module.exports.getUserStatus = getUserStatus;

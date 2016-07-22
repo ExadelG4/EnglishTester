@@ -1,8 +1,11 @@
 var express = require('express');
 var contracts = require('./contracts');
 var service = require('../services/userService');
+var stackService = require('../services/stackService');
+var testService = require('../services/testService');
 var path = require("path");
 var router = express.Router();
+var testService = require('../services/testService')
 
 // var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -13,9 +16,6 @@ var key = require('../config.json');
 router.use(passport.initialize());
 require('../passport')(passport);
 
-// router.use(bodyParser.urlencoded({ extended: false }));
-// router.use(bodyParser.json());
-// router.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/getAll',passport.authenticate('jwt', { session: false }), function(req, res) {
 	
@@ -76,10 +76,6 @@ router.post('/login',function (req, res) {
 	
 });
 
-// router.post('/refresh',function(req, res){
-// 	contracts.refresh()
-// });
-
 
 router.get('/refresh', passport.authenticate('jwt', { session: false }), function(req, res) {
 	 contracts.refresh(req.header('refresh')).then(function(data){
@@ -89,5 +85,53 @@ router.get('/refresh', passport.authenticate('jwt', { session: false }), functio
 	 });	
 });
 
+router.post('/assignStudents',function(req, res) {
+	 if(!req.body.students){
+	 	res.json({ success: false, message: 'Please enter email and password.' });
+	 } 
+	 else{
+	  		console.log(req.body.students);
+	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
+			  res.json('add');
+				console.log('azaza');
+				console.log(data);
+		  }).catch(function (err) {
+			  res.json('eror');
+		  });
+
+  }
+
+});
+router.post('/addQuestion',function(req, res) {
+	 if(!req.body.finalQue){
+	 	res.json({ success: false, message: 'Please correct data.' });
+	 } 
+	 else{
+	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
+			  res.json('add');
+		  }).catch(function (err) {
+			  res.json('eror');
+		  });
+
+  }
+
+})
+
+
+router.get('/getTest', function(req, res){
+	testService.getTest().then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.json(err);
+	});
+});
+
+router.get('/getUserStatus/:id', function(req, res){
+	service.getUserStatus(req.params.id).then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.json(err);
+	});
+});
 
 module.exports = router;
