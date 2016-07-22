@@ -14,5 +14,6 @@
                 });
                 $scope.userName = 'Tina Kandelaki';
                 $scope.tchName = 'Jhon Tramb';
+
             }]);
 })();

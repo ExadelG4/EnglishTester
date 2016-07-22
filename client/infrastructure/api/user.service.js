@@ -59,6 +59,15 @@
                                 return false;
                              }
                         );
+                    },
+
+                    getTest: function () {
+                        return httpService.get('http://localhost:3000/getTest')
+                            .then(
+                                function(result) {
+                                    return result.data;
+                                }
+                            )
                     }
                 };
             }]);

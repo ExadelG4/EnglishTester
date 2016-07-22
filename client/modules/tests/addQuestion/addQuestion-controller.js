@@ -3,17 +3,15 @@
 	angular.module('tests')
 		.controller('addQuestionController', ['$scope', function($scope) {
 
-			var ctrl = this;
-
-			ctrl.selectedQue = '';
-			ctrl.answers = [[{}],[{}],[{}],[{}]];
+			$scope.selectedQue = '';
+			$scope.answers = [[{}],[{}],[{}],[{}]];
 
 				
-			ctrl.addAnswerItem = addAnswerItem;
-			ctrl.removeAnswerItem = removeAnswerItem;
+			$scope.addAnswerItem = addAnswerItem;
+			$scope.removeAnswerItem = removeAnswerItem;
 
 
-			ctrl.typeOfQuestion = [
+			$scope.typeOfQuestion = [
 				'"One of many"', 
 				'"Many of many"', 
 				'Question without choice of answers', 
@@ -25,24 +23,32 @@
 			];
 
 			function addAnswerItem(num) {
-				if (ctrl.answers[num].length !== 7) {
-					ctrl.answers[num].push({});
+				if ($scope.answers[num].length !== 7) {
+					$scope.answers[num].push({});
 				}
 			};
 
 			function removeAnswerItem(num) {
-				if (ctrl.answers[num].length !== 1) {
-					ctrl.answers[num].splice(ctrl.answers[num].length - 1, 1);
+				if ($scope.answers[num].length !== 1) {
+					$scope.answers[num].splice($scope.answers[num].length - 1, 1);
 				}
 			};
 
-			ctrl.song = {
+			$scope.song = {
     			id: 'one',
     			title: 'Rain',
     			artist: 'Drake',
     			//url: 'http://cdndl.zaycev.net/6100/1726613/anberlin_-_the_feel_good_drag_(zaycev.net).mp3'
     			url: 'papa_roach_-_last_resort(zaycev.net).mp3'
 
+			};
+
+			$scope.finalQue = {
+				type: '',
+				text: '',
+				level: '',
+				audio: '',
+				answers: []
 			};
 
 }])})();

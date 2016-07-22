@@ -87,13 +87,14 @@
 
         <div ng-if="qCtrl.selectedQue === qCtrl.typeOfQuestion[4]">
           <div>
-            <input type="file" nv-file-select uploader="uploader"/>
-            <ul>
+            <input type="file"/>
+            <!--ul>
+            nv-file-select uploader="uploader"
               <li ng-repeat="item in uploader.queue">
                 Name: <span ng-bind="item.file.name"></span>
                 <button ng-click="item.upload()">upload</button>
               </li>
-            </ul>
+            </ul-->
           </div>
           <p class="ads">Level of question</p>
           <input type="text" class="form-control"/>
@@ -103,13 +104,13 @@
         <div ng-if="qCtrl.selectedQue === qCtrl.typeOfQuestion[5]">
         <form> 
           <div>
-            <input type="file" nv-file-select uploader="uploader"/>
-            <ul>
+            <input type="file"/>
+            <!--ul>
               <li ng-repeat="item in uploader.queue">
                 Name: <span ng-bind="item.file.name"></span>
                 <button ng-click="item.upload()">upload</button>
               </li>
-            </ul>
+            </ul-->
           </div>
           <p class="ads">Add answer options</p>
           <a ng-click="qCtrl.addAnswerItem(2)">
@@ -133,13 +134,13 @@
       <div ng-if="qCtrl.selectedQue === qCtrl.typeOfQuestion[6]">
         <form> 
           <div>
-            <input type="file" nv-file-select uploader="uploader"/>
-            <ul>
+            <input type="file"/>
+            <!--ul>
               <li ng-repeat="item in uploader.queue">
                 Name: <span ng-bind="item.file.name"></span>
                 <button ng-click="item.upload()">upload</button>
               </li>
-            </ul>
+            </ul-->
           </div>
           <p class="ads">Add answer options</p>
           <a ng-click="qCtrl.addAnswerItem(3)">
@@ -172,7 +173,7 @@
         </form>
       </div>
 
-    		<sound-manager>
+    		<!--sound-manager>
     			<button music-player add-song="qCtrl.song">+</button>
     			<div class="seekBase" seek-track>
     				<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
@@ -180,7 +181,7 @@
 				<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
 				<button stop-music>Stop</button>
 
-    		</sound-manager>
+    		</sound-manager-->
 
 		</div>
 	</div>

@@ -18,7 +18,7 @@
 
 		$scope.questionsPart1 = [
 			{
-				id: '',
+				qId: '',
 				type: 'oneOfMany',
 				text: 'Mimimi nyanyanya. What you choose?',
 				audio: '',
@@ -29,7 +29,7 @@
 				]
 			},
 			{
-				id: '',
+				qId: '',
 				type: 'manyOfMany',
 				text: 'Which colors do you like?',
 				audio: '',
@@ -40,7 +40,7 @@
 				]
 			},
 			{
-				id: '',
+				qId: '',
 				type: 'questionWithoutChoiceOfAnswers',
 				text: 'Which colors do you like?',
 				audio: ''/*,
@@ -51,7 +51,7 @@
 				]*/
 			},
 			{
-				id: '',
+				qId: '',
 				type: 'listeningWithOneOfMany',
 				text: 'How named this song?',
 				audio: 'assets/audio/papa_roach_-_last_resort(zaycev.net).mp3',
@@ -62,7 +62,7 @@
 				]
 			},
 			{
-				id: '',
+				qId: '',
 				type: 'listeningWithManyOfMany',
 				text: 'Which albums this band do you like?',
 				audio: 'assets/audio/Three Days Grace - Animal I Have Become.mp3',
@@ -92,15 +92,15 @@
 
 		for (let i = 0; i < $scope.questionsPart1.length; ++i) {
 			var tempAnswer = {
-				id: '',
-				type: '',
+				qId: '',
+				//type: '',
 				answers: '',
 				audioAnswer: ''
 			};
 			if (isCheckboxType($scope.questionsPart1[i].type) || isRadioType($scope.questionsPart1[i].type)) {
 					tempAnswer.answers = [];
 			};
-			tempAnswer.id = $scope.questionsPart1[i].id;
+			tempAnswer.qId = $scope.questionsPart1[i].qId;
 			tempAnswer.type = $scope.questionsPart1[i].type;
 			$scope.userAnswers.push(tempAnswer);
 		}
