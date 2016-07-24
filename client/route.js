@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('myApp').config(
-        function($stateProvider, $urlRouterProvider) {
+        function($stateProvider, $urlRouterProvider, $locationProvider) {
             $stateProvider
                 .state('login', {
                     url: '/login',
@@ -17,6 +17,9 @@
                     role: ['admin', 'user', 'teacher', 'guest']
                 });
             $urlRouterProvider.otherwise('/home');
+
+            // use the HTML5 History API
+            $locationProvider.html5Mode(true);
         }
     )
 })();
