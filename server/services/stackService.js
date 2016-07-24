@@ -68,6 +68,10 @@ function findOpenTestsById(id){
 }
 
 
+function updateStackTeacher(id,field){
+return stack.update(id,field);
+};
+
 module.exports.getAllStack = getAllStack;
 module.exports.addStack = addStack;
 module.exports.addStacks = addStacks;
@@ -86,3 +90,4 @@ module.exports.findResults = findResults;
 module.exports.findRequest = findRequest;
 module.exports.findOpenTests = findOpenTests;
 module.exports.addOpenTestsArray = addOpenTestsArray;
+module.exports.updateStackTeacher = updateStackTeacher;

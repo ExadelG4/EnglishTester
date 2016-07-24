@@ -104,7 +104,7 @@ router.post('/assignStudents',function(req, res) {
 });
 router.post('/addQuestion',function(req, res) {
 	 if(!req.body.finalQue){
-	 	res.json({ success: false, message: 'Please correct data.' });
+	 	res.json({ success: false, message: 'Please, input correct data.' });
 	 } 
 	 else{
 	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
@@ -115,8 +115,22 @@ router.post('/addQuestion',function(req, res) {
 
   }
 
-})
+});
 
+router.post('/assignTeachers',function(req, res) {
+	 if(!req.body.teachers){
+	 	res.json({ success: false, message: 'Please, input correct data.' });
+	 } 
+	 else{
+	  		stackService.updateStackTeacher(req.body.teachers).then(function(data){
+			  res.json('teacher assign successfull');
+		  }).catch(function (err) {
+			  res.json('eror');
+		  });
+
+  }
+
+});
 
 router.get('/getTest', function(req, res){
 	testService.getTest().then(function(data){
