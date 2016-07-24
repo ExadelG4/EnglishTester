@@ -1,8 +1,13 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('passTestController', ['$scope', '$state', function($scope, $state) {
-		
+	angular.module('home').controller('passTestController', ['$scope', '$state','userService', function($scope, $state, userService) {
+		var abc = null;
+		userService.getTest().then( function(result) {
+			var abc = result;
+			}
+		);
+
 		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
 
 		$scope.urls = {

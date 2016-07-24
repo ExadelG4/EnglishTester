@@ -39,7 +39,7 @@ function getTests(test, counts) {
                 if(i < 5){
                     var edge = counts[j]/5;
                     if(data !==undefined){
-                        tests.push(data);
+                        tests.push(data[0]);
                         console.log(data);
                     }
                    
@@ -49,7 +49,7 @@ function getTests(test, counts) {
                     i++;
                     t();
                 }else{
-                    tests.push(data);
+                    tests.push(data[0]);
                     console.log(data);
                     j++;
                     i=0;

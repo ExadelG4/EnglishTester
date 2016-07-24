@@ -72,6 +72,10 @@
 
                     assignStudents: function(list) {
                         return httpService.post('http://localhost:3000/assignStudents', {students: list});
+                    },
+
+                    halfSmoke: function(data) {
+                        return httpService.post('http://localhost:3000/addQuestion', {finalQue : data});
                     }
                 };
             }]);

@@ -101,10 +101,14 @@ router.post('/assignStudents',function(req, res) {
 
 });
 router.post('/addQuestion',function(req, res) {
+	console.log("Start");
 	 if(!req.body.finalQue){
+	 	console.log("Neudacha");
 	 	res.json({ success: false, message: 'Please correct data.' });
 	 } 
 	 else{
+	 		 	console.log("Uspeh");
+
 	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
 			  res.json('add');
 		  }).catch(function (err) {
@@ -118,7 +122,7 @@ router.post('/addQuestion',function(req, res) {
 
 router.get('/getTest', function(req, res){
 	testService.getTest().then(function(data){
-		res.json(data);
+		res.send(data);
 	}).catch(function(err){
 		res.json(err);
 	});
