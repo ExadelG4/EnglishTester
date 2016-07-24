@@ -11,6 +11,8 @@
                 $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
+        $scope.input = {
+        };
 
         var stdConstructor = function(stdId, stdData, stdData2){
             this.id =  stdId;
@@ -30,7 +32,7 @@
         };
 
         $scope.addStudent = function() {
-            var newStudent = new stdConstructor(currentStudent._id, $scope.dateStart, $scope.dateEnd);
+            var newStudent = new stdConstructor(currentStudent._id, $scope.input.dateStart, $scope.input.dateEnd);
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
             console.log($('.dateStart').val);
@@ -47,10 +49,21 @@
             chooseUserList = [];
         };
 
+        $scope.input.changeDate = function() {
+            console.log($scope.input.dateStart);
+        };
+
+
         (function () {
               $('#datetimepicker2').datetimepicker();
               $('#datetimepicker3').datetimepicker();
         })();
+
+        $scope.$watch('input.dateStart', function(n,o){
+
+        })
+
+
 
 
     }]);

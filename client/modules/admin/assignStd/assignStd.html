@@ -20,7 +20,7 @@
                 <div class='firstCalendar'>
                     <div class="form-group">
                         <div class='input-group' id='datetimepicker2'>
-                            <input type='text' class="form-control col-sm-12 col-md-12 col-lg-12" ng-model="dateEnd" />
+                            <input type='text' class="form-control col-sm-12 col-md-12 col-lg-12" ng-model="input.dateStart" ng-change="input.changeDate()" />
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -48,7 +48,7 @@
         </div>
 
 
-        <div class="step2 col-sm-3 col-md-3 col-lg-3 pull-right">
+        <div class="step2 col-sm-3 col-md-3 col-lg-3">
             <div class="form-group sel4">
                 <label for="sel4">Choosen students</label>
                 <select ng-model="studentList" class="form-control" id="sel4" multiple="multiple" ng-options="user for user in showList"></select>

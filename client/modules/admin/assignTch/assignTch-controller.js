@@ -34,8 +34,6 @@
         }
 
         $scope.submitTchStd = function() {
-            console.log($scope.currentTeacher._id);
-            console.log($scope.currentUser._id);
             userService.assignTeachers($scope.currentUser._id, $scope.currentTeacher._id);
 
             $scope.stdName = '';
