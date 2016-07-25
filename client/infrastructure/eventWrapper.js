@@ -12,5 +12,5 @@
             eventEmitter.inject(EventWrapper);
 
             return EventWrapper;
-        }])
+        }]);
 })();

@@ -21,7 +21,9 @@
     <link type="text/css" rel="stylesheet" href="modules/home/user/user-home.css">
     <link type="text/css" rel="stylesheet" href="modules/admin/assignTch/assignTch.css">
     <link type="text/css" rel="stylesheet" href="modules/home/home.css">
+    <link type="text/css" rel="stylesheet" href="infrastructure/toastr/toastr.css">
     <link type="text/css" rel="stylesheet" href="modules/profile/profile.css">
+
 
 
     <link href="https://fonts.googleapis.com/css?family=Pavanam" rel="stylesheet">
@@ -33,6 +35,7 @@
 
 </head>
 <body ng-controller="appController">
+    <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
     <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
     <div ui-view class="main"></div>
 
@@ -81,6 +84,8 @@
     <script type="text/javascript" src="infrastructure/context.js"></script>
     <script type="text/javascript" src="infrastructure/event-emitter.js"></script>
     <script type="text/javascript" src="infrastructure/eventWrapper.js"></script>
+    <script type="text/javascript" src="infrastructure/toastr/toastr.js"></script>
+    <script type="text/javascript" src="infrastructure/notifications.js"></script>
     <script type="text/javascript" src="infrastructure/http.service.js"></script>
     <script type="text/javascript" src="infrastructure/navigation.factory.js"></script>
     <script type="text/javascript" src="infrastructure/api/user.service.js"></script>

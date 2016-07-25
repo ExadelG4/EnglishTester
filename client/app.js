@@ -11,6 +11,7 @@
         /*'angularFileUpload',*/
         'ui.bootstrap',
         'nya.bootstrap.select',
+        'toaster',
         'ngAnimate'
     ]);
 })();
