@@ -46,7 +46,6 @@ DatabasService.prototype.save = function(query){
 }
 DatabasService.prototype.create = function(query){
     var defer = q.defer();
-    ;
     this.model.create(query,function(err){
         if(err) defer.reject(err);
         defer.resolve();
@@ -64,19 +63,6 @@ DatabasService.prototype.findOne = function(query, fields, options){
 
     return defer.promise;
 }
-// DatabasService.prototype.authenticate = function (email_, password_) {
-//     var defer = q.defer();
-//     this.model.findOne({
-//     email: email_
-//     }, function(err, user) {
-//         if (err) defer.reject(err);
-
-//         defer.resolve(user);
-//     });
-//     return defer.promise;
-// }
-
-
 
 DatabasService.prototype.count = function (query) {
     var defer = q.defer();
