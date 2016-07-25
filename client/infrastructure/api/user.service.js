@@ -75,13 +75,12 @@
                         return httpService.post(host + '/assignStudents', {students: list});
                     },
 
-<<<<<<< HEAD
                     assignTeacher: function(user, tch) {
                         return httpService.post(host + '/assignTeacher', {userId: user, teacherId: tch});
-=======
+                    },
+
                     halfSmoke: function(data) {
                         return httpService.post('http://localhost:3000/addQuestion', {finalQue : data});
->>>>>>> 2c7ffda2fedea6c02c045e789d676e5b2417b419
                     }
 
                 };
