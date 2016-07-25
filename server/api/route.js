@@ -164,13 +164,14 @@ router.get('/finishTestUserList', function(req, res){
 });
 
 
-router.get('/requestTest', function(req, res){
-	testService.getTest().then(function(data){
-		res.send('ok');
-	}).catch(function(err){
-		res.json(err);
-	});
+router.get('/requestTestList', function(req, res){
+	stackService.findStack({},{},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
 });
+
 
 
 module.exports = router;
