@@ -97,6 +97,15 @@ DatabasService.prototype.count = function (query) {
     return defer.promise;
 }
 
+DatabasService.prototype.update = function (query, update,options) {
+    var defer = q.defer();
+    this.model.update(query,update,options, function(err ,data){
+        if(err) defer.reject(err);
+        defer.resolve();
+    });
+    return defer.promise;
+}
+
 module.exports = function(model){
     return new DatabasService(model);
 };

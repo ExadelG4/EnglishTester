@@ -8,25 +8,16 @@
                 };
                 
                 $scope.headerMenu = navigationFactory.getNavigationMenu();
-                $scope.smallMenu = $scope.headerMenu;
-                $scope.isSmall = false;
 
-                $scope.chooseSmall = function (menuItem) {
-                    if (menuItem.tabs) {
-                        $scope.smallMenu = menuItem.tabs;
-                        setTimeout(function () {
-                            $scope.isSmall = true;
-                        }, 0);
-                    } else {
+                $scope.isShowSmallNav = true;
+                
+                $scope.selectMenu = function (menuItem) {
+                    if (menuItem.state) {
+                        $scope.isShowSmallNav = false;
                         $state.go(menuItem.state);
-                        $scope.isSmall = false;
-                    }
-                };
-
-                $scope.toggled = function (open) {
-                    if (!open && $scope.isSmall == false) {
-                        $scope.smallMenu = $scope.headerMenu;
-                        // $scope.isSmall = false;
+                        setTimeout(function() {
+                            $scope.isShowSmallNav = true;
+                        }, 0);
                     }
                 };
             }

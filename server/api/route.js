@@ -117,20 +117,22 @@ router.post('/addQuestion',function(req, res) {
 
 });
 
-router.post('/assignTeachers',function(req, res) {
-	 if(!req.body.teachers){
-	 	res.json({ success: false, message: 'Please, input correct data.' });
+
+router.post('/assignTeacher',function (req, res) {
+	if(!req.body.userId||!req.body.teacheId||req.body.userId===undefined||req.body.teacheId===undefined){
+	 	res.status(400).send("Bad Request");
 	 } 
 	 else{
-	  		stackService.updateStackTeacher(req.body.teachers).then(function(data){
-			  res.json('teacher assign successfull');
+	  		stackService.assignTeacher(req.body).then(function(data){
+			  res.send('ok');
 		  }).catch(function (err) {
-			  res.json('eror');
+			  res.status(400).send("Bad Request");
 		  });
 
   }
+})
 
-});
+
 
 router.get('/getTest', function(req, res){
 	testService.getTest().then(function(data){
