@@ -56,7 +56,6 @@ DatabasService.prototype.update = function(id,query){
 }
 DatabasService.prototype.create = function(query){
     var defer = q.defer();
-    ;
     this.model.create(query,function(err,data){
         if(err) defer.reject(err);
         defer.resolve(data);
