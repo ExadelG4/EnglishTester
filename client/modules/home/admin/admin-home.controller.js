@@ -3,23 +3,12 @@
 
     angular.module('home')
         .controller('adminHomeController', ['$scope', 'EventWrapper', 'notification',
-            function($scope, EventWrapper, notification) {
-                $scope.isShowList = true;
+            function ($scope, EventWrapper, notification) {
 
-                $scope.changeIsShowList = function () {
-                    $scope.isShowList = !$scope.isShowList;
-                };
-
-                $scope.testList = [
-                    {
-                        level: 'Intermediate',
-                        date: new Date()
-                    },
-                    {
-                        level: 'Upper-Intermediate',
-                        date: new Date()
-                    }
-                ];
+                //$scope.newsUser = [];
+                //$scope.newsTeacher = [];
+                //
+                //$scope.newsUser.push('')
 
                 $scope.popToastr = function (type) {
                     switch (type) {
@@ -45,5 +34,8 @@
                 // setInterval(function () {
                 //     thing.emit('event', i++);
                 // }, 10000);
-            }]);
+                //}]);
+
+            }
+        ]);
 })();

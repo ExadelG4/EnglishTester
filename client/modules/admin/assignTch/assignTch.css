@@ -2,12 +2,15 @@
     padding: 30px;
 }
 
-input {
-    margin-top: 15px;
+.sel1 > input, .sel2 > input {
     display: block;
     height: 45px;
     padding: 5px;
     text-align: center;
+}
+
+.sel1 > *, .sel2 > * {
+    margin-top: 5%;
 }
 
 .formSelect {
@@ -26,11 +29,11 @@ input {
 }
 
 .sel1, .sel2 {
-    margin-left: 5%;
+    padding: 10px;
     display: inline-block;
 }
 
 .submit-tch {
+    margin-left: 10px;
     width: 200px;
-    margin-left: 41%;
 }

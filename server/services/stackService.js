@@ -38,7 +38,12 @@ function addStacks(info){
 function addOpenTestsArray(info){
 	return openTests.create(info);
 }
-
+function addRequests(info){
+	return request.create(info);
+}
+function addResultArray(info){
+	return results.create(info);
+}
 
 function findStack(){
 	return stack.find(arguments[0],arguments[1],arguments[2]);
@@ -52,7 +57,6 @@ function findRequest(){
 function findOpenTests(){
 	return openTests.find(arguments[0],arguments[1],arguments[2]);
 }
-
 
 function findStackById(id){
 	return stack.findById();
@@ -96,4 +100,5 @@ module.exports.findRequest = findRequest;
 module.exports.findOpenTests = findOpenTests;
 module.exports.addOpenTestsArray = addOpenTestsArray;
 module.exports.assignTeacher = assignTeacher;
-
+module.exports.addRequests = addRequests;
+module.exports.addResultArray = addResultArray;

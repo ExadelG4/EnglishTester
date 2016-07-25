@@ -65,6 +65,10 @@ function removeCollection(){
 	return user.remove();
 }
 
+function find(query, fields, options){
+    return user.find(query, fields, options);
+}
+
 function getUserStatus(_userId){
     var pr = q.defer();
     userInfo(_userId).then(function(data){
@@ -113,3 +117,4 @@ module.exports.removeCollection = removeCollection;
 module.exports.getAllRole = getAllRole;
 module.exports.userInfo = userInfo;
 module.exports.getUserStatus = getUserStatus;
+module.exports.find = find;
