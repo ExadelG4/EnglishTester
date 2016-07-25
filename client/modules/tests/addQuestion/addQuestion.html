@@ -56,7 +56,7 @@
         				<input type="text" class="form-control" aria-label="..." ng-model="finalQue.options[$index]" required> 
         		</div>
             <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-pattern="'[1-5]{1}'" required>
+            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
         		<button class="btn btn-success" ng-disabled="main.$invalid" ng-click="sendQue()" >Submit</button>
           </form>
     		</div>
@@ -65,10 +65,10 @@
   				<form name="main"> 
   					<div>
   						<p class="ads">Text of question</p>
-  						<textarea placeholder="Write here.."></textarea>
+  						<textarea placeholder="Write here.." ng-model="finalQue.question" required></textarea>
   					</div>
             <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-pattern="'[1-5]{1}'" required>
+            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
         		<button class="btn btn-success" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
         	</form>
     		</div>
@@ -77,10 +77,10 @@
   				<form name="main"> 
   					<div>
   						<p class="ads">Topic for essay</p>
-  						<textarea class="sm-textarea" placeholder="Write here.." required></textarea>
+  						<textarea class="sm-textarea" ng-model="finalQue.question" placeholder="Write here.." required></textarea>
   					</div>
             <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-pattern="'[1-5]{1}'" required>
+            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
         		<button class="btn btn-success" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
         	</form>
     		</div>
@@ -102,7 +102,7 @@
               </ul-->
             </div>
             <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-pattern="'[1-5]{1}'" required>
+            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
             <button class="btn btn-success" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
           </form>
         </div>
@@ -136,7 +136,7 @@
             <input type="text" class="form-control" aria-label="..." ng-model="finalQue.options[$index]" required> 
           </div>
           <p class="ads">Level of question</p>
-          <input type="text" class="form-control" ng-pattern="'[1-5]{1}'" required>
+          <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
           <button class="btn btn-success" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
         </form>
       </div>
@@ -170,7 +170,7 @@
             <input type="text" class="form-control" aria-label="..." required> 
           </div>
           <p class="ads">Level of question</p>
-          <input type="text" class="form-control" ng-pattern="'[1-5]{1}'" required>
+          <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
           <button class="btn btn-success" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
         </form>
       </div>
@@ -182,7 +182,7 @@
             <textarea class="sm-textarea" placeholder="Write here.."></textarea>
           </div>
           <p class="ads">Level of question</p>
-          <input type="text" class="form-control" ng-pattern="'[1-5]{1}'" required>
+          <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
           <button class="btn btn-success" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
         </form>
       </div>
