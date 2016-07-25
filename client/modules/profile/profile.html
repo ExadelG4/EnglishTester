@@ -1,7 +1,12 @@
-<div class="profile">
+<div class="profile col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <img src="profile_image" />
-    <h1 >{{userProfile.name}}</h1>
-    <input type="text" size="40" class="col-xs-10 col-sm-10 col-md-7 col-lg-7" ng-model="mail" placeholder="{{userProfile.email}}" disabled>
-    <input type="text" size="40" class="col-xs-10 col-sm-10 col-md-7 col-lg-7" ng-model="number" placeholder="{{userProfile.telNumber}}" disabled>
-    <button class="btn btn-primary col-xs-10 col-sm-10 col-md-7 col-lg-7" type="submit" ng-click="save()">Save</button>
+    <div class="info col-xs-10 col-sm-10 col-md-7 col-lg-7">
+        <h1 class="col-xs-11 col-sm-11 col-md-11 col-lg-11">{{userProfile.name}}</h1>
+        <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11" ng-model="mail" ng-disabled="disable1 == true" ng-change="changeMail()" placeholder="{{userProfile.email}}">
+        <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="onFrstInput()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+        <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11" ng-model="telNbr" ng-disabled="disable2 == true" ng-change="changeTelNumber()" placeholder="{{userProfile.telNumber}}">
+        <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="onScndInput()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+        <button class="btn btn-primary col-xs-11 col-sm-11 col-md-11 col-lg-11" type="submit" ng-disabled="disable1 == true && disable2 == true" ng-click="save()">Save</button>
+    </div>
+
 </div>

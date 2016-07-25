@@ -15,7 +15,6 @@
 
                 return {
                     init: function (userData) {
-                        console.log(userData);
                         user.id = userData.id;
                         user.firstName = userData.firstName;
                         user.lastName = userData.lastName;

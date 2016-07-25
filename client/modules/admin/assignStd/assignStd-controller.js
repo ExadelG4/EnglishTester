@@ -14,8 +14,8 @@
 
         var stdConstructor = function(stdId, stdData, stdData2){
             this.userId =  stdId;
-            this.dataStart =  stdData;
-            this.dataEnd =  stdData2;
+            this.dateStart =  stdData;
+            this.dateEnd =  stdData2;
 
         };
 
@@ -23,22 +23,26 @@
             currentStudent = item;
             $scope.stdName = item.fullName;
             $scope.stdMail = item.email;
+            $scope.stdTel = item.number;
         };
 
         $scope.reset = function(){
             $scope.showList = [];
         };
 
-        $scope.addStudent = function() {
+        $scope.addStudent = function(dt, dt2, mytime, mytime2) {
             var userId = currentStudent._id;
-            var newStudent = new stdConstructor(userId, $scope.dateStart, $scope.dateEnd);
+            var newStudent = new stdConstructor(userId, dt.getTime()+mytime.getTime(), dt2.getTime()+mytime2.getTime());
+            $scope.mytime = null;
+            $scope.mytime2 = null;
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
 
             $scope.stdName = '';
             $scope.stdMail = '';
-            $scope.dateStart = '';
-            $scope.dateEnd = '';
+            $scope.stdTel = '';
+            $scope.dt = null;
+            $scope.dt2 = null;
         };
 
         $scope.submitStudentsList = function() {
@@ -47,22 +51,8 @@
             chooseUserList = [];
         };
 
-        $scope.changeDate = function(val){
-            console.log(val);
-        };
-
-        (function () {
-              $('#datetimepicker2').datetimepicker();
-              $('#datetimepicker3').datetimepicker();
-        })();
 
 
-
-
-        $scope.myCal = function(dt) {
-            var k = new Date(dt);
-            console.log(k);
-        };
 
         $scope.inlineOptions = {
             customClass: getDayClass,
@@ -123,6 +113,28 @@
 
             return '';
         }
+
+
+
+
+
+
+        $scope.mytime = new Date();
+
+        $scope.hstep = 1;
+        $scope.mstep = 1;
+
+        $scope.ismeridian = true;
+        $scope.toggleMode = function() {
+            $scope.ismeridian = ! $scope.ismeridian;
+        };
+
+        $scope.update = function() {
+            var d = new Date();
+            d.setHours( 14 );
+            d.setMinutes( 0 );
+            $scope.mytime = d;
+        };
     }]);
 })();
 
