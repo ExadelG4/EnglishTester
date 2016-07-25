@@ -11,11 +11,9 @@
                 $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
-        $scope.input = {
-        };
 
         var stdConstructor = function(stdId, stdData, stdData2){
-            this.id =  stdId;
+            this.userId =  stdId;
             this.dataSt =  stdData;
             this.dataEn =  stdData2;
 
@@ -32,10 +30,9 @@
         };
 
         $scope.addStudent = function() {
-            var newStudent = new stdConstructor(currentStudent._id, $scope.input.dateStart, $scope.input.dateEnd);
+            var newStudent = new stdConstructor(currentStudent._id, $scope.dateStart, $scope.dateEnd);
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
-            console.log($('.dateStart').val);
 
             $scope.stdName = '';
             $scope.stdMail = '';
@@ -49,23 +46,79 @@
             chooseUserList = [];
         };
 
-        $scope.input.changeDate = function() {
-            console.log($scope.input.dateStart);
+        //(function () {
+        //      $('#datetimepicker2').datetimepicker();
+        //      $('#datetimepicker3').datetimepicker();
+        //})();
+
+
+
+
+        $scope.myCal = function(dt) {
+            console.log(dt);
+            var k = new Date(dt);
+            console.log(dt);
+        };
+
+        $scope.inlineOptions = {
+            customClass: getDayClass,
+            minDate: new Date(),
+            showWeeks: true
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
         };
 
 
-        (function () {
-              $('#datetimepicker2').datetimepicker();
-              $('#datetimepicker3').datetimepicker();
-        })();
 
-        $scope.$watch('input.dateStart', function(n,o){
+        $scope.toggleMin = function() {
+            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+        };
 
-        })
+        $scope.toggleMin();
 
+        $scope.open1 = function() {
+            $scope.popup1.opened = true;
+        };
 
+        $scope.popup1 = {
+            opened: false
+        };
 
+        $scope.open2 = function() {
+            $scope.popup2.opened = true;
+        };
 
+        $scope.popup2 = {
+            opened: false
+        };
+
+        $scope.setDate = function(year, month, day) {
+            $scope.dt = new Date(year, month, day);
+        };
+
+        function getDayClass(data) {
+            var date = data.date,
+                mode = data.mode;
+            if (mode === 'day') {
+                var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                    if (dayToCheck === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        }
     }]);
 })();
 

@@ -66,8 +66,8 @@
                         return httpService.post(host + '/assignStudents', {students: list});
                     },
 
-                    assignTeachers: function(tch, user) {
-                        return httpService.post(host + '/assignTeachers', {student: user, teacher: tch});
+                    assignTeacher: function(user, tch) {
+                        return httpService.post(host + '/assignTeacher', {userId: user, teacherId: tch});
                     }
 
                 };

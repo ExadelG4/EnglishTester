@@ -10,7 +10,7 @@
 }
 
 .sel1 > *, .sel2 > * {
-    margin-top: 5% !important;
+    margin-top: 5%;
 }
 
 .formSelect {
@@ -29,11 +29,11 @@
 }
 
 .sel1, .sel2 {
-    margin-left: 5%;
+    padding: 10px;
     display: inline-block;
 }
 
 .submit-tch {
+    margin-left: 10px;
     width: 200px;
-    margin-left: 41%;
 }
