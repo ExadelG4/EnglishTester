@@ -50,7 +50,7 @@
 				answers: [-1]
 			};
 
-			$scope.temp
+			/*$scope.temp*/
 
 			$scope.addAnswerItem = function() {
 				if ($scope.finalQue.options.length !== 7) {
@@ -113,6 +113,13 @@
 					}
 				}
 				userService.halfSmoke($scope.finalQue);
+				if ($scope.finalQue.type === 'questionWithoutChoiceoOfAnswers' || 
+					$scope.finalQue.type === 'essay' ||  
+					$scope.finalQue.type === 'listeningWithoutChoiceOfAnswers' ||
+					$scope.finalQue.type === 'speaking') {
+					delete $scope.finalQue.answers;
+					delete $scope.finalQue.options;
+				}
 				$scope.selectedQue = '';
 			};
 
