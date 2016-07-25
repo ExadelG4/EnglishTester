@@ -77,6 +77,10 @@ function assignTeacher(data){
 
 
 
+function updateStackTeacher(id,field){
+return stack.update(id,field);
+};
+
 module.exports.getAllStack = getAllStack;
 module.exports.addStack = addStack;
 module.exports.addStacks = addStacks;

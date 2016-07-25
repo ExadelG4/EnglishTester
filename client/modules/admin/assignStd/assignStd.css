@@ -3,7 +3,7 @@
 }
 
 .step2 {
-    padding: 65px;
+    padding: 15px;
 }
 
 .formSelect {
@@ -13,3 +13,11 @@
 .step1, .step2 {
     display: inline-block;
 }
+
+.sel2 .cal1 {
+    padding: 0;
+    margin-top: 0;
+}
+/*.firstCalendar, .secondCalendar {*/
+    /*margin-bottom: 5%;*/
+/*}*/

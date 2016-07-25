@@ -6,17 +6,22 @@
             function() {
                 var user = {
                     id: "",
-                    username: "",
+                    firstName: "",
+                    lastName: "",
                     role: "",
-                    email: ""
+                    email: "",
+                    number: ""
                 };
 
                 return {
                     init: function (userData) {
+                        console.log(userData);
                         user.id = userData.id;
-                        user.username = userData.name;
+                        user.firstName = userData.firstName;
+                        user.lastName = userData.lastName;
                         user.role = userData.role;
                         user.email = userData.email;
+                        user.number = userData.number;
                     },
                     getRole: function () {
                         return user.role;
@@ -32,6 +37,18 @@
                     },
                     isGuest: function () {
                         return user.role === 'guest';
+                    },
+                    getFirstName: function() {
+                        return user.firstName;
+                    },
+                    getLastName: function() {
+                        return user.lastName;
+                    },
+                    getEmail: function() {
+                        return user.email;
+                    },
+                    getNumber: function() {
+                        return user.number;
                     }
                 };
             }]);

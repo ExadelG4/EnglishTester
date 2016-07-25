@@ -44,11 +44,12 @@ DatabasService.prototype.save = function(query){
 
     return defer.promise;
 }
+
 DatabasService.prototype.create = function(query){
     var defer = q.defer();
-    this.model.create(query,function(err){
+    this.model.create(query,function(err,data){
         if(err) defer.reject(err);
-        defer.resolve();
+        defer.resolve(data);
     });
 
     return defer.promise;

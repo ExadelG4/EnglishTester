@@ -6,9 +6,11 @@
         'home',
         'admin',
         'tests',
+        'profile',
         'angularSoundManager',
-        'angularFileUpload',
+        /*'angularFileUpload',*/
         'ui.bootstrap',
-        'nya.bootstrap.select'
+        'nya.bootstrap.select',
+        'ngAnimate'
     ]);
 })();

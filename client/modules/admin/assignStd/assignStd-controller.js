@@ -1,6 +1,10 @@
 (function(){
     angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
         $scope.students = [];
+        $scope.showList = [];
+        var chooseUserList = [];
+        var currentStudent;
+
         userService.getUsers().then(function(data) {
             data.forEach(function(item, i) {
                 $scope.students[i] = item;
@@ -8,14 +12,10 @@
             });
         });
 
-        var chooseUserList = [];
-        $scope.showList = [];
-        var currentStudent;
-
         var stdConstructor = function(stdId, stdData, stdData2){
-            this.id =  stdId;
-            this.dataSt =  stdData;
-            this.dataEn =  stdData2;
+            this.userId =  stdId;
+            this.dataStart =  stdData;
+            this.dataEnd =  stdData2;
 
         };
 
@@ -30,7 +30,8 @@
         };
 
         $scope.addStudent = function() {
-            var newStudent = new stdConstructor(currentStudent._id, $scope.dateStart, $scope.dateEnd);
+            var userId = currentStudent._id;
+            var newStudent = new stdConstructor(userId, $scope.dateStart, $scope.dateEnd);
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
 
@@ -41,24 +42,87 @@
         };
 
         $scope.submitStudentsList = function() {
-            console.log(chooseUserList);
+            userService.assignStudents(chooseUserList);
             $scope.showList = [];
-            userService.assignStudents(chooseUserList).then(function(result){
-                if (result){
-                    alert('ok');
-                } else{
-                    alert('fail');
-                }
-            });
+            chooseUserList = [];
         };
 
+        $scope.changeDate = function(val){
+            console.log(val);
+        };
 
         (function () {
-              $('#datetimepicker1').datetimepicker();
               $('#datetimepicker2').datetimepicker();
+              $('#datetimepicker3').datetimepicker();
         })();
 
 
+
+
+        $scope.myCal = function(dt) {
+            var k = new Date(dt);
+            console.log(k);
+        };
+
+        $scope.inlineOptions = {
+            customClass: getDayClass,
+            minDate: new Date(),
+            showWeeks: true
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+        };
+
+
+
+        $scope.toggleMin = function() {
+            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+        };
+
+        $scope.toggleMin();
+
+        $scope.open1 = function() {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.popup1 = {
+            opened: false
+        };
+
+        $scope.open2 = function() {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
+        $scope.setDate = function(year, month, day) {
+            $scope.dt = new Date(year, month, day);
+        };
+
+        function getDayClass(data) {
+            var date = data.date,
+                mode = data.mode;
+            if (mode === 'day') {
+                var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                    if (dayToCheck === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        }
     }]);
 })();
 
