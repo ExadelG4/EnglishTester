@@ -119,7 +119,7 @@ router.post('/addQuestion',function(req, res) {
 
 
 router.post('/assignTeacher',function (req, res) {
-	if(!req.body.userId||!req.body.teacheId||req.body.userId===undefined||req.body.teacheId===undefined){
+	if(!req.body.userId||!req.body.teacherId||req.body.userId===undefined||req.body.teacherId===undefined){
 	 	res.status(400).send("Bad Request");
 	 } 
 	 else{
@@ -150,4 +150,6 @@ router.get('/getUserStatus/:id', function(req, res){
 	});
 });
 
+router.get('/finishTestUserList', function(req, res){
+});
 module.exports = router;
