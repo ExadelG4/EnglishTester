@@ -46,18 +46,21 @@
             chooseUserList = [];
         };
 
-        //(function () {
-        //      $('#datetimepicker2').datetimepicker();
-        //      $('#datetimepicker3').datetimepicker();
-        //})();
+        $scope.changeDate = function(val){
+            console.log(val);
+        };
+
+        (function () {
+              $('#datetimepicker2').datetimepicker();
+              $('#datetimepicker3').datetimepicker();
+        })();
 
 
 
 
         $scope.myCal = function(dt) {
-            console.log(dt);
             var k = new Date(dt);
-            console.log(dt);
+            console.log(k);
         };
 
         $scope.inlineOptions = {

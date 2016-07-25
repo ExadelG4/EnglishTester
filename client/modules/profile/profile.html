@@ -1,4 +1,7 @@
-<div>
-    <img src="profile_image">
-    <h1>Kira Plastina</h1>
+<div class="profile">
+    <img src="profile_image" />
+    <h1 >{{userProfile.name}}</h1>
+    <input type="text" size="40" class="col-xs-10 col-sm-10 col-md-7 col-lg-7" ng-model="mail" placeholder="{{userProfile.email}}" disabled>
+    <input type="text" size="40" class="col-xs-10 col-sm-10 col-md-7 col-lg-7" ng-model="number" placeholder="{{userProfile.telNumber}}" disabled>
+    <button class="btn btn-primary col-xs-10 col-sm-10 col-md-7 col-lg-7" type="submit" ng-click="save()">Save</button>
 </div>
