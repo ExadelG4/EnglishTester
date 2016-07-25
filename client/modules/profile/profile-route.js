@@ -6,7 +6,7 @@
                 url: '/profile',
                 templateUrl: 'modules/profile/profile.html',
                 controller: 'profileController',
-                role: ['admin', 'user']
+                role: ['admin', 'user', 'teacher']
             });
     });
 }());

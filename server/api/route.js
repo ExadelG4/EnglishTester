@@ -161,16 +161,19 @@ router.get('/getUserStatus/:id', function(req, res){
 });
 
 router.get('/finishTestUserList', function(req, res){
+	service.getFinishedList().then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
+		res.json(err);
+	})
 });
 
 
-router.get('/requestTestList', function(req, res){
-	stackService.findStack({},{},{}).then(function(data){
-			  res.send(JSON.stringify(data));
-		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
-		  });
+router.get('/assignedTeacherList', function(req, res){
+	
+
 });
+
 
 
 

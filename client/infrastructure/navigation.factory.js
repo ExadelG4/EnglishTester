@@ -31,10 +31,6 @@
                         {
                             name: 'Add question',
                             state: 'addQuestion'
-                        },
-                        {
-                            name: 'Edit question',
-                            state: 'editQuestion'
                         }
                     ]
                 },

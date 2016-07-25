@@ -6,4 +6,9 @@
     <p><a>{{tchName}}</a> checked the <a>{{userName}}</a> test 25.07.2016 at 2:30 pm</p>
     <p><a>{{userName}}</a> finished the test 25.07.2016 at 1:30 am</p>
 
+    <notification></notification>
+    <input type="text" ng-model="msg">
+    <button type="button" class="btn btn-success" ng-click="popToastr('Success')">Success</button>
+    <button type="button" class="btn btn-danger" ng-click="popToastr('Error')">Error</button>
+    <button type="button" class="btn btn-warning" ng-click="popToastr('Warning')">Warning</button>
 </div>

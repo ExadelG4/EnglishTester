@@ -7,6 +7,31 @@
             telNumber: context.getNumber()
         };
 
+        $scope.disable1 = true;
+        $scope.disable2 = true;
+
+        $scope.onFrstInput = function() {
+            $scope.disable1 = false;
+        };
+
+        $scope.onScndInput = function() {
+            $scope.disable2 = false;
+        };
+
+        $scope.changeMail = function() {
+            $scope.userProfile.email = $scope.mail;
+        };
+
+        $scope.changeTelNumber = function() {
+            $scope.userProfile.telNumber = $scope.telNbr;
+            console.log($scope.telNbr);
+        };
+
+        $scope.save = function() {
+            $scope.disable1 = true;
+            $scope.disable2 = true;
+        };
+
 
     }]);
 
