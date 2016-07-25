@@ -17,7 +17,7 @@ var addQuestion = function(_level,count){
 			var prom = [];
 			for(i =0; i< count; i++){
 				prom.push(testService.addNewQuestion({
-							type: 'One',
+							type: 'oneOfMany',
 							level: _level,
 							question: questRand.choose(),
 							options: [optionRand.choose(),optionRand.choose(),optionRand.choose()],

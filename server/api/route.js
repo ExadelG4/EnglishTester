@@ -102,20 +102,26 @@ router.post('/assignStudents',function(req, res) {
 
 });
 router.post('/addQuestion',function(req, res) {
-	console.log("Start");
+	
 	 if(!req.body.finalQue){
 	 	res.json({ success: false, message: 'Please, input correct data.' });
 	 } 
 	 else{
-	 		 	console.log("Uspeh");
-
-	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
-			  res.json('add');
-			  console.log("azaza");
-		  }).catch(function (err) {
-			  res.json('eror');
-		  });
-
+	 		if(!req.body.finalQue.options){
+	 			testService.addNewQuestionB(req.body.finalQue).then(function(data){
+					  res.json('add');
+					 }).catch(function (err) {
+					  res.json('eror');
+				 	 });
+	 		}
+	  		else{
+	  		
+			  		testService.addNewQuestion(req.body.finalQue).then(function(data){
+					  res.json('add');
+					 }).catch(function (err) {
+					  res.json('eror');
+				 	 });
+		  }
   }
 
 });
@@ -162,8 +168,10 @@ router.get('/finishTestUserList', function(req, res){
 	})
 });
 
+
 router.get('/assignedTeacherList', function(req, res){
 	
+
 });
 
 
