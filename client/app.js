@@ -9,6 +9,7 @@
         'angularSoundManager',
         /*'angularFileUpload',*/
         'ui.bootstrap',
-        'nya.bootstrap.select'
+        'nya.bootstrap.select',
+        'toaster'
     ]);
 })();

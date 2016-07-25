@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('home')
-        .controller('adminHomeController', ['$scope', 'EventWrapper',
-            function($scope, EventWrapper) {
+        .controller('adminHomeController', ['$scope', 'EventWrapper', 'notification',
+            function($scope, EventWrapper, notification) {
                 $scope.isShowList = true;
 
                 $scope.changeIsShowList = function () {
@@ -20,6 +20,20 @@
                         date: new Date()
                     }
                 ];
+
+                $scope.popToastr = function (type) {
+                    switch (type) {
+                        case 'Warning':
+                            notification.warning($scope.msg);
+                            break;
+                        case 'Error':
+                            notification.error($scope.msg);
+                            break;
+                        case 'Success':
+                            notification.success($scope.msg);
+                            break;
+                    }
+                };
 
                 // var thing = new EventWrapper(123);
                 //
