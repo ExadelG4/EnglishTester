@@ -17,50 +17,34 @@
                 <input class="col-sm-12 col-md-12 col-lg-12" type="text" size="40" ng-model="stdTel" placeholder="User's telephone" disabled>
 
 
-                <div class='firstCalendar'>
-                    <div class="form-group">
-                        <div class='input-group' id='datetimepicker2'>
-                            <input type='text' class="form-control col-sm-12 col-md-12 col-lg-12" ng-model="dateStart" ng-change="changeDate(dateStart)" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class='secondCalendar'>
-                    <div class="form-group">
-                        <div class='input-group' id='datetimepicker3'>
-                            <input type='text' class="form-control col-sm-12 col-md-12 col-lg-12" ng-model="dateEnd" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12 cal1">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1">
                     <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" ng-change="myCal(dt)" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                     </p>
                 </div>
 
-                <div class="col-md-12 cal1">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time">
+                    <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1">
                     <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup ng-model="dt2" ng-change="myCal(dt2)" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                     </p>
                 </div>
 
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time">
+                    <div uib-timepicker ng-model="mytime2" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                </div>
 
 
-                <button class="btn btn-primary btn-block" type="submit" ng-click="addStudent()">Add student</button>
+                <button class="btn btn-primary btn-block" type="submit" ng-click="addStudent(dt, dt2, mytime, mytime2)">Add student</button>
                 <button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>
             </div>
         </div>

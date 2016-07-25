@@ -14,9 +14,13 @@
     display: inline-block;
 }
 
-.sel2 .cal1 {
+.sel2 .cal1, .sel2 .cal2 {
     padding: 0;
-    margin-top: 0;
+    margin-top: 32px;
+}
+
+.time {
+    margin: 0 !important;
 }
 /*.firstCalendar, .secondCalendar {*/
     /*margin-bottom: 5%;*/

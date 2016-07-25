@@ -93,6 +93,7 @@ router.post('/assignStudents',function(req, res) {
 	  		console.log(req.body.students);
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
 			  res.json('add');
+			  
 				
 		  }).catch(function (err) {
 			  res.json('eror');
@@ -102,20 +103,26 @@ router.post('/assignStudents',function(req, res) {
 
 });
 router.post('/addQuestion',function(req, res) {
-	console.log("Start");
+	
 	 if(!req.body.finalQue){
 	 	res.json({ success: false, message: 'Please, input correct data.' });
 	 } 
 	 else{
-	 		 	console.log("Uspeh");
-
-	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
-			  res.json('add');
-			  console.log("azaza");
-		  }).catch(function (err) {
-			  res.json('eror');
-		  });
-
+	 		if(!req.body.finalQue.options){
+	 			testService.addNewQuestionB(req.body.finalQue).then(function(data){
+					  res.json('add');
+					 }).catch(function (err) {
+					  res.json('eror');
+				 	 });
+	 		}
+	  		else{
+	  		
+			  		testService.addNewQuestion(req.body.finalQue).then(function(data){
+					  res.json('add');
+					 }).catch(function (err) {
+					  res.json('eror');
+				 	 });
+		  }
   }
 
 });
@@ -155,16 +162,49 @@ router.get('/getUserStatus/:id', function(req, res){
 });
 
 router.get('/finishTestUserList', function(req, res){
-});
-
-
-router.get('/requestTest', function(req, res){
-	testService.getTest().then(function(data){
-		res.send('ok');
-	}).catch(function(err){
+	service.getFinishedList().then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
 		res.json(err);
-	});
+	})
 });
 
+
+router.get('/assignedTeacherList', function(req, res){
+	
+
+});
+
+router.post('/requestTest', function(req, res){
+	console.log(req.body);
+
+	if(!req.body){
+	 	res.json({ success: false, message: 'Bad request2' });
+	 } 
+	 else{
+			stackService.addRequest(req.body).then(function(data){
+				 res.send('ok');
+			}).catch(function(err){
+				res.status(400).send("Bad Request");
+			});
+		}
+});
+router.get('/requestTestList', function(req, res){
+	stackService.findRequest({},{},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
+
+});
+
+router.post('/getPersonalListForTeacher', function(req, res){
+	var tId = req.body.tId;
+	stackService.findStack({teacherId : tId},{'date': 1, 'level': 1},{}).then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
+		res.json(err);
+	})
+});
 
 module.exports = router;

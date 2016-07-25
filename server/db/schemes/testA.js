@@ -6,7 +6,9 @@ var TestAScheme = new Schema(
 	{
 		type: {
 			type: String,
-			required: true
+			required: true,
+			enum: ['oneOfMany','manyOfMany','listeningWithOneOfMany','listeningWithManyOfMany'],
+			default: 'oneOfMany'
   		},
 		level:{
 			type:Number,
@@ -16,6 +18,7 @@ var TestAScheme = new Schema(
 		question:{
 			type:String,
 			required: true
+			
 		},
 		options: [],
 		answers: []

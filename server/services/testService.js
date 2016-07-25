@@ -11,10 +11,15 @@ function getQFromLevel(_level,rand){
 function addNewQuestion(info){
 	return testA.save(info);	
 }
+function addNewQuestionB(info){
+	return testB.save(info);	
+}
 function removeCollection(){
 	return testA.remove();
 }
-
+function removeCollectionB(){
+	return testB.remove();
+}
 function getTest(){
 	return testMaker.make(testA);
 }
@@ -22,5 +27,7 @@ function getTest(){
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
 module.exports.addNewQuestion = addNewQuestion;
+module.exports.addNewQuestionB = addNewQuestionB;
 module.exports.removeCollection = removeCollection;
 module.exports.getTest= getTest;
+module.exports.removeCollectionB = removeCollectionB;

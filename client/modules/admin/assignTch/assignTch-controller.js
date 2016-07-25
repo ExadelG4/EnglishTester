@@ -23,6 +23,7 @@
         $scope.chooseTeacher = function(item) {
             $scope.tchName = item.fullName;
             $scope.tchMail = item.email;
+            $scope.tchTel = item.number;
             $scope.currentTeacher = item;
 
         };
@@ -30,6 +31,7 @@
         $scope.chooseUser = function(item) {
             $scope.stdName = item.fullName;
             $scope.stdMail = item.email;
+            $scope.stdTel = item.number;
             $scope.currentUser = item;
         }
 
@@ -38,8 +40,10 @@
 
             $scope.stdName = '';
             $scope.stdMail = '';
+            $scope.stdTel = '';
             $scope.tchName = '';
             $scope.tchMail = '';
+            $scope.tchTel = '';
 
         }
 

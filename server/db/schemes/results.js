@@ -5,10 +5,15 @@ var Schema = mongoose.Schema;
 var resultsScheme = new Schema(
 	{
 		date : {
-			type: Date,
+			type: Number,
 			default: Date.now()
 		},
+		
 		userId: String,
+		firstName: String,
+		lastName: String,
+		email: String,
+
 		result: {
 			autoMark: Number,
 			teacherMark: Number,

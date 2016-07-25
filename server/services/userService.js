@@ -65,6 +65,10 @@ function removeCollection(){
 	return user.remove();
 }
 
+function find(query, fields, options){
+    return user.find(query, fields, options);
+}
+
 function getUserStatus(_userId){
     var pr = q.defer();
     userInfo(_userId).then(function(data){
@@ -105,6 +109,27 @@ function getUserStatus(_userId){
     return pr.promise;
     
 }
+
+function getFinishedList(){
+    var defer = q.defer();
+    stackService.findStack({},{'userId': 1},{}).then(function (data) {
+        var arrayId =[];
+        data.forEach(function(element) {
+            arrayId.push(element._doc.userId);
+        });
+        user.find({'_id': {$in:arrayId}},{'password': 0},{}).then(function (data_) {
+            defer.resolve(data_);
+        }).catch(function (err) {
+            defer.reject(err);
+        })
+    }).catch(function (err) {
+        defer.reject(err);
+    });
+    return defer.promise;
+}
+
+
+
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
 module.exports.addNewUsers = addNewUsers;
@@ -113,3 +138,5 @@ module.exports.removeCollection = removeCollection;
 module.exports.getAllRole = getAllRole;
 module.exports.userInfo = userInfo;
 module.exports.getUserStatus = getUserStatus;
+module.exports.find = find;
+module.exports.getFinishedList = getFinishedList;
