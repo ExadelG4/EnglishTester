@@ -1,10 +1,14 @@
 <div class="contaoner-fluid">
 	<div class="row">
 		<div class="col-xs-12 col-offset-sm-2 col-sm-8">
-			<form>
+			<form name="main" novalidate>
 				<label>
-					{{$index + 1}}. {{question.text}}
+					{{$index + 1}}. {{question.question}}
 				</label>
+
+				<div>
+					{{question.answer}}
+				</div>
 				<sound-manager>
     				<button music-player add-song="createSong(question.audio, song)">+</button>
     				<div class="seekBase" seek-track>
@@ -13,9 +17,11 @@
 					<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
 					<button stop-music>Stop</button>
     			</sound-manager>
-    			<div ng-repeat="ans in question.answers">
-					<input type="radio" name="ans" ng-model="omg.tempChoise" ng-value="$index" ng-change="changeValidRT(currentPage)"> {{ans}}
-				</div>	
+			
+				<label for="mark" style="display: inline-block">Your mark </label>
+				<input name="mark" ng-model="omg.tempMark" ng-pattern style="display: inline-block" ng-change="onlineWriteValid(currentPage)" ng-pattern="[0-9]{1,}" required>
+				<label for="mark" style="display: inline-block"> / {{question.scale}}</label>
+				<span ng-show="main.mark.$dirty && !validMark(question.scale)" class="error-mes">Wrong mark</span>
 			</form>
 		</div>
 	</div>

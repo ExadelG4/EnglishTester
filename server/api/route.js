@@ -113,6 +113,7 @@ router.post('/addQuestion',function(req, res) {
 
 	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
 			  res.json('add');
+			  console.log("azaza");
 		  }).catch(function (err) {
 			  res.json('eror');
 		  });

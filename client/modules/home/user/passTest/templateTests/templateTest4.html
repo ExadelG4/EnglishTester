@@ -5,7 +5,7 @@
 				<label>
 					{{$index + 1}}. {{question.text}}
 				</label>
-				<textarea name="ans" ng-model="omg.tempChoise">
+				<textarea name="ans" ng-model="omg.tempChoise" ng-change="changeValidRT(currentPage)">
 			</form>
 		</div>
 	</div>

@@ -98,7 +98,6 @@
 		for (let i = 0; i < $scope.questionsPart1.length; ++i) {
 			var tempAnswer = {
 				qId: '',
-				//type: '',
 				answers: '',
 				audioAnswer: ''
 			};
@@ -175,29 +174,13 @@
 			}
 		};
 
-		/*if (isCheckboxType($scope.questionsPart1[$scope.currentPage - 1].type)) {
-		 	$scope.omg.tempChoise = [];
-			 for (var i = 0; i < $scope.questionsPart1[$scope.currentPage - 1].answers.length; ++i) {
-	    		$scope.omg.tempChoise.push(false);
-	    	}
-	    }
-	    else if (isRadioType($scope.questionsPart1[$scope.currentPage - 1].type)) {
-	    	$scope.omg.tempChoise = -1;
-    	}
-    	else if (isTextType($scope.questionsPart1[$scope.currentPage - 1].type)) {
-    		$scope.omg.tempChoise = '';
-    	}
-    	else {
-    			//audio ans
-    	}*/
-
 		$scope.song = {
     			id: 'one',
     			artist: 'Drake',
     			//url: 'http://cdndl.zaycev.net/6100/1726613/anberlin_-_the_feel_good_drag_(zaycev.net).mp3'
     			url: 'assets/audio/Three Days Grace - Animal I Have Become.mp3'
 
-			};
+		};
 
 		$scope.createSong = function(urlAudio, song) {
 			song.url = urlAudio;
@@ -207,59 +190,45 @@
 		$scope.totalCount = $scope.questionsPart1.length;
 
 		$scope.pageChanged = function(prevNumPage) {
-		 	/**if (isCheckboxType($scope.questionsPart1[prevNumPage - 1].type)) {
-		 		$scope.userAnswers[prevNumPage - 1].answers = [];
-			 	for (var i = 0; i < $scope.omg.tempChoise.length; ++i) {
-			 		if ($scope.omg.tempChoise[i]) {
-	    				$scope.userAnswers[prevNumPage - 1].answers.push(i);
-	    			}
-	    		}
-		 	}
-		 	else if (isRadioType($scope.questionsPart1[prevNumPage - 1].type)) {
-		 		$scope.userAnswers[prevNumPage - 1].answers = [];
-		 		$scope.userAnswers[prevNumPage - 1].answers.push($scope.omg.tempChoise);	
-		 	}
-		 	else if (isTextType($scope.questionsPart1[prevNumPage - 1].type)) {
-		 		$scope.userAnswers[prevNumPage - 1].answers = $scope.omg.tempChoise;
-		 	}
-		 	else {
-		 		//audio ans
-		 	}
-		 	if (isCheckboxType($scope.questionsPart1[$scope.currentPage - 1].type)) {
-		 		$scope.omg.tempChoise = [];
-			 	for (var i = 0; i < $scope.questionsPart1[$scope.currentPage - 1].answers.length; ++i) {
-	    			$scope.omg.tempChoise.push(false);
-	    		}
-	    		for (var i = 0; i < $scope.userAnswers[$scope.currentPage - 1].answers.length; ++i) {
-	    			$scope.omg.tempChoise[$scope.userAnswers[$scope.currentPage - 1].answers[i]] = true;
-	    		}
-	    	}
-	    	else if (isRadioType($scope.questionsPart1[$scope.currentPage - 1].type)) {
-	    		if($scope.userAnswers[$scope.currentPage - 1].answers[0] !== null) {
-	    			$scope.omg.tempChoise = $scope.userAnswers[$scope.currentPage - 1].answers[0];
-	    		}
-	    		else {
-	    			$scope.omg.tempChoise = '';
-	    		}
-	    	}
-	    	else if (isTextType($scope.questionsPart1[$scope.currentPage - 1].type)) {
-	    		$scope.omg.tempChoise = $scope.userAnswers[$scope.currentPage - 1].answers;
-    		}
-    		else {
-    			//audio ans
-    		}*/
     		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
     		$scope.initNewPage($scope.currentPage);
     		$scope.copyCurrentPage = $scope.currentPage;
   		};
+  		$scope.validAnswers = [];
+  		for (var i = 0; i < $scope.totalCount; ++i) {
+  			$scope.validAnswers.push(false);
+  		}
+  		$scope.changeValidC = function(currentPage) {
+  			for(var i = 0; i < $scope.totalCount; ++i) {
+  				if( $scope.omg.tempChoise[i] === true) {
+  					$scope.validAnswers[currentPage - 1] = true;
+  					return;
+  				}
+  			}
+  			;$scope.validAnswers[currentPage - 1] = false;
+  		}
 
+  		/*$scope.changeValidR = function(currentPage) {
+  			if ($scope.omg.tempChoise)
+  		}*/
 
-
-			
-		$scope.onSendRequest = function() {
-			$scope.userInformation.isSentReq = true;
-		};
+  		$scope.changeValidRT = function(currentPage) {
+  			if ($scope.omg.tempChoise !== '') {
+  				$scope.validAnswers[currentPage - 1] = true;
+  			}
+  			else {
+  				$scope.validAnswers[currentPage - 1] = false;
+  			}
+  		};
+  		$scope.allValidAnswers = function () {
+  			for(var i = 0; i < $scope.totalCount; ++i) {
+  				if($scope.validAnswers[i] === false){
+  					return false;
+  				}
+  			}
+  			return true;
+  		}
 
 
 	}]);

@@ -6,9 +6,9 @@
             function($scope) {
                 $scope.isShowList = true;
                 
-                $scope.changeIsShowList = function () {
+                /*$scope.changeIsShowList = function () {
                     $scope.isShowList = !$scope.isShowList;
-                };
+                };*/
                 
                 $scope.testList = [
                     {
