@@ -155,16 +155,18 @@ router.get('/getUserStatus/:id', function(req, res){
 });
 
 router.get('/finishTestUserList', function(req, res){
-});
-
-
-router.get('/requestTest', function(req, res){
-	testService.getTest().then(function(data){
-		res.send('ok');
-	}).catch(function(err){
+	service.getFinishedList().then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
 		res.json(err);
-	});
+	})
 });
+
+router.get('/assignedTeacherList', function(req, res){
+	
+});
+
+
 
 
 module.exports = router;
