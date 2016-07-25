@@ -93,8 +93,7 @@ router.post('/assignStudents',function(req, res) {
 	  		console.log(req.body.students);
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
 			  res.json('add');
-				console.log('azaza');
-				console.log(data);
+				
 		  }).catch(function (err) {
 			  res.json('eror');
 		  });
@@ -103,35 +102,69 @@ router.post('/assignStudents',function(req, res) {
 
 });
 router.post('/addQuestion',function(req, res) {
+	console.log("Start");
 	 if(!req.body.finalQue){
-	 	res.json({ success: false, message: 'Please correct data.' });
+	 	res.json({ success: false, message: 'Please, input correct data.' });
 	 } 
 	 else{
+	 		 	console.log("Uspeh");
+
 	  		testService.addNewQuestion(req.body.finalQue).then(function(data){
 			  res.json('add');
+			  console.log("azaza");
 		  }).catch(function (err) {
 			  res.json('eror');
 		  });
 
   }
 
+});
+
+
+router.post('/assignTeacher',function (req, res) {
+	if(!req.body.userId||!req.body.teacherId||req.body.userId===undefined||req.body.teacherId===undefined){
+	 	res.status(400).send("Bad Request");
+	 } 
+	 else{
+	  		stackService.assignTeacher(req.body).then(function(data){
+			  res.send('ok');
+		  }).catch(function (err) {
+			  res.status(400).send("Bad Request");
+		  });
+
+  }
 })
+
 
 
 router.get('/getTest', function(req, res){
 	testService.getTest().then(function(data){
-		res.json(data);
+		res.send(data);
 	}).catch(function(err){
 		res.json(err);
 	});
 });
 
+// todo: create query by jwt, not by id
 router.get('/getUserStatus/:id', function(req, res){
 	service.getUserStatus(req.params.id).then(function(data){
 		res.json(data);
 	}).catch(function(err){
+		res.status(404).send("User not found");
+	});
+});
+
+router.get('/finishTestUserList', function(req, res){
+});
+
+
+router.get('/requestTest', function(req, res){
+	testService.getTest().then(function(data){
+		res.send('ok');
+	}).catch(function(err){
 		res.json(err);
 	});
 });
+
 
 module.exports = router;

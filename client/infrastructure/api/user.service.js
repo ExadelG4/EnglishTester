@@ -62,8 +62,21 @@
                         );
                     },
 
+                    getTest: function () {
+                        return httpService.get('http://localhost:3000/getTest')
+                            .then(
+                                function(result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+
                     assignStudents: function(list) {
                         return httpService.post(host + '/assignStudents', {students: list});
+                    },
+
+                    halfSmoke: function(data) {
+                        return httpService.post('http://localhost:3000/addQuestion', {finalQue : data});
                     }
                 };
             }]);

@@ -6,7 +6,7 @@
 					{{$index + 1}}. {{question.text}}
 				</label>
 				<div ng-repeat="ans in question.answers">
-					<input type="checkbox" name="ans" ng-model="omg.tempChoise[$index]"> {{ans}}
+					<input type="checkbox" name="ans" ng-model="omg.tempChoise[$index]" ng-change="changeValidC(currentPage)"> {{ans}}
 				</div>
 			</form>
 		</div>

@@ -10,7 +10,7 @@ function getAllUsers(){
 	return user.find({},{},{});
 }
 function getAllRole(_role){
-	return user.find({role: _role},{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{});
+	return user.find({role: _role},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1},{});
 }	
 function userInfo(id){
     return user.findOne({_id: id},{},{});
@@ -48,9 +48,7 @@ function authenticate(email, pass){
                     var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
                     now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
-                    
-                    
-                    defer.resolve({ user:{id:user.id, name: user.name, email: user.email, role:user.role}, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
+                    defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
 
                 } else {
                      defer.reject();

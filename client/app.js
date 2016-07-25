@@ -7,7 +7,7 @@
         'admin',
         'tests',
         'angularSoundManager',
-        'angularFileUpload',
+        /*'angularFileUpload',*/
         'ui.bootstrap',
         'nya.bootstrap.select'
     ]);
