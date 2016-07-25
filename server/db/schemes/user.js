@@ -32,6 +32,11 @@ var UserSchema = new Schema(
 		number: {
 			type: String,
 			default: '+375291111111'
+		},
+		status: {
+			type: String,
+			enum: ['free','open','req','stack'],
+			default: 'free'
 		}
 
 	});

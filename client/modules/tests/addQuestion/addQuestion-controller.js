@@ -101,14 +101,11 @@
 			$scope.sendQue = function () {
 				//допилить конец, если это чекбокс
 				if ($scope.selectedQue === 'listeningWithManyOfMany' || $scope.selectedQue === 'manyOfMany') {
-					for (var i = 0; i < $scope.finalQue.answers.length; ++i) {
-						if($scope.finalQue.answers[i]) {
-							$scope.finalQue.answers[i] = i;
-						}
-					}
-					for (var i = 0; i < $scope.finalQue.answers.length; ++i) {
-						if($scope.finalQue.answers[i] === false) {
-							$scope.finalQue.answers.splice(i, 1);
+					var tempNum = angular.copy($scope.finalQue.answers);
+					$scope.finalQue.answers = [];
+					for (var i = 0; i < tempNum.length; ++i) {
+						if(tempNum[i] === true) {
+							$scope.finalQue.answers.push(i);
 						}
 					}
 				}

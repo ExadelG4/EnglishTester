@@ -23,16 +23,29 @@ var fillCollections = function () {
         userService.find({role: 'user'},{},{ limit : 12 }).then(function (data) {
             teachers = data;
             for(var i =0; i<users.length;i++){
-                if(i<3){
-                    var id = users[i]._doc._id;
+               var id = users[i]._doc._id;
+                    var firstName = users[i]._doc.firstName;
+                    var lastName = users[i]._doc.lastName;
+                    var email = users[i]._doc.email;
+
                     var tid = teachers[i]._doc._id;
-                    users[i] = {userId: id, teacherId: tid};
-                }else if(i<6){
-                    users[i] = {userId: users[i]._doc._id};
-                }else if(i< 9){
-                    users[i] = {userId: users[i]._doc._id,result: {autoMark: 0,	teacherMark: 0,	level: 0}};
-                }else{
-                    users[i] = {userId: users[i]._doc._id,startDate: new Date() , endDate: new  Date()};
+                    var tfirstName = teachers[i]._doc.firstName;
+                    var tlastName = teachers[i]._doc.lastName;
+                    var temail = teachers[i]._doc.email;
+                
+                if(i<3){
+                    
+
+                    users[i] = {userId: id, teacherId: tid, firstName: firstName, lastName: lastName, email: email, teacherFirstName: tfirstName, teacherLastName: tlastName, teacherEmail: temail};
+                }
+                 if(i>=3 && i<6){
+                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email};
+                }
+                if(i >= 6 && i< 9){
+                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,result: {autoMark: 0,	teacherMark: 0,	level: 0}};
+                }
+                 if (i >=9){
+                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,startDate: new Date() , endDate: new  Date()};
                 }
             }
             stackService.addStacks(users.slice(0, 3)).then(function (data) {
@@ -61,9 +74,24 @@ var fillCollections = function () {
 }
 
 console.log('Default testGen. Please, wait...');
-testService.removeCollection().then(function(data){
-    fillCollections(3,3,3,3);
+stackService.removeStackCollection().then(function(data){
+    stackService.removeRequestCollection().then(function(data){
+        stackService.removeResultsCollection().then(function(data){
+            stackService.removeOpenTestsCollection().then(function(data){
+                  fillCollections(3,3,3,3);
+            }).catch(function (err) {
+                 console.log(err);
+             });
+        }).catch(function (err) {
+                 console.log(err);
+        });
+    }).catch(function (err) {
+                 console.log(err);
+    }); 
 }).catch(function (err) {
-    console.log(err);
-});
+                 console.log(err);
+             });
+
+  
+
 	

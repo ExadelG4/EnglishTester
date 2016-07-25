@@ -24,15 +24,12 @@ function addNewUsers(info){
 function authenticate(email, pass){
     var defer = q.defer();
 	// user.authenticate(email, pass).
-    
-    
-        user.findOne({email: email},{},{}).then(function(user){        
-		if (!user) {           
+    user.findOne({email: email},{},{}).then(function(user){                
+        if (!user) {           
             defer.reject();
         } else {
             user.comparePassword(pass, function(err, isMatch) {
                 if (isMatch && !err) {
-
                     var token = jwt.sign(user, key.secret, {
                         expiresIn: expires 
                     });
@@ -48,10 +45,25 @@ function authenticate(email, pass){
                     var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
                     now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
-                    defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
+                    if(user.role == 'guest'){
+                        stackService.findOpenTests(user,{},{}).then(function(data){
+                            if(data.length){
+                                defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
+                            }
+                            else{
+                                defer.reject();
+                            }
+                        }).catch(function(err){
+                            defer.reject();
+                        });
+                    }else{
+                        defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
+                    }
+
+                    
 
                 } else {
-                     defer.reject();
+                    defer.reject();
                 }
             });
         }

@@ -17,7 +17,9 @@ function addNewQuestionB(info){
 function removeCollection(){
 	return testA.remove();
 }
-
+function removeCollectionB(){
+	return testB.remove();
+}
 function getTest(){
 	return testMaker.make(testA);
 }
@@ -28,3 +30,4 @@ module.exports.addNewQuestion = addNewQuestion;
 module.exports.addNewQuestionB = addNewQuestionB;
 module.exports.removeCollection = removeCollection;
 module.exports.getTest= getTest;
+module.exports.removeCollectionB = removeCollectionB;

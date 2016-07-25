@@ -5,10 +5,14 @@ var Schema = mongoose.Schema;
 var requestScheme = new Schema(
 	{
 		date : {
-			type: Date,
+			type: Number,
 			default: Date.now()
 		},
-		userId: String
+		
+		userId: String,
+		firstName: String,
+		lastName: String,
+		email: String
 
 	});
 	

@@ -81,6 +81,20 @@ function updateStackTeacher(id,field){
 return stack.update(id,field);
 };
 
+function removeStackCollection(){
+	return stack.remove();
+}
+function removeResultsCollection(){
+	return results.remove();
+}
+function removeRequestCollection(){
+	return request.remove();
+}
+function removeOpenTestsCollection(){
+	return openTests.remove();
+}
+
+
 module.exports.getAllStack = getAllStack;
 module.exports.addStack = addStack;
 module.exports.addStacks = addStacks;
@@ -102,3 +116,7 @@ module.exports.addOpenTestsArray = addOpenTestsArray;
 module.exports.assignTeacher = assignTeacher;
 module.exports.addRequests = addRequests;
 module.exports.addResultArray = addResultArray;
+module.exports.removeStackCollection = removeStackCollection;
+module.exports.removeRequestCollection = removeRequestCollection;
+module.exports.removeResultsCollection = removeResultsCollection;
+module.exports.removeOpenTestsCollection = removeOpenTestsCollection;
