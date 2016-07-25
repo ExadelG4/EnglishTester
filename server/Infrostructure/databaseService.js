@@ -44,12 +44,21 @@ DatabasService.prototype.save = function(query){
 
     return defer.promise;
 }
-DatabasService.prototype.create = function(query){
+
+DatabasService.prototype.update = function(id,query){
     var defer = q.defer();
-    ;
-    this.model.create(query,function(err){
+    this.model.update(id,query,function(err){
         if(err) defer.reject(err);
         defer.resolve();
+    });
+
+    return defer.promise;
+}
+DatabasService.prototype.create = function(query){
+    var defer = q.defer();
+    this.model.create(query,function(err,data){
+        if(err) defer.reject(err);
+        defer.resolve(data);
     });
 
     return defer.promise;
