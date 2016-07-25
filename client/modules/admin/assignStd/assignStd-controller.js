@@ -14,8 +14,8 @@
 
         var stdConstructor = function(stdId, stdData, stdData2){
             this.userId =  stdId;
-            this.dataSt =  stdData;
-            this.dataEn =  stdData2;
+            this.dataStart =  stdData;
+            this.dataEnd =  stdData2;
 
         };
 
@@ -30,7 +30,8 @@
         };
 
         $scope.addStudent = function() {
-            var newStudent = new stdConstructor(currentStudent._id, $scope.dateStart, $scope.dateEnd);
+            var userId = currentStudent._id;
+            var newStudent = new stdConstructor(userId, $scope.dateStart, $scope.dateEnd);
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
 

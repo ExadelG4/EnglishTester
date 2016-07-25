@@ -6,10 +6,8 @@
 					{{$index + 1}}. {{question.text}}
 				</label>
 				<div ng-repeat="ans in question.answers"">
-					<input type="radio" name="ans" ng-model="omg.tempChoise" ng-value="$index"> {{ans}} 
-					{{omg.tempChoise}} 
+					<input type="radio" name="ans" ng-model="omg.tempChoise" ng-value="$index" ng-change="changeValidRT(currentPage)"> {{ans}} 
 				</div>
-				{{omg.tempChoise}}
 			</form>
 		</div>
 	</div>

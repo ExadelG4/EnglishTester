@@ -10,6 +10,10 @@
             $scope.onSendRequest = function() {
                 $scope.userInformation.isSentReq = true;
             };
+            /*$scope.onStartTest = function() {
+                userService.getTest();
+                var 
+            }*/
         }]
     );
 })();
