@@ -81,8 +81,22 @@
 
                     halfSmoke: function(data) {
                         return httpService.post('http://localhost:3000/addQuestion', {finalQue : data});
+                    },
+                    sendTestRequest: function(data) {
+                        return httpService.post('http://localhost:3000/requestTest', data);
+                    },
+                    sendFirstPart: function(data) {
+                        return httpService.post('http://localhost:3000/submit1', data)
+                            .then ( function(result) {
+                                return result.data;
+                            })
+                    },
+                    getStatus: function() {
+                        return httpService.get('http://localhost:3000/')
+                            .then (function(result) {
+                                return result.data;
+                            })
                     }
-
                 };
             }]);
 })();

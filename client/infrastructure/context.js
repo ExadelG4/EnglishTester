@@ -15,7 +15,7 @@
 
                 return {
                     init: function (userData) {
-                        user.id = userData.id;
+                        user.id = userData._id;
                         user.firstName = userData.firstName;
                         user.lastName = userData.lastName;
                         user.role = userData.role;
@@ -48,6 +48,9 @@
                     },
                     getNumber: function() {
                         return user.number;
+                    },
+                    getId: function() {
+                        return user.id;
                     }
                 };
             }]);

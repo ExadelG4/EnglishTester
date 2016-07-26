@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular.module('tests')
-		.controller('addQuestionController', ['$scope','userService', function($scope, userService) {
+		.controller('addQuestionController', ['$scope','userService','notification', function($scope, userService, notification) {
 
 			$scope.selectedQue = '';
 
@@ -50,7 +50,24 @@
 				answers: [-1]
 			};
 
-			/*$scope.temp*/
+			$scope.song = {
+    			id: '',
+    			title: '',
+    			artist: '',
+    			url: ''
+
+			};
+
+			$scope.init = function(selectedQue) {
+				$scope.finalQue.type = selectedQue;
+				$scope.finalQue.question = '';
+				$scope.finalQue.level = '';
+				$scope.finalQue.options = [''];
+				$scope.finalQue.answers = [-1];
+				if (selectedQue === 'listeningWithManyOfMany' || selectedQue === 'manyOfMany') {
+					$scope.finalQue.answers[0] = false;
+				}
+			};
 
 			$scope.addAnswerItem = function() {
 				if ($scope.finalQue.options.length !== 7) {
@@ -71,35 +88,12 @@
 					}
 				}
 			};
-			$scope.init = function(selectedQue) {
-				$scope.finalQue.type = selectedQue;
-				$scope.finalQue.question = '';
-				$scope.finalQue.level = '';
-				$scope.finalQue.options = [''];
-				$scope.finalQue.answers = [-1];
-				if (selectedQue === 'listeningWithManyOfMany' || selectedQue === 'manyOfMany') {
-					$scope.finalQue.answers[0] = false;
-				}
-
-			}
+		
 			$scope.changeQue = function(selectedQue) {
 				$scope.init(selectedQue);
-			}
-
-			$scope.song = {
-    			id: 'one',
-    			title: 'Rain',
-    			artist: 'Drake',
-    			//url: 'http://cdndl.zaycev.net/6100/1726613/anberlin_-_the_feel_good_drag_(zaycev.net).mp3'
-    			url: 'papa_roach_-_last_resort(zaycev.net).mp3'
-
 			};
-			/*$scope.disableSubmit  = function() {
-
-			}*/
 
 			$scope.sendQue = function () {
-				//допилить конец, если это чекбокс
 				if ($scope.selectedQue === 'listeningWithManyOfMany' || $scope.selectedQue === 'manyOfMany') {
 					var tempNum = angular.copy($scope.finalQue.answers);
 					$scope.finalQue.answers = [];
@@ -109,7 +103,6 @@
 						}
 					}
 				}
-				userService.halfSmoke($scope.finalQue);
 				if ($scope.finalQue.type === 'questionWithoutChoiceoOfAnswers' || 
 					$scope.finalQue.type === 'essay' ||  
 					$scope.finalQue.type === 'listeningWithoutChoiceOfAnswers' ||
@@ -117,7 +110,8 @@
 					delete $scope.finalQue.answers;
 					delete $scope.finalQue.options;
 				}
+				userService.halfSmoke($scope.finalQue);
 				$scope.selectedQue = '';
+				notification.success("You have successfully added new question");
 			};
-
 }])})();

@@ -1,7 +1,14 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('checkTestController', ['$scope', '$state','userService', function($scope, $state, userService) {
+	angular.module('home').controller('checkTestController', ['$scope', '$state','userService','angularPlayer', function($scope, $state, userService, angularPlayer) {
+		$scope.$on('$stateChangeStart', function () {
+			if (angularPlayer.getPlaylist().length > 0) {
+				angularPlayer.clearPlaylist( function() {			
+				});
+			}
+		});
+
 		var startUrl = 'modules/home/teacher/check test/templateTests/templateTest';
 
 		$scope.urls = {
@@ -36,8 +43,8 @@
 				type: 'listeningWithoutChoiceOfAnswers',
 				question: 'How named this song?',
 				audio: 'assets/audio/papa_roach_-_last_resort(zaycev.net).mp3',
-				answer: '',
-				audioAnswer: 'CUT MY LIFE IN TO PEASES, THIS IS MI LAST RESORT.. oh yeahh, last resort.',
+				answer: 'CUT MY LIFE IN TO PEASES, THIS IS MY LAST RESORT.. oh yeahh, last resort.',
+				audioAnswer: '',
 				scale: 100
 			},
 			{
@@ -74,20 +81,55 @@
 			$scope.forValidMark.push(false);
 		}
 
+		var song = {
+	    	id: 'one',
+	    	artist: 'Drake',
+	    	url: ''
+    	}
+
 		var initNewPage = function (currentPage) {
 			$scope.omg.tempMark = $scope.proven[currentPage - 1].mark;
+			angularPlayer.init();
+			if($scope.questions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers') {
+				/*var song = {
+	    			id: 'one',
+	    			artist: 'Drake',
+	    			url: $scope.questions[currentPage - 1].audio
+    			}*/
+    			song.url = $scope.questions[currentPage - 1].audio;
+				angularPlayer.addTrack(song);
+			}
+			else if ($scope.questions[currentPage - 1].type ==='speaking') {
+				/*var song = {
+	    			id: 'one',
+	    			artist: 'Drake',
+	    			url: $scope.questions[currentPage - 1].audioAnswer
+    			}*/
+    			song.url = $scope.questions[currentPage - 1].audioAnswer;
+				angularPlayer.addTrack(song);
+			}
+
 		};
 
 		var savePrevPage = function(currentPage) {
 			$scope.proven[currentPage - 1].mark = $scope.omg.tempMark;
 			$scope.omg.tempMark = '';
+
 		};
 
 		$scope.pageChanged = function(prevNumPage) {
     		$scope.validNeededNumPage = true;
     		savePrevPage(prevNumPage);
-    		initNewPage($scope.currentPage);
-    		$scope.copyCurrentPage = $scope.currentPage;
+    		if (angularPlayer.getPlaylist().length > 0) {
+				angularPlayer.clearPlaylist( function() {
+					initNewPage($scope.currentPage);
+    				$scope.copyCurrentPage = $scope.currentPage;
+				});
+			}
+			else {
+				initNewPage($scope.currentPage);
+    			$scope.copyCurrentPage = $scope.currentPage;
+			}
   		};
 
   		$scope.setNumPage = function(numPage) {
@@ -101,13 +143,6 @@
 		$scope.onlineWriteValid = function(currentPage) {
 			$scope.forValidMark[currentPage - 1] = $scope.validMark($scope.questions[currentPage - 1].scale);
 		}
-		$scope.song = {
-    			id: 'one',
-    			artist: 'Drake',
-    			//url: 'http://cdndl.zaycev.net/6100/1726613/anberlin_-_the_feel_good_drag_(zaycev.net).mp3'
-    			url: ''
-
-		};
 
 		$scope.createSong = function(urlAudio, song) {
 			song.url = urlAudio;
