@@ -144,13 +144,19 @@ router.post('/assignTeacher',function (req, res) {
 
 
 
-router.get('/getTest', function(req, res){
-	testService.getTest().then(function(data){
+router.post('/getTest', function(req, res){
+	testService.getTest(req.body).then(function(data){
 		res.send(data);
 	}).catch(function(err){
 		res.json(err);
 	});
 });
+
+
+router.post('/submit1', function(req,res){
+	service.submit1(req.body);
+});
+
 
 // todo: create query by jwt, not by id
 router.get('/getUserStatus/:id', function(req, res){

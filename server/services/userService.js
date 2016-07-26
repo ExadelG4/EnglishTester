@@ -140,6 +140,19 @@ function getFinishedList(){
     return defer.promise;
 }
 
+function update(query, update,options){
+    return user.update(query, update,options);
+}
+
+function submit1(data){
+    var defer = q.defer();
+
+    stackService.checkFirstPart(data)
+
+
+    return defer.promise;
+}
+
 
 
 module.exports.getAllUsers = getAllUsers;
@@ -152,3 +165,5 @@ module.exports.userInfo = userInfo;
 module.exports.getUserStatus = getUserStatus;
 module.exports.find = find;
 module.exports.getFinishedList = getFinishedList;
+module.exports.submit1 = submit1;
+module.exports.update = update;

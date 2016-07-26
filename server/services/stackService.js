@@ -2,7 +2,7 @@ var stack = require('../db/mongo').stack;
 var results = require('../db/mongo').results;
 var request = require('../db/mongo').request;
 var openTests = require('../db/mongo').openTests;
-
+var q = require('q');
 
 function getAllStack(){
 	return stack.find({},{},{});
@@ -78,7 +78,7 @@ function assignTeacher(data){
 
 
 function updateStackTeacher(id,field){
-return stack.update(id,field);
+	return stack.update(id,field);
 };
 
 function removeStackCollection(){
@@ -93,6 +93,23 @@ function removeRequestCollection(){
 function removeOpenTestsCollection(){
 	return openTests.remove();
 }
+
+
+
+
+function checkFirstPart(data){
+	var pr = q.defer();
+	var len = data.answers.length;
+	stack.findOne({userId: data.userId}).then(function(data){
+
+	})
+
+	return pr.promise;
+
+}
+
+
+
 
 
 module.exports.getAllStack = getAllStack;
@@ -120,3 +137,5 @@ module.exports.removeStackCollection = removeStackCollection;
 module.exports.removeRequestCollection = removeRequestCollection;
 module.exports.removeResultsCollection = removeResultsCollection;
 module.exports.removeOpenTestsCollection = removeOpenTestsCollection;
+
+module.exports.checkFirstPart = checkFirstPart;
