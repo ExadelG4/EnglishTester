@@ -12,7 +12,7 @@
 				type: 'oneOfMany'
 			},
 			{
-				text: '"Many of many"',
+				text: 'Many of many',
 				type: 'manyOfMany'
 			},
 			{

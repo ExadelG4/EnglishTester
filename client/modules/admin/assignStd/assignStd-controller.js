@@ -54,6 +54,8 @@
 
 
 
+
+
         $scope.inlineOptions = {
             customClass: getDayClass,
             minDate: new Date(),
@@ -115,10 +117,6 @@
         }
 
 
-
-
-
-
         $scope.mytime = new Date();
 
         $scope.hstep = 1;
@@ -135,6 +133,8 @@
             d.setMinutes( 0 );
             $scope.mytime = d;
         };
+
+
     }]);
 })();
 

@@ -45,7 +45,7 @@ var fillCollections = function () {
                     users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,result: {autoMark: 0,	teacherMark: 0,	level: 0}};
                 }
                  if (i >=9){
-                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,startDate: new Date() , endDate: new  Date()};
+                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,dateStart: new Date() , dateEnd: new  Date()};
                 }
             }
             stackService.addStacks(users.slice(0, 3)).then(function (data) {
