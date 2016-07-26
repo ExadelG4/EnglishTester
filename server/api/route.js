@@ -198,7 +198,8 @@ router.get('/requestTestList', function(req, res){
 
 });
 
-router.post('/getPersonalListForTeacher', function(req, res){
+router.get('/getPersonalListForTeacher', function(req, res){
+	
 	var tId = req.body.tId;
 	stackService.findStack({teacherId : tId},{'date': 1, 'level': 1},{}).then(function (data) {
 		res.json(data);
