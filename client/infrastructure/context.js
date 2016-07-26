@@ -15,12 +15,22 @@
 
                 return {
                     init: function (userData) {
-                        user.id = userData.id;
-                        user.firstName = userData.firstName;
-                        user.lastName = userData.lastName;
-                        user.role = userData.role;
-                        user.email = userData.email;
-                        user.number = userData.number;
+                        if (userData) {
+                            user.id = userData._id;
+                            user.firstName = userData.firstName;
+                            user.lastName = userData.lastName;
+                            user.role = userData.role;
+                            user.email = userData.email;
+                            user.number = userData.number;
+                        }
+                    },
+                    clear: function () {
+                        user.id = "";
+                        user.firstName = "";
+                        user.lastName = "";
+                        user.role = "";
+                        user.email = "";
+                        user.number = "";
                     },
                     getRole: function () {
                         return user.role;
@@ -48,6 +58,9 @@
                     },
                     getNumber: function() {
                         return user.number;
+                    },
+                    getId: function() {
+                        return user.id;
                     }
                 };
             }]);

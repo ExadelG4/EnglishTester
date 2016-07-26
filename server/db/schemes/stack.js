@@ -15,7 +15,7 @@ var stackScheme = new Schema(
 		lastName: String,
 		email: String,
 
-		answersAuto: [{_qId: String, answer: []}],
+		answersAuto: [{_qId: String, level: Number, answer: []}],
 		answers: [{_id: String, answer: String }],
 		
 		teacherId: {

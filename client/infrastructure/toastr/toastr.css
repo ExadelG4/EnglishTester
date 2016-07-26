@@ -29,7 +29,7 @@
 }
 .toast-top-right {
     top: 12px;
-    right: 12px;
+    right: calc(50% - 150px);
 }
 .toast-bottom-right {
     right: 12px;
@@ -42,7 +42,7 @@
 #toast-container {
     position: fixed;
     z-index: 999998;
-    margin-top: 75px;
+    /*margin-top: 75px;*/
 }
 #toast-container * {
     -moz-box-sizing: border-box;
@@ -97,37 +97,49 @@
     z-index: 999999;
 }
 .toast-success {
-    background-color: #51a351;
+    background-color: #63d179;
 }
 .toast-error {
-    background-color: #bd362f;
+    background-color: #e86e68;
 }
 .toast-info {
     background-color: #2f96b4;
 }
 .toast-warning {
-    background-color: #f89406;
+    background-color: #e3bf27;
 }
 /*Responsive Design*/
 @media all and (max-width: 240px) {
-    #toast-container > div > div {
-        padding: 8px 8px 8px 50px;
-        width: 108px;
+    #toast-container {
+        right: calc(50% - 64px);
     }
-}
-@media all and (min-width: 241px) and (max-width: 320px) {
     #toast-container > div > div {
         padding: 8px 8px 8px 50px;
         width: 128px;
     }
 }
+@media all and (min-width: 241px) and (max-width: 320px) {
+    #toast-container {
+        right: calc(50% - 96px);
+    }
+    #toast-container > div > div {
+        padding: 8px 8px 8px 50px;
+        width: 192px;
+    }
+}
 @media all and (min-width: 321px) and (max-width: 480px) {
+    #toast-container {
+        right: calc(50% - 96px);
+    }
     #toast-container > div > div {
         padding: 8px 8px 8px 50px;
         width: 192px;
     }
 }
 @media all and (min-width: 481px) and (max-width: 768px) {
+    #toast-container {
+        right: calc(50% - 150px);
+    }
     #toast-container > div > div {
         padding: 15px 15px 15px 50px;
         width: 300px;

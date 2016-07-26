@@ -20,8 +20,8 @@ function removeCollection(){
 function removeCollectionB(){
 	return testB.remove();
 }
-function getTest(){
-	return testMaker.make(testA);
+function getTest(user){
+	return testMaker.make(testA,user);
 }
 
 module.exports.getAllQuestions = getAllQuestions;

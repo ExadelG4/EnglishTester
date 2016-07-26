@@ -6,11 +6,11 @@
 					{{$index + 1}}. {{question.question}}
 				</label>
 				<sound-manager>
-    				<button music-player add-song="createSong(question.audio, song)">+</button>
     				<div class="seekBase" seek-track>
     					<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
 					</div>
-					<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+					<button play-music>Play</button>
+					<button pause-music>Pause</button>
 					<button stop-music>Stop</button>
     			</sound-manager>
     			<div ng-repeat="ans in question.options">
