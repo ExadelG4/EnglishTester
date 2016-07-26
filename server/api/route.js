@@ -111,8 +111,7 @@ router.post('/assignStudents',function(req, res) {
 	  		console.log(req.body.students);
 	  		
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
-			  res.json('add');
-			  
+			  res.json('add');			  
 				
 		  }).catch(function (err) {
 			  res.json('eror');
@@ -163,13 +162,32 @@ router.post('/assignTeacher',function (req, res) {
 
 
 
-router.get('/getTest', function(req, res){
-	testService.getTest().then(function(data){
-		res.send(data);
-	}).catch(function(err){
-		res.json(err);
+router.get('/getTest',  passport.authenticate('jwt', { session: false }),function(req, res){
+	var token = req.header('Authorization');
+	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded){
+		stackService.findOpenTests({userId: decoded._doc._id},{},{}).then(function (data){
+			if(data[0] !== undefined){
+				testService.getTest(data).then(function(data){
+					res.send(data);
+				}).catch(function(err){
+					res.json(err);
+				});
+			}else{
+				res.status(401).send("unauthorized");
+			}
+			
+		}).catch(function(err){
+			res.json(err);
+		});
 	});
+	
 });
+
+
+router.post('/submit1', function(req,res){
+	service.submit1(req.body);
+});
+
 
 // todo: create query by jwt, not by id
 router.get('/getUserStatus', passport.authenticate('jwt', { session: false }),function(req, res){

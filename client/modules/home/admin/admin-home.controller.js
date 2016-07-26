@@ -10,6 +10,8 @@
                 //
                 //$scope.newsUser.push('')
 
+                $scope.msg = 'Some text';
+
                 $scope.popToastr = function (type) {
                     switch (type) {
                         case 'Warning':

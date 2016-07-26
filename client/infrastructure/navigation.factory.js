@@ -26,6 +26,10 @@
                     ]
                 },
                 {
+                    name: 'Statistics',
+                    state: 'statistics'
+                },
+                {
                     name: 'Tests',
                     tabs: [
                         {

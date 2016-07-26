@@ -3,6 +3,10 @@
     color: red;
 }
 
-.formAddUser {
-    padding-top: 50px;
+.dateTime {
+    width: 100%;
+}
+
+.dateTime > div:first-child{
+    margin-top: 33px;
 }
