@@ -100,9 +100,32 @@ function removeOpenTestsCollection(){
 function checkFirstPart(data){
 	var pr = q.defer();
 	var len = data.answers.length;
-	stack.findOne({userId: data.userId}).then(function(data){
+	var marks = [];
+	for (var i =0; i < 5 ;i++){
+		marks.push(0);
+	}
+	stack.findOne({userId: data.userId}).then(function(stackRecord){
+			data.forEach(function(element) {
+				stackRecord.answersAuto.forEach(function(element1) {
+					if(element.qid === element1._qid){
+						marks[element1.level-1]+=0.2*element1.level;
+					}
+				});
+			});
+			var rez = 0;
+			marks.forEach(function(element) {
+				rez+=element;
+			});
+			rez/=15;
+			rez = Math.floor(rez*5);
+			stack.update({_id:stackRecord._id},{ $set: { level: rez }},{}).then(function(){
 
-	})
+			}).catch(function(err){
+
+			});
+	}).catch(function(err){
+
+	});
 
 	return pr.promise;
 
