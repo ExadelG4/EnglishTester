@@ -92,7 +92,7 @@
                             })
                     },
                     getStatus: function() {
-                        return httpService.get('http://localhost:3000/')
+                        return httpService.get('http://localhost:3000/getUserStatus')
                             .then (function(result) {
                                 return result.data;
                             })
