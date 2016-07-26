@@ -1,14 +1,14 @@
 <header ng-controller="headerController">
     <div class="header-block navbar">
         <!--Logo-->
-        <div class="col-sm-4 col-xs-6">
+        <div class="col-sm-2 col-xs-6">
             <a href="" ng-click="click()">
                 <span>KP<span style="color: red">&forall;</span>CUBO</span>
             </a>
         </div>
 
         <!--Full navigation menu-->
-        <div class="header-nav-lg col-sm-8">
+        <div class="header-nav-lg col-sm-10">
             <ul>
                 <li uib-dropdown ng-repeat="menuItem in headerMenu">
                     <a ng-if="menuItem.state" ui-sref="{{menuItem.state}}">{{menuItem.name}}</a>
