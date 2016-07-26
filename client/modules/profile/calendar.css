@@ -1,0 +1,217 @@
+.schedule {
+    height: 340px;
+    width: 750px;
+    top: 950px;
+    bottom: 0;
+    padding-left: 42px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 10px !important;
+}
+
+.scheduleContainer {
+    height: 277px;
+    width: 704px;
+    position: relative;
+}
+
+.rows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.rows li {
+    height: 70px;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    vertical-align: bottom;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: GothamSSm-Book;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.rows li:first-child {
+    height: 66px;
+}
+
+.rows li span {
+    position: absolute;
+    bottom: 2px;
+    left: -1px;
+}
+
+.columns {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-left: 115px;
+    padding-right: 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 1px;
+}
+
+.columns li {
+    width: 55px;
+    display: inline-block;
+    position: relative;
+    border-radius: 3px !important;
+    background-color: #fb6362;
+}
+
+.columns li:before {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+    bottom: -22px;
+}
+
+.columns li span {
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    display: none;
+    top: -45px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 32px;
+    background-color: #404a58;
+    color: white;
+}
+
+.columns li span:before {
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    content: '';
+    left: calc(50% - 5px);
+    bottom: -5px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    background-color: #404a58;
+}
+
+.columns li:hover span {
+    display: block;
+}
+
+@keyframes li-monday {
+    from {height: 0;}
+    to {height: 49px;}
+}
+
+@keyframes li-tuesday {
+    from {height: 0;}
+    to {height: 62px;}
+}
+
+@keyframes li-wednesday {
+    from {height: 0;}
+    to {height: 119px;}
+}
+
+@keyframes li-thursday {
+    from {height: 0;}
+    to {height: 158px;}
+}
+
+@keyframes li-friday {
+    from {height: 0;}
+    to {height: 129px;}
+}
+
+@keyframes li-saturday {
+    from {height: 0;}
+    to {height: 169px;}
+}
+
+@keyframes li-sunday {
+    from {height: 0;}
+    to {height: 143px;}
+}
+
+.columns .monday {
+    height: 49px;
+    animation: li-monday 2s;
+    -webkit-animation: li-monday 2s;
+}
+
+.columns .monday:before {
+    content: '20.04.2012';
+}
+
+.columns .tuesday {
+    height: 62px;
+    animation: li-tuesday 2s;
+    -webkit-animation: li-tuesday 2s;
+}
+
+.columns .tuesday:before {
+    content: '21.05.2013';
+}
+
+.columns .wednesday {
+    height: 119px;
+    animation: li-wednesday 2s;
+    -webkit-animation: li-wednesday 2s;
+}
+
+.columns .wednesday:before {
+    content: '22.06.2014';
+}
+
+.columns .thursday {
+    height: 158px;
+    animation: li-thursday 2s;
+    -webkit-animation: li-thursday 2s;
+}
+
+.columns .thursday:before {
+    content: '23.07.2015';
+}
+
+.columns .friday {
+    height: 129px;
+    animation: li-friday 2s;
+    -webkit-animation: li-friday 2s;
+}
+
+.columns .friday:before {
+    content: '24.08.2016';
+}
+
+.columns .saturday {
+    height: 169px;
+    animation: li-saturday 2s;
+    -webkit-animation: li-saturday 2s;
+}
+
+.columns .saturday:before {
+    content: '25.09.2017';
+}
+
+.columns .sunday {
+    height: 143px;
+    animation: li-sunday 2s;
+    -webkit-animation: li-sunday 2s;
+}
+
+.columns .sunday:before {
+    content: '26.10.2018';
+}

@@ -8,6 +8,7 @@
         'tests',
         'profile',
         'angularSoundManager',
+        'angularAudioRecorder',
         /*'angularFileUpload',*/
         'ui.bootstrap',
         'nya.bootstrap.select',
