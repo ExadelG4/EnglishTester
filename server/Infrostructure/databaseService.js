@@ -37,9 +37,9 @@ DatabasService.prototype.remove = function(){
 DatabasService.prototype.save = function(query){
     var defer = q.defer();
     var doc = new  this.model(query);
-    doc.save(function(err){
+    doc.save(function(err,data){
         if(err) defer.reject(err);
-        defer.resolve();
+        defer.resolve(data);
     });
 
     return defer.promise;

@@ -50,7 +50,7 @@ function getTests(test, counts) {
                     t();
                 }else{
                     tests.push(data[0]);
-                    console.log(data);
+                    //console.log(data);
                     j++;
                     i=0;
                     t();

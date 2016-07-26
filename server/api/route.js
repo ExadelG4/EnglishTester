@@ -55,9 +55,24 @@ router.post('/register',function(req, res) {
   			lastName: req.body.secondName,
   			role: 'guest'
   		};
+  		var guestOpen = {
+  			
+			firstName: req.body.firstName,
+			lastName: req.body.secondName,
+			email: req.body.email,
+		
+			dateStart: req.body.dateStart,
+			dateEnd : req.body.dateEnd
+  		};
 		service.addNewUser(info).then(function(data){
-			res.json(data);
-			console.log(data);
+				res.json(data);
+				console.log(data);
+				guestOpen.userId = data._id;
+				stackService.addStack(guestOpen).then(function(data){
+					console.log(data);
+				}).catch(function(err){
+					console.log("guest is not in openTests");
+				});
 		}).catch(function(err){
 			res.status(400).send("Bad Request");
 		});
@@ -91,7 +106,10 @@ router.post('/assignStudents',function(req, res) {
 	 	res.json({ success: false, message: 'Please enter email and password.' });
 	 } 
 	 else{
+	  		
+
 	  		console.log(req.body.students);
+	  		
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
 			  res.json('add');
 			  
