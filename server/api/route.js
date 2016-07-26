@@ -224,11 +224,6 @@ router.get('/finishTestUserList', function(req, res){
 });
 
 
-router.get('/assignedTeacherList', function(req, res){
-	
-
-});
-
 router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
 	console.log(req.user);
 	var token = req.header('Authorization');
@@ -253,7 +248,7 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 		}
 	});		
 });
-router.get('/requestTestList', function(req, res){
+router.get('/getRequestsUsers', function(req, res){
 	stackService.findRequest({},{},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
@@ -273,7 +268,15 @@ router.get('/getPersonalListForTeacher', function(req, res){
 });
 router.get('/getFreeUsers', function(req, res){
 	
-	service.find({status: 'open', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+	service.find({status: 'free', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
+});
+router.get('/getResults', function(req, res){
+	
+	stackService.findResults({},{},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));
