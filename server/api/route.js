@@ -57,6 +57,7 @@ router.post('/register',function(req, res) {
   		};
 		service.addNewUser(info).then(function(data){
 			res.json(data);
+			console.log(data);
 		}).catch(function(err){
 			res.status(400).send("Bad Request");
 		});
