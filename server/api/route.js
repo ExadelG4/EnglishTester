@@ -228,24 +228,23 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 	var token = req.header('Authorization');
 	console.log(token);
 	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
-	if(err){
-		console.log(err);
-	}
-	else{ console.log(decoded._doc);
-
-	}
-	});
-
-	if(!req.body){
-	 	res.json({ success: false, message: 'Bad request2' });
-	 } 
-	 else{
-			stackService.addRequest(req.body).then(function(data){
-				res.send('ok');
-			}).catch(function(err){
-				res.status(400).send("Bad Request");
-			});
+		if(err){
+			console.log(err);
 		}
+		else{ //console.log(decoded._doc);
+				var doc = {
+					userId: decoded._doc._id ,
+					firstName: decoded._doc.firstName,
+					lastName: decoded._doc.lastName,
+					email: decoded._doc.email
+				}
+				stackService.addRequest(doc).then(function(data){
+					res.send('ok');
+				}).catch(function(err){
+					res.status(422).send("Bad Request");
+				});
+		}
+	});		
 });
 router.get('/requestTestList', function(req, res){
 	stackService.findRequest({},{},{}).then(function(data){
@@ -264,6 +263,14 @@ router.get('/getPersonalListForTeacher', function(req, res){
 	}).catch(function (err) {
 		res.json(err);
 	})
+});
+router.get('/getFreeUsers', function(req, res){
+	
+	service.find({status: 'open', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
 });
 
 module.exports = router;
