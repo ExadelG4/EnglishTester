@@ -53,7 +53,8 @@ router.post('/register',function(req, res) {
   			password: req.body.password,
   			firstName: req.body.firstName,
   			lastName: req.body.secondName,
-  			role: 'guest'
+  			role: 'guest',
+  			status: 'open'
   		};
   		var guestOpen = {
   			
@@ -66,10 +67,10 @@ router.post('/register',function(req, res) {
   		};
 		service.addNewUser(info).then(function(data){
 				res.json(data);
-				console.log(data);
+				
 				guestOpen.userId = data._id;
-				stackService.addStack(guestOpen).then(function(data){
-					console.log(data);
+				stackService.addOpenTests(guestOpen).then(function(data){
+					
 				}).catch(function(err){
 					console.log("guest is not in openTests");
 				});
@@ -109,7 +110,6 @@ router.post('/assignStudents',function(req, res) {
 	  		
 
 	  		console.log(req.body.students);
-	  		
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
 			  res.json('add');			  
 				
@@ -128,17 +128,17 @@ router.post('/addQuestion',function(req, res) {
 	 else{
 	 		if(!req.body.finalQue.options){
 	 			testService.addNewQuestionB(req.body.finalQue).then(function(data){
-					  res.json('add');
+					  res.send('ok');
 					 }).catch(function (err) {
-					  res.json('eror');
+					   res.status(406).send("Not Acceptable");
 				 	 });
 	 		}
 	  		else{
 	  		
 			  		testService.addNewQuestion(req.body.finalQue).then(function(data){
-					  res.json('add');
+					  res.send('ok');
 					 }).catch(function (err) {
-					  res.json('eror');
+					  res.status(406).send("Not Acceptable");
 				 	 });
 		  }
   }
