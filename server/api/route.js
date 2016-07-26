@@ -153,12 +153,24 @@ router.get('/getTest', function(req, res){
 });
 
 // todo: create query by jwt, not by id
-router.get('/getUserStatus/:id', function(req, res){
-	service.getUserStatus(req.params.id).then(function(data){
-		res.json(data);
-	}).catch(function(err){
-		res.status(404).send("User not found");
+router.get('/getUserStatus', passport.authenticate('jwt', { session: false }),function(req, res){
+	
+	var token = req.header('Authorization');
+	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
+		if(err){
+			console.log(err);
+		}
+		else{ 
+			var id = decoded._doc._id;
+			service.getUserStatus(id).then(function(data){
+				res.json(data);
+			}).catch(function(err){
+				res.status(404).send("User not found");
+			});
+		}
 	});
+
+	
 });
 
 router.get('/finishTestUserList', function(req, res){
@@ -175,15 +187,24 @@ router.get('/assignedTeacherList', function(req, res){
 
 });
 
-router.post('/requestTest', function(req, res){
-	console.log(req.body);
+router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
+	var token = req.header('Authorization');
+	console.log(token);
+	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
+	if(err){
+		console.log(err);
+	}
+	else{ console.log(decoded._doc);
+
+	}
+	});
 
 	if(!req.body){
 	 	res.json({ success: false, message: 'Bad request2' });
 	 } 
 	 else{
 			stackService.addRequest(req.body).then(function(data){
-				 res.send('ok');
+				res.send('ok');
 			}).catch(function(err){
 				res.status(400).send("Bad Request");
 			});
@@ -198,7 +219,8 @@ router.get('/requestTestList', function(req, res){
 
 });
 
-router.post('/getPersonalListForTeacher', function(req, res){
+router.get('/getPersonalListForTeacher', function(req, res){
+	
 	var tId = req.body.tId;
 	stackService.findStack({teacherId : tId},{'date': 1, 'level': 1},{}).then(function (data) {
 		res.json(data);

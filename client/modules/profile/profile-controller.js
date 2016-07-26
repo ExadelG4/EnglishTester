@@ -7,6 +7,8 @@
             telNumber: context.getNumber()
         };
 
+        $scope.role = context.getRole();
+
         $scope.disable1 = true;
         $scope.disable2 = true;
 
