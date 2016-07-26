@@ -1,33 +1,26 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('passTestController', ['$scope', '$state','userService', function($scope, $state, userService) {
-		var abc = null;
-		userService.getTest().then( function(result) {
-			var abc = result;
-			}
-		);
-
-		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
-
-		$scope.urls = {
-				'oneOfMany': startUrl + '1.html',
-				'manyOfMany': startUrl + '2.html',
-				'questionWithoutChoiceOfAnswers': startUrl + '3.html',
-				'essay': startUrl + '4.html',
-				'listeningWithOneOfMany': startUrl + '5.html',
-				'listeningWithManyOfMany': startUrl + '6.html',
-				'listeningWithoutChoiceOfAnswers': startUrl + '7.html',
-				'speaking': startUrl + '8.html'
-			};
+	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer', function($scope, $state, userService, angularPlayer) {
+		$scope.questionsPart1 = null;
+		$scope.currentPage = 1;
+		$scope.copyCurrentPage = 1;
+		$scope.neededNumPage = '';
+		$scope.validNeededNumPage = true;
+		$scope.userAnswers = [];
+		$scope.validAnswers = [];
+		$scope.totalCount = null;
+		$scope.omg = {
+			tempChoise: null
+		};
 
 		$scope.questionsPart1 = [
 			{
 				qId: '',
 				type: 'oneOfMany',
-				text: 'Mimimi nyanyanya. What you choose?',
+				question: 'Mimimi nyanyanya. What you choose?',
 				audio: '',
-				answers: [
+				options: [
 					'Mimimi',
 					'Nyanyanya',
 					'No, I am normal man'
@@ -36,9 +29,9 @@
 			{
 				qId: '',
 				type: 'manyOfMany',
-				text: 'Which colors do you like?',
+				question: 'Which colors do you like?',
 				audio: '',
-				answers: [
+				options: [
 					'The red',
 					'Cian',
 					'Yellow, mmm'
@@ -47,20 +40,14 @@
 			{
 				qId: '',
 				type: 'questionWithoutChoiceOfAnswers',
-				text: 'Which colors do you like?',
-				audio: ''/*,
-				answers: [
-					'The red',
-					'Cian',
-					'Yellow, mmm'
-				]*/
+				question: 'Which colors do you like?',
 			},
 			{
 				qId: '',
 				type: 'listeningWithOneOfMany',
-				text: 'How named this song?',
+				question: 'How named this song?',
 				audio: 'assets/audio/papa_roach_-_last_resort(zaycev.net).mp3',
-				answers: [
+				options: [
 					'Behind blue eyes',
 					'Last resort',
 					'Riot'
@@ -69,9 +56,9 @@
 			{
 				qId: '',
 				type: 'listeningWithManyOfMany',
-				text: 'Which albums this band do you like?',
+				question: 'Which albums this band do you like?',
 				audio: 'assets/audio/Three Days Grace - Animal I Have Become.mp3',
-				answers: [
+				options: [
 					'One-X',
 					'Life starts now',
 					'TDG'
@@ -93,31 +80,7 @@
 			return type === 'speaking';
 		}
 
-		$scope.userAnswers = [];
-
-		for (let i = 0; i < $scope.questionsPart1.length; ++i) {
-			var tempAnswer = {
-				qId: '',
-				answers: '',
-				audioAnswer: ''
-			};
-			if (isCheckboxType($scope.questionsPart1[i].type) || isRadioType($scope.questionsPart1[i].type)) {
-					tempAnswer.answers = [];
-			};
-			tempAnswer.qId = $scope.questionsPart1[i].qId;
-			tempAnswer.type = $scope.questionsPart1[i].type;
-			$scope.userAnswers.push(tempAnswer);
-		}
-		$scope.omg = {
-			tempChoise: null
-		};
-		$scope.currentPage = 1;
-		$scope.copyCurrentPage = 1;
-		$scope.neededNumPage = '';
-		$scope.validNeededNumPage = true;
-
-		//init first page
-		$scope.initNewPage = function(currentPage) {
+			$scope.initNewPage = function(currentPage) {
 			if (isCheckboxType($scope.questionsPart1[currentPage - 1].type)) {
 		 		$scope.omg.tempChoise = [];
 			 	for (var i = 0; i < $scope.questionsPart1[currentPage - 1].answers.length; ++i) {
@@ -142,8 +105,71 @@
     			/*audio ans*/
     		}
 		};
+		//userService.getTest().then( function(result) {
+		//	$scope.questionsPart1 = result;
+			$scope.totalCount = $scope.questionsPart1.length;
 
-		$scope.initNewPage($scope.currentPage);
+			for (let i = 0; i < $scope.totalCount; ++i) {
+				var tempAnswer = {
+					qId: '',
+					answers: '',
+					audioAnswer: ''
+				};
+				if (isCheckboxType($scope.questionsPart1[i].type) || isRadioType($scope.questionsPart1[i].type)) {
+						tempAnswer.answers = [];
+				};
+				tempAnswer.qId = $scope.questionsPart1[i].qId;
+				tempAnswer.type = $scope.questionsPart1[i].type;
+				$scope.userAnswers.push(tempAnswer);
+			}
+  		for (var i = 0; i < $scope.totalCount; ++i) {
+  			$scope.validAnswers.push(false);
+  		}
+  		$scope.initNewPage($scope.currentPage);
+	 	//});
+
+		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
+
+		$scope.urls = {
+				'oneOfMany': startUrl + '1.html',
+				'manyOfMany': startUrl + '2.html',
+				'questionWithoutChoiceOfAnswers': startUrl + '3.html',
+				'essay': startUrl + '4.html',
+				'listeningWithOneOfMany': startUrl + '5.html',
+				'listeningWithManyOfMany': startUrl + '6.html',
+				'listeningWithoutChoiceOfAnswers': startUrl + '7.html',
+				'speaking': startUrl + '8.html'
+			};
+
+	
+
+
+		//init first page
+		/*$scope.initNewPage = function(currentPage) {
+			if (isCheckboxType($scope.questionsPart1[currentPage - 1].type)) {
+		 		$scope.omg.tempChoise = [];
+			 	for (var i = 0; i < $scope.questionsPart1[currentPage - 1].answers.length; ++i) {
+	    			$scope.omg.tempChoise.push(false);
+	    		}
+	    		for (var i = 0; i < $scope.userAnswers[currentPage - 1].answers.length; ++i) {
+	    			$scope.omg.tempChoise[$scope.userAnswers[currentPage - 1].answers[i]] = true;
+	    		}
+	    	}
+	    	else if (isRadioType($scope.questionsPart1[currentPage - 1].type)) {
+	    		if($scope.userAnswers[currentPage - 1].answers[0] !== null) {
+	    			$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answers[0];
+	    		}
+	    		else {
+	    			$scope.omg.tempChoise = -1;
+	    		}
+	    	}
+	    	else if (isTextType($scope.questionsPart1[currentPage - 1].type)) {
+	    		$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answers;
+    		}
+    		else {
+    			//audio ans
+    		}
+		};*/
 
 		$scope.savePrevPage = function(prevNumPage) {
 			if (isCheckboxType($scope.questionsPart1[prevNumPage - 1].type)) {
@@ -187,18 +213,16 @@
 			return song;
 		};
 
-		$scope.totalCount = $scope.questionsPart1.length;
 
 		$scope.pageChanged = function(prevNumPage) {
     		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
+    		if(angularPlayer.getPlaylist().length > 0)
+    			angularPlayer.clearPlaylist();    		
     		$scope.initNewPage($scope.currentPage);
     		$scope.copyCurrentPage = $scope.currentPage;
   		};
-  		$scope.validAnswers = [];
-  		for (var i = 0; i < $scope.totalCount; ++i) {
-  			$scope.validAnswers.push(false);
-  		}
+  		
   		$scope.changeValidC = function(currentPage) {
   			for(var i = 0; i < $scope.totalCount; ++i) {
   				if( $scope.omg.tempChoise[i] === true) {
@@ -206,7 +230,7 @@
   					return;
   				}
   			}
-  			;$scope.validAnswers[currentPage - 1] = false;
+  			$scope.validAnswers[currentPage - 1] = false;
   		}
 
   		/*$scope.changeValidR = function(currentPage) {
