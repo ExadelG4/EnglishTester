@@ -4,6 +4,8 @@ var jwt = require('jsonwebtoken');
 var key = require('../config.json');
 var expires = require('../config.json').expires;
 var stackService = require('./stackService');
+var testService = require('./testService');
+
 
 
 function getAllUsers(){
@@ -147,7 +149,15 @@ function update(query, update,options){
 function submit1(data){
     var defer = q.defer();
 
-    stackService.checkFirstPart(data)
+    stackService.checkFirstPart(data).then(function(level){
+        testService.getSecondTest(level).then(function(data){
+            defer.resolve(data);
+        }).catch(function(err){
+            defer.reject(err);
+        })
+    }).catch(function(err){
+        defer.reject(err);
+    })
 
 
     return defer.promise;

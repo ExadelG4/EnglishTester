@@ -166,7 +166,11 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 
 
 router.post('/submit1', function(req,res){
-	service.submit1(req.body);
+	service.submit1(req.body).then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.send(err);
+	});
 });
 
 
