@@ -10,12 +10,13 @@
 					{{question.answer}}
 				</div>
 				<sound-manager>
-    				<button music-player add-song="createSong(question.audioAnswer, song)">+</button>
     				<div class="seekBase" seek-track>
     					<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
 					</div>
-					<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+					<button play-music>Play</button>
+					<button pause-music>Pause</button>
 					<button stop-music>Stop</button>
+
     			</sound-manager>
 			
 				<label for="mark" style="display: inline-block">Your mark </label>
