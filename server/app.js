@@ -6,11 +6,12 @@ var bodyParser = require('body-parser');
 var router = require('./api/route');
 // var passport = require('passport');
 var jwt = require('jsonwebtoken');
+var path = require('path');
 
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/../client'));
-app.use(express.static(__dirname + '/../'));
+app.use('/../bower_components', express.static(path.normalize(__dirname + '/../client/bower_components')));
+app.use(express.static(path.normalize(__dirname + '/../client')));
 
 
 // app.use(passport.initialize());

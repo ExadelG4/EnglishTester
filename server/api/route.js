@@ -107,14 +107,15 @@ router.post('/assignStudents',function(req, res) {
 	 	res.json({ success: false, message: 'Please enter email and password.' });
 	 } 
 	 else{
-	  		
+	  		var tempArr = [];
+
 
 	  		console.log(req.body.students);
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
-			  res.json('add');			  
+			  res.send('add');			  
 				
 		  }).catch(function (err) {
-			  res.json('eror');
+			  res.status(401).send("error");
 		  });
 
   }
@@ -225,6 +226,7 @@ router.get('/assignedTeacherList', function(req, res){
 });
 
 router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
+	console.log(req.user);
 	var token = req.header('Authorization');
 	console.log(token);
 	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
@@ -239,6 +241,7 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 					email: decoded._doc.email
 				}
 				stackService.addRequest(doc).then(function(data){
+					service.updateStatus(doc.userId, 'req');
 					res.send('ok');
 				}).catch(function(err){
 					res.status(422).send("Bad Request");
