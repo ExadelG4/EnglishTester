@@ -2,6 +2,14 @@
 	'use strict';
 
 	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer', function($scope, $state, userService, angularPlayer) {
+		$scope.$on('$stateChangeStart', function () {
+			if (angularPlayer.getPlaylist().length > 0) {
+				angularPlayer.clearPlaylist( function() {			
+				});
+			}
+		});
+
+
 		$scope.allQuestions = null;
 		$scope.currentPage = 1;
 		$scope.copyCurrentPage = 1;
@@ -87,12 +95,12 @@
 			for (let i = 0; i < $scope.totalCount; ++i) {
 				var tempAnswer = {
 					qId: '',
-					answers: '',
+					answers: [],
 					audioAnswer: ''
 				};
-				if (isCheckboxType($scope.allQuestions[i].type) || isRadioType($scope.allQuestions[i].type)) {
+				/*if (isCheckboxType($scope.allQuestions[i].type) || isRadioType($scope.allQuestions[i].type)) {
 						tempAnswer.answers = [];
-				};
+				};*/
 				tempAnswer.qId = $scope.allQuestions[i].qId;
 				tempAnswer.type = $scope.allQuestions[i].type;
 				$scope.userAnswers.push(tempAnswer);
@@ -138,11 +146,19 @@
 	    		}
 	    	}
 	    	else if (isTextType($scope.allQuestions[currentPage - 1].type)) {
-	    		$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answers;
+	    		$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answers[0];
     		}
     		else {
     			//audio ans
     		}
+    		angularPlayer.init();
+			if($scope.allQuestions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers' || 
+				$scope.allQuestions[currentPage - 1].type === 'listeningWithOneOfMany' ||
+				$scope.allQuestions[currentPage - 1].type === 'listeningWithManyOfMany') {
+    			song.url = $scope.allQuestions[currentPage - 1].audio; 
+				angularPlayer.addTrack(song);
+			}
+
 		};
 
 		$scope.savePrevPage = function(prevNumPage) {
@@ -159,11 +175,13 @@
 		 		$scope.userAnswers[prevNumPage - 1].answers.push($scope.omg.tempChoise);	
 		 	}
 		 	else if (isTextType($scope.allQuestions[prevNumPage - 1].type)) {
-		 		$scope.userAnswers[prevNumPage - 1].answers = $scope.omg.tempChoise;
+		 		$scope.userAnswers[prevNumPage - 1].answers[0] = $scope.omg.tempChoise;
 		 	}
 		 	else {
 		 		//audio ans
 		 	}
+
+			
 		};
 
 		$scope.setNumPage = function(numPage) {
@@ -192,9 +210,14 @@
     		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
     		if(angularPlayer.getPlaylist().length > 0)
-    			angularPlayer.clearPlaylist();    		
-    		$scope.initNewPage($scope.currentPage);
-    		$scope.copyCurrentPage = $scope.currentPage;
+    			angularPlayer.clearPlaylist( function() {
+    				$scope.initNewPage($scope.currentPage);
+    				$scope.copyCurrentPage = $scope.currentPage;
+    			});    		
+    		else {
+    			$scope.initNewPage($scope.currentPage);
+    			$scope.copyCurrentPage = $scope.currentPage;
+    		}
   		};
   		
   		$scope.changeValidC = function(currentPage) {
