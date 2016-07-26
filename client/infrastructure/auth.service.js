@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('infrastructure', [])
-        .factory('authService', ['$http', 'context', '$location',
-            function($http, context, $location) {
+        .factory('authService', ['$http', 'context', '$state',
+            function($http, context, $state) {
                 function refresh(localContext) {
                     return $http.get('http://localhost:3000/refresh',
                         {headers: {'Authorization': localContext.token, 'Refresh': localContext.refreshToken}})
@@ -11,10 +11,11 @@
                             localContext.token = result.data.token;
                             localContext.refreshToken = result.data.refreshToken;
                             localContext.expiredTime = result.data.expiredTime;
+                            localStorage.setItem('context', JSON.stringify(localContext));
                         });
                 }
 
-                function checkRefresh() {
+                function checkRefresh(self) {
                     var intervalID = setInterval(function () {
                         var localContext = JSON.parse(localStorage.getItem('context'));
                         if (localContext) {
@@ -25,12 +26,14 @@
                                     refresh(localContext);
                                 }
                             } else {
+                                self.isAuthenticated = false;
+                                context.clear();
                                 clearInterval(intervalID);
-                                $location.path('/login');
+                                $state.go('login');
                             }
                         } else {
                             clearInterval(intervalID);
-                            $location.path('/login');
+                            $state.go('login');
                         }
                     }, 5 * 1000);
                 }
@@ -43,7 +46,7 @@
                             if(localContext.expiredTime < new Date().getTime()) {
                                 this.isAuthenticated = false;
                             } else {
-                                checkRefresh();
+                                checkRefresh(this);
                                 context.init(localContext.user);
                                 this.isAuthenticated = true;
                             }
@@ -54,8 +57,8 @@
                     logout: function () {
                         localStorage.removeItem('context');
                         this.isAuthenticated = false;
-                        //todo: maybe clear all context (set empty data)
-                        $location.path('/login');
+                        context.clear();
+                        $state.go('login');
                     }
                 };
     }]);

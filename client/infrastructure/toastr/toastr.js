@@ -51,19 +51,22 @@
 
                         function addToast (toast){
                             toast.type = mergedConfig['icon-classes'][toast.type];
-                            if (!toast.type)
+                            if (!toast.type) {
                                 toast.type = mergedConfig['icon-class'];
+                            }
 
                             id++;
                             angular.extend(toast, { id: id });
 
-                            if (mergedConfig['time-out'] > 0)
+                            if (mergedConfig['time-out'] > 0) {
                                 setTimeout(toast, mergedConfig['time-out']);
+                            }
 
-                            if (mergedConfig['newest-on-top'] === true)
+                            if (mergedConfig['newest-on-top'] === true) {
                                 scope.toasters.unshift(toast);
-                            else
+                            } else {
                                 scope.toasters.push(toast);
+                            }
                         }
 
                         function setTimeout(toast, time){
