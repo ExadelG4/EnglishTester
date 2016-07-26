@@ -48,9 +48,9 @@
                             )
                     },
 
-                    newUser: function (firstName_, secondName_, email_, number_) {
+                    newUser: function (firstName_, secondName_, email_, number_, _dateStart,_dateEnd) {
                         return httpService.post(host + '/register', {password: 11111, email: email_,
-                        firstName: firstName_, secondName: secondName_, phone: number_})
+                        firstName: firstName_, secondName: secondName_, phone: number_, dateStart: _dateStart, dateEnd: _dateEnd})
                             .then(function(result){
                                 console.log('new user created');
                                 return true;
