@@ -47,7 +47,7 @@
                                 }
                             )
                     },
-                     getFreeUsers: function () {
+                    getFreeUsers: function () {
                         return httpService.get(host + '/admin/getFreeUsers')
                             .then(
                                 function (result) {
@@ -55,7 +55,7 @@
                                 }
                             )
                     },
-                     getFinishedUsers: function () {
+                    getFinishedUsers: function () {
                         return httpService.get(host + '/admin/getFinishedUsers')
                             .then(
                                 function (result) {
@@ -63,7 +63,7 @@
                                 }
                             )
                     },
-                     getResults: function () {
+                    getResults: function () {
                         return httpService.get(host + '/admin/getResults')
                             .then(
                                 function (result) {
@@ -87,20 +87,20 @@
                                 }
                             )
                     },
-                  
+
 
                     newUser: function (firstName_, secondName_, email_, number_, _dateStart,_dateEnd) {
                         return httpService.post(host + '/admin/register', {password: 11111, email: email_,
-                        firstName: firstName_, secondName: secondName_, phone: number_, dateStart: _dateStart, dateEnd: _dateEnd})
+                                firstName: firstName_, secondName: secondName_, phone: number_, dateStart: _dateStart, dateEnd: _dateEnd})
                             .then(function(result){
-                                console.log('new user created');
-                                return true;
-                            },
-                            function () {
-                                console.log('create new user failed');
-                                return false;
-                             }
-                        );
+                                    console.log('new user created');
+                                    return true;
+                                },
+                                function () {
+                                    console.log('create new user failed');
+                                    return false;
+                                }
+                            );
                     },
 
                     getTest: function () {
@@ -111,7 +111,7 @@
                                 }
                             )
                     },
-                     checkTest: function(data) {
+                    checkTest: function(data) {
                         return httpService.post(host+'/teacher/checkTest', data);
                     },
                     assignStudents: function(list) {

@@ -5,7 +5,7 @@ angular.module('admin').controller('assignStdController', ['$scope', 'userServic
         var chooseUserList = [];
         var currentStudent;
 
-        userService.getUsers().then(function(data) {
+        userService.getFreeUsers().then(function(data) {
             data.forEach(function(item, i) {
                 $scope.students[i] = item;
                 $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
