@@ -3,8 +3,12 @@ var app = express();
 var mongo = require('./db/mongo');
 var path = require('path');
 var bodyParser = require('body-parser');
-var router = require('./api/route');
-// var passport = require('passport');
+
+var adminRouter = require('./api/Routers/adminRoute');
+var userRouter = require('./api/Routers/userRoute');
+var teacherRouter = require('./api/Routers/teacherRoute');
+var commonRouter = require('./api/Routers/commonRoute');
+
 var jwt = require('jsonwebtoken');
 var path = require('path');
 
@@ -13,12 +17,10 @@ app.use(bodyParser.json());
 app.use('/../bower_components', express.static(path.normalize(__dirname + '/../client/bower_components')));
 app.use(express.static(path.normalize(__dirname + '/../client')));
 
-
-// app.use(passport.initialize());
-// require('./passport')(passport);
-
-
-app.use('/',router);
+app.use('/admin',adminRouter);
+app.use('/user',userRouter);
+app.use('/teacher',teacherRouter);
+app.use('/',commonRouter);
 
 
 app.get('*', function(req, res) {  
