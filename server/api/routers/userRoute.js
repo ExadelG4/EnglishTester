@@ -1,0 +1,79 @@
+var express = require('express');
+var contracts = require('../contracts');
+var service = require('../../services/userService');
+var stackService = require('../../services/stackService');
+var testService = require('../../services/testService');
+var path = require("path");
+var router = express.Router();
+
+
+
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
+var key = require('../../config.json');
+
+
+router.use(passport.initialize());
+require('../../passport')(passport);
+
+router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
+	console.log(req.user);
+	var token = req.header('Authorization');
+	console.log(token);
+	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
+		if(err){
+			console.log(err);
+		}
+		else{ //console.log(decoded._doc);
+				var doc = {
+					userId: decoded._id ,
+					firstName: decoded.firstName,
+					lastName: decoded.lastName,
+					email: decoded.email
+				}
+				stackService.addRequest(doc).then(function(data){
+					service.updateStatus(doc.userId, 'req');
+					res.send('ok');
+				}).catch(function(err){
+					res.status(422).send("Bad Request");
+				});
+		}
+	});		
+});
+
+router.get('/getTest',  passport.authenticate('jwt', { session: false }),function(req, res){
+	
+		stackService.findOpenTests({userId: req.user._id},{},{}).then(function (data){
+			if(data[0] !== undefined){
+				testService.getTest(data[0]).then(function(data){
+					res.send(data);
+				}).catch(function(err){
+					res.json(err);
+				});
+			}else{
+				res.status(401).send("unauthorized");
+			}
+			
+		}).catch(function(err){
+			res.json(err);
+		});
+	
+});
+
+router.post('/submit1', passport.authenticate('jwt', { session: false }), function(req,res){
+	service.submit1(req.body, req.user._id).then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.send(err);
+	});
+});
+
+router.post('/submit2', passport.authenticate('jwt', { session: false }), function(req,res){
+	service.submit2(req.body, req.user._id).then(function(data){
+		res.send();
+	}).catch(function(err){
+		res.status(400).send(err);
+	});
+});
+
+module.exports = router;
