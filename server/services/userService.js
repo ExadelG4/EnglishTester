@@ -158,12 +158,16 @@ function update(query, update,options){
 }
 
 function submit1(data, id){
+    console.log('us');
     var defer = q.defer();
 
     stackService.checkFirstPart(data, id).then(function(level){
+        console.log('promise1');
         testService.getSecondTest(level).then(function(data){
+            console.log('promise2');
             defer.resolve(data);
         }).catch(function(err){
+            console.log('err');
             defer.reject(err);
         })
     }).catch(function(err){
