@@ -37,6 +37,9 @@ var UserSchema = new Schema(
 			type: String,
 			enum: ['free','open','req','stack'],
 			default: 'free'
+		},
+		fullName: {
+			type:String
 		}
 
 	});
