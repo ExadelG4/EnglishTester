@@ -5,60 +5,97 @@ var bodyParser = require('body-parser');
 var q = require('q');
 var faker = require('faker');
 
-var addUser = function(_name,_pass,_type,count){
-			var defer = q.defer();
-			var prom = [];
-			
-			for(i =0; i<count; i++){
-				var fn = faker.fake("{{name.firstName}}");
-				var ln = faker.fake("{{name.lastName}}");
-				var full = fn + ' '+ln;
-				prom.push(service.addNewUser({
-							email: _name+(i+1)+"@exadel.com", 
-							password: _pass+(i+1),
-							role: _type,
-							firstName: fn,
-							lastName: ln,
-							fullName : full
-							}));
-				}
 
-			
-			return q.all(prom);
+var addUsers = function(_adminCount,_userCount,_teacherCount,_guestCount){
+	
+	var userArray = [];
+	
+	for(var i=0; i<_adminCount; i++){
 		
+			var fn = faker.fake("{{name.firstName}}");
+			var ln = faker.fake("{{name.lastName}}");
+			var full = fn + ' '+ln;
+			
+			var user ={
+				firstName: fn,
+				lastName: ln,
+				fullName : full,
+				email: 'admin'+(i+1)+"@exadel.com",
+				password : 'apass'+(i+1),
+				role: 'admin'
+			};
+			userArray.push(user);
+		}
+
+	for(var i=0; i<_userCount; i++){
+		
+			var fn = faker.fake("{{name.firstName}}");
+			var ln = faker.fake("{{name.lastName}}");
+			var full = fn + ' '+ln;
+			
+			var user ={
+				firstName: fn,
+				lastName: ln,
+				fullName : full,
+				email: 'user'+(i+1)+"@exadel.com",
+				password : 'upass'+(i+1),
+				role: 'user'
+			};
+			userArray.push(user);
+		}	
+	
+	for(var i=0; i<_teacherCount; i++){
+		
+			var fn = faker.fake("{{name.firstName}}");
+			var ln = faker.fake("{{name.lastName}}");
+			var full = fn + ' '+ln;
+			
+			var user ={
+				firstName: fn,
+				lastName: ln,
+				fullName : full,
+				email: 'teacher'+(i+1)+"@exadel.com",
+				password : 'tpass'+(i+1),
+				role: 'teacher'
+			};
+			userArray.push(user);
+		}
+
+	for(var i=0; i<_guestCount; i++){
+		
+			var fn = faker.fake("{{name.firstName}}");
+			var ln = faker.fake("{{name.lastName}}");
+			var full = fn + ' '+ln;
+			
+			var user ={
+				firstName: fn,
+				lastName: ln,
+				fullName : full,
+				email: 'guest'+(i+1)+"@exadel.com",
+				password : 'gpass'+(i+1),
+				role: 'guest'
+			};
+			userArray.push(user);
+		}
+
+	service.addNewUsers(userArray).then(function(data){
+		console.log('users added');
+	}).catch(function (err){
+		console.log(err);
+	});
+
 }
-var addAll = function(admin,user,teacher,guest){
-		addUser("admin","apass","admin",admin).then(function(data){
-		  	 console.log(admin + " Admins created");
-		  }).catch(function (err) {
-			 console.log(err);
-		});
-		addUser("user","upass","user",user).then(function(data){
-		 	 console.log(user + " Users created");
-		  }).catch(function (err) {
-			 console.log(err);
-		});
-		addUser("teacher","tpass","teacher",teacher).then(function(data){
-			 console.log(teacher+ " Teachers created");
-		  }).catch(function (err) {
-			 console.log(err);
-		});
-		addUser("guest","gpass","guest",guest).then(function(data){
-		  	 console.log(guest + " Guests created");
-		  }).catch(function (err) {
-			 console.log(err);
-		});
-}
+
+
+
 var args = process.argv.slice(2);
 if(args == '-d'){
 	console.log('Default dataGen. Please, wait...');
 	service.removeCollection().then(function(data){
-		addAll(3,10,3,3);
+		addUsers(5,20,10,10);
 		  }).catch(function (err) {
 			 console.log(err);
 	});
-	
-
 }
 else {
 	prompt.start();
@@ -66,7 +103,7 @@ else {
 	prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 	  	console.log('Please, wait...');
 	   service.removeCollection().then(function(data){
-	   		addAll(result.Admin,result.User,result.Teacher,result.Guest);
+	   		addUsers(result.Admin,result.User,result.Teacher,result.Guest);
 		  }).catch(function (err) {
 			 console.log(err);
 		});
