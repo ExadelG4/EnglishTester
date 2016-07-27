@@ -4,10 +4,11 @@
     angular.module('infrastructure')
         .service('userService', ['httpService', 'context',  'authService',
             function(httpService, context, authService) {
+                var host = location.origin;
 
                 return {
                     login: function (login, password) {
-                        return httpService.post('http://localhost:3000/login', {email: login, password: password})
+                        return httpService.post(host + '/login', {email: login, password: password})
                             .then(
                                 function(result) {
                                     localStorage.setItem('context', JSON.stringify(result.data));
@@ -21,7 +22,7 @@
                             );
                     },
                     getUsers: function () {
-                        return httpService.get('http://localhost:3000/getUsers')
+                        return httpService.get(host + '/admin/getUsers')
                             .then(
                                 function (result) {
                                     return result.data;
@@ -30,7 +31,7 @@
                     },
 
                     getTeachers: function () {
-                        return httpService.get('http://localhost:3000/getTeachers')
+                        return httpService.get(host + '/admin/getTeachers')
                             .then(
                                 function (result) {
                                     return result.data;
@@ -39,7 +40,47 @@
                     },
 
                     getAll: function () {
-                        return httpService.get('http://localhost:3000/getAll')
+                        return httpService.get(host + '/admin/getAll')
+                            .then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+                    getFreeUsers: function () {
+                        return httpService.get(host + '/admin/getFreeUsers')
+                            .then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+                    getFinishedUsers: function () {
+                        return httpService.get(host + '/admin/getFinishedUsers')
+                            .then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+                    getResults: function () {
+                        return httpService.get(host + '/admin/getResults')
+                            .then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+                    getUsersRequests: function () {
+                        return httpService.get(host + '/admin/getUsersRequests')
+                            .then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+                    getTests: function () {
+                        return httpService.get(host + '/teacher/getTests')
                             .then(
                                 function (result) {
                                     return result.data;
@@ -47,9 +88,10 @@
                             )
                     },
 
-                    newUser: function (firstName_, secondName_, email_, number_) {
-                        return httpService.post('http://localhost:3000/register', {password: 11111, email: email_,
-                                firstName: firstName_, secondName: secondName_, phone: number_})
+
+                    newUser: function (firstName_, secondName_, email_, number_, _dateStart,_dateEnd) {
+                        return httpService.post(host + '/admin/register', {password: 11111, email: email_,
+                                firstName: firstName_, secondName: secondName_, phone: number_, dateStart: _dateStart, dateEnd: _dateEnd})
                             .then(function(result){
                                     console.log('new user created');
                                     return true;
@@ -59,6 +101,44 @@
                                     return false;
                                 }
                             );
+                    },
+
+                    getTest: function () {
+                        return httpService.get(host + '/user/getTest')
+                            .then(
+                                function(result) {
+                                    return result.data;
+                                }
+                            )
+                    },
+                    checkTest: function(data) {
+                        return httpService.post(host+'/teacher/checkTest', data);
+                    },
+                    assignStudents: function(list) {
+                        return httpService.post(host + '/admin/assignStudents', {students: list});
+                    },
+
+                    assignTeacher: function(user, tch) {
+                        return httpService.post(host + '/admin/assignTeacher', {userId: user, teacherId: tch});
+                    },
+
+                    halfSmoke: function(data) {
+                        return httpService.post(host + '/admin/addQuestion', {finalQue : data});
+                    },
+                    sendTestRequest: function(data) {
+                        return httpService.post(host +'/user/requestTest', data);
+                    },
+                    sendFirstPart: function(data) {
+                        return httpService.post(host+'/user/submit1', data)
+                            .then ( function(result) {
+                                return result.data;
+                            })
+                    },
+                    getStatus: function() {
+                        return httpService.get(host+'/status')
+                            .then (function(result) {
+                                return result.data;
+                            })
                     }
                 };
             }]);
