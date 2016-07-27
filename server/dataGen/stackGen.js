@@ -1,8 +1,8 @@
-var mongo = require('./db/mongo');
+var mongo = require('../db/mongo');
 var prompt = require('prompt');
-var testService = require('./services/testService');
-var userService = require('./services/userService');
-var stackService = require('./services/stackService')
+var testService = require('../services/testService');
+var userService = require('../services/userService');
+var stackService = require('../services/stackService')
 var bodyParser = require('body-parser');
 var q = require('q');
 

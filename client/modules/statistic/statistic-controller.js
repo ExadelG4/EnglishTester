@@ -1,8 +1,24 @@
 (function () {
 	'use strict';
 
-	var startStatisticModule = angular.module('statistic', ['ui.bootstrap', 'ui.router']);
-	startStatisticModule.controller('statisticController', ['$scope', '$state', function($scope, $state) {
+	angular.module('statistic', []).controller('statisticController', ['$scope', '$state', function($scope, $state) {
 
+
+		$scope.searchUser = function() {
+			console.log('hello');
+		};
+
+		$scope.items = [
+			{
+				name: 'kety'
+			},
+			{
+				name: 'katy'
+			},
+			{
+				name: 'kity'
+			}
+
+		]
 	}]);
 })();
