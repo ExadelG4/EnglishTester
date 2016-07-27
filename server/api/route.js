@@ -222,7 +222,7 @@ router.get('/getUserStatus', passport.authenticate('jwt', { session: false }),fu
 			console.log(err);
 		}
 		else{ 
-			var id = decoded._doc._id;
+			var id = decoded._id;
 			service.getUserStatus(id).then(function(data){
 				res.json(data);
 			}).catch(function(err){
