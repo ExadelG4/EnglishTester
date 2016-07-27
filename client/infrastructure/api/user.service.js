@@ -125,8 +125,11 @@
                     halfSmoke: function(data) {
                         return httpService.post(host + '/admin/addQuestion', {finalQue : data});
                     },
-                    sendTestRequest: function(data) {
-                        return httpService.post(host +'/user/requestTest', data);
+                    sendTestRequest: function() {
+                        return httpService.get(host +'/user/requestTest')
+                            .then ( function() {
+
+                        })
                     },
                     sendFirstPart: function(data) {
                         return httpService.post(host+'/user/submit1', data)

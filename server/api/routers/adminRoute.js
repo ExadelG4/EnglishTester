@@ -111,6 +111,23 @@ router.post('/assignTeacher',function (req, res) {
   }
 });
 
+router.post('/submit1', passport.authenticate('jwt', { session: false }), function(req,res){
+	console.log('start');
+	service.submit1(req.body, req.user._id).then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.send(err);
+	});
+});
+
+router.post('/submit2', passport.authenticate('jwt', { session: false }), function(req,res){
+	service.submit2(req.body, req.user._id).then(function(data){
+		res.send();
+	}).catch(function(err){
+		res.status(400).send(err);
+	});
+});
+
 router.get('/getAll',passport.authenticate('jwt', { session: false }), function(req, res) {
 	
   		service.getAllUsers().then(function(data){
@@ -127,7 +144,6 @@ router.get('/getUsers', function(req, res) {
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));
 		  });
-
 
 });
 router.get('/getTeachers', function(req, res) {
@@ -174,7 +190,8 @@ router.get('/getResults', function(req, res){
 });
 
 router.post('/getFromReg',function(req, res) {
-
+	//console.log(req.body)
+	//console.log(req.body.name)
 	 if(!req.body){
 	 	res.json({ success: false, message: 'Please enter correct regex' });
 	 } 
@@ -182,7 +199,8 @@ router.post('/getFromReg',function(req, res) {
 	 else{
 	  		var a = req.body.name;
 	  		service.find({fullName : new RegExp(a, "i") },{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
-			res.send(data);			  
+			res.send(data);
+			//console.log(data);			  
 				
 		  }).catch(function (err) {
 			  res.status(401).send("error");

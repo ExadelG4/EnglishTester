@@ -13,7 +13,7 @@
 					<button pause-music>Pause</button>
 					<button stop-music>Stop</button>
     			</sound-manager>
-				<div ng-repeat="ans in question.options">
+				<div ng-repeat="ans in question.options track by $index">
 					<input type="checkbox" name="ans" ng-model="omg.tempChoise[$index]" ng-change="changeValidC(currentPage)"> {{ans}}
 				</div>	
 			</form>
