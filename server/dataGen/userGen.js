@@ -10,13 +10,16 @@ var addUser = function(_name,_pass,_type,count){
 			var prom = [];
 			
 			for(i =0; i<count; i++){
+				var fn = faker.fake("{{name.firstName}}");
+				var ln = faker.fake("{{name.lastName}}");
+				var full = fn + ' '+ln;
 				prom.push(service.addNewUser({
 							email: _name+(i+1)+"@exadel.com", 
 							password: _pass+(i+1),
 							role: _type,
-							firstName: faker.fake("{{name.firstName}}"),
-							lastName: faker.fake("{{name.lastName}}")
-							
+							firstName: fn,
+							lastName: ln,
+							fullName : full
 							}));
 				}
 

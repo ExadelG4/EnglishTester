@@ -142,6 +142,13 @@
                             .then (function(result) {
                                 return result.data;
                             })
+                    },
+
+                    searchUser: function(data) {
+                        return httpService.post(host + '/admin/getFromReg', {name: data})
+                            .then (function(result) {
+                                return result.data;
+                        })
                     }
                 };
             }]);
