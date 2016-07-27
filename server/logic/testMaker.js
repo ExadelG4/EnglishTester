@@ -56,9 +56,8 @@ function getTests(test, counts, user) {
                     i++;
                     t();
                 }else{
+                    user.answersAuto.push({_qId: data[0]._id, level:data[0].level,answer: data[0].answers});
 
-
-                    user.answersAuto.push({_qId: data[0]._id, answer: data[0].answers});
                     delete data[0]._doc.answers;
                     tests.push(data[0]);                    
                     console.log(data);
@@ -84,7 +83,7 @@ function make(test , usr){
 
     var user = {};
 
-    user.userId = usr.id;
+    user.userId = usr.userId;
     user.firstName = usr.firstName;
     user.lastName = usr.lastName;
     user.email = usr.email;

@@ -28,6 +28,9 @@ function getSecondTest(level){
 	return testMaker.makeAgain(testB,level);
 }
 
+
+
+
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
 module.exports.addNewQuestion = addNewQuestion;
