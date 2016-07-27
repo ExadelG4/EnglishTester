@@ -162,7 +162,13 @@ function submit1(data){
 
     return defer.promise;
 }
-
+function updateStatus(id,_status){
+   update({_id:id},{ $set: { status: _status }},{}).then(function(data){
+                        console.log('user update')
+                    }).catch(function(err){
+                       console.log(err);
+                    });
+}
 
 
 module.exports.getAllUsers = getAllUsers;
@@ -177,3 +183,4 @@ module.exports.find = find;
 module.exports.getFinishedList = getFinishedList;
 module.exports.submit1 = submit1;
 module.exports.update = update;
+module.exports.updateStatus = updateStatus;

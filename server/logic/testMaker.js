@@ -57,6 +57,7 @@ function getTests(test, counts, user) {
                     t();
                 }else{
                     user.answersAuto.push({_qId: data[0]._id, level:data[0].level,answer: data[0].answers});
+
                     delete data[0]._doc.answers;
                     tests.push(data[0]);                    
                     console.log(data);
