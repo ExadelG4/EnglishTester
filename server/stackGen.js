@@ -35,17 +35,20 @@ var fillCollections = function () {
                 
                 if(i<3){
                     
-
+                    userService.updateStatus(id,'stack');
                     users[i] = {userId: id, teacherId: tid, firstName: firstName, lastName: lastName, email: email, teacherFirstName: tfirstName, teacherLastName: tlastName, teacherEmail: temail};
                 }
                  if(i>=3 && i<6){
+                    userService.updateStatus(id,'req');
                     users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email};
                 }
                 if(i >= 6 && i< 9){
+                    
                     users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,result: {autoMark: 0,	teacherMark: 0,	level: 0}};
                 }
                  if (i >=9){
-                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,startDate: new Date() , endDate: new  Date()};
+                     userService.updateStatus(id,'open');
+                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,dateStart: new Date().getTime() , dateEnd: new  Date().getTime()};
                 }
             }
             stackService.addStacks(users.slice(0, 3)).then(function (data) {
@@ -56,6 +59,8 @@ var fillCollections = function () {
                         console.log('results filled');
                         stackService.addOpenTestsArray(users.slice(9, users.length)).then(function (data) {
                             console.log('opentest filled');
+                        }).catch(function(err){
+                                console.log(' ERROR');
                         });
                     });
                 });

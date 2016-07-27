@@ -24,6 +24,13 @@ function getTest(user){
 	return testMaker.make(testA,user);
 }
 
+function getSecondTest(level){
+	return testMaker.makeAgain(testB,level);
+}
+
+
+
+
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
 module.exports.addNewQuestion = addNewQuestion;
@@ -31,3 +38,4 @@ module.exports.addNewQuestionB = addNewQuestionB;
 module.exports.removeCollection = removeCollection;
 module.exports.getTest= getTest;
 module.exports.removeCollectionB = removeCollectionB;
+module.exports.getSecondTest = getSecondTest;

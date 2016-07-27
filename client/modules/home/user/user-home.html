@@ -1,27 +1,28 @@
 <div class="container-fluid" ng-controller="userHomeController">
     <div class="row-fluid">
         <div class="start col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-1 col-md-5 col-lg-offset-2 col-lg-4">
-            <button class="btn start-test" ng-click="onStartTest()" ui-sref="passTest">START<br>TEST</button>
+            <button class="btn start-test" ng-click="onStartTest()" ui-sref="passTest" ng-disabled="disStart">START<br>TEST</button>
         </div>
         <div class="jjj col-xs-12 col-sm-5 col-md-5 col-lg-4">
-            <div class="info-about-button">
+            <div ng-if="!disStart" class="info-about-button">
                 You can to start to pass the test from {29.06.2016 11:00:00} to {29.06.2016 15:00:00}.
                 You have {2} hour\hours for this.
             </div>
-            <!--div>
-            	You can't to start to pass the test.
-            </div-->
+            <div ng-if="disStart" class="info-about-button">
+            	You can't to start to pass the test. alalala lalalaal alalalaal alalalaal lalalaaal
+                kldsjfdsklfj fjkldsfjdlsf lskdjfsdlkf j
+            </div>
         </div>
     </div>
     <div class="row-fluid">
         <div class="start col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-1 col-md-5 col-lg-offset-2 col-lg-4">
-            <button class="btn req-test" ng-click="onSendRequest()" ng-disabled="userInformation.isSentReq">SEND<br>REQUEST</button>
+            <button class="btn req-test" ng-click="onSendRequest()" ng-disabled="disReq">SEND<br>REQUEST</button>
         </div>
         <div class="jjj col-xs-12 col-sm-5 col-md-5 col-lg-4">
-            <div ng-if="!userInformation.isSentReq" class="info-about-button">
+            <div ng-if="!disReq" class="info-about-button">
                 You can to send request for passing the test. <br>Notification of the designated test will come on email later.
             </div>
-            <div ng-if="userInformation.isSentReq" class="info-about-button">
+            <div ng-if="disReq" class="info-about-button">
                 You can't to send request for passing the test, because you sent it before.
             </div>
         </div>
@@ -49,5 +50,3 @@
   </div>
   <!-- End controls-->
 </ng-audio-recorder>
-
-{{status}}
