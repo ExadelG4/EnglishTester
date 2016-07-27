@@ -1,5 +1,5 @@
 (function(){
-    angular.module('profile', []).controller('profileController',['$scope', 'context', function($scope, context){
+    angular.module('profile', []).controller('editProfileController',['$scope', 'context', function($scope, context){
         var fullName = context.getFirstName() + ' ' + context.getLastName();
         $scope.userProfile = {
             name: fullName,
