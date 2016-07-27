@@ -2,25 +2,27 @@
 	'use strict';
 
 	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer', function($scope, $state, userService, angularPlayer) {
+
 		$scope.$on('$stateChangeStart', function () {
-			if (angularPlayer.getPlaylist().length > 0) {
-				angularPlayer.clearPlaylist( function() {			
-				});
-			}
+			if(angularPlayer.getPlaylist().length > 0)
+    			angularPlayer.clearPlaylist( function() {}); 
 		});
 
+		$scope.whichPart = 1;
 
-		$scope.allQuestions = null;
-		$scope.currentPage = 1;
-		$scope.copyCurrentPage = 1;
-		$scope.neededNumPage = '';
-		$scope.validNeededNumPage = true;
-		$scope.userAnswers = [];
-		$scope.validAnswers = [];
-		$scope.totalCount = null;
-		$scope.omg = {
-			tempChoise: null
-		};
+		var initVars = function(){ 
+			$scope.allQuestions = null;
+			$scope.currentPage = 1;
+			$scope.copyCurrentPage = 1;
+			$scope.neededNumPage = '';
+			$scope.validNeededNumPage = true;
+			$scope.userAnswers = [];
+			$scope.validAnswers = [];
+			$scope.totalCount = null;
+			$scope.omg = {
+				tempChoise: null
+			};
+		}();
 
 		/*$scope.allQuestions = [
 			{
@@ -88,7 +90,7 @@
 			return type === 'speaking';
 		}
 
-		userService.getTest().then( function(result) {
+		var initAll = function() {
 			$scope.allQuestions = result;
 			$scope.totalCount = $scope.allQuestions.length;
 
@@ -98,9 +100,6 @@
 					answers: [],
 					audioAnswer: ''
 				};
-				/*if (isCheckboxType($scope.allQuestions[i].type) || isRadioType($scope.allQuestions[i].type)) {
-						tempAnswer.answers = [];
-				};*/
 				tempAnswer.qId = $scope.allQuestions[i].qId;
 				tempAnswer.type = $scope.allQuestions[i].type;
 				$scope.userAnswers.push(tempAnswer);
@@ -110,6 +109,10 @@
   		}
 
   		$scope.initNewPage($scope.currentPage);
+		}
+
+		userService.getTest().then( function(result) {
+			initAll();
 	 	});
 
 		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
@@ -126,7 +129,6 @@
 			};
 
 
-		//init first page
 		$scope.initNewPage = function(currentPage) {
 			if (isCheckboxType($scope.allQuestions[currentPage - 1].type)) {
 		 		$scope.omg.tempChoise = [];
@@ -200,10 +202,10 @@
 
 		};
 
-		$scope.createSong = function(urlAudio, song) {
+		/*$scope.createSong = function(urlAudio, song) {
 			song.url = urlAudio;
 			return song;
-		};
+		};*/
 
 
 		$scope.pageChanged = function(prevNumPage) {
@@ -247,12 +249,20 @@
   			return true;
   		};
   		$scope.sendFirstPart = function() {
-  			var data = {
-  				data: $scope.userAnswers,
-  				id: 'sss'
-  			}
-  			userService.sendFirstPart(data)
-  				.then ( function() {/*hz hz hz zapusk 2y raz*/});
+  			userService.sendFirstPart($scope.userAnswers)
+  				.then ( function(data) {
+  					notification.success("You have successfully completed the first part of the text.");
+  					$scope.whichPart = 2;
+  					initVars();
+  					initAll();
+  				});
+  		};
+  		$scope.sendSecondPart = function() {
+  			userService.sendSecondPart($scope.userAnswers)
+  				.then ( function() {
+  					$state.go('home');
+  					notification.success("You have successfully completed the first part of the text.");
+  				});
   		};
 
 	}]);

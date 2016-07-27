@@ -20,8 +20,11 @@
                 $scope.disReq = false;
             }
             $scope.onSendRequest = function() {
-                userService.sendTestRequest().then( function(data) {
+                userService.sendTestRequest().then( function() {
                     notification.success("You have successfully send request for test");
+                    userService.getStatus().then(function (data) {
+                        $scope.status = data;
+                    });
                 })
             };
             /*$scope.onStartTest = function() {

@@ -82,8 +82,11 @@
                     halfSmoke: function(data) {
                         return httpService.post('http://localhost:3000/addQuestion', {finalQue : data});
                     },
-                    sendTestRequest: function(data) {
-                        return httpService.post('http://localhost:3000/requestTest', data);
+                    sendTestRequest: function() {
+                        return httpService.get('http://localhost:3000/requestTest')
+                            .then ( function() {
+
+                        })
                     },
                     sendFirstPart: function(data) {
                         return httpService.post('http://localhost:3000/submit1', data)
