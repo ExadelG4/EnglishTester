@@ -2,6 +2,7 @@ var stack = require('../db/mongo').stack;
 var results = require('../db/mongo').results;
 var request = require('../db/mongo').request;
 var openTests = require('../db/mongo').openTests;
+
 var q = require('q');
 
 function getAllStack(){
@@ -97,18 +98,26 @@ function removeOpenTestsCollection(){
 
 
 
-function checkFirstPart(data){
+function checkFirstPart(data, id){
 	var pr = q.defer();
-	var len = data.answers.length;
+	var len = data.length;
 	var marks = [];
 	for (var i =0; i < 5 ;i++){
 		marks.push(0);
 	}
-	stack.findOne({userId: data.userId}).then(function(stackRecord){
+	stack.findOne({userId: id}).then(function(stackRecord){
 			data.forEach(function(element) {
 				stackRecord.answersAuto.forEach(function(element1) {
-					if(element.qid === element1._qid){
-						marks[element1.level-1]+=0.2*element1.level;
+					if(element.qId === element1._qId){
+						var f = true
+						element.answer.forEach(function(element, i, arr) {
+							if(element!= element1.answer[i]){
+								f = false;
+							}
+						});
+						if(f){
+							marks[element1.level-1]+=0.2*element1.level;
+						}
 					}
 				});
 			});
@@ -119,19 +128,21 @@ function checkFirstPart(data){
 			rez/=15;
 			rez = Math.floor(rez*5);
 			stack.update({_id:stackRecord._id},{ $set: { level: rez }},{}).then(function(){
-
+				pr.resolve(rez);
 			}).catch(function(err){
-
+				pr.reject(err);
 			});
 	}).catch(function(err){
-
+		pr.reject(err);
 	});
 
 	return pr.promise;
 
 }
 
-
+function sendTest(sId, tId){
+	return stack.findOne({_id : sId, teacherId : tid},{},{});
+}
 
 
 
@@ -162,3 +173,4 @@ module.exports.removeResultsCollection = removeResultsCollection;
 module.exports.removeOpenTestsCollection = removeOpenTestsCollection;
 
 module.exports.checkFirstPart = checkFirstPart;
+module.exports.sendTest = sendTest;

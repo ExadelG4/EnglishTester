@@ -107,14 +107,15 @@ router.post('/assignStudents',function(req, res) {
 	 	res.json({ success: false, message: 'Please enter email and password.' });
 	 } 
 	 else{
-	  		
+	  		var tempArr = [];
+
 
 	  		console.log(req.body.students);
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
-			  res.json('add');			  
+			  res.send('add');			  
 				
 		  }).catch(function (err) {
-			  res.json('eror');
+			  res.status(401).send("error");
 		  });
 
   }
@@ -163,11 +164,11 @@ router.post('/assignTeacher',function (req, res) {
 
 
 router.get('/getTest',  passport.authenticate('jwt', { session: false }),function(req, res){
-	var token = req.header('Authorization');
-	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded){
-		stackService.findOpenTests({userId: decoded._doc._id},{},{}).then(function (data){
+	// var token = req.header('Authorization');
+	// jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded){
+		stackService.findOpenTests({userId: req.user._id},{},{}).then(function (data){
 			if(data[0] !== undefined){
-				testService.getTest(data).then(function(data){
+				testService.getTest(data[0]).then(function(data){
 					res.send(data);
 				}).catch(function(err){
 					res.json(err);
@@ -179,14 +180,37 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 		}).catch(function(err){
 			res.json(err);
 		});
-	});
+	// });
 	
 });
 
 
-router.post('/submit1', function(req,res){
-	service.submit1(req.body);
+router.post('/submit1', passport.authenticate('jwt', { session: false }), function(req,res){
+	service.submit1(req.body, req.user._id).then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.send(err);
+	});
 });
+
+router.post('/submit2', passport.authenticate('jwt', { session: false }), function(req,res){
+	service.submit2(req.body, req.user._id).then(function(data){
+		res.send();
+	}).catch(function(err){
+		res.status(400).send(err);
+	});
+});
+
+router.post('/checkTest',passport.authenticate('jwt', { session: false }),function(req, res){
+	
+	testService.sendTest(req.body.id, req.user._id ).then(function(data){
+		res.send(data);
+	}).catch(function(err){
+		res.status(400).send("Bad Request");
+	});
+
+})
+
 
 
 // todo: create query by jwt, not by id
@@ -219,12 +243,8 @@ router.get('/finishTestUserList', function(req, res){
 });
 
 
-router.get('/assignedTeacherList', function(req, res){
-	
-
-});
-
 router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
+	console.log(req.user);
 	var token = req.header('Authorization');
 	console.log(token);
 	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
@@ -239,6 +259,7 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 					email: decoded._doc.email
 				}
 				stackService.addRequest(doc).then(function(data){
+					service.updateStatus(doc.userId, 'req');
 					res.send('ok');
 				}).catch(function(err){
 					res.status(422).send("Bad Request");
@@ -246,7 +267,7 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 		}
 	});		
 });
-router.get('/requestTestList', function(req, res){
+router.get('/getRequestsUsers', function(req, res){
 	stackService.findRequest({},{},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
@@ -266,7 +287,15 @@ router.get('/getPersonalListForTeacher', function(req, res){
 });
 router.get('/getFreeUsers', function(req, res){
 	
-	service.find({status: 'open', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+	service.find({status: 'free', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
+});
+router.get('/getResults', function(req, res){
+	
+	stackService.findResults({},{},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));

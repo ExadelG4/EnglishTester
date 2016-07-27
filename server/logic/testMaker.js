@@ -56,8 +56,8 @@ function getTests(test, counts, user) {
                     i++;
                     t();
                 }else{
+                    user.answersAuto.push({_qId: data[0]._id, level:data[0].level,answer: data[0].answers});
 
-                    user.answersAuto.push({_qId: data[0]._id, answer: data[0].answers});
                     delete data[0]._doc.answers;
                     tests.push(data[0]);                    
                     console.log(data);
@@ -83,7 +83,7 @@ function make(test , usr){
 
     var user = {};
 
-    user.userId = usr.id;
+    user.userId = usr.userId;
     user.firstName = usr.firstName;
     user.lastName = usr.lastName;
     user.email = usr.email;
@@ -113,5 +113,40 @@ function make(test , usr){
     return defer.promise;
 }
 
+function makeAgain(test, level){
+    var defer = q.defer();
+    var tests =[];
+    
+    var i = 0;
+
+    test.count({ level: level }).then(function(data){
+        var rand = getRandomArbitrary(0, data/5);
+        var pr = test.find({level: level},{},{skip : Math.floor(rand), limit : 1 });
+        var edge = data/5;
+        (function t(){
+            pr = pr.then(function(data){ 
+                    if(i < 5){                        
+                        if(data !==undefined){
+                            tests.push(data[0]);                        
+                            console.log(data);
+                        } 
+                        rand = getRandomArbitrary(i*edge, (i+1)*edge);
+                        pr = test.find({level:level},{},{skip : Math.floor(rand), limit : 1 });
+                        i++;
+                        t();                    
+                    }else{
+                        defer.resolve(tests);
+                    }    
+            
+            });
+     })();
+
+    }).catch(function(err){
+        defer.reject(err);
+    });
+
+    return defer.promise;
+}
 
 module.exports.make = make;
+module.exports.makeAgain = makeAgain;
