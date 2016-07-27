@@ -6,7 +6,9 @@ var TestBScheme = new Schema(
 	{
 		type: {
 			type: String,
-			required: true
+			required: true,
+			enum: ['questionWithoutChoiceOfAnswers','essay','listeningWithoutChoiceOfAnswers','speaking'],
+			default: 'essay'
   		},
 		level:{
 			type:Number,
@@ -16,6 +18,7 @@ var TestBScheme = new Schema(
 		question:{
 			type:String,
 			required: true
+
 		}
 	});
 	

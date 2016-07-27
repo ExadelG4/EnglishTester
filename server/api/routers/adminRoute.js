@@ -173,4 +173,23 @@ router.get('/getResults', function(req, res){
 		  });
 });
 
+router.post('/getFromReg',function(req, res) {
+
+	 if(!req.body){
+	 	res.json({ success: false, message: 'Please enter correct regex' });
+	 } 
+	
+	 else{
+	  		var a = req.body.name;
+	  		service.find({fullName : new RegExp(a, "i") },{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
+			res.send(data);			  
+				
+		  }).catch(function (err) {
+			  res.status(401).send("error");
+		  });
+
+  }
+
+});
+
 module.exports = router;
