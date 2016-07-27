@@ -5,7 +5,7 @@
 
 
         $scope.searchUser = function() {
-            if($scope.searching.length >= 3) {
+            if ($scope.searching.length >= 3) {
                 userService.searchUser($scope.searching).then(function(data) {
                     console.log(data);
                 });
