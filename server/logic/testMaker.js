@@ -83,7 +83,7 @@ function make(test , usr){
 
     var user = {};
 
-    user.userId = usr.id;
+    user.userId = usr.userId;
     user.firstName = usr.firstName;
     user.lastName = usr.lastName;
     user.email = usr.email;

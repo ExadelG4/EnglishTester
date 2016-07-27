@@ -164,11 +164,11 @@ router.post('/assignTeacher',function (req, res) {
 
 
 router.get('/getTest',  passport.authenticate('jwt', { session: false }),function(req, res){
-	var token = req.header('Authorization');
-	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded){
-		stackService.findOpenTests({userId: decoded._doc._id},{},{}).then(function (data){
+	// var token = req.header('Authorization');
+	// jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded){
+		stackService.findOpenTests({userId: req.user._id},{},{}).then(function (data){
 			if(data[0] !== undefined){
-				testService.getTest(data).then(function(data){
+				testService.getTest(data[0]).then(function(data){
 					res.send(data);
 				}).catch(function(err){
 					res.json(err);
@@ -180,18 +180,37 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 		}).catch(function(err){
 			res.json(err);
 		});
-	});
+	// });
 	
 });
 
 
-router.post('/submit1', function(req,res){
-	service.submit1(req.body).then(function(data){
+router.post('/submit1', passport.authenticate('jwt', { session: false }), function(req,res){
+	service.submit1(req.body, req.user._id).then(function(data){
 		res.json(data);
 	}).catch(function(err){
 		res.send(err);
 	});
 });
+
+router.post('/submit2', passport.authenticate('jwt', { session: false }), function(req,res){
+	service.submit2(req.body, req.user._id).then(function(data){
+		res.send();
+	}).catch(function(err){
+		res.status(400).send(err);
+	});
+});
+
+router.post('/checkTest',passport.authenticate('jwt', { session: false }),function(req, res){
+	
+	testService.sendTest(req.body.id, req.user._id ).then(function(data){
+		res.send(data);
+	}).catch(function(err){
+		res.status(400).send("Bad Request");
+	});
+
+})
+
 
 
 // todo: create query by jwt, not by id

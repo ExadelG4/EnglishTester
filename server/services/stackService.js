@@ -98,14 +98,14 @@ function removeOpenTestsCollection(){
 
 
 
-function checkFirstPart(data){
+function checkFirstPart(data, id){
 	var pr = q.defer();
 	var len = data.length;
 	var marks = [];
 	for (var i =0; i < 5 ;i++){
 		marks.push(0);
 	}
-	stack.findOne({userId: data.userId}).then(function(stackRecord){
+	stack.findOne({userId: id}).then(function(stackRecord){
 			data.forEach(function(element) {
 				stackRecord.answersAuto.forEach(function(element1) {
 					if(element.qId === element1._qId){
@@ -140,7 +140,9 @@ function checkFirstPart(data){
 
 }
 
-
+function sendTest(sId, tId){
+	return stack.findOne({_id : sId, teacherId : tid},{},{});
+}
 
 
 
@@ -171,3 +173,4 @@ module.exports.removeResultsCollection = removeResultsCollection;
 module.exports.removeOpenTestsCollection = removeOpenTestsCollection;
 
 module.exports.checkFirstPart = checkFirstPart;
+module.exports.sendTest = sendTest;

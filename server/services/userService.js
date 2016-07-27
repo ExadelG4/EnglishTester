@@ -1,4 +1,5 @@
 var user = require('../db/mongo').user;
+var stack = require('../db/mongo').stack;
 var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
@@ -26,12 +27,22 @@ function addNewUsers(info){
 function authenticate(email, pass){
     var defer = q.defer();
 	// user.authenticate(email, pass).
-    user.findOne({email: email},{},{}).then(function(user){                
-        if (!user) {           
+    user.findOne({email: email},{},{}).then(function(user_){                
+        if (!user_) {           
             defer.reject();
         } else {
-            user.comparePassword(pass, function(err, isMatch) {
+            user_.comparePassword(pass, function(err, isMatch) {
                 if (isMatch && !err) {
+                    var user = {};
+                    user.email = user_.email;
+                    user.number = user_.number;
+                    user.role = user_.role;
+                    user.password = user_.password;
+                    user.firstName = user_.firstName;
+                    user.lastName = user_.lastName;
+                    user._id = user_._id;
+
+
                     var token = jwt.sign(user, key.secret, {
                         expiresIn: expires 
                     });
@@ -146,10 +157,10 @@ function update(query, update,options){
     return user.update(query, update,options);
 }
 
-function submit1(data){
+function submit1(data, id){
     var defer = q.defer();
 
-    stackService.checkFirstPart(data).then(function(level){
+    stackService.checkFirstPart(data, id).then(function(level){
         testService.getSecondTest(level).then(function(data){
             defer.resolve(data);
         }).catch(function(err){
@@ -162,6 +173,19 @@ function submit1(data){
 
     return defer.promise;
 }
+
+function submit2(data, uid){
+    var defer = q.defer();
+
+    stack.update({userId:uid},{ $set: { answers: data }},{}).then(function(data){
+        defer.resolve(data);
+    }).catch(function(err){
+        defer.reject(err);
+    })
+
+    return defer.promise;
+}
+
 function updateStatus(id,_status){
    update({_id:id},{ $set: { status: _status }},{}).then(function(data){
                         console.log('user update')
@@ -182,5 +206,6 @@ module.exports.getUserStatus = getUserStatus;
 module.exports.find = find;
 module.exports.getFinishedList = getFinishedList;
 module.exports.submit1 = submit1;
+module.exports.submit2 = submit2;
 module.exports.update = update;
 module.exports.updateStatus = updateStatus;
