@@ -174,7 +174,8 @@ router.get('/getResults', function(req, res){
 });
 
 router.post('/getFromReg',function(req, res) {
-
+	//console.log(req.body)
+	//console.log(req.body.name)
 	 if(!req.body){
 	 	res.json({ success: false, message: 'Please enter correct regex' });
 	 } 
@@ -182,7 +183,8 @@ router.post('/getFromReg',function(req, res) {
 	 else{
 	  		var a = req.body.name;
 	  		service.find({fullName : new RegExp(a, "i") },{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
-			res.send(data);			  
+			res.send(data);
+			//console.log(data);			  
 				
 		  }).catch(function (err) {
 			  res.status(401).send("error");
