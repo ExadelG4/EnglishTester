@@ -7,6 +7,7 @@
         'admin',
         'tests',
         'profile',
+        'statistic',
         'angularSoundManager',
         'angularAudioRecorder',
         /*'angularFileUpload',*/
