@@ -10,21 +10,21 @@
                 //
                 //$scope.newsUser.push('')
 
-                $scope.msg = 'Some text';
+                // $scope.msg = 'Some text';
 
-                $scope.popToastr = function (type) {
-                    switch (type) {
-                        case 'Warning':
-                            notification.warning($scope.msg);
-                            break;
-                        case 'Error':
-                            notification.error($scope.msg);
-                            break;
-                        case 'Success':
-                            notification.success($scope.msg);
-                            break;
-                    }
-                };
+                // $scope.popToastr = function (type) {
+                //     switch (type) {
+                //         case 'Warning':
+                //             notification.warning($scope.msg);
+                //             break;
+                //         case 'Error':
+                //             notification.error($scope.msg);
+                //             break;
+                //         case 'Success':
+                //             notification.success($scope.msg);
+                //             break;
+                //     }
+                // };
 
                 // var thing = new EventWrapper(123);
                 //
