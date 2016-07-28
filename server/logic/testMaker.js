@@ -13,7 +13,7 @@ function getCounts(test,countL) {
             
             if(i < 5){
                 countL.push(data);
-                console.log(data);
+                //console.log(data);
                 i++;
                 pr = test.count({ level: i+1 });
                 c();
@@ -47,7 +47,7 @@ function getTests(test, counts, user) {
                         user.answersAuto.push({_qId: data[0]._id, level:data[0].level, answer: ans});
                         delete data[0]._doc.answers;
                         tests.push(data[0]);                        
-                        console.log(data);
+                       // console.log(data);
                     }
                    
                    
@@ -60,7 +60,7 @@ function getTests(test, counts, user) {
 
                     delete data[0]._doc.answers;
                     tests.push(data[0]);                    
-                    console.log(data);
+                   // console.log(data);
 
                     j++;
                     i=0;
@@ -128,7 +128,7 @@ function makeAgain(test, level){
                     if(i < 5){                        
                         if(data !==undefined){
                             tests.push(data[0]);                        
-                            console.log(data);
+                            //console.log(data);
                         } 
                         rand = getRandomArbitrary(i*edge, (i+1)*edge);
                         pr = test.find({level:level},{},{skip : Math.floor(rand), limit : 1 });
