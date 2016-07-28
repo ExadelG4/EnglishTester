@@ -25,7 +25,8 @@ router.post('/register',function(req, res) {
   			firstName: req.body.firstName,
   			lastName: req.body.secondName,
   			role: 'guest',
-  			status: 'open'
+  			status: 'open',
+  			fullName : req.body.firstName +' '+ req.body.secondName
   		};
   		var guestOpen = {
   			
@@ -198,10 +199,12 @@ router.post('/getFromReg',function(req, res) {
 	
 	 else{
 	  		var a = req.body.name;
-	  		service.find({fullName : new RegExp(a, "i") },{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
+	  		var b = a;
+	  		var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
+	  		console.log(c);
+	  		service.find({fullName : new RegExp(c, "i") },{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
 			res.send(data);
-			//console.log(data);			  
-				
+
 		  }).catch(function (err) {
 			  res.status(401).send("error");
 		  });

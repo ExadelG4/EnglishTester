@@ -3,4 +3,16 @@
     position: relative;
     padding: 50px;
     margin-top: 70px;
+    background-color: white;
+}
+
+div:hover {
+	cursor: default;
+}
+
+@media (max-width: 767px) {
+	.main {
+		padding: 20px;
+	}
+
 }
