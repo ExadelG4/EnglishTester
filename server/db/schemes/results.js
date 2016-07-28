@@ -18,7 +18,14 @@ var resultsScheme = new Schema(
 			autoMark: Number,
 			teacherMark: Number,
 			level: Number
-		}
+		},
+		teacherId: {
+			type: String,
+			default: 'none'
+		},
+		teacherFirstName: String,
+		teacherLastName: String,
+		teacherEmail: String
 
 	});
 	

@@ -59,17 +59,17 @@ function findOpenTests(){
 	return openTests.find(arguments[0],arguments[1],arguments[2]);
 }
 
-function findStackById(id){
-	return stack.findById();
+function findStackById(){
+	return stack.findById(arguments[0],arguments[1],arguments[2]);
 }
-function findResultsById(id){
-	return results.findById(id);
+function findResultsById(){
+	return results.findById(arguments[0],arguments[1],arguments[2]);
 }
-function findRequestById(id){
-	return request.findById(id);
+function findRequestById(){
+	return request.findById(arguments[0],arguments[1],arguments[2]);
 }
-function findOpenTestsById(id){
-	return openTests.findById(id);
+function findOpenTestsById(){
+	return openTests.findById(arguments[0],arguments[1],arguments[2]);
 }
 
 function assignTeacher(data){
@@ -96,7 +96,18 @@ function removeOpenTestsCollection(){
 }
 
 
-
+function findOneStack(){
+	return stack.findOne(arguments[0],arguments[1],arguments[2]);
+}
+function findOneResults(){
+	return results.findOne(arguments[0],arguments[1],arguments[2]);
+}
+function findOneRequest(){
+	return request.findOne(arguments[0],arguments[1],arguments[2]);
+}
+function findOneOpenTests(){
+	return openTests.findOne(arguments[0],arguments[1],arguments[2]);
+}
 
 function checkFirstPart(data, id){
 	var pr = q.defer();
@@ -171,6 +182,10 @@ module.exports.removeStackCollection = removeStackCollection;
 module.exports.removeRequestCollection = removeRequestCollection;
 module.exports.removeResultsCollection = removeResultsCollection;
 module.exports.removeOpenTestsCollection = removeOpenTestsCollection;
+module.exports.findOneRequest = findOneRequest;
+module.exports.findOneResults = findOneResults;
+module.exports.findOneStack = findOneStack;
+module.exports.findOneOpenTests = findOneOpenTests;
 
 module.exports.checkFirstPart = checkFirstPart;
 module.exports.sendTest = sendTest;
