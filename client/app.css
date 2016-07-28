@@ -35,6 +35,6 @@ select {
 }
 
 .disable {
-    background-color: rgba(201, 185, 165, 0.2) !important;
+    background-color: rgba(208, 211, 222, 0.52) !important;
     box-shadow: none !important;
 }

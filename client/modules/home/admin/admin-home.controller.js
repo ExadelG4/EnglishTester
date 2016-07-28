@@ -5,6 +5,22 @@
         .controller('adminHomeController', ['$scope', 'EventWrapper', 'notification',
             function ($scope, EventWrapper, notification) {
 
+            $scope.tabs = [
+                {
+                    "heading": "Finished tests",
+                    "template": "../../admin/assignStd/assignStd.html"
+                },
+                {
+                    "heading": "Tests for assign of teachers",
+                    "template": "../../admin/assignStd/assignStd.html"
+                },
+                {
+                    "heading": "Tests for assign of students",
+                    "template": "../../admin/assignTch/assignTch.html"
+                }
+            ];
+                
+
                 //$scope.newsUser = [];
                 //$scope.newsTeacher = [];
                 //
