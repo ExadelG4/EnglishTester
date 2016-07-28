@@ -201,6 +201,48 @@ function updateStatus(id,_status){
                     });
 }
 
+function userStatistics(id){
+var pr = q.defer();
+    user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
+        if (data){
+            if(data.role == 'admin'){
+             
+                pr.resolve(data);
+            }
+            else if(data.role == 'user' || data.role == 'guest'){
+                stackService.findOneResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
+                        var userInfo ={};
+                        userInfo.firstName = data.firstName;
+                        userInfo.lastName = data.lastName;
+                        userInfo.email = data.email;
+                        userInfo.number = data.number;
+                        userInfo.role = data.role;
+                        userInfo.status = data.status;
+                    if(data2){
+                        userInfo.result = data2.result;
+                        userInfo.teacherId = data2.teacherId;
+                        userInfo.date = data2.date;
+                        userInfo.teacherLastName = data2.teacherLastName;
+                        userInfo.teacherFirstName = data2.teacherFirstName;
+                
+                        pr.resolve(userInfo);
+                    }
+                    else pr.resolve(data);
+                }).catch(function(err){
+                    pr.reject(err);
+                });
+            }
+        }
+        else {
+            pr.resolve('user not found');
+        }
+
+    }).catch(function(err){
+        pr.reject('Bad data :(');
+    });
+    return pr.promise;
+}
+
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
@@ -216,3 +258,4 @@ module.exports.submit1 = submit1;
 module.exports.submit2 = submit2;
 module.exports.update = update;
 module.exports.updateStatus = updateStatus;
+module.exports.userStatistics = userStatistics;
