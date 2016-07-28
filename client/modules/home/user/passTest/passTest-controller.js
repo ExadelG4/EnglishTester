@@ -8,20 +8,15 @@
 			if(angularPlayer.getPlaylist().length > 0)
     			angularPlayer.clearPlaylist( function() {}); 
 		});
-		$scope.startTest = false;
-
-		userService.getStatus().then(function (data) {
-			if(data === 'open') {
-				userService.getTest()
-					.then( function(result) {
-						$scope.startTest = true;
-						$scope.initAll(result);
-				});
-			}
-			else {
+		//$scope.startTest = false;
+		userService.getStatus().then ( function(result) {
+			if(result !== 'open') {
 				$state.go('home');
 			}
-		;});
+			/*else {
+				$scope.startTest = true;
+			}*/
+		})
 
 		$scope.whichPart = 1;
 
@@ -128,17 +123,9 @@
   		$scope.initNewPage($scope.currentPage);
 		}
 
-		userService.getStatus().then(function (data) {
-			if(data === 'open') {
-				userService.getTest()
-					.then( function(result) {
-					$scope.initAll(result);
-				});
-			}
-			else {
-				$state.go('home');
-			}
-		;});
+		userService.getTest().then( function(result) {
+			$scope.initAll(result);
+	 	});
 
 		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
 
@@ -227,15 +214,19 @@
 
 		};
 
+		/*$scope.createSong = function(urlAudio, song) {
+			song.url = urlAudio;
+			return song;
+		};*/
+
+
 		$scope.pageChanged = function(prevNumPage) {
     		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
     		$scope.omg.tempChoise = null;
-    		if(angularPlayer.getPlaylist().length > 0) {
-    			angularPlayer.clearPlaylist(function() {
-  
-    			});    		
-    		}
+    		if(angularPlayer.getPlaylist().length > 0)
+    			angularPlayer.clearPlaylist( function() {
+    				});    		
     		$scope.initNewPage($scope.currentPage);
     		$scope.copyCurrentPage = $scope.currentPage;
   		};
