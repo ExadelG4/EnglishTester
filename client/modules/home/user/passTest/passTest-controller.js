@@ -10,7 +10,7 @@
 		});
 		//$scope.startTest = false;
 		userService.getStatus().then ( function(result) {
-			if(result !== 'open') {
+			if(result.status !== 'open') {
 				$state.go('home');
 			}
 			/*else {
