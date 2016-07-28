@@ -152,7 +152,7 @@
                     },
 
                     showInfoProfile: function(data) {
-                        return httpService.post(host + '/', {})
+                        return httpService.post(host + '/admin/showStatistics', data)
                             .then (function(result) {
                                 return result.data;
                             })
