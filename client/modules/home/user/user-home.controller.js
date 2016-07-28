@@ -8,6 +8,9 @@
             $scope.status;
             $scope.firstName = context.getFirstName();
             $scope.lastName = context.getLastName();
+            $scope.dataStart;
+            $scope.dataEnd;
+
 
             $scope.updateButtons = function () {
                 $scope.disStart = true;
@@ -28,8 +31,12 @@
 
             $scope.update = function() { 
                     userService.getStatus().then(function (data) {
-                    $scope.status = data;
-                    $scope.updateButtons();
+                        $scope.status = data.status;
+                        if($scope.status === 'open') {
+                            $scope.dataStart = new Date(data.dataStart);
+                            $scope.dataEnd = new Date(data.dataEnd);
+                        }
+                        $scope.updateButtons();
                 });
             }
             $scope.onSendRequest = function() {

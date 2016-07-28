@@ -149,6 +149,13 @@
                             .then (function(result) {
                                 return result.data;
                         })
+                    },
+
+                    showInfoProfile: function(data) {
+                        return httpService.post(host + '/admin/showStatistics', data)
+                            .then (function(result) {
+                                return result.data;
+                            })
                     }
                 };
             }]);
