@@ -149,6 +149,13 @@
                             .then (function(result) {
                                 return result.data;
                         })
+                    },
+
+                    showInfoProfile: function(data) {
+                        return httpService.post(host + '/', {})
+                            .then (function(result) {
+                                return result.data;
+                            })
                     }
                 };
             }]);
