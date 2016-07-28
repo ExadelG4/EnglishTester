@@ -58,10 +58,13 @@ function authenticate(email, pass){
                     var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
                     now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
+                    //console.log(user.role == 'guest');
                     if(user.role == 'guest'){
-                        stackService.findOpenTests(user,{},{}).then(function(data){
+                        stackService.findOpenTests({userId: user._id},{},{}).then(function(data){
+                            console.log(data);
                             if(data.length){
                                 defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
+                                console.log(data);
                             }
                             else{
                                 defer.reject();
@@ -100,22 +103,22 @@ function getUserStatus(_userId){
         stackService.findOpenTests({userId: _userId},{},{}).then(function(data){
             if(data.length != 0){
                 
-                pr.resolve('open');
+                pr.resolve({status:'open',dateStart: data[0].dateStart, dateEnd: data[0].dateEnd });
             }                
             else 
                 stackService.findRequest({userId: _userId},{},{}).then(function(data){
                     if(data.length != 0){
                         
-                        pr.resolve('req');
+                        pr.resolve({status: 'req'});
                     }                         
                     else 
                         stackService.findStack({userId: _userId},{},{}).then(function(data){
                              if(data.length != 0){
                                     
-                                    pr.resolve('stack'); 
+                                    pr.resolve({status:'stack'}); 
                              }else {
                                  
-                                 pr.resolve('free');
+                                 pr.resolve({status:'free'});
                              }  
                         }).catch(function (err){
                             pr.reject(err);
