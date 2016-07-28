@@ -1,4 +1,4 @@
-<div ng-if="startTest">
+<!--div ng-if="startTest"-->
 	<uib-pagination items-per-page="1" ng-model="currentPage" total-items="totalCount" max-size="4" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" ng-change="pageChanged(copyCurrentPage)"> 
 	</uib-pagination>
 
@@ -17,4 +17,4 @@
 
 	<button class="btn" ng-if="whichPart === 1" ng-disabled="!allValidAnswers()" ng-click="sendFirstPart()">Submit</button>
 	<button class="btn" ng-if="whichPart === 2" ng-disabled="!allValidAnswers()" ng-click="sendSecondPart()">Submit</button>
-</div>
+<!--/div-->

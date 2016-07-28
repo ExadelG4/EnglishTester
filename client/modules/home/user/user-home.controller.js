@@ -6,6 +6,8 @@
             $scope.disStart;
             $scope.disReq;
             $scope.status;
+            $scope.firstName = context.getFirstName();
+            $scope.lastName = context.getLastName();
 
             $scope.updateButtons = function () {
                 $scope.disStart = true;
