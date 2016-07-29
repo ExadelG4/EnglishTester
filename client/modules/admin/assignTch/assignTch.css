@@ -1,5 +1,6 @@
 .formWrapper {
     padding: 30px;
+    position: relative;
 }
 
 .sel1 > input, .sel2 > input {
@@ -13,8 +14,12 @@
 
 .formSelect {
     display: inline-block;
-    width: 100%;
 }
+
+/*.col-centered {*/
+    /*float: none;*/
+    /*margin: 0 auto;*/
+/*}*/
 
 .sel1 > ol, .sel2 > ol {
     width: 100% !important;

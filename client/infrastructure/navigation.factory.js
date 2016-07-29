@@ -16,10 +16,6 @@
                             state: 'assignStd'
                         },
                         {
-                            name: 'Assign teacher',
-                            state: 'assignTch'
-                        },
-                        {
                             name: 'New user',
                             state: 'newUser'
                         }
