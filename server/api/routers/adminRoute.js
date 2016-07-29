@@ -43,7 +43,7 @@ router.post('/register',function(req, res) {
 				stackService.addOpenTests(guestOpen).then(function(data){
 					
 				}).catch(function(err){
-					console.log("guest is not in openTests");
+					//console.log("guest is not in openTests");
 				});
 		}).catch(function(err){
 			res.status(400).send("Bad Request");
@@ -61,7 +61,7 @@ router.post('/assignStudents',function(req, res) {
 	  		var tempArr = [];
 
 
-	  		console.log(req.body.students);
+	  	//	console.log(req.body.students);
 	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
 			  res.send('add');			  
 				
@@ -182,7 +182,7 @@ router.post('/getFromReg',function(req, res) {
 	  		var a = req.body.name;
 	  		var b = a;
 	  		var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
-	  		console.log(c);
+	  	//	console.log(c);
 	  		service.find({fullName : new RegExp(c, "i") },{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
 			res.send(data);
 
@@ -200,6 +200,22 @@ router.post('/showStatistics',function (req, res) {
 	 } 
 	 else{
 	  		service.userStatistics(req.body.id).then(function(data){
+			//	console.log(data);
+				res.send(data);
+			}).catch(function(err){
+			//	console.log(err);
+				res.status(401).send("error");
+
+			});
+
+  }
+});
+router.post('/showTeacherCount',function (req, res) {
+	if(!req.body.id){
+	 	res.status(400).send("Bad Request");
+	 } 
+	 else{
+	  		service.getTeacherStatus(req.body.id).then(function(data){
 				console.log(data);
 				res.send(data);
 			}).catch(function(err){
