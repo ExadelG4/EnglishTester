@@ -2,12 +2,13 @@
 
     <uib-tabset active="activeJustified" justified="true">
         <uib-tab ng-repeat="tab in tabs" heading="{{tab.heading}}">
-            <div ng-include="tab.template"></div>
+            <div ng-include="tab.template">
+            </div>
             <!--<div ui-sref="{{tab.state}}"></div>-->
         </uib-tab>
-        <uib-tab index="0" heading="Justified">Justified content</uib-tab>
-        <uib-tab index="1" heading="SJ">Short Labeled Justified content</uib-tab>
-        <uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab>
+        <!--<uib-tab index="0" heading="Justified">Justified content</uib-tab>-->
+        <!--<uib-tab index="1" heading="SJ">Short Labeled Justified content</uib-tab>-->
+        <!--<uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab>-->
     </uib-tabset>
 
     <!--<notification></notification>-->

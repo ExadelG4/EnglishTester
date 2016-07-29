@@ -8,15 +8,15 @@
             $scope.tabs = [
                 {
                     "heading": "Finished tests",
-                    "template": "../../admin/assignStd/assignStd.html"
+                    "template": ""
                 },
                 {
                     "heading": "Tests for assign of teachers",
-                    "template": "../../admin/assignStd/assignStd.html"
+                    "template": "modules/admin/assignTch/assignTch.html"
                 },
                 {
                     "heading": "Tests for assign of students",
-                    "template": "../../admin/assignTch/assignTch.html"
+                    "template": "modules/admin/assignStd/assignStd.html"
                 }
             ];
                 
