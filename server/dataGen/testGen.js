@@ -102,8 +102,8 @@ var addAll = function(){
 
 
 	console.log('Default testGen. Please, wait...');
-	testService.removeCollection().then(function(data){
-		testService.removeCollectionB().then(function(data){
+	testService.removeCollection({}).then(function(data){
+		testService.removeCollectionB({}).then(function(data){
 			addAll(10,10,10,10,10);
 		}).catch(function(err){
 			console.log(err);
