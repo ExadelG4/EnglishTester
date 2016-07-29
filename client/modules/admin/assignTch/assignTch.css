@@ -5,12 +5,10 @@
 .sel1 > input, .sel2 > input {
     display: block;
     height: 45px;
-    padding: 5px;
-    text-align: center;
 }
 
 .sel1 > *, .sel2 > * {
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 .formSelect {

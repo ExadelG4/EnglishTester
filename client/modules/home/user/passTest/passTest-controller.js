@@ -1,26 +1,40 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer', function($scope, $state, userService, angularPlayer) {
+	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer','notification',
+		 function($scope, $state, userService, angularPlayer, notification) {
+
 		$scope.$on('$stateChangeStart', function () {
-			if (angularPlayer.getPlaylist().length > 0) {
-				angularPlayer.clearPlaylist( function() {			
-				});
-			}
+			if(angularPlayer.getPlaylist().length > 0)
+    			angularPlayer.clearPlaylist( function() {}); 
 		});
+		//$scope.startTest = false;
+		userService.getStatus().then ( function(result) {
+			if(result.status !== 'open') {
+				$state.go('home');
+			}
+			/*else {
+				$scope.startTest = true;
+			}*/
+		})
 
+		$scope.whichPart = 1;
 
-		$scope.allQuestions = null;
-		$scope.currentPage = 1;
-		$scope.copyCurrentPage = 1;
-		$scope.neededNumPage = '';
-		$scope.validNeededNumPage = true;
-		$scope.userAnswers = [];
-		$scope.validAnswers = [];
-		$scope.totalCount = null;
-		$scope.omg = {
-			tempChoise: null
-		};
+		$scope.initVars = function() { 
+			$scope.allQuestions = null;
+			$scope.currentPage = 1;
+			$scope.copyCurrentPage = 1;
+			$scope.neededNumPage = '';
+			$scope.validNeededNumPage = true;
+			$scope.userAnswers = [];
+			$scope.validAnswers = [];
+			$scope.totalCount = null;
+			$scope.omg = {
+				tempChoise: null
+			};
+		}
+
+		$scope.initVars();
 
 		/*$scope.allQuestions = [
 			{
@@ -82,26 +96,23 @@
 		};
 
 		var isTextType = function(type) {
-			return type === 'questionWithoutChoiceOfAnswers' || type === 'essay' || type === 'listeningWithoutChoiceOfAnswers';	
+			return type === 'questionWithoutChoiceoOfAnswers' || type === 'essay' || type === 'listeningWithoutChoiceOfAnswers';	
 		};
 		var isAudioType = function(type) {
 			return type === 'speaking';
 		}
 
-		userService.getTest().then( function(result) {
+		$scope.initAll = function(result) {
 			$scope.allQuestions = result;
 			$scope.totalCount = $scope.allQuestions.length;
 
 			for (let i = 0; i < $scope.totalCount; ++i) {
 				var tempAnswer = {
 					qId: '',
-					answers: [],
+					answer: [],
 					audioAnswer: ''
 				};
-				/*if (isCheckboxType($scope.allQuestions[i].type) || isRadioType($scope.allQuestions[i].type)) {
-						tempAnswer.answers = [];
-				};*/
-				tempAnswer.qId = $scope.allQuestions[i].qId;
+				tempAnswer.qId = $scope.allQuestions[i]._id;
 				tempAnswer.type = $scope.allQuestions[i].type;
 				$scope.userAnswers.push(tempAnswer);
 			}
@@ -110,6 +121,10 @@
   		}
 
   		$scope.initNewPage($scope.currentPage);
+		}
+
+		userService.getTest().then( function(result) {
+			$scope.initAll(result);
 	 	});
 
 		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
@@ -117,7 +132,7 @@
 		$scope.urls = {
 				'oneOfMany': startUrl + '1.html',
 				'manyOfMany': startUrl + '2.html',
-				'questionWithoutChoiceOfAnswers': startUrl + '3.html',
+				'questionWithoutChoiceoOfAnswers': startUrl + '3.html',
 				'essay': startUrl + '4.html',
 				'listeningWithOneOfMany': startUrl + '5.html',
 				'listeningWithManyOfMany': startUrl + '6.html',
@@ -126,27 +141,26 @@
 			};
 
 
-		//init first page
 		$scope.initNewPage = function(currentPage) {
 			if (isCheckboxType($scope.allQuestions[currentPage - 1].type)) {
 		 		$scope.omg.tempChoise = [];
 			 	for (var i = 0; i < $scope.allQuestions[currentPage - 1].options.length; ++i) {
 	    			$scope.omg.tempChoise.push(false);
 	    		}
-	    		for (var i = 0; i < $scope.userAnswers[currentPage - 1].answers.length; ++i) {
-	    			$scope.omg.tempChoise[$scope.userAnswers[currentPage - 1].answers[i]] = true;
+	    		for (var i = 0; i < $scope.userAnswers[currentPage - 1].answer.length; ++i) {
+	    			$scope.omg.tempChoise[$scope.userAnswers[currentPage - 1].answer[i]] = true;
 	    		}
 	    	}
 	    	else if (isRadioType($scope.allQuestions[currentPage - 1].type)) {
-	    		if($scope.userAnswers[currentPage - 1].answers[0] !== null) {
-	    			$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answers[0];
+	    		if($scope.userAnswers[currentPage - 1].answer[0] !== null) {
+	    			$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answer[0];
 	    		}
 	    		else {
 	    			$scope.omg.tempChoise = -1;
 	    		}
 	    	}
 	    	else if (isTextType($scope.allQuestions[currentPage - 1].type)) {
-	    		$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answers[0];
+	    		$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answer[0];
     		}
     		else {
     			//audio ans
@@ -155,27 +169,27 @@
 			if($scope.allQuestions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers' || 
 				$scope.allQuestions[currentPage - 1].type === 'listeningWithOneOfMany' ||
 				$scope.allQuestions[currentPage - 1].type === 'listeningWithManyOfMany') {
-    			song.url = $scope.allQuestions[currentPage - 1].audio; 
-				angularPlayer.addTrack(song);
+    			$scope.song.url = $scope.allQuestions[currentPage - 1].audio; 
+				angularPlayer.addTrack($scope.song);
 			}
 
 		};
 
 		$scope.savePrevPage = function(prevNumPage) {
 			if (isCheckboxType($scope.allQuestions[prevNumPage - 1].type)) {
-		 		$scope.userAnswers[prevNumPage - 1].answers = [];
+		 		$scope.userAnswers[prevNumPage - 1].answer = [];
 			 	for (var i = 0; i < $scope.omg.tempChoise.length; ++i) {
 			 		if ($scope.omg.tempChoise[i]) {
-	    				$scope.userAnswers[prevNumPage - 1].answers.push(i);
+	    				$scope.userAnswers[prevNumPage - 1].answer.push(i);
 	    			}
 	    		}
 		 	}
 		 	else if (isRadioType($scope.allQuestions[prevNumPage - 1].type)) {
-		 		$scope.userAnswers[prevNumPage - 1].answers = [];
-		 		$scope.userAnswers[prevNumPage - 1].answers.push($scope.omg.tempChoise);	
+		 		$scope.userAnswers[prevNumPage - 1].answer = [];
+		 		$scope.userAnswers[prevNumPage - 1].answer.push($scope.omg.tempChoise);	
 		 	}
 		 	else if (isTextType($scope.allQuestions[prevNumPage - 1].type)) {
-		 		$scope.userAnswers[prevNumPage - 1].answers[0] = $scope.omg.tempChoise;
+		 		$scope.userAnswers[prevNumPage - 1].answer[0] = $scope.omg.tempChoise;
 		 	}
 		 	else {
 		 		//audio ans
@@ -200,24 +214,21 @@
 
 		};
 
-		$scope.createSong = function(urlAudio, song) {
+		/*$scope.createSong = function(urlAudio, song) {
 			song.url = urlAudio;
 			return song;
-		};
+		};*/
 
 
 		$scope.pageChanged = function(prevNumPage) {
     		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
+    		$scope.omg.tempChoise = null;
     		if(angularPlayer.getPlaylist().length > 0)
     			angularPlayer.clearPlaylist( function() {
-    				$scope.initNewPage($scope.currentPage);
-    				$scope.copyCurrentPage = $scope.currentPage;
-    			});    		
-    		else {
-    			$scope.initNewPage($scope.currentPage);
-    			$scope.copyCurrentPage = $scope.currentPage;
-    		}
+    				});    		
+    		$scope.initNewPage($scope.currentPage);
+    		$scope.copyCurrentPage = $scope.currentPage;
   		};
   		
   		$scope.changeValidC = function(currentPage) {
@@ -247,12 +258,20 @@
   			return true;
   		};
   		$scope.sendFirstPart = function() {
-  			var data = {
-  				data: $scope.userAnswers,
-  				id: 'sss'
-  			}
-  			userService.sendFirstPart(data)
-  				.then ( function() {/*hz hz hz zapusk 2y raz*/});
+  			userService.sendFirstPart($scope.userAnswers)
+  				.then ( function(data) {
+  					notification.success("You have successfully completed the first part of the text.");
+  					$scope.whichPart = 2;
+  					$scope.initVars();
+  					$scope.initAll(data);
+  				});
+  		};
+  		$scope.sendSecondPart = function() {
+  			userService.sendSecondPart($scope.userAnswers)
+  				.then ( function() {
+  					$state.go('home');
+  					notification.success("You have successfully completed the first part of the text.");
+  				});
   		};
 
 	}]);

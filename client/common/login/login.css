@@ -1,6 +1,7 @@
 html {
     min-height: 100%;
     position: relative;
+    background-color: white !important;
 }
 
 .login-wrapper{
@@ -8,10 +9,20 @@ html {
     width: 100%;
     top: 0;
     left: 0;
+    background-color: white !important;
+    font-family: 'Pavanam', sans-serif;
 }
 
 .login-container input {
-    color: white;
+    display: block;
+    color: black;
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 18px;
+    padding: 5px;
+    border-width: 0px !important;
+    font-size: 1.2em !important;
+    /*border: 1px solid #ccc !important;*/
 }
 
 body, .login-wrapper {
@@ -23,32 +34,40 @@ h1 {
     margin-top: 0;
 }
 
-.login-container input {
-    margin-bottom: 10px;
-}
 
 .login-container {
     width: 250px;
-    top: 10%;
-    right: 25%;
-    position: absolute;
+    margin: auto;
+    margin-top: 50px;
     padding: 30px;
-    border-radius: 15px;
-    background-color: rgba(57, 76, 122, 0.9) !important;
+    border-radius: 8px !important;
+    /*box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);*/
+    box-shadow: 0 0 5px rgba(0,0,0,.12),0 0 20px rgba(0,0,0,.24);
+    background-color: white !important
 }
 
-    .login-container input {
-        display: block;
-        padding: 5px;
-        position: relative;
-        margin-bottom: 10px;
-    }
 
 .logo {
-    width: 100%;
-    height: 100%;
+    width: 90%;
 }
 
 .warning-text {
-    color: red;
+    font-size: 1.2em !important;
+    color: #c53535;
+}
+
+.btn-login {
+    display: block;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px !important;
+    background-color: #5bc0de;
+    color: white;
+    font-size: 1.5em;
+}
+
+.btn-login:hover, .btn-login:active, .btn-login:focus {
+    outline: none !important;
 }

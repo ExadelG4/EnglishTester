@@ -1,18 +1,20 @@
-<uib-pagination items-per-page="1" ng-model="currentPage" total-items="totalCount" max-size="4" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" ng-change="pageChanged(copyCurrentPage)"> 
-</uib-pagination>
+<!--div ng-if="startTest"-->
+	<uib-pagination items-per-page="1" ng-model="currentPage" total-items="totalCount" max-size="4" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" ng-change="pageChanged(copyCurrentPage)"> 
+	</uib-pagination>
 
-<form name="num">
-	<label for="numPage">Enter number of question</label>
-	<input name="numPage" ng-model="neededNumPage" ng-pattern="'[0-9]{1,10}'" ng-change="validNeededNumPage = true;">
-	<button class="btn" ng-click="setNumPage(neededNumPage)" ng-disabled="num.numPage.$invalid">Go</button>
-	<span ng-show="!validNeededNumPage" class="error-mes">Question not found</span>
+	<form name="num">
+		<label for="numPage">Enter number of question</label>
+		<input name="numPage" ng-model="neededNumPage" ng-pattern="'[0-9]{1,10}'" ng-change="validNeededNumPage = true;">
+		<button class="btn" ng-click="setNumPage(neededNumPage)" ng-disabled="num.numPage.$invalid">Go</button>
+		<span ng-show="!validNeededNumPage" class="error-mes">Question not found</span>
 
-</form>
+	</form>
 
-<div ng-repeat="question in allQuestions track by $index">
-	<div ng-if="$index === $parent.currentPage - 1" ng-include="urls[question.type]">
+	<div ng-repeat="question in allQuestions track by $index">
+		<div ng-if="$index === $parent.currentPage - 1" ng-include="urls[question.type]">
+		</div>
 	</div>
-</div>
 
-<button class="btn" ng-disabled="!allValidAnswers()" ng-click="sendFirstPart()">Finish first part test</button>
-
+	<button class="btn" ng-if="whichPart === 1" ng-disabled="!allValidAnswers()" ng-click="sendFirstPart()">Submit</button>
+	<button class="btn" ng-if="whichPart === 2" ng-disabled="!allValidAnswers()" ng-click="sendSecondPart()">Submit</button>
+<!--/div-->

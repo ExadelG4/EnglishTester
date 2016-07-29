@@ -58,10 +58,13 @@ function authenticate(email, pass){
                     var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
                     now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
+                    //console.log(user.role == 'guest');
                     if(user.role == 'guest'){
-                        stackService.findOpenTests(user,{},{}).then(function(data){
+                        stackService.findOpenTests({userId: user._id},{},{}).then(function(data){
+                            console.log(data);
                             if(data.length){
                                 defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
+                                console.log(data);
                             }
                             else{
                                 defer.reject();
@@ -100,22 +103,22 @@ function getUserStatus(_userId){
         stackService.findOpenTests({userId: _userId},{},{}).then(function(data){
             if(data.length != 0){
                 
-                pr.resolve('open');
+                pr.resolve({status:'open',dateStart: data[0].dateStart, dateEnd: data[0].dateEnd });
             }                
             else 
                 stackService.findRequest({userId: _userId},{},{}).then(function(data){
                     if(data.length != 0){
                         
-                        pr.resolve('req');
+                        pr.resolve({status: 'req'});
                     }                         
                     else 
                         stackService.findStack({userId: _userId},{},{}).then(function(data){
                              if(data.length != 0){
                                     
-                                    pr.resolve('stack'); 
+                                    pr.resolve({status:'stack'}); 
                              }else {
                                  
-                                 pr.resolve('free');
+                                 pr.resolve({status:'free'});
                              }  
                         }).catch(function (err){
                             pr.reject(err);
@@ -158,12 +161,16 @@ function update(query, update,options){
 }
 
 function submit1(data, id){
+    console.log('us');
     var defer = q.defer();
 
     stackService.checkFirstPart(data, id).then(function(level){
+        console.log('promise1');
         testService.getSecondTest(level).then(function(data){
+            console.log('promise2');
             defer.resolve(data);
         }).catch(function(err){
+            console.log('err');
             defer.reject(err);
         })
     }).catch(function(err){
@@ -194,6 +201,48 @@ function updateStatus(id,_status){
                     });
 }
 
+function userStatistics(id){
+var pr = q.defer();
+    user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
+        if (data){
+            if(data.role == 'admin'){
+             
+                pr.resolve(data);
+            }
+            else if(data.role == 'user' || data.role == 'guest'){
+                stackService.findOneResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
+                        var userInfo ={};
+                        userInfo.firstName = data.firstName;
+                        userInfo.lastName = data.lastName;
+                        userInfo.email = data.email;
+                        userInfo.number = data.number;
+                        userInfo.role = data.role;
+                        userInfo.status = data.status;
+                    if(data2){
+                        userInfo.result = data2.result;
+                        userInfo.teacherId = data2.teacherId;
+                        userInfo.date = data2.date;
+                        userInfo.teacherLastName = data2.teacherLastName;
+                        userInfo.teacherFirstName = data2.teacherFirstName;
+                
+                        pr.resolve(userInfo);
+                    }
+                    else pr.resolve(data);
+                }).catch(function(err){
+                    pr.reject(err);
+                });
+            }
+        }
+        else {
+            pr.resolve('user not found');
+        }
+
+    }).catch(function(err){
+        pr.reject('Bad data :(');
+    });
+    return pr.promise;
+}
+
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
@@ -209,3 +258,4 @@ module.exports.submit1 = submit1;
 module.exports.submit2 = submit2;
 module.exports.update = update;
 module.exports.updateStatus = updateStatus;
+module.exports.userStatistics = userStatistics;

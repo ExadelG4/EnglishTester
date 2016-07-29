@@ -1,0 +1,30 @@
+.listOfSearch {
+    list-style-type: none;
+    padding: 10px;
+    width: 100%;
+    height: 20em;
+    line-height: 2em;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0,0,0,.12),0 0 20px rgba(0,0,0,.24);
+    margin-top: 3%;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: white;
+}
+
+    .listOfSearch p {
+        color: grey;
+    }
+
+.showUserInfo {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+    .showUserInfo input {
+        display: block;
+        height: 45px;
+        padding: 5px;
+        margin-top: 3%;
+        width: 100%;
+    }
