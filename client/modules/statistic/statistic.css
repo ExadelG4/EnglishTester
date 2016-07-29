@@ -12,6 +12,19 @@
     background-color: white;
 }
 
-.listOfSearch p {
-    color: grey;
+    .listOfSearch p {
+        color: grey;
+    }
+
+.showUserInfo {
+    padding-left: 3%;
+    padding-right: 3%;
 }
+
+    .showUserInfo input {
+        display: block;
+        height: 45px;
+        padding: 5px;
+        margin-top: 3%;
+        width: 100%;
+    }

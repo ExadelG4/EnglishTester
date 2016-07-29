@@ -137,7 +137,6 @@ router.get('/getTeachers', function(req, res) {
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));
 		  });
-
 });
 
 router.get('/getFinishedUsers', function(req, res){
