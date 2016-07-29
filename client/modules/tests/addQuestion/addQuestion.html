@@ -86,20 +86,60 @@
     		</div>
 
         <div ng-if="selectedQue === typeOfQuestion[4].type">
+           <form name="upload">
+            <input type="file" name="myfile">
+            <input type="submit" value="Загрузить">
+          </form>
+
+          <div id="log">Прогресс загрузки</div>
+
+          <script>
+            function log(html) {
+              document.getElementById('log').innerHTML = html;
+            }
+
+            document.forms.upload.onsubmit = function() {
+              var file = this.elements.myfile.files[0];
+              if (file) {
+                upload(file);
+              }
+              return false;
+            }
+
+
+            function upload(file) {
+
+              var xhr = new XMLHttpRequest();
+
+              // обработчики можно объединить в один,
+              // если status == 200, то это успех, иначе ошибка
+              xhr.onload = xhr.onerror = function() {
+                if (this.status == 200) {
+                  log("success");
+                } else {
+                  log("error " + this.status);
+                }
+              };
+
+              // обработчик для закачки
+              xhr.upload.onprogress = function(event) {
+                log(event.loaded + ' / ' + event.total);
+              }
+
+              xhr.open("POST", "upload", true);
+              xhr.send(file);
+
+            }
+          </script>
+
           <form name="main">
             <div>
               <p class="ads">Text of question</p>
               <textarea placeholder="Write here.." ng-model="finalQue.question" required></textarea>
             </div>
             <div>
-              <input type="file"/>
-              <!--ul>
-              nv-file-select uploader="uploader"
-                <li ng-repeat="item in uploader.queue">
-                  Name: <span ng-bind="item.file.name"></span>
-                  <button ng-click="item.upload()">upload</button>
-                </li>
-              </ul-->
+              
+              
             </div>
             <p class="ads">Level of question</p>
             <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
