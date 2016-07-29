@@ -82,17 +82,17 @@ function updateStackTeacher(id,field){
 	return stack.update(id,field);
 };
 
-function removeStackCollection(){
-	return stack.remove();
+function removeStackCollection(query){
+	return stack.remove(query);
 }
-function removeResultsCollection(){
-	return results.remove();
+function removeResultsCollection(query){
+	return results.remove(query);
 }
-function removeRequestCollection(){
-	return request.remove();
+function removeRequestCollection(query){
+	return request.remove(query);
 }
-function removeOpenTestsCollection(){
-	return openTests.remove();
+function removeOpenTestsCollection(query){
+	return openTests.remove(query);
 }
 
 

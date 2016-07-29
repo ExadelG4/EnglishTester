@@ -89,8 +89,8 @@ function authenticate(email, pass){
 
     return defer.promise;
 }
-function removeCollection(){
-	return user.remove();
+function removeCollection(query){
+	return user.remove(query);
 }
 
 function find(query, fields, options){
@@ -100,10 +100,23 @@ function find(query, fields, options){
 function getUserStatus(_userId){
     var pr = q.defer();
     userInfo(_userId).then(function(data){
-        stackService.findOpenTests({userId: _userId},{},{}).then(function(data){
-            if(data.length != 0){
-                
-                pr.resolve({status:'open',dateStart: data[0].dateStart, dateEnd: data[0].dateEnd });
+        stackService.findOneOpenTests({userId: _userId},{},{}).then(function(data){
+            if(data){
+                var now = new Date().getTime();
+                if(now >= data.dateStart && now<= data.dateEnd){
+                    pr.resolve({status:'open',dateStart: data.dateStart, dateEnd: data.dateEnd });
+                 }
+                else {
+
+                    stackService.removeOpenTestsCollection({userId: _userId}).then(function(data){
+                        updateStatus(_userId,'free');
+                        pr.resolve({status:'free'});
+s
+                    }).catch(function(err){
+                        pr.reject(err);
+                    });
+                    
+                 }
             }                
             else 
                 stackService.findRequest({userId: _userId},{},{}).then(function(data){

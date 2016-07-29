@@ -14,11 +14,11 @@ function addNewQuestion(info){
 function addNewQuestionB(info){
 	return testB.save(info);	
 }
-function removeCollection(){
-	return testA.remove();
+function removeCollection(query){
+	return testA.remove(query);
 }
-function removeCollectionB(){
-	return testB.remove();
+function removeCollectionB(query){
+	return testB.remove(query);
 }
 function getTest(user){
 	return testMaker.make(testA,user);

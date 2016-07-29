@@ -24,11 +24,11 @@ DatabasService.prototype.findById = function(id, fields, options){
 
     return defer.promise;
 }
-DatabasService.prototype.remove = function(){
+DatabasService.prototype.remove = function(query){
     var defer = q.defer();
-    this.model.remove({},function(err){
+    this.model.remove(query,function(err){
         if(err) defer.reject(err);
-        defer.resolve({message : "Collection removed"});
+        defer.resolve("removed");
 
     });
 
@@ -82,6 +82,7 @@ DatabasService.prototype.update = function (query, update,options) {
     });
     return defer.promise;
 }
+
 
 module.exports = function(model){
     return new DatabasService(model);

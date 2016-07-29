@@ -102,7 +102,7 @@ else {
 	console.log("Input numbers of roles: ");
 	prompt.get(['Admin', 'User','Teacher','Guest'], function (err, result) {
 	  	console.log('Please, wait...');
-	   service.removeCollection().then(function(data){
+	   service.removeCollection({}).then(function(data){
 	   		addUsers(result.Admin,result.User,result.Teacher,result.Guest);
 		  }).catch(function (err) {
 			 console.log(err);
