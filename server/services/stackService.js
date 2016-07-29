@@ -109,6 +109,20 @@ function findOneOpenTests(){
 	return openTests.findOne(arguments[0],arguments[1],arguments[2]);
 }
 
+function stackCount(){
+	return stack.count(arguments[0]);
+}
+function resultsCount(){
+	return results.count(arguments[0]);
+}
+function requestCount(){
+	return request.count(arguments[0]);
+}
+function openTestsCount(){
+	return openTests.count(arguments[0]);
+}
+
+
 function checkFirstPart(data, id){
 	var pr = q.defer();
 	var len = data.length;
@@ -186,6 +200,9 @@ module.exports.findOneRequest = findOneRequest;
 module.exports.findOneResults = findOneResults;
 module.exports.findOneStack = findOneStack;
 module.exports.findOneOpenTests = findOneOpenTests;
-
+module.exports.stackCount =stackCount;
+module.exports.resultsCount = resultsCount;
+module.exports.openTestsCount = openTestsCount;
+module.exports.requestCount = requestCount;
 module.exports.checkFirstPart = checkFirstPart;
 module.exports.sendTest = sendTest;

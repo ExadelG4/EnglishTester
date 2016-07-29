@@ -61,10 +61,10 @@ function authenticate(email, pass){
                     //console.log(user.role == 'guest');
                     if(user.role == 'guest'){
                         stackService.findOpenTests({userId: user._id},{},{}).then(function(data){
-                            console.log(data);
+                           // console.log(data);
                             if(data.length){
                                 defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
-                                console.log(data);
+                              //  console.log(data);
                             }
                             else{
                                 defer.reject();
@@ -111,7 +111,7 @@ function getUserStatus(_userId){
                     stackService.removeOpenTestsCollection({userId: _userId}).then(function(data){
                         updateStatus(_userId,'free');
                         pr.resolve({status:'free'});
-s
+
                     }).catch(function(err){
                         pr.reject(err);
                     });
@@ -174,16 +174,16 @@ function update(query, update,options){
 }
 
 function submit1(data, id){
-    console.log('us');
+   // console.log('us');
     var defer = q.defer();
 
     stackService.checkFirstPart(data, id).then(function(level){
-        console.log('promise1');
+     //   console.log('promise1');
         testService.getSecondTest(level).then(function(data){
-            console.log('promise2');
+       //     console.log('promise2');
             defer.resolve(data);
         }).catch(function(err){
-            console.log('err');
+         //   console.log('err');
             defer.reject(err);
         })
     }).catch(function(err){
@@ -208,9 +208,9 @@ function submit2(data, uid){
 
 function updateStatus(id,_status){
    update({_id:id},{ $set: { status: _status }},{}).then(function(data){
-                        console.log('user update')
+                  //      console.log('user update')
                     }).catch(function(err){
-                       console.log(err);
+                    //   console.log(err);
                     });
 }
 
@@ -256,6 +256,33 @@ var pr = q.defer();
     return pr.promise;
 }
 
+function getTeacherStatus(_tId){
+    var pr = q.defer();
+    userInfo(_tId).then(function(data){
+        if(data){
+            stackService.resultsCount({teacherId:_tId}).then(function(data){
+                    console.log(data);
+                    stackService.stackCount({teacherId:_tId}).then(function(data2){
+                        pr.resolve({totalTests: data, assignTest: data2})
+                    }).catch(function(err){
+                        pr.reject(err);
+                    });
+            }).catch(function(err){
+                pr.reject(err);
+            });
+        }
+        else{
+             pr.reject('teacher not found');
+        }
+                                 
+    }).catch(function(err){
+        console.log('bad teacher id');
+        pr.reject(err);
+    });
+
+    return pr.promise;
+    
+}
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
@@ -272,3 +299,4 @@ module.exports.submit2 = submit2;
 module.exports.update = update;
 module.exports.updateStatus = updateStatus;
 module.exports.userStatistics = userStatistics;
+module.exports.getTeacherStatus = getTeacherStatus;

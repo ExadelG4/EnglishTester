@@ -41,7 +41,7 @@ router.get('/status', passport.authenticate('jwt', { session: false }),function(
 	var token = req.header('Authorization');
 	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
 		if(err){
-			console.log(err);
+			//console.log(err);
 		}
 		else{ 
 			var id = decoded._id;
