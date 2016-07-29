@@ -42,6 +42,7 @@
             $scope.freeStdTel = '';
             $scope.mytime3 = null;
             $scope.mytime4 = null;
+            $scope.selectedItem4 = '';
             //$scope.dt = null;
             //$scope.dt2 = null;
         };

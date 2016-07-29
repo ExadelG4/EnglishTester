@@ -2,7 +2,7 @@
     <div class="formSelect" ng-controller="assignTchController">
         <div class="form-group sel1">
 
-            <ol class="nya-bs-select" title="Choose teacher" ng-model="selectedItem2" data-live-search="true" ng-change="chooseTeacher(selectedItem2)">
+            <ol class="nya-bs-select" size="7" title="Choose teacher" ng-model="selectedItem2" data-live-search="true" ng-change="chooseTeacher(selectedItem2)">
                 <li nya-bs-option="teacher in teachers">
                     <a>
                         {{ teacher.fullName }}
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group sel2">
 
-            <ol class="nya-bs-select" title="Choose student" ng-model="selectedItem3" data-live-search="true" ng-change="chooseUser(selectedItem3)">
+            <ol class="nya-bs-select" size="7" title="Choose student" ng-model="selectedItem3" data-live-search="true" ng-change="chooseUser(selectedItem3)">
                 <li nya-bs-option="student in students">
                     <a>
                         {{ student.fullName }}

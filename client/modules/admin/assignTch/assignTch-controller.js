@@ -45,6 +45,8 @@
             $scope.tchName = '';
             $scope.tchMail = '';
             $scope.tchTel = '';
+            $scope.selectedItem2 = '';
+            $scope.selectedItem3 = '';
 
         }
 
