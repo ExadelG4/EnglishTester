@@ -112,22 +112,6 @@ router.post('/assignTeacher',function (req, res) {
   }
 });
 
-router.post('/submit1', passport.authenticate('jwt', { session: false }), function(req,res){
-	console.log('start');
-	service.submit1(req.body, req.user._id).then(function(data){
-		res.json(data);
-	}).catch(function(err){
-		res.send(err);
-	});
-});
-
-router.post('/submit2', passport.authenticate('jwt', { session: false }), function(req,res){
-	service.submit2(req.body, req.user._id).then(function(data){
-		res.send();
-	}).catch(function(err){
-		res.status(400).send(err);
-	});
-});
 
 router.get('/getAll',passport.authenticate('jwt', { session: false }), function(req, res) {
 	
@@ -153,7 +137,6 @@ router.get('/getTeachers', function(req, res) {
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));
 		  });
-
 });
 
 router.get('/getFinishedUsers', function(req, res){
@@ -191,8 +174,6 @@ router.get('/getResults', function(req, res){
 });
 
 router.post('/getFromReg',function(req, res) {
-	//console.log(req.body)
-	//console.log(req.body.name)
 	 if(!req.body){
 	 	res.json({ success: false, message: 'Please enter correct regex' });
 	 } 
@@ -213,4 +194,20 @@ router.post('/getFromReg',function(req, res) {
 
 });
 
+router.post('/showStatistics',function (req, res) {
+	if(!req.body.id){
+	 	res.status(400).send("Bad Request");
+	 } 
+	 else{
+	  		service.userStatistics(req.body.id).then(function(data){
+				console.log(data);
+				res.send(data);
+			}).catch(function(err){
+				console.log(err);
+				res.status(401).send("error");
+
+			});
+
+  }
+});
 module.exports = router;

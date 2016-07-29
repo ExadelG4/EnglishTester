@@ -7,7 +7,7 @@ var TestBScheme = new Schema(
 		type: {
 			type: String,
 			required: true,
-			enum: ['questionWithoutChoiceOfAnswers','essay','listeningWithoutChoiceOfAnswers','speaking'],
+			enum: ['questionWithoutChoiceOfAnswers','essay','listeningWithoutChoiceOfAnswers'],
 			default: 'essay'
   		},
 		level:{
