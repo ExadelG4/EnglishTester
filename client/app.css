@@ -11,10 +11,16 @@ body div, table, span, ul, li, input, select, textarea, a, h6, h5, h4, h3, h2, h
     border-radius: 0 !important;
 }
 
-.btn{
-    border-radius: 1px !important;
+.btn, .btn:hover, .btn-active, .btn:focus {
     border: inherit;
+    outline: none !important;
 }
+
+.btn-info {
+    border-radius: 20px !important;
+    margin-top: 10px;
+}
+
 h1, h2, h3, h4, h5 {
     text-align: center;
 }
@@ -24,7 +30,7 @@ input {
     background-color: white !important;
     border-radius: 1px !important;
     border-width: 0px !important;
-    box-shadow: 0 -1px 10px -1px rgba(0,0,0,.24) !important;
+    /*box-shadow: 0 -1px 10px -1px rgba(0,0,0,.24) !important;*/
     padding: 10px !important;
     /*box-shadow: 0 0 1px rgba(0,0,0,.12),0 0 5px rgba(0,0,0,.24) !important;*/
 }

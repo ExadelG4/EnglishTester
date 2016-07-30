@@ -1,6 +1,7 @@
 <div class="formWrapper col-sm-12 col-md-12 col-lg-12">
     <div class="formSelect col-sm-12 col-md-12 col-lg-12" ng-controller="assignStdController">
-        <div class="step1 col-sm-5 col-md-5 col-lg-5">
+
+        <div class="step1 col-xs-7 col-sm-6 col-md-6 col-lg-5 pull-left">
             <div class="form-group sel2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                 <ol class="nya-bs-select" size="7" title="Choose student" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
@@ -30,7 +31,7 @@
                     <div uib-timepicker ng-model="mytime3" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
                 </div>
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1 secondDate">
                     <p class="input-group">
                         <input type="text" class="form-control" ng-model="dt4" uib-datepicker-popup is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
@@ -44,17 +45,17 @@
                 </div>
 
 
-                <button class="btn btn-primary btn-block" type="submit" ng-click="addStudent(dt3, dt4)">Add student</button>
-                <button class="btn btn-primary btn-block" type="submit" ng-click="reset()">Reset</button>
+                <button class="btn btn-info btn-block" type="submit" ng-click="addStudent(dt3, dt4)">Add student</button>
+                <button class="btn btn-info btn-block" type="submit" ng-click="reset()">Reset</button>
             </div>
         </div>
 
 
-        <div class="step2 col-sm-3 col-md-3 col-lg-3">
+        <div class="step2 col-xs-7 col-sm-3 col-md-4 col-lg-5 pull-right">
             <div class="form-group sel4">
                 <label for="sel4">Choosen students</label>
                 <select ng-model="studentList" class="form-control" id="sel4" multiple="multiple" ng-options="user for user in showList"></select>
-                <button class="btn btn-primary btn-block" type="submit" ng-click="submitStudentsList()">Submit</button>
+                <button class="btn btn-info btn-block" type="submit" ng-click="submitStudentsList()">Submit</button>
             </div>
         </div>
 

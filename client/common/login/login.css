@@ -4,6 +4,15 @@ html {
     background-color: white !important;
 }
 
+h1 {
+    margin-top: 0;
+}
+
+body, .login-wrapper {
+    background-size: 100% 100%;
+    height: 100%;
+}
+
 .login-wrapper{
     position: absolute;
     width: 100%;
@@ -13,38 +22,27 @@ html {
     font-family: 'Pavanam', sans-serif;
 }
 
-.login-container input {
-    display: block;
-    color: black;
-    position: relative;
-    margin-bottom: 10px;
-    margin-top: 18px;
-    padding: 5px;
-    border-width: 0px !important;
-    font-size: 1.2em !important;
-    /*border: 1px solid #ccc !important;*/
-}
-
-body, .login-wrapper {
-    background-size: 100% 100%;
-    height: 100%;
-}
-
-h1 {
-    margin-top: 0;
-}
-
-
 .login-container {
     width: 250px;
     margin: auto;
     margin-top: 50px;
     padding: 30px;
-    border-radius: 8px !important;
     /*box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);*/
     box-shadow: 0 0 5px rgba(0,0,0,.12),0 0 20px rgba(0,0,0,.24);
     background-color: white !important
 }
+
+    .login-container input {
+        display: block;
+        color: black;
+        position: relative;
+        margin-bottom: 10px;
+        margin-top: 18px;
+        padding: 5px;
+        border-width: 0px !important;
+        font-size: 1.2em !important;
+        /*border: 1px solid #ccc !important;*/
+    }
 
 
 .logo {
@@ -62,7 +60,6 @@ h1 {
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 20px !important;
     background-color: #5bc0de;
     color: white;
     font-size: 1.5em;
