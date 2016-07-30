@@ -8,13 +8,8 @@
         };
 
         $scope.role = context.getRole();
-
-        $scope.disable1 = true;
         $scope.disable2 = true;
 
-        $scope.onFrstInput = function() {
-            $scope.disable1 = false;
-        };
 
         $scope.onScndInput = function() {
             $scope.disable2 = false;
@@ -30,7 +25,6 @@
         };
 
         $scope.save = function() {
-            $scope.disable1 = true;
             $scope.disable2 = true;
         };
 
