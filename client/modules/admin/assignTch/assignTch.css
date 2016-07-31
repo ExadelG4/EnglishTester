@@ -1,5 +1,6 @@
 .formWrapper {
     padding: 30px;
+    position: relative;
 }
 
 .sel1 > input, .sel2 > input {
@@ -13,9 +14,12 @@
 
 .formSelect {
     display: inline-block;
-    width: 100%;
-    padding: 30px;
 }
+
+/*.col-centered {*/
+    /*float: none;*/
+    /*margin: 0 auto;*/
+/*}*/
 
 .sel1 > ol, .sel2 > ol {
     width: 100% !important;
@@ -32,6 +36,5 @@
 }
 
 .submit-tch {
-    margin-left: 10px;
-    width: 200px;
+    width: 100%;
 }

@@ -25,19 +25,13 @@
     <link type="text/css" rel="stylesheet" href="infrastructure/toastr/toastr.css">
     <link type="text/css" rel="stylesheet" href="modules/profile/editProfile/editProfile.css">
     <link type="text/css" rel="stylesheet" href="modules/profile/editProfile/chart.css">
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
-
-
-
+    <link type="text/css" rel="stylesheet" href="modules/home/admin/admin-home.css">
+    <link type="text/css" rel="stylesheet" href="modules/home/teacher/teacher-home.css">
 
 
     <link href="https://fonts.googleapis.com/css?family=Pavanam" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Raleway:500|Montserrat:700" rel="stylesheet">
     <!--<link href="bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css" rel="stylesheet"/>-->
-
-
 
 
 </head>
@@ -46,12 +40,13 @@
     <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
     <div ui-view class="main"></div>
 
-    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="../bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
@@ -90,6 +85,7 @@
     <script type="text/javascript" src="modules/home/teacher/teacher-home.controller.js"></script>
     <script type="text/javascript" src="modules/home/teacher/teacher-home.route.js"></script>
     <script type="text/javascript" src="modules/home/teacher/check test/checkTest-controller.js"></script>
+    <script type="text/javascript" src="modules/home/admin/resultNews-controller.js"></script>
 
 
     <!--script type="text/javascript" src="../bower_components/angular-file-upload/dist/angular-file-upload.js"></script-->

@@ -48,9 +48,12 @@ var fillCollections = function () {
                 }
                  if (i >=9){
                      userService.updateStatus(id,'open');
-                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,dateStart: new Date().getTime() , dateEnd: new  Date().getTime()};
-                }
-            }
+                     var now = new Date();
+                     now.setSeconds(now.getSeconds()+18000);
+                
+                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,dateStart: new Date().getTime() , dateEnd: now.getTime()};
+                }}; 
+            
             stackService.addStacks(users.slice(0, 3)).then(function (data) {
                 console.log('stack filled');
                 stackService.addRequests(users.slice(3, 6)).then(function (data) {
@@ -79,10 +82,10 @@ var fillCollections = function () {
 }
 
 console.log('Default testGen. Please, wait...');
-stackService.removeStackCollection().then(function(data){
-    stackService.removeRequestCollection().then(function(data){
-        stackService.removeResultsCollection().then(function(data){
-            stackService.removeOpenTestsCollection().then(function(data){
+stackService.removeStackCollection({}).then(function(data){
+    stackService.removeRequestCollection({}).then(function(data){
+        stackService.removeResultsCollection({}).then(function(data){
+            stackService.removeOpenTestsCollection({}).then(function(data){
                   fillCollections(3,3,3,3);
             }).catch(function (err) {
                  console.log(err);

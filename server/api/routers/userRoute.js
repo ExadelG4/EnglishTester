@@ -17,12 +17,12 @@ router.use(passport.initialize());
 require('../../passport')(passport);
 
 router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
-	console.log(req.user);
+//	console.log(req.user);
 	var token = req.header('Authorization');
-	console.log(token);
+//	console.log(token);
 	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
 		if(err){
-			console.log(err);
+		//	console.log(err);
 		}
 		else{ //console.log(decoded._doc);
 				var doc = {

@@ -86,9 +86,16 @@ exports.getFromReg = function(req, res, next) {
          next();
     }    
 }
-expors.showStstistics = function(req, res, next){
+exports.showStstistics = function(req, res, next){
 
 	if(!req.body.id){	 	
+	 	res.status(400).send("Bad Request");
+	 } else{
+         next();
+    }    
+}
+exports.showTeacherCount = function(req, res, next){    
+    if(!req.body.id){	 	
 	 	res.status(400).send("Bad Request");
 	 } else{
          next();

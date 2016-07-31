@@ -1,4 +1,5 @@
 (function(){
+    'use strict';
     angular.module('admin').controller('assignTchController', ['$scope', 'userService', function($scope, userService) {
 
         $scope.teachers = [];
@@ -33,7 +34,7 @@
             $scope.stdMail = item.email;
             $scope.stdTel = item.number;
             $scope.currentUser = item;
-        }
+        };
 
         $scope.submitTchStd = function() {
             userService.assignTeacher($scope.currentUser._id, $scope.currentTeacher._id);
@@ -44,6 +45,8 @@
             $scope.tchName = '';
             $scope.tchMail = '';
             $scope.tchTel = '';
+            $scope.selectedItem2 = '';
+            $scope.selectedItem3 = '';
 
         }
 

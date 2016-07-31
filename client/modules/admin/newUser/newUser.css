@@ -10,3 +10,11 @@
 .dateTime > div:first-child{
     margin-top: 33px;
 }
+
+.dateTime  div {
+    padding: 0 !important;
+}
+
+.submitNewUser {
+    width: 100% !important;
+}

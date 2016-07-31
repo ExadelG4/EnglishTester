@@ -1,14 +1,15 @@
-'use strict';
-angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
-        $scope.students = [];
+(function(){
+    'use strict';
+    angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
+        $scope.freeStudents = [];
         $scope.showList = [];
         var chooseUserList = [];
         var currentStudent;
 
         userService.getFreeUsers().then(function(data) {
             data.forEach(function(item, i) {
-                $scope.students[i] = item;
-                $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
+                $scope.freeStudents[i] = item;
+                $scope.freeStudents[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
 
@@ -21,9 +22,9 @@ angular.module('admin').controller('assignStdController', ['$scope', 'userServic
 
         $scope.hasChanged = function(item){
             currentStudent = item;
-            $scope.stdName = item.fullName;
-            $scope.stdMail = item.email;
-            $scope.stdTel = item.number;
+            $scope.freeStdName = item.fullName;
+            $scope.freeStdMail = item.email;
+            $scope.freeStdTel = item.number;
         };
 
         $scope.reset = function(){
@@ -36,11 +37,12 @@ angular.module('admin').controller('assignStdController', ['$scope', 'userServic
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
 
-            $scope.stdName = '';
-            $scope.stdMail = '';
-            $scope.stdTel = '';
+            $scope.freeStdName = '';
+            $scope.freeStdMail = '';
+            $scope.freeStdTel = '';
             $scope.mytime3 = null;
             $scope.mytime4 = null;
+            $scope.selectedItem4 = '';
             //$scope.dt = null;
             //$scope.dt2 = null;
         };
@@ -139,5 +141,5 @@ angular.module('admin').controller('assignStdController', ['$scope', 'userServic
 
 
 
-}]);
+}]);})();
 
