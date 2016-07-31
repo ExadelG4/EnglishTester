@@ -101,3 +101,17 @@ exports.showTeacherCount = function(req, res, next){
          next();
     }    
 }
+exports.login = function(req,res, next){
+    if(!req.body.email || !req.body.password){	 	
+	 	res.status(400).send("Bad Request");
+	 } else{
+         next();
+    }   
+}
+exports.refresh = function(req, res, next){
+    if(!req.header('refresh')){	 	
+	 	res.status(400).send("Bad Request");
+	 } else{
+         next();
+    }   
+}

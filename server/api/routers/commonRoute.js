@@ -17,7 +17,7 @@ var key = require('../../config.json');
 router.use(passport.initialize());
 require('../../passport')(passport);
 
-router.post('/login',function (req, res) {
+router.post('/login',contracts.login,function (req, res) {
 
 	service.authenticate(req.body.email, req.body.password).then(function (data) {
 		res.json(data);
@@ -28,7 +28,7 @@ router.post('/login',function (req, res) {
 });
 
 
-router.get('/refresh', passport.authenticate('jwt', { session: false }), function(req, res) {
+router.get('/refresh',contracts.refresh, passport.authenticate('jwt', { session: false }), function(req, res) {
 	 contracts.refresh(req.header('refresh')).then(function(data){
 		 res.json(data);
 	 }).catch(function(err){
@@ -36,24 +36,12 @@ router.get('/refresh', passport.authenticate('jwt', { session: false }), functio
 	 });	
 });
 
-router.get('/status', passport.authenticate('jwt', { session: false }),function(req, res){
-		
-	var token = req.header('Authorization');
-	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
-		if(err){
-			//console.log(err);
-		}
-		else{ 
-			var id = decoded._id;
-			service.getUserStatus(id).then(function(data){
-				res.json(data);
-			}).catch(function(err){
-				res.status(404).send("User not found");
-			});
-		}
-	});
-
-	
+router.get('/status', passport.authenticate('jwt', { session: false }),function(req, res){	
+	service.getUserStatus(req.user._id).then(function(data){
+		res.json(data);
+	}).catch(function(err){
+		res.status(404).send("User not found");
+	});	
 });
 
 router.post('/upload',function(req, res){

@@ -151,8 +151,7 @@ router.get('/getResults', function(req, res){
 		  });
 });
 
-<<<<<<< HEAD
-router.post('/getFromReg',contract.getFromReg,function(req, res) {
+router.post('/getFromReg',contracts.getFromReg,function(req, res) {
 	 
 	var a = req.body.name;
 	var b = a;
@@ -165,8 +164,6 @@ router.post('/getFromReg',contract.getFromReg,function(req, res) {
 	});
 
 });
-
-<<<<<<< HEAD
 router.post('/showStatistics',contracts.showStstistics,function (req, res) {
 	service.userStatistics(req.body.id).then(function (data) {
 		console.log(data);
