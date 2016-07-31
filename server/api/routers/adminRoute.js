@@ -15,7 +15,9 @@ var key = require('../../config.json');
 router.use(passport.initialize());
 require('../../passport')(passport);
 
-router.post('/register',function(req, res) {
+
+
+router.post('/register',contracts.adminRegister,function(err, req, res) {
 	if(!req.body.email || !req.body.password) {
     	res.json({ success: false, message: 'Please enter email and password.' });
   	} else {
@@ -53,7 +55,7 @@ router.post('/register',function(req, res) {
 
 });
 
-router.post('/assignStudents',function(req, res) {
+router.post('/assignStudents',contracts.assignStudent,function(req, res) {
 	 if(!req.body.students){
 	 	res.json({ success: false, message: 'Please enter email and password.' });
 	 } 

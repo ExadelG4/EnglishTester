@@ -7,6 +7,9 @@ var jwt = require('jsonwebtoken');
 var expires = require('../config.json').expires;;
 
 
+
+
+
 function refresh(token){
     var defer = q.defer();
 
@@ -38,4 +41,19 @@ function refresh(token){
     return defer.promise;
 }
 
+
+
 exports.refresh = refresh;
+exports.adminRegister = function(req, res, next){
+    
+    if(!req.body.email || !req.body.password){
+        res.status(400).send("Bad Request");
+        // next("ert");
+    }else{
+         next();
+    }
+};
+
+exports.assignStudent = function(req, res, next){
+
+};
