@@ -15,10 +15,9 @@ var key = require('../../config.json');
 router.use(passport.initialize());
 require('../../passport')(passport);
 
-router.post('/register',function(req, res) {
-	if(!req.body.email || !req.body.password) {
-    	res.json({ success: false, message: 'Please enter email and password.' });
-  	} else {
+
+
+router.post('/register',contracts.adminRegister,function(err, req, res) {	
   		var info ={
   			email : req.body.email,
   			password: req.body.password,
@@ -26,7 +25,7 @@ router.post('/register',function(req, res) {
   			lastName: req.body.secondName,
   			role: 'guest',
   			status: 'open',
-  			fullName : req.body.firstName +' '+ req.body.secondName
+  			fullName : req.body.firstName +' '+ req.body.secondName +' '+req.body.email
   		};
   		var guestOpen = {
   			
@@ -49,15 +48,10 @@ router.post('/register',function(req, res) {
 			res.status(400).send("Bad Request");
 		});
 
-  }
-
 });
 
-router.post('/assignStudents',function(req, res) {
-	 if(!req.body.students){
-	 	res.json({ success: false, message: 'Please enter email and password.' });
-	 } 
-	 else{
+router.post('/assignStudents',contracts.assignStudent,function(req, res) {	 
+	 
 	  		var tempArr = [];
 
 
@@ -68,48 +62,32 @@ router.post('/assignStudents',function(req, res) {
 		  }).catch(function (err) {
 			  res.status(401).send("error");
 		  });
-
-  }
-
 });
 
-router.post('/addQuestion',function(req, res) {
-	
-	 if(!req.body.finalQue){
-	 	res.json({ success: false, message: 'Please, input correct data.' });
-	 } 
-	 else{
-	 		if(!req.body.finalQue.options){
-	 			testService.addNewQuestionB(req.body.finalQue).then(function(data){
-					  res.send('ok');
-					 }).catch(function (err) {
-					   res.status(406).send("Not Acceptable");
-				 	 });
-	 		}
-	  		else{
-	  		
-			  		testService.addNewQuestion(req.body.finalQue).then(function(data){
-					  res.send('ok');
-					 }).catch(function (err) {
-					  res.status(406).send("Not Acceptable");
-				 	 });
-		  }
-  }
+router.post('/addQuestion',contracts.addQuestion,function(req, res) {
+	if (!req.body.finalQue.options) {
 
+		testService.addNewQuestionB(req.body.finalQue).then(function (data) {
+			res.send('ok');
+		}).catch(function (err) {
+			res.status(406).send("Not Acceptable");
+		});
+	}
+	else {
+		testService.addNewQuestion(req.body.finalQue).then(function (data) {
+			res.send('ok');
+		}).catch(function (err) {
+			res.status(406).send("Not Acceptable");
+		});
+	}
 });
 
-router.post('/assignTeacher',function (req, res) {
-	if(!req.body.userId||!req.body.teacherId||req.body.userId===undefined||req.body.teacherId===undefined){
-	 	res.status(400).send("Bad Request");
-	 } 
-	 else{
-	  		stackService.assignTeacher(req.body).then(function(data){
-			  res.send('ok');
-		  }).catch(function (err) {
-			  res.status(400).send("Bad Request");
-		  });
-
-  }
+router.post('/assignTeacher', contracts.assignTeacher, function (req, res) {
+	stackService.assignTeacher(req.body).then(function (data) {
+		res.send('ok');
+	}).catch(function (err) {
+		res.status(400).send("Bad Request");
+	});
 });
 
 
@@ -173,57 +151,45 @@ router.get('/getResults', function(req, res){
 		  });
 });
 
-router.post('/getFromReg',function(req, res) {
-	 if(!req.body){
-	 	res.json({ success: false, message: 'Please enter correct regex' });
-	 } 
-	
-	 else{
-	  		var a = req.body.name;
-	  		var b = a;
-	  		var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
-	  	//	console.log(c);
-	  		service.find({fullName : new RegExp(c, "i") },{'_id':1,'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
-			res.send(data);
-
-		  }).catch(function (err) {
-			  res.status(401).send("error");
-		  });
-
-  }
+router.post('/getFromReg',contracts.getFromReg,function(req, res) {
+	 
+	var a = req.body.name;
+	var b = a;
+	var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
+	// console.log(c);
+	service.find({ fullName: new RegExp(c, "i") }, { '_id': 1, 'firstName': 1, 'lastName': 1, 'email': 1 }, {}).then(function (data) {
+		res.send(data);
+	}).catch(function (err) {
+		res.status(401).send("error");
+	});
 
 });
+router.post('/showStatistics',contracts.showStstistics,function (req, res) {
+	service.userStatistics(req.body.id).then(function (data) {
+		//console.log(data);
+		res.send(data);
+	}).catch(function (err) {
+		//console.log(err);
+		res.status(401).send("error");
 
-router.post('/showStatistics',function (req, res) {
-	if(!req.body.id){
-	 	res.status(400).send("Bad Request");
-	 } 
-	 else{
-	  		service.userStatistics(req.body.id).then(function(data){
-			//	console.log(data);
-				res.send(data);
-			}).catch(function(err){
-			//	console.log(err);
-				res.status(401).send("error");
-
-			});
-
-  }
+	});
 });
-router.post('/showTeacherCount',function (req, res) {
-	if(!req.body.id){
-	 	res.status(400).send("Bad Request");
-	 } 
-	 else{
-	  		service.getTeacherStatus(req.body.id).then(function(data){
-				console.log(data);
-				res.send(data);
-			}).catch(function(err){
-				console.log(err);
-				res.status(401).send("error");
-
-			});
-
-  }
+router.post('/showTeacherCount',contracts.showTeacherCount,function (req, res) {	
+	service.getTeacherStatus(req.body.id).then(function (data) {
+		console.log(data);
+		res.send(data);
+	}).catch(function (err) {
+		console.log(err);
+		res.status(401).send("error");
+	});
 });
+
+router.get('/getComplainted',function(req, res){
+	testService.getComplaintedA().then(function(data){
+		testService.getComplaintedB().then(function(data1){
+			res.send(data.concat(data1));
+		})
+	});
+
+})
 module.exports = router;

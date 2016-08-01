@@ -18,18 +18,18 @@ require('../../passport')(passport);
 
 router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
 //	console.log(req.user);
-	var token = req.header('Authorization');
-//	console.log(token);
-	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
-		if(err){
-		//	console.log(err);
-		}
-		else{ //console.log(decoded._doc);
+// 	var token = req.header('Authorization');
+// //	console.log(token);
+// 	jwt.verify(token.replace('JWT ',''), key.secret, function(err, decoded) {
+// 		if(err){
+// 		//	console.log(err);
+// 		}
+// 		else{ //console.log(decoded._doc);
 				var doc = {
-					userId: decoded._id ,
-					firstName: decoded.firstName,
-					lastName: decoded.lastName,
-					email: decoded.email
+					userId: req.user._id ,
+					firstName: req.user.firstName,//decoded.firstName,
+					lastName: req.user.lastName,//decoded.lastName,
+					email: req.user.email//decoded.email
 				}
 				stackService.addRequest(doc).then(function(data){
 					service.updateStatus(doc.userId, 'req');
@@ -37,8 +37,8 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 				}).catch(function(err){
 					res.status(422).send("Bad Request");
 				});
-		}
-	});		
+		// }
+	// });		
 });
 
 router.get('/getTest',  passport.authenticate('jwt', { session: false }),function(req, res){
@@ -60,7 +60,7 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 	
 });
 
-router.post('/submit1', passport.authenticate('jwt', { session: false }), function(req,res){
+router.post('/submit1', contracts.submit1, passport.authenticate('jwt', { session: false }), function(req,res){
 	service.submit1(req.body, req.user._id).then(function(data){
 		res.json(data);
 	}).catch(function(err){
@@ -68,7 +68,7 @@ router.post('/submit1', passport.authenticate('jwt', { session: false }), functi
 	});
 });
 
-router.post('/submit2', passport.authenticate('jwt', { session: false }), function(req,res){
+router.post('/submit2', contracts.submit2, passport.authenticate('jwt', { session: false }), function(req,res){
 	service.submit2(req.body, req.user._id).then(function(data){
 		res.send();
 	}).catch(function(err){
