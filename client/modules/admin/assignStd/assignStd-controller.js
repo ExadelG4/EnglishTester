@@ -29,22 +29,22 @@
 
         $scope.reset = function(){
             $scope.showList = [];
+            chooseUserList = [];
         };
 
-        $scope.addStudent = function(dt3, dt4) {
+        $scope.addStudent = function() {
             var userId = currentStudent._id;
-            var newStudent = new stdConstructor(userId, dt3.getTime() + $scope.mytime3.getTime(), dt4.getTime() + $scope.mytime4.getTime());
+            var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getTime(), $scope.dt4.getTime() + $scope.mytime4.getTime());
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
-
             $scope.freeStdName = '';
             $scope.freeStdMail = '';
             $scope.freeStdTel = '';
             $scope.mytime3 = null;
             $scope.mytime4 = null;
             $scope.selectedItem4 = '';
-            //$scope.dt = null;
-            //$scope.dt2 = null;
+            $scope.dt3 = null;
+            $scope.dt4 = null;
         };
 
         $scope.submitStudentsList = function() {
