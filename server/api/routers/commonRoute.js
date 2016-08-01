@@ -7,7 +7,7 @@ var path = require("path");
 var router = express.Router();
 var fs = require('fs');
 var UUID = require('uuid-js');
-
+var host = require('../../config.json').host;
 
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
@@ -47,13 +47,14 @@ router.get('/status', passport.authenticate('jwt', { session: false }),function(
 router.post('/upload',function(req, res){
 	var date = new Date().getTime();
 	var uuid = UUID.fromTime(date, false);	
-	req.pipe(fs.createWriteStream(path.join(__dirname +'./../../../uploadFiles/'+uuid+'.mp3'))).on('end',function(){
-		res.send('../media/'+uuid+'.mp3');
+	var ws = req.pipe(fs.createWriteStream(path.join(__dirname +'./../../../uploadFiles/'+uuid+'.mp3')));
+	ws.on('finish', function() {
+		res.send(host+'media/'+uuid+'.mp3');
 	});
 });
 
-// router.get('/uploadtest',function(req, res){
-// 	res.sendFile(path.join(__dirname + '/../../../../modules/saving file in server/index.html'));
-// });
+router.get('/uploadtest',function(req, res){
+	res.sendFile(path.join(__dirname + '/../../../../modules/saving file in server/index.html'));
+});
 
 module.exports = router;
