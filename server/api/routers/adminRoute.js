@@ -183,4 +183,13 @@ router.post('/showTeacherCount',contracts.showTeacherCount,function (req, res) {
 		res.status(401).send("error");
 	});
 });
+
+router.get('/getComplainted',function(req, res){
+	testService.getComplaintedA().then(function(data){
+		testService.getComplaintedB().then(function(data1){
+			res.send(data.concat(data1));
+		})
+	});
+
+})
 module.exports = router;
