@@ -20,6 +20,10 @@ var TestAScheme = new Schema(
 			required: true
 			
 		},
+		complaint:{
+			type: Boolean,
+			default: false
+		},
 		options: [],
 		answers: []
 

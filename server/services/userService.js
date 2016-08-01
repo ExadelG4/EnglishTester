@@ -1,5 +1,6 @@
 var user = require('../db/mongo').user;
 var stack = require('../db/mongo').stack;
+var testB = require('../db/mongo').testB;
 var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
@@ -174,16 +175,12 @@ function update(query, update,options){
 }
 
 function submit1(data, id){
-   // console.log('us');
     var defer = q.defer();
 
-    stackService.checkFirstPart(data, id).then(function(level){
-     //   console.log('promise1');
+    stackService.checkFirstPart(data, id).then(function(level){     
         testService.getSecondTest(level).then(function(data){
-       //     console.log('promise2');
             defer.resolve(data);
         }).catch(function(err){
-         //   console.log('err');
             defer.reject(err);
         })
     }).catch(function(err){
@@ -196,6 +193,12 @@ function submit1(data, id){
 
 function submit2(data, uid){
     var defer = q.defer();
+
+    data.array.forEach(function(element) {
+        if(element.badForUser){
+            testB.update({_id:element.qId},{ $set: { complaint: true }},{});
+        }
+    });
 
     stack.update({userId:uid},{ $set: { answers: data }},{}).then(function(data){
         defer.resolve(data);
