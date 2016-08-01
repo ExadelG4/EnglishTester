@@ -136,7 +136,7 @@ exports.submit1 = function(req, res, next){
          next();
     } 
 }
-expors.submit = function(req, res, next){
+exports.submit2 = function(req, res, next){
     if(!req.body){	 	
 	 	res.status(400).send("Bad Request");
 	 } else{
