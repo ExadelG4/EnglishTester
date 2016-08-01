@@ -87,3 +87,7 @@ hr {
     .chart > div {
         font-size: larger;
     }
+
+    .chart div:hover::after {
+        content: attr(data-title);
+    }
