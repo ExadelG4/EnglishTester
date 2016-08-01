@@ -14,7 +14,7 @@ var addUsers = function(_adminCount,_userCount,_teacherCount,_guestCount){
 		
 			var fn = faker.fake("{{name.firstName}}");
 			var ln = faker.fake("{{name.lastName}}");
-			var full = fn + ' '+ln;
+			var full = fn + ' '+ln+ ' '+'admin'+(i+1)+"@exadel.com";
 			
 			var user ={
 				firstName: fn,
@@ -31,7 +31,7 @@ var addUsers = function(_adminCount,_userCount,_teacherCount,_guestCount){
 		
 			var fn = faker.fake("{{name.firstName}}");
 			var ln = faker.fake("{{name.lastName}}");
-			var full = fn + ' '+ln;
+			var full = fn + ' '+ln+' '+'user'+(i+1)+"@exadel.com";
 			
 			var user ={
 				firstName: fn,
@@ -48,7 +48,7 @@ var addUsers = function(_adminCount,_userCount,_teacherCount,_guestCount){
 		
 			var fn = faker.fake("{{name.firstName}}");
 			var ln = faker.fake("{{name.lastName}}");
-			var full = fn + ' '+ln;
+			var full = fn + ' '+ln+' '+'teacher'+(i+1)+"@exadel.com";
 			
 			var user ={
 				firstName: fn,
@@ -65,7 +65,7 @@ var addUsers = function(_adminCount,_userCount,_teacherCount,_guestCount){
 		
 			var fn = faker.fake("{{name.firstName}}");
 			var ln = faker.fake("{{name.lastName}}");
-			var full = fn + ' '+ln;
+			var full = fn + ' '+ln+ ' '+'guest'+(i+1)+"@exadel.com";
 			
 			var user ={
 				firstName: fn,

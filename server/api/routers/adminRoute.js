@@ -25,7 +25,7 @@ router.post('/register',contracts.adminRegister,function(err, req, res) {
   			lastName: req.body.secondName,
   			role: 'guest',
   			status: 'open',
-  			fullName : req.body.firstName +' '+ req.body.secondName
+  			fullName : req.body.firstName +' '+ req.body.secondName +' '+req.body.email
   		};
   		var guestOpen = {
   			
@@ -166,10 +166,10 @@ router.post('/getFromReg',contracts.getFromReg,function(req, res) {
 });
 router.post('/showStatistics',contracts.showStstistics,function (req, res) {
 	service.userStatistics(req.body.id).then(function (data) {
-		console.log(data);
+		//console.log(data);
 		res.send(data);
 	}).catch(function (err) {
-		console.log(err);
+		//console.log(err);
 		res.status(401).send("error");
 
 	});

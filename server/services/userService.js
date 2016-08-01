@@ -213,49 +213,6 @@ function updateStatus(id,_status){
                     //   console.log(err);
                     });
 }
-
-function userStatistics(id){
-var pr = q.defer();
-    user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
-        if (data){
-            if(data.role == 'admin'){
-             
-                pr.resolve(data);
-            }
-            else if(data.role == 'user' || data.role == 'guest'){
-                stackService.findOneResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
-                        var userInfo ={};
-                        userInfo.firstName = data.firstName;
-                        userInfo.lastName = data.lastName;
-                        userInfo.email = data.email;
-                        userInfo.number = data.number;
-                        userInfo.role = data.role;
-                        userInfo.status = data.status;
-                    if(data2){
-                        userInfo.result = data2.result;
-                        userInfo.teacherId = data2.teacherId;
-                        userInfo.date = data2.date;
-                        userInfo.teacherLastName = data2.teacherLastName;
-                        userInfo.teacherFirstName = data2.teacherFirstName;
-                
-                        pr.resolve(userInfo);
-                    }
-                    else pr.resolve(data);
-                }).catch(function(err){
-                    pr.reject(err);
-                });
-            }
-        }
-        else {
-            pr.resolve('user not found');
-        }
-
-    }).catch(function(err){
-        pr.reject('Bad data :(');
-    });
-    return pr.promise;
-}
-
 function getTeacherStatus(_tId){
     var pr = q.defer();
     userInfo(_tId).then(function(data){
@@ -283,6 +240,63 @@ function getTeacherStatus(_tId){
     return pr.promise;
     
 }
+
+function userStatistics(id){
+var pr = q.defer();
+    user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
+        if (data){
+            var userInfo ={};
+                        userInfo.firstName = data.firstName;
+                        userInfo.lastName = data.lastName;
+                        userInfo.email = data.email;
+                        userInfo.number = data.number;
+                        userInfo.role = data.role;
+                        userInfo.status = data.status;
+           
+            if(data.role == 'admin'){
+             
+                pr.resolve(data);
+            }
+            else if(data.role == 'user' || data.role == 'guest'){
+                stackService.findOneResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
+                        
+                    if(data2){
+                        userInfo.result = data2.result;
+                        userInfo.teacherId = data2.teacherId;
+                        userInfo.date = data2.date;
+                        userInfo.teacherLastName = data2.teacherLastName;
+                        userInfo.teacherFirstName = data2.teacherFirstName;
+                
+                        pr.resolve(userInfo);
+                    }
+                    else pr.resolve(data);
+                }).catch(function(err){
+                    pr.reject(err);
+                });
+            }
+            else if(data.role == 'teacher'){
+                getTeacherStatus(id).then(function(dataT){
+                    if(dataT){
+                        userInfo.totalTests = dataT.totalTests;
+                        userInfo.assignTest = dataT.assignTest;
+                        pr.resolve(userInfo);
+                     }
+                }).catch(function(err){
+                    pr.reject(err);
+                })
+            }
+        }
+        else {
+            pr.resolve('user not found');
+        }
+
+    }).catch(function(err){
+        pr.reject('Bad data :(');
+    });
+    return pr.promise;
+}
+
+
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;

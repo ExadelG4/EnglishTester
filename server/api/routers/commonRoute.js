@@ -57,4 +57,16 @@ router.get('/uploadtest',function(req, res){
 	res.sendFile(path.join(__dirname + '/../../../../modules/saving file in server/index.html'));
 });
 
+router.post('/editNumber',passport.authenticate('jwt', { session: false }),function(req,res){
+
+	var id = req.user._id;
+	var newNumber = req.body.number;
+	service.update({_id:id},{ $set: { number: newNumber}},{}).then(function(data){
+		res.status(200).send("Number was edited");
+	}).catch(function(err){
+		res.status(402).send(err);
+	})
+
+});
+
 module.exports = router;
