@@ -137,6 +137,12 @@
                                 return result.data;
                             })
                     },
+                    sendSecondPart: function(data) {
+                        return httpService.post(host+'/user/submit2', data)
+                            .then ( function(result) {
+                                return result.data;
+                            })
+                    },
                     getStatus: function() {
                         return httpService.get(host+'/status')
                             .then (function(result) {

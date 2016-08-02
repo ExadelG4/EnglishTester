@@ -1,29 +1,24 @@
-.start-test, .req-test {
+.btn-start-smile, .btn-req-smile {
 	width: 180px;
     height: 180px;
-	margin-top: 40px;
-    margin-bottom: 40px;
+    display: block;
+    margin: auto;
 	background-image: url("../../../assets/images/happy.png");
     background-size: cover;
-    background-color: rgba(255, 255, 255, 0);
     border-radius: 90px;
-    /*font-size: 32px;
-    color: #f4eade;*/
+    vertical-align: middle;
 }
 
-.start-test:hover, .req-test:hover {
+.btn-start-smile:hover, .btn-req-smile:hover {
 	box-shadow: 0 0 5px rgba(0,0,0,.12),0 0 20px rgba(0,0,0,.24);
 }
 
-.start-test:disabled, .req-test:disabled {
-	box-shadow: 0 0 0 rgba(0,0,0,0);
+.btn-start-smile:disabled, .btn-req-smile:disabled {
+	box-shadow: none;
 	background-image: url("../../../assets/images/sad.png");
 	cursor: default;
-}
-
-
-.start {
-	/*text-align: center;*/
+	background-color: inherit;
+	/*background-color: rgba(255, 255, 255, 0);*/
 }
 
 .statistic {
@@ -32,13 +27,30 @@
 .info-about-button {
 	width: 100%;
     display: block;
+<<<<<<< HEAD
+	vertical-align: middle;
+=======
 	margin-right: 10px;
     margin-left: 10px;
     margin-top: 50px;
+>>>>>>> develop
     font-size: 2.3em;
     font-family: 'Pavanam', sans-serif;
 }
 
+.card-user-home  {
+	padding: 15px;
+    margin-bottom: 20px;
+}
+
+.card-user-home .btn-start {
+	display: none;
+}
+
+.card-user-home:hover .btn-start {
+	display: block;
+	float: right;
+}
 
 .date-and-time {
 	padding: 0;
@@ -46,20 +58,23 @@
 	display: block;
 	width: inherit;
 }
+
 .welcome-all {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
+	margin-top: -20px;
+	font-family: 'Montserrat', sans-serif;
+
 }
 
 .welcome-name {
 	margin-bottom: 10px;
 	font-size: 2.7em;
-	font-family: 'Montserrat', sans-serif;
 }
-.welcome {
-	font-size: 3.3em;
-	font-family: 'Montserrat', sans-serif;
 
+.welcome {
+	margin-bottom: 10px;
+	font-size: 3.3em;
 }
 
 @media (max-width: 1000px) {
@@ -79,11 +94,18 @@
 		text-align: center;
 	}
 
-	.start-test, .req-test {
+	.btn-start-smile, .btn-req-smile {
 		width: 120px;
     	height: 120px;
     	margin-top: 10px;
     	margin-bottom: 10px;
+	}
+}
+
+@media (max-device-width: 767px) {
+	.card .btn-start {
+		display: block;
+		float: right;
 	}
 }
 
@@ -99,17 +121,14 @@
 @media (max-width: 550px) {
 	.welcome-name {
 		font-size: 1.6em;
-}
+	}
 	.welcome {
 		font-size: 2em;
 	}
 
 }
 
-@media (max-width: 430px) {
-	/*.welcome-name {
-		font-size: 1.5em;
-}*/
+@media (max-width: 440px) {
 	.welcome {
 		font-size: 1.8em;
 	}
