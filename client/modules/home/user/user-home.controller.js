@@ -17,7 +17,7 @@
             $scope.updateButtons = function () {
                 $scope.disStart = true;
                 $scope.disReq = true;
-                if ($scope.status === 'open') {
+                if ($scope.status === 'scha') {
                     $scope.disStart = false;
                     $scope.disReq = true;
                 }
