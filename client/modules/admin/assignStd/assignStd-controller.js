@@ -3,6 +3,7 @@
     angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
         $scope.freeStudents = [];
         $scope.showList = [];
+        $scope.disabled = true;
         var chooseUserList = [];
         var currentStudent;
 
@@ -30,6 +31,7 @@
         $scope.reset = function(){
             $scope.showList = [];
             chooseUserList = [];
+            $scope.disabled = true;
         };
 
         $scope.addStudent = function() {
@@ -37,6 +39,7 @@
             var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getTime(), $scope.dt4.getTime() + $scope.mytime4.getTime());
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
+            $scope.disabled = false;
             $scope.freeStdName = '';
             $scope.freeStdMail = '';
             $scope.freeStdTel = '';
@@ -51,6 +54,7 @@
             userService.assignStudents(chooseUserList);
             $scope.showList = [];
             chooseUserList = [];
+            $scope.disabled = true;
         };
 
 
@@ -74,8 +78,8 @@
 
 
     $scope.toggleMin = function() {
-        $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-        $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+        $scope.minDate = $scope.minDate ? null : new Date();
+        $scope.minDate2 = $scope.minDate2 ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();
