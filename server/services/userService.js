@@ -16,6 +16,7 @@ function getAllUsers(){
 function getAllRole(_role){
 	return user.find({role: _role},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1},{});
 }	
+
 function userInfo(id){
     return user.findOne({_id: id},{},{});
 }
@@ -104,11 +105,14 @@ function getUserStatus(_userId){
         stackService.findOneOpenTests({userId: _userId},{},{}).then(function(data){
             if(data){
                 var now = new Date().getTime();
-                if(now >= data.dateStart && now<= data.dateEnd){
+                if(now < data.dateStart){
                     pr.resolve({status:'open',dateStart: data.dateStart, dateEnd: data.dateEnd });
+                }
+                if(now >= data.dateStart && now<= data.dateEnd){
+                    pr.resolve({status:'scha',dateStart: data.dateStart, dateEnd: data.dateEnd });
                  }
-                else {
-
+                if(now > data.dateEnd ) {
+                    console.log('BAD TIME');
                     stackService.removeOpenTestsCollection({userId: _userId}).then(function(data){
                         updateStatus(_userId,'free');
                         pr.resolve({status:'free'});
@@ -221,7 +225,7 @@ function getTeacherStatus(_tId){
     userInfo(_tId).then(function(data){
         if(data){
             stackService.resultsCount({teacherId:_tId}).then(function(data){
-                    console.log(data);
+                   // console.log(data);
                     stackService.stackCount({teacherId:_tId}).then(function(data2){
                         pr.resolve({totalTests: data, assignTest: data2})
                     }).catch(function(err){
@@ -243,7 +247,14 @@ function getTeacherStatus(_tId){
     return pr.promise;
     
 }
-
+function getTeacherCount(_tId){
+    getTeacherStatus(_tId).then(function(data){
+        
+        return data;
+    }).catch(function(err){
+        return err;
+    });
+}
 function userStatistics(id){
 var pr = q.defer();
     user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
@@ -298,7 +309,34 @@ var pr = q.defer();
     });
     return pr.promise;
 }
-
+function getTeachers(){
+    var prom = q.defer();
+        
+        var teacherCount =[]
+        var teachers = [];
+        user.find({role: 'teacher'},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1},{}).then(function(data){               
+                console.log(teachers);
+                data.forEach(function(element){
+                        var teacher = {};
+                        teacher._id = element._id;
+                        teacher.firstName = element.firstName;
+                        teacher.lastName = element.lastName;
+                        teacher.email = element.email;
+                        teacher.number = element.number;
+                        console.log(getTeacherCount(element._id));
+                        // var count = getTeacherCount(element._id);
+                        // teacher.totalTests = count.totalTests;
+                        // teacher.assignTest = count.assignTest;
+                         teachers.push(teacher);
+                });
+                console.log(teachers);
+                prom.resolve(teachers);
+                console.log(teachers);                               
+        }).catch(function(err){
+             prom.reject(err);
+        });
+    return prom.promise;    
+}
 
 
 module.exports.getAllUsers = getAllUsers;
@@ -316,4 +354,6 @@ module.exports.submit2 = submit2;
 module.exports.update = update;
 module.exports.updateStatus = updateStatus;
 module.exports.userStatistics = userStatistics;
+module.exports.getTeachers = getTeachers;
 module.exports.getTeacherStatus = getTeacherStatus;
+module.exports.getTeacherCount = getTeacherCount;
