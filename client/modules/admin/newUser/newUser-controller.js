@@ -12,6 +12,10 @@
                     $scope.dt2 = null;
                     $scope.mytime = null;
                     $scope.mytime2 = null;
+                    $scope.firstMd = null;
+                    $scope.secondMd = null;
+                    $scope.emailMd = null;
+                    $scope.phnumberMd = null;
                 };
 
                 $scope.inlineOptions = {
