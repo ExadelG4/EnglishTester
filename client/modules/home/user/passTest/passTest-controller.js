@@ -1,21 +1,18 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer','notification',
-		 function($scope, $state, userService, angularPlayer, notification) {
+	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer','notification', '$timeout',
+		 function($scope, $state, userService, angularPlayer, notification, $timeout) {
 
 		$scope.$on('$stateChangeStart', function () {
 			if(angularPlayer.getPlaylist().length > 0)
     			angularPlayer.clearPlaylist( function() {}); 
 		});
-		//$scope.startTest = false;
+
 		userService.getStatus().then ( function(result) {
 			if(result.status !== 'open') {
 				$state.go('home');
 			}
-			/*else {
-				$scope.startTest = true;
-			}*/
 		})
 
 		$scope.whichPart = 1;
@@ -28,11 +25,32 @@
 			$scope.validNeededNumPage = true;
 			$scope.userAnswers = [];
 			$scope.validAnswers = [];
+			$scope.dirty = [];
 			$scope.totalCount = null;
 			$scope.omg = {
 				tempChoise: null
 			};
 		}
+		$scope.initTimer = function() {
+			$scope.timer = 1000*60*60*2;
+			$scope.timerHours = Math.floor($scope.timer/1000/60/60);
+			$scope.timerMin = Math.floor($scope.timer/1000/60) - $scope.timerHours*60;
+			$scope.timerSec = Math.floor($scope.timer/1000) - $scope.timerMin*60 - $scope.timerHours*60*60;
+		}();
+
+		function testTimer(){
+			$scope.timer -= 1000;
+			    if ($scope.timer === 0){
+			    	//something
+			    } 
+			    else {
+			    	$scope.timerHours = Math.floor($scope.timer/1000/60/60);
+					$scope.timerMin = Math.floor($scope.timer/1000/60) - $scope.timerHours*60;
+					$scope.timerSec = Math.floor($scope.timer/1000) - $scope.timerMin*60 - $scope.timerHours*60*60;
+			        $timeout(testTimer,1000);
+			    }
+		}
+		$timeout(testTimer,1000);
 
 		$scope.initVars();
 
@@ -96,7 +114,7 @@
 		};
 
 		var isTextType = function(type) {
-			return type === 'questionWithoutChoiceoOfAnswers' || type === 'essay' || type === 'listeningWithoutChoiceOfAnswers';	
+			return type === 'questionWithoutChoiceOfAnswers' || type === 'essay' || type === 'listeningWithoutChoiceOfAnswers';	
 		};
 		var isAudioType = function(type) {
 			return type === 'speaking';
@@ -110,17 +128,17 @@
 				var tempAnswer = {
 					qId: '',
 					answer: [],
-					audioAnswer: ''
+					audioAnswer: '',
+					badForUser: false
 				};
 				tempAnswer.qId = $scope.allQuestions[i]._id;
 				tempAnswer.type = $scope.allQuestions[i].type;
 				$scope.userAnswers.push(tempAnswer);
+				$scope.validAnswers.push(false);
+				$scope.dirty.push(false);
+				//$scope.badForUser.push(false);
 			}
-  		for (var i = 0; i < $scope.totalCount; ++i) {
-  			$scope.validAnswers.push(false);
-  		}
-
-  		$scope.initNewPage($scope.currentPage);
+	  		$scope.initNewPage($scope.currentPage);
 		}
 
 		userService.getTest().then( function(result) {
@@ -132,7 +150,7 @@
 		$scope.urls = {
 				'oneOfMany': startUrl + '1.html',
 				'manyOfMany': startUrl + '2.html',
-				'questionWithoutChoiceoOfAnswers': startUrl + '3.html',
+				'questionWithoutChoiceOfAnswers': startUrl + '3.html',
 				'essay': startUrl + '4.html',
 				'listeningWithOneOfMany': startUrl + '5.html',
 				'listeningWithManyOfMany': startUrl + '6.html',
@@ -142,6 +160,7 @@
 
 
 		$scope.initNewPage = function(currentPage) {
+			$scope.neededNumPage = '';
 			if (isCheckboxType($scope.allQuestions[currentPage - 1].type)) {
 		 		$scope.omg.tempChoise = [];
 			 	for (var i = 0; i < $scope.allQuestions[currentPage - 1].options.length; ++i) {
@@ -165,17 +184,20 @@
     		else {
     			//audio ans
     		}
+    		$scope.currentPage = currentPage;
+
     		angularPlayer.init();
 			if($scope.allQuestions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers' || 
 				$scope.allQuestions[currentPage - 1].type === 'listeningWithOneOfMany' ||
 				$scope.allQuestions[currentPage - 1].type === 'listeningWithManyOfMany') {
     			$scope.song.url = $scope.allQuestions[currentPage - 1].audio; 
-				angularPlayer.addTrack($scope.song);
+				$timeout( function() {angularPlayer.addTrack($scope.song);});
 			}
 
 		};
 
 		$scope.savePrevPage = function(prevNumPage) {
+			$scope.dirty[prevNumPage - 1] = true;
 			if (isCheckboxType($scope.allQuestions[prevNumPage - 1].type)) {
 		 		$scope.userAnswers[prevNumPage - 1].answer = [];
 			 	for (var i = 0; i < $scope.omg.tempChoise.length; ++i) {
@@ -193,14 +215,27 @@
 		 	}
 		 	else {
 		 		//audio ans
-		 	}
-
-			
+		 	}			
 		};
 
+		$scope.pageChanged = function(prevNumPage, currentPage) {
+    		$scope.validNeededNumPage = true;
+    		$scope.savePrevPage(prevNumPage);
+    		//$scope.omg.tempChoise = null;
+    		if(angularPlayer.getPlaylist().length > 0)
+    			angularPlayer.clearPlaylist( function() {
+    				});    	
+    		$scope.initNewPage(currentPage);
+    		$scope.copyCurrentPage = $scope.currentPage;
+
+  		};
+
 		$scope.setNumPage = function(numPage) {
-			if(numPage >= 0 && numPage <= $scope.totalCount)
-				$scope.currentPage = numPage;
+			if(numPage >= 0 && numPage <= $scope.totalCount) {
+				$scope.dirty[$scope.copyCurrentPage - 1] = true;
+				$scope.pageChanged($scope.copyCurrentPage, numPage);
+				//$scope.currentPage = numPage;
+			}
 			else  {
 				$scope.validNeededNumPage = false;
 			}
@@ -214,22 +249,6 @@
 
 		};
 
-		/*$scope.createSong = function(urlAudio, song) {
-			song.url = urlAudio;
-			return song;
-		};*/
-
-
-		$scope.pageChanged = function(prevNumPage) {
-    		$scope.validNeededNumPage = true;
-    		$scope.savePrevPage(prevNumPage);
-    		$scope.omg.tempChoise = null;
-    		if(angularPlayer.getPlaylist().length > 0)
-    			angularPlayer.clearPlaylist( function() {
-    				});    		
-    		$scope.initNewPage($scope.currentPage);
-    		$scope.copyCurrentPage = $scope.currentPage;
-  		};
   		
   		$scope.changeValidC = function(currentPage) {
   			for(var i = 0; i < $scope.totalCount; ++i) {
@@ -257,6 +276,16 @@
   			}
   			return true;
   		};
+
+  		$scope.addBadForUser = function(num) {
+  			var temp = $scope.userAnswers[num].badForUser;
+  			if (temp) {
+  				$scope.userAnswers[num].badForUser = false;
+  			}
+  			else 
+  				$scope.userAnswers[num].badForUser = true;
+  		};
+
   		$scope.sendFirstPart = function() {
   			userService.sendFirstPart($scope.userAnswers)
   				.then ( function(data) {
@@ -270,7 +299,7 @@
   			userService.sendSecondPart($scope.userAnswers)
   				.then ( function() {
   					$state.go('home');
-  					notification.success("You have successfully completed the first part of the text.");
+  					notification.success("You have successfully completed all text.");
   				});
   		};
 

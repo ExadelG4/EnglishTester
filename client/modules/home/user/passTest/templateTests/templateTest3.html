@@ -1,11 +1,11 @@
 <div class="contaoner-fluid">
-	<div class="row"> <!--HERE WIIL BE TEMPLATE-->
-		<div class="col-xs-12 col-offset-sm-2 col-sm-8">
+	<div class="row">
+		<div class="main-que col-xs-12 col-offset-sm-2 col-sm-10">
 			<form>
-				<label>
+				<label class="label-text-que">
 					{{$index + 1}}. {{question.question}}
 				</label>
-				<textarea name="ans" ng-model="omg.tempChoise" ng-change="changeValidRT(currentPage)">
+				<textarea class="textarea-que" name="ans" ng-model="omg.tempChoise" ng-change="changeValidRT(currentPage)">
 			</form>
 		</div>
 	</div>

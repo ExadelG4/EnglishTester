@@ -5,7 +5,7 @@
 .add-question .container-fluid {
 
 	width: inherit;
-	color: darkblue !important; 
+	/*color: darkblue !important; */
 }
 
 .add-question .row-fluid {
@@ -14,7 +14,7 @@
 
 .add-question .ads{
 	margin-top: 10px;
-	font-family: 'Raleway', sans-serif;
+	/*font-family: 'Raleway', sans-serif;*/
     font-size: 16px
 }
 

@@ -115,6 +115,7 @@
                         return httpService.post(host+'/teacher/checkTest', data);
                     },
                     assignStudents: function(list) {
+                        console.log(list);
                         return httpService.post(host + '/admin/assignStudents', {students: list});
                     },
 
@@ -133,6 +134,12 @@
                     },
                     sendFirstPart: function(data) {
                         return httpService.post(host+'/user/submit1', data)
+                            .then ( function(result) {
+                                return result.data;
+                            })
+                    },
+                    sendSecondPart: function(data) {
+                        return httpService.post(host+'/user/submit2', data)
                             .then ( function(result) {
                                 return result.data;
                             })

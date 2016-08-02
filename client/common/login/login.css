@@ -1,7 +1,37 @@
+.bgvideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -9999;
+}
+
 html {
     min-height: 100%;
     position: relative;
     background-color: white !important;
+}
+
+.login-container input {
+    width: 100%;
+    margin-top: 18px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.login-container input::-webkit-input-placeholder {
+  color: rgb(51, 51, 51);
+}
+
+.login-container input:focus::-webkit-input-placeholder {
+  color: rgb(42, 171, 210);
+}
+
+.login-container input:focus {
+    border-color: rgb(42, 171, 210);
 }
 
 h1 {
@@ -11,6 +41,7 @@ h1 {
 body, .login-wrapper {
     background-size: 100% 100%;
     height: 100%;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .login-wrapper{
@@ -27,44 +58,29 @@ body, .login-wrapper {
     margin: auto;
     margin-top: 50px;
     padding: 30px;
-    /*box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);*/
+    border-radius: 8px !important;
     box-shadow: 0 0 5px rgba(0,0,0,.12),0 0 20px rgba(0,0,0,.24);
-    background-color: white !important
+    background-color: rgba(255, 255, 255, 0.75) !important;
 }
-
-    .login-container input {
-        display: block;
-        color: black;
-        position: relative;
-        margin-bottom: 10px;
-        margin-top: 18px;
-        padding: 5px;
-        border-width: 0px !important;
-        font-size: 1.2em !important;
-        /*border: 1px solid #ccc !important;*/
-    }
-
 
 .logo {
     width: 90%;
 }
 
 .warning-text {
-    font-size: 1.2em !important;
+    font-size: 1.3em !important;
     color: #c53535;
 }
 
 .btn-login {
     display: block;
-    width: 100px;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #5bc0de;
-    color: white;
-    font-size: 1.5em;
+    margin: 35px auto 0 auto;
+    background-color: rgb(42, 171, 210);
+    width: 50%;
 }
 
-.btn-login:hover, .btn-login:active, .btn-login:focus {
-    outline: none !important;
+@media only screen and (max-width: 768px) {
+  video {
+    display:none;
+  }
 }
