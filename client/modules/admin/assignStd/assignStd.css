@@ -10,6 +10,10 @@
     display: inline-block;
 }
 
+.sel1, .sel2 {
+    width: 100%;
+}
+
 .sel2 .cal1, .sel2 .cal2 {
     padding: 0;
     margin-top: 33px;
