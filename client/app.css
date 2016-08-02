@@ -1,3 +1,7 @@
+body {
+    background-color: rgba(255, 255, 255, 0);
+}
+
 body, html {
     min-height: 100%;
 }
@@ -7,26 +11,85 @@ body, html {
     padding: 0;
 }
 
-body div, table, span, ul, li, input, select, textarea, a, h6, h5, h4, h3, h2, h1, label {
-    border-radius: 0 !important;
+textarea, input {
+    outline: none !important;
 }
 
-.btn{
-    border-radius: 1px !important;
-    border: inherit;
+button {
+    padding: 5px 13px 5px 13px;
+    font-size: 1.4em;
+    border-radius: 5px;
+    box-shadow: none;
+    border-width: 0;
+    height: 35px;
+    color: white;
+    font-family: 'Pavanam', sans-serif;
+    outline: none !important;
 }
+
+.btn-user {
+    background-color: rgb(91, 212, 145);
+}
+
+.btn-admin {
+    background-color: rgb(42, 171, 210);
+}
+
+.btn-teacher {
+    background-origin: rgb(232, 134, 18);
+}
+
+.btn-user:hover {
+    background-color: rgb(99, 249, 168);
+}
+
+.btn-admin:hover {
+    background-color: rgb(140, 215, 239);
+}
+
+.btn-teacher:hover {
+    background-color: rgb(255, 191, 81);
+}
+
+.btn-user:disabled {
+    background-color: rgb(96, 121, 107);
+}
+
+.btn-admin:disabled {
+    background-color: rgb(77, 92, 123);
+}
+
+.btn-teacher:disabled {
+    background-color: rgb(181, 99, 19);
+
+}
+
 h1, h2, h3, h4, h5 {
     text-align: center;
 }
 
 input {
-    border: none;
-    background-color: white !important;
-    border-radius: 1px !important;
-    border-width: 0px !important;
-    box-shadow: 0 -1px 10px -1px rgba(0,0,0,.24) !important;
+    background-color: white;
     padding: 10px !important;
-    /*box-shadow: 0 0 1px rgba(0,0,0,.12),0 0 5px rgba(0,0,0,.24) !important;*/
+    height: 35px;
+    outline: none;
+    border-color: rgb(55, 65, 68);
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    border-radius: 0px !important;
+    font-size: 1.1em;
+}
+
+.input-user:focus {
+    border-color: rgb(91, 212, 145);
+}
+
+.input-admin:focus {
+    border-color: rgb(42, 171, 210);
+}
+
+.input-teacher:focus {
+    border-color: rgb(232, 134, 18);
 }
 
 select {

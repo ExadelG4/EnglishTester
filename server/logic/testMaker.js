@@ -118,6 +118,10 @@ function makeAgain(test, level){
     var tests =[];
     
     var i = 0;
+    if(level === 0) {
+        level = 1;
+    }
+    console.log(level);
 
     test.count({ level: level }).then(function(data){
         var rand = getRandomArbitrary(0, data/5);
