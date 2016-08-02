@@ -14,11 +14,11 @@ function addNewQuestion(info){
 function addNewQuestionB(info){
 	return testB.save(info);	
 }
-function removeCollection(){
-	return testA.remove();
+function removeCollection(query){
+	return testA.remove(query);
 }
-function removeCollectionB(){
-	return testB.remove();
+function removeCollectionB(query){
+	return testB.remove(query);
 }
 function getTest(user){
 	return testMaker.make(testA,user);
@@ -27,9 +27,13 @@ function getTest(user){
 function getSecondTest(level){
 	return testMaker.makeAgain(testB,level);
 }
+function getComplaintedA(){
+	return testA.find({complaint: true},{'type':1, 'question':1, 'options':1},{});
+}
 
-
-
+function getComplaintedB(){
+	return testB.find({complaint: true},{'type':1, 'question':1, 'options':1},{});
+}
 
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
@@ -39,3 +43,5 @@ module.exports.removeCollection = removeCollection;
 module.exports.getTest= getTest;
 module.exports.removeCollectionB = removeCollectionB;
 module.exports.getSecondTest = getSecondTest;
+module.exports.getComplaintedA = getComplaintedA;
+module.exports.getComplaintedB = getComplaintedB;

@@ -1,4 +1,5 @@
 var stack = require('../db/mongo').stack;
+var testA = require('../db/mongo').testA;
 var results = require('../db/mongo').results;
 var request = require('../db/mongo').request;
 var openTests = require('../db/mongo').openTests;
@@ -82,17 +83,17 @@ function updateStackTeacher(id,field){
 	return stack.update(id,field);
 };
 
-function removeStackCollection(){
-	return stack.remove();
+function removeStackCollection(query){
+	return stack.remove(query);
 }
-function removeResultsCollection(){
-	return results.remove();
+function removeResultsCollection(query){
+	return results.remove(query);
 }
-function removeRequestCollection(){
-	return request.remove();
+function removeRequestCollection(query){
+	return request.remove(query);
 }
-function removeOpenTestsCollection(){
-	return openTests.remove();
+function removeOpenTestsCollection(query){
+	return openTests.remove(query);
 }
 
 
@@ -109,6 +110,20 @@ function findOneOpenTests(){
 	return openTests.findOne(arguments[0],arguments[1],arguments[2]);
 }
 
+function stackCount(){
+	return stack.count(arguments[0]);
+}
+function resultsCount(){
+	return results.count(arguments[0]);
+}
+function requestCount(){
+	return request.count(arguments[0]);
+}
+function openTestsCount(){
+	return openTests.count(arguments[0]);
+}
+
+
 function checkFirstPart(data, id){
 	var pr = q.defer();
 	var len = data.length;
@@ -118,6 +133,9 @@ function checkFirstPart(data, id){
 	}
 	stack.findOne({userId: id}).then(function(stackRecord){
 			data.forEach(function(element) {
+				if(element.badForUser){
+					testA.update({_id:element.qId},{ $set: { complaint: true }},{});
+				}
 				stackRecord.answersAuto.forEach(function(element1) {
 					if(element.qId === element1._qId){
 						var f = true
@@ -186,6 +204,9 @@ module.exports.findOneRequest = findOneRequest;
 module.exports.findOneResults = findOneResults;
 module.exports.findOneStack = findOneStack;
 module.exports.findOneOpenTests = findOneOpenTests;
-
+module.exports.stackCount =stackCount;
+module.exports.resultsCount = resultsCount;
+module.exports.openTestsCount = openTestsCount;
+module.exports.requestCount = requestCount;
 module.exports.checkFirstPart = checkFirstPart;
 module.exports.sendTest = sendTest;

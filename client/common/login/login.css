@@ -15,6 +15,7 @@ html {
     background-color: white !important;
 }
 
+<<<<<<< HEAD
 .login-wrapper{
     position: absolute;
     width: 100%;
@@ -39,6 +40,10 @@ html {
 
 .login-container input:focus {
     border-color: rgb(42, 171, 210);
+=======
+h1 {
+    margin-top: 0;
+>>>>>>> develop
 }
 
 body, .login-wrapper {
@@ -47,20 +52,40 @@ body, .login-wrapper {
     background-color: rgba(255, 255, 255, 0);
 }
 
-h1 {
-    margin-top: 0;
+.login-wrapper{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: white !important;
+    font-family: 'Pavanam', sans-serif;
 }
-
 
 .login-container {
     width: 250px;
     margin: auto;
     margin-top: 50px;
     padding: 30px;
+<<<<<<< HEAD
     border-radius: 8px !important;
+=======
+    /*box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);*/
+>>>>>>> develop
     box-shadow: 0 0 5px rgba(0,0,0,.12),0 0 20px rgba(0,0,0,.24);
     background-color: rgba(255, 255, 255, 0.75) !important;
 }
+
+    .login-container input {
+        display: block;
+        color: black;
+        position: relative;
+        margin-bottom: 10px;
+        margin-top: 18px;
+        padding: 5px;
+        border-width: 0px !important;
+        font-size: 1.2em !important;
+        /*border: 1px solid #ccc !important;*/
+    }
 
 
 .logo {
@@ -74,9 +99,19 @@ h1 {
 
 .btn-login {
     display: block;
+<<<<<<< HEAD
     margin: 35px auto 0 auto;
     background-color: rgb(42, 171, 210);
     width: 50%;
+=======
+    width: 100px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #5bc0de;
+    color: white;
+    font-size: 1.5em;
+>>>>>>> develop
 }
 
 /*.btn-login:hover, .btn-login:active, .btn-login:focus {

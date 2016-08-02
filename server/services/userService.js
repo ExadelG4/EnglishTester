@@ -1,5 +1,6 @@
 var user = require('../db/mongo').user;
 var stack = require('../db/mongo').stack;
+var testB = require('../db/mongo').testB;
 var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
@@ -61,10 +62,10 @@ function authenticate(email, pass){
                     //console.log(user.role == 'guest');
                     if(user.role == 'guest'){
                         stackService.findOpenTests({userId: user._id},{},{}).then(function(data){
-                            console.log(data);
+                           // console.log(data);
                             if(data.length){
                                 defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
-                                console.log(data);
+                              //  console.log(data);
                             }
                             else{
                                 defer.reject();
@@ -89,8 +90,8 @@ function authenticate(email, pass){
 
     return defer.promise;
 }
-function removeCollection(){
-	return user.remove();
+function removeCollection(query){
+	return user.remove(query);
 }
 
 function find(query, fields, options){
@@ -100,10 +101,23 @@ function find(query, fields, options){
 function getUserStatus(_userId){
     var pr = q.defer();
     userInfo(_userId).then(function(data){
-        stackService.findOpenTests({userId: _userId},{},{}).then(function(data){
-            if(data.length != 0){
-                
-                pr.resolve({status:'open',dateStart: data[0].dateStart, dateEnd: data[0].dateEnd });
+        stackService.findOneOpenTests({userId: _userId},{},{}).then(function(data){
+            if(data){
+                var now = new Date().getTime();
+                if(now >= data.dateStart && now<= data.dateEnd){
+                    pr.resolve({status:'open',dateStart: data.dateStart, dateEnd: data.dateEnd });
+                 }
+                else {
+
+                    stackService.removeOpenTestsCollection({userId: _userId}).then(function(data){
+                        updateStatus(_userId,'free');
+                        pr.resolve({status:'free'});
+
+                    }).catch(function(err){
+                        pr.reject(err);
+                    });
+                    
+                 }
             }                
             else 
                 stackService.findRequest({userId: _userId},{},{}).then(function(data){
@@ -161,16 +175,12 @@ function update(query, update,options){
 }
 
 function submit1(data, id){
-    console.log('us');
     var defer = q.defer();
 
-    stackService.checkFirstPart(data, id).then(function(level){
-        console.log('promise1');
+    stackService.checkFirstPart(data, id).then(function(level){     
         testService.getSecondTest(level).then(function(data){
-            console.log('promise2');
             defer.resolve(data);
         }).catch(function(err){
-            console.log('err');
             defer.reject(err);
         })
     }).catch(function(err){
@@ -184,6 +194,12 @@ function submit1(data, id){
 function submit2(data, uid){
     var defer = q.defer();
 
+    data.array.forEach(function(element) {
+        if(element.badForUser){
+            testB.update({_id:element.qId},{ $set: { complaint: true }},{});
+        }
+    });
+
     stack.update({userId:uid},{ $set: { answers: data }},{}).then(function(data){
         defer.resolve(data);
     }).catch(function(err){
@@ -195,29 +211,58 @@ function submit2(data, uid){
 
 function updateStatus(id,_status){
    update({_id:id},{ $set: { status: _status }},{}).then(function(data){
-                        console.log('user update')
+                  //      console.log('user update')
                     }).catch(function(err){
-                       console.log(err);
+                    //   console.log(err);
                     });
+}
+function getTeacherStatus(_tId){
+    var pr = q.defer();
+    userInfo(_tId).then(function(data){
+        if(data){
+            stackService.resultsCount({teacherId:_tId}).then(function(data){
+                    console.log(data);
+                    stackService.stackCount({teacherId:_tId}).then(function(data2){
+                        pr.resolve({totalTests: data, assignTest: data2})
+                    }).catch(function(err){
+                        pr.reject(err);
+                    });
+            }).catch(function(err){
+                pr.reject(err);
+            });
+        }
+        else{
+             pr.reject('teacher not found');
+        }
+                                 
+    }).catch(function(err){
+        console.log('bad teacher id');
+        pr.reject(err);
+    });
+
+    return pr.promise;
+    
 }
 
 function userStatistics(id){
 var pr = q.defer();
     user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
         if (data){
-            if(data.role == 'admin'){
-             
-                pr.resolve(data);
-            }
-            else if(data.role == 'user' || data.role == 'guest'){
-                stackService.findOneResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
-                        var userInfo ={};
+            var userInfo ={};
                         userInfo.firstName = data.firstName;
                         userInfo.lastName = data.lastName;
                         userInfo.email = data.email;
                         userInfo.number = data.number;
                         userInfo.role = data.role;
                         userInfo.status = data.status;
+           
+            if(data.role == 'admin'){
+             
+                pr.resolve(data);
+            }
+            else if(data.role == 'user' || data.role == 'guest'){
+                stackService.findOneResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
+                        
                     if(data2){
                         userInfo.result = data2.result;
                         userInfo.teacherId = data2.teacherId;
@@ -232,6 +277,17 @@ var pr = q.defer();
                     pr.reject(err);
                 });
             }
+            else if(data.role == 'teacher'){
+                getTeacherStatus(id).then(function(dataT){
+                    if(dataT){
+                        userInfo.totalTests = dataT.totalTests;
+                        userInfo.assignTest = dataT.assignTest;
+                        pr.resolve(userInfo);
+                     }
+                }).catch(function(err){
+                    pr.reject(err);
+                })
+            }
         }
         else {
             pr.resolve('user not found');
@@ -242,6 +298,7 @@ var pr = q.defer();
     });
     return pr.promise;
 }
+
 
 
 module.exports.getAllUsers = getAllUsers;
@@ -259,3 +316,4 @@ module.exports.submit2 = submit2;
 module.exports.update = update;
 module.exports.updateStatus = updateStatus;
 module.exports.userStatistics = userStatistics;
+module.exports.getTeacherStatus = getTeacherStatus;
