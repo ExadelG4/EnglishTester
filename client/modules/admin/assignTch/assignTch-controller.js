@@ -14,12 +14,9 @@
             });
         });
 
-        userService.getFinishedUsers().then(function(data) {
-            data.forEach(function(item, i) {
-                $scope.students[i] = item;
-                $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
-            });
-        });
+        (function gfu() {
+
+        })()
 
         $scope.chooseTeacher = function(item) {
             $scope.tchName = item.fullName;

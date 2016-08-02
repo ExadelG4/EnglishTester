@@ -2,6 +2,7 @@
     'use strict';
     angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
         $scope.freeStudents = [];
+        $scope.copyFreeStudents = [];
         $scope.showList = [];
         $scope.disabled = true;
         var chooseUserList = [];
@@ -10,7 +11,9 @@
         userService.getFreeUsers().then(function(data) {
             data.forEach(function(item, i) {
                 $scope.freeStudents[i] = item;
+                $scope.copyFreeStudents[i] = item;
                 $scope.freeStudents[i].fullName = item.firstName + ' ' + item.lastName;
+                $scope.copyFreeStudents[i].fullName = item.firstName + ' ' + item.lastName;
             });
         });
 
