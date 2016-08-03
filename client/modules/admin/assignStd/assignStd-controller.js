@@ -1,6 +1,6 @@
 (function(){
     'use strict';
-    angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
+    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', function($scope, userService, $location) {
         $scope.freeStudents = [];
         $scope.copyFreeStudents = [];
         $scope.showList = [];
@@ -8,14 +8,24 @@
         var chooseUserList = [];
         var currentStudent;
 
-        userService.getFreeUsers().then(function(data) {
-            data.forEach(function(item, i) {
-                $scope.freeStudents[i] = item;
-                $scope.copyFreeStudents[i] = item;
-                $scope.freeStudents[i].fullName = item.firstName + ' ' + item.lastName;
-                $scope.copyFreeStudents[i].fullName = item.firstName + ' ' + item.lastName;
+        (function(){
+            if($location.absUrl() == 'http://localhost:3000/home') {
+                fingOutURL(userService.getUsersRequests());
+            } else {
+                fingOutURL(userService.getFreeUsers());
+            }
+        })();
+
+        function fingOutURL (req) {
+            req.then(function(data) {
+                data.forEach(function(item, i) {
+                    $scope.freeStudents[i] = item;
+                    $scope.copyFreeStudents[i] = item;
+                    $scope.freeStudents[i].fullName = item.firstName + ' ' + item.lastName;
+                    $scope.copyFreeStudents[i].fullName = item.firstName + ' ' + item.lastName;
+                });
             });
-        });
+        }
 
         var stdConstructor = function(stdId, stdData, stdData2){
             this.userId =  stdId;
