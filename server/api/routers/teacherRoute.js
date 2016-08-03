@@ -18,8 +18,6 @@ require('../../passport')(passport);
 
 
 router.get('/getTests', passport.authenticate('jwt', { session: false }), function(req, res){
-
-	
 	var tId = req.user._id;
 	stackService.findStack({teacherId : tId},{'date': 1, 'level': 1},{}).then(function (data) {
 		res.json(data);

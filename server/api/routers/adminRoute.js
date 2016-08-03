@@ -148,8 +148,10 @@ router.get('/getTeachers', function(req, res) {
 
 router.get('/getFinishedUsers', function(req, res){
 	service.getFinishedList().then(function (data) {
+		
 		res.json(data);
 	}).catch(function (err) {
+		
 		res.json(err);
 	})
 });
