@@ -245,7 +245,7 @@ function getTeacherStatus(_tId){
 }
 
 function userStatistics(id){
-var pr = q.defer();
+    var pr = q.defer();
     user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
         if (data){
             var userInfo ={};
