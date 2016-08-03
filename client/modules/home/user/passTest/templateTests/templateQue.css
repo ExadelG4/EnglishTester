@@ -10,6 +10,7 @@
     background-size: contain;
     display: inline-block;
     vertical-align: middle;
+    cursor: pointer;
 }
 .radio-icon {
     background-image: url(../../../../../assets/images/icons/radio-off.png);

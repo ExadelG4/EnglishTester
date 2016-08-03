@@ -10,8 +10,9 @@
 		});
 
 		userService.getStatus().then ( function(result) {
-			if(result.status !== 'open') {
+			if(result.status !== 'scha') {
 				$state.go('home');
+				notification.error("You can't pass test now");
 			}
 		})
 

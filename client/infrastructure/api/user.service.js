@@ -115,6 +115,7 @@
                         return httpService.post(host+'/teacher/checkTest', data);
                     },
                     assignStudents: function(list) {
+                        console.log(list);
                         return httpService.post(host + '/admin/assignStudents', {students: list});
                     },
 
@@ -159,6 +160,12 @@
 
                     showInfoProfile: function(data) {
                         return httpService.post(host + '/admin/showStatistics', {id: data})
+                            .then (function(result) {
+                                return result.data;
+                            })
+                    },
+                    getTestsList : function() {
+                        return httpService.get(host + '/teacher/getTests')
                             .then (function(result) {
                                 return result.data;
                             })

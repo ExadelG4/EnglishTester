@@ -29,7 +29,9 @@
                $scope.choosenUser.role = data.role;
                $scope.choosenUser.status = data.status;
                $scope.choosenUser.mail = data.email;
-               $scope.tel = data.number;
+               $scope.choosenUser.tel = data.number;
+               $scope.choosenUser.assignTest = data.assignTest;
+               $scope.choosenUser.totalTests = data.totalTests;
            })
         };
 

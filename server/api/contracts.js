@@ -115,13 +115,7 @@ exports.refresh = function(req, res, next){
          next();
     }   
 }
-exports.getTests = function(req, res, next){
-    if(!req.body.tId){	 	
-	 	res.status(400).send("Bad Request");
-	 } else{
-         next();
-    } 
-}
+
 exports.checkTest = function(req, res, next){
     if(!req.body.Id){	 	
 	 	res.status(400).send("Bad Request");

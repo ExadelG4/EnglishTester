@@ -20,18 +20,21 @@ var fillCollections = function () {
     var teachers = [];
     userService.find({role: 'user'},{},{ limit : 12 }).then(function (data) {
         users = data;
-        userService.find({role: 'user'},{},{ limit : 12 }).then(function (data) {
-            teachers = data;
+        
+        userService.find({role: 'teacher'},{},{}).then(function (dataTeach) {
+            teachers = dataTeach;
+            
+
             for(var i =0; i<users.length;i++){
-               var id = users[i]._doc._id;
+                    var id = users[i]._doc._id;
                     var firstName = users[i]._doc.firstName;
                     var lastName = users[i]._doc.lastName;
                     var email = users[i]._doc.email;
 
-                    var tid = teachers[i]._doc._id;
-                    var tfirstName = teachers[i]._doc.firstName;
-                    var tlastName = teachers[i]._doc.lastName;
-                    var temail = teachers[i]._doc.email;
+                    var tid = teachers[i%teachers.length]._doc._id;
+                    var tfirstName = teachers[i%teachers.length]._doc.firstName;
+                    var tlastName = teachers[i%teachers.length]._doc.lastName;
+                    var temail = teachers[i%teachers.length]._doc.email;
                 
                 if(i<3){
                     
@@ -39,17 +42,19 @@ var fillCollections = function () {
                     users[i] = {userId: id, teacherId: tid, firstName: firstName, lastName: lastName, email: email, teacherFirstName: tfirstName, teacherLastName: tlastName, teacherEmail: temail};
                 }
                  if(i>=3 && i<6){
+                    
                     userService.updateStatus(id,'req');
                     users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email};
                 }
                 if(i >= 6 && i< 9){
-                    
-                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,result: {autoMark: 0,	teacherMark: 0,	level: 0}};
+                     userService.updateStatus(id,'res');
+                    users[i] = {teacherId: tid,teacherEmail: temail,teacherFirstName: tfirstName, teacherLastName: tlastName,userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,result: {autoMark: 0,	teacherMark: 0,	level: 0}};
                 }
                  if (i >=9){
+                     
                      userService.updateStatus(id,'open');
                      var now = new Date();
-                     now.setSeconds(now.getSeconds()+18000);
+                     now.setSeconds(now.getSeconds()+20000);
                 
                     users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,dateStart: new Date().getTime() , dateEnd: now.getTime()};
                 }}; 
@@ -72,16 +77,13 @@ var fillCollections = function () {
             
             
         });
-        // var stackData = data.slise(0, 3);
-        // var resData = data.slise(3, 6);
-        // var reqData = data.slise(6, 9);
-        // var openData = data.slise(9, 12);
+        
         
         
     });
 }
 
-console.log('Default testGen. Please, wait...');
+console.log('Default stackGen. Please, wait...');
 stackService.removeStackCollection({}).then(function(data){
     stackService.removeRequestCollection({}).then(function(data){
         stackService.removeResultsCollection({}).then(function(data){

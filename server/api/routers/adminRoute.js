@@ -51,17 +51,45 @@ router.post('/register',contracts.adminRegister,function(err, req, res) {
 });
 
 router.post('/assignStudents',contracts.assignStudent,function(req, res) {	 
-	 
+	 		
 	  		var tempArr = [];
-
-
-	  	//	console.log(req.body.students);
-	  		stackService.addOpenTestsArray(req.body.students).then(function(data){
-			  res.send('add');			  
+	  		var userArr = [];
+	  		tempArr = req.body.students;
+	  		for(var i=0; i<tempArr.length; i++){
+	  			var user = {};
+	  			user._id = tempArr[i].userId;
+	  			userArr.push(user);
+	  		}
+	  		tempArr.forEach(function(element){
+	  			service.updateStatus(element.userId,'open');
+	  		});
+	  		
+	  		service.find({$or:userArr},{'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
+	  			console.log(data);
+	  			var openArr = [];
+	  			for(var i=0; i<data.length; i++){
+	  				var open ={};
+	  				open.firstName = data[i].firstName;
+	  				open.lastName = data[i].lastName;
+	  				open.email = data[i].email;
+	  				open.userId = data[i]._id;
+	  				open.dateStart = tempArr[i].dateStart;
+	  				open.dateEnd = tempArr[i].dateEnd;
+	  				openArr.push(open);
+	  			}
+	  			stackService.addOpenTestsArray(openArr).then(function(data){
+			  
+			 		 res.send('add');			  
 				
-		  }).catch(function (err) {
-			  res.status(401).send("error");
-		  });
+		 		 }).catch(function (err) {
+			  		res.status(401).send("error");
+		  		});
+
+	  		}).catch(function(err){
+	  			res.status(401).send("error");
+	  		})
+	  		
+	  		
 });
 
 router.post('/addQuestion',contracts.addQuestion,function(req, res) {
@@ -110,17 +138,20 @@ router.get('/getUsers', function(req, res) {
 
 });
 router.get('/getTeachers', function(req, res) {
-  		service.getAllRole('teacher').then(function(data){
-			  res.send(JSON.stringify(data));
+  		
+  		service.getTeachers().then(function(data){
+			  res.send(data);
 		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
+			  res.status(401).send(err);
 		  });
 });
 
 router.get('/getFinishedUsers', function(req, res){
 	service.getFinishedList().then(function (data) {
+		
 		res.json(data);
 	}).catch(function (err) {
+		
 		res.json(err);
 	})
 });
@@ -156,7 +187,6 @@ router.post('/getFromReg',contracts.getFromReg,function(req, res) {
 	var a = req.body.name;
 	var b = a;
 	var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
-	// console.log(c);
 	service.find({ fullName: new RegExp(c, "i") }, { '_id': 1, 'firstName': 1, 'lastName': 1, 'email': 1 }, {}).then(function (data) {
 		res.send(data);
 	}).catch(function (err) {
@@ -166,10 +196,8 @@ router.post('/getFromReg',contracts.getFromReg,function(req, res) {
 });
 router.post('/showStatistics',contracts.showStstistics,function (req, res) {
 	service.userStatistics(req.body.id).then(function (data) {
-		//console.log(data);
 		res.send(data);
 	}).catch(function (err) {
-		//console.log(err);
 		res.status(401).send("error");
 
 	});

@@ -2,37 +2,32 @@
 	<div class="row-fluid">
 		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
 			<p class="ads">Choose type of question </p>
-            <select class="form-control" ng-model="selectedQue" ng-change="changeQue(selectedQue)">
+            <select class="form-control input-admin input-option" ng-model="selectedQue" ng-change="changeQue(selectedQue)">
                 <option ng-repeat="que in typeOfQuestion" ng-value="que.type">{{que.text}}</option>
             </select>
 		</div>
 		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
 
-			<!--<p ng-if="selectedQue === ''" class="ads">Form for a new question will be here</p>-->
-			<!--<p class="ads" ng-if="selectedQue !== ''">You choose : {{selectedQue}}</p>-->
 
 			<div ng-if="selectedQue === typeOfQuestion[0].type">
 				<form name="main"> 
 					<div>
 						<p class="ads">Text of question</p>
-						<textarea id="qtextarea" placeholder="Write here.." ng-model="finalQue.question" required></textarea>
+						<textarea class="textarea-admin" id="qtextarea" placeholder="Write here.." ng-model="finalQue.question" required></textarea>
 					</div>
 					<p class="ads">Add answer options</p>
-					<a ng-click="addAnswerItem()">
-            <span class="glyphicon glyphicon-plus"></span>                	
-          </a>
-          <a ng-click="removeAnswerItem()">
-            <span class="glyphicon glyphicon-minus"></span>                	
-          </a>
-          <div class="input-group options" ng-repeat="smth in finalQue.options track by $index">
-      			<span class="input-group-addon">
-        			<input type="radio" name="answer" aria-label="..." ng-value="$index" ng-model="finalQue.answers[0]">
-      			</span>
-      			<input type="text" class="form-control" aria-label="..." ng-model="finalQue.options[$index]" required>
+					<a class="icon plus-option" ng-click="addAnswerItem()"></a>
+          <a class="icon remove-option" ng-click="removeAnswerItem()"></a>
+          <div ng-repeat="smth in finalQue.options track by $index">
+        		<input id="{{$index}}"  type="radio" name="answer" ng-value="$index" ng-model="finalQue.answers[0]">
+              <label for="{{$index}}" class=" icon-block main-label">
+                <div class="icon radio-icon"></div>
+              </label>
+      			<input type="text" class="input-admin input-option" ng-model="finalQue.options[$index]" placeholder="Write option here" required>
       		</div>
           <p class="ads">Level of question</p>
-          <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-      		<button class="btn btn-info"  ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+          <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5" required>
+      		<button class="btn-admin btn-submit-que"  ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
       	</form>
     	</div>
 
@@ -40,24 +35,21 @@
 				  <form name="main"> 
   					<div>
   						<p class="ads">Text of question</p>
-  						<textarea placeholder="Write here.." ng-model="finalQue.question" required></textarea>
+  						<textarea class="textarea-admin" placeholder="Write here.." ng-model="finalQue.question" required></textarea>
   					</div>
   					<p class="ads">Add answer options</p>
-  					<a ng-click="addAnswerItem()">
-              <span class="glyphicon glyphicon-plus"></span>                	
-            </a>
-            <a ng-click="removeAnswerItem()">
-              <span class="glyphicon glyphicon-minus"></span>                	
-            </a>
-            <div class="input-group options" ng-repeat="smth in finalQue.options track by $index">
-        			<span class="input-group-addon">
-          			<input type="checkbox" name="answer" aria-label="..." ng-value="$index" ng-model="finalQue.answers[$index]">
-        				</span>
-        				<input type="text" class="form-control" aria-label="..." ng-model="finalQue.options[$index]" required> 
+  					<a class="icon plus-option" ng-click="addAnswerItem()"></a>
+            <a class="icon remove-option" ng-click="removeAnswerItem()"></a>
+            <div ng-repeat="smth in finalQue.options track by $index">
+        			<input id="{{$index}}" type="checkbox" name="answer" ng-value="$index" ng-model="finalQue.answers[$index]">
+                <label for="{{$index}}" class=" icon-block main-label">
+                  <div class="icon checkbox-icon"></div>
+                </label>
+      				<input type="text" class="input-admin input-option" ng-model="finalQue.options[$index]" placeholder="Write option here" required> 
         		</div>
             <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-        		<button class="btn btn-info" ng-disabled="main.$invalid" ng-click="sendQue()" >Submit</button>
+            <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
+        		<button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
           </form>
     		</div>
 
@@ -65,11 +57,11 @@
   				<form name="main"> 
   					<div>
   						<p class="ads">Text of question</p>
-  						<textarea placeholder="Write here.." ng-model="finalQue.question" required></textarea>
+  						<textarea class="textarea-admin" placeholder="Write here.." ng-model="finalQue.question" required></textarea>
   					</div>
             <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-        		<button class="btn btn-info" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+            <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
+        		<button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
         	</form>
     		</div>
 
@@ -77,23 +69,170 @@
   				<form name="main"> 
   					<div>
   						<p class="ads">Topic for essay</p>
-  						<textarea class="sm-textarea" ng-model="finalQue.question" placeholder="Write here.." required></textarea>
+  						<textarea class="textarea-admin" class="sm-textarea" ng-model="finalQue.question" placeholder="Write here.." required></textarea>
   					</div>
             <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-        		<button class="btn btn-info" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+            <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
+        		<button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
         	</form>
     		</div>
 
         <div ng-if="selectedQue === typeOfQuestion[4].type">
           <form name="upload">
-                <input type="file" name="myfile">
-                <input type="submit" value="Загрузить">
-              <div id="log">Прогресс загрузки</div>
+            <input type="file" name="myfile">
+            <input type="submit" value="Загрузить">
           </form>
-          <!--script type="text/javascript" src="modules/tests/addQuestion/upload.js"></script-->
+             <div id="log">Прогресс загрузки</div>
           <script>
             function log(html) {
+              document.getElementById('log').innerHTML = html;
+              console.log("hi");
+            }
+
+            document.forms.upload.onsubmit = function() {
+              var file = this.elements.myfile.files[0];
+              if (file) {
+                upload(file);
+              }
+              return false;
+            }
+
+            function upload(file) {
+              var xhr = new XMLHttpRequest();
+
+              // обработчики можно объединить в один,
+              // если status == 200, то это успех, иначе ошибка
+              xhr.onload = xhr.onerror = function() {
+              if (this.status == 200) {
+                log("success");
+              } 
+              else {
+                log("error " + this.status);
+              }
+            };
+              // обработчик для закачки
+              xhr.upload.onprogress = function(event) {
+                log(event.loaded + ' / ' + event.total);
+              }
+
+              xhr.open("POST", "upload", true);
+              xhr.send(file);
+            }
+          </script>
+
+          <form name="main">
+            <div>
+              <p class="ads">Text of question</p>
+              <textarea class="textarea-admin" placeholder="Write here.." ng-model="finalQue.question" required></textarea>
+
+            </div>
+            <div>
+            </div>
+            <p class="ads">Level of question</p>
+            <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
+            <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+          </form>
+        </div>
+
+        <div ng-if="selectedQue === typeOfQuestion[5].type">
+        <form name="main"> 
+          <div>
+              <p class="ads">Add other information</p>
+              <textarea class="textarea-admin" placeholder="Write here.." ng-model="finalQue.question" required></textarea>
+          </div>
+          <div>
+            <input type="file"/>
+            <!--ul>
+              <li ng-repeat="item in uploader.queue">
+                Name: <span ng-bind="item.file.name"></span>
+                <button ng-click="item.upload()">upload</button>
+              </li>
+            </ul-->
+          </div>
+          <p class="ads">Add other information</p>
+          <a class="icon plus-option" ng-click="addAnswerItem()"></a>
+          <a class="icon remove-option" ng-click="removeAnswerItem()"></a>
+
+          <div ng-repeat="smth in finalQue.options track by $index">
+            <input id="{{$index}}"  type="radio" name="answer" ng-value="$index" ng-model="finalQue.answers[0]">
+              <label for="{{$index}}" class=" icon-block main-label">
+                <div class="icon radio-icon"></div>
+              </label>
+            <input type="text" class="input-admin input-option" ng-model="finalQue.options[$index]" placeholder="Write option here" required> 
+          </div>
+          <p class="ads">Level of question</p>
+          <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+        </form>
+      </div>
+
+      <div ng-if="selectedQue === typeOfQuestion[6].type">
+        <form name="main">
+        <div>
+              <p class="ads">Add other information</p>
+              <textarea class="textarea-admin" placeholder="Write here.." ng-model="finalQue.question" required></textarea>
+            </div> 
+          <div>
+            <input type="file"/>
+            <!--ul>
+              <li ng-repeat="item in uploader.queue">
+                Name: <span ng-bind="item.file.name"></span>
+                <button ng-click="item.upload()">upload</button>
+              </li>
+            </ul-->
+          </div>
+          <p class="ads">Add other information</p>
+          <a class="icon plus-option" ng-click="addAnswerItem()"></a>
+          <a class="icon remove-option" ng-click="removeAnswerItem()"></a>
+          <div ng-repeat="smth in finalQue.options track by $index">
+            <input id="{{$index}}" type="checkbox" name="answer" ng-model="finalQue.answers[$index]">
+              <label for="{{$index}}" class=" icon-block main-label">
+                <div class="icon checkbox-icon"></div>
+              </label>
+            <input type="text" class="input-admin input-option" ng-model="finalQue.options[$index]" placeholder="Write option here" required> 
+          </div>
+          <p class="ads">Level of question</p>
+          <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+        </form>
+      </div>
+
+      <div ng-if="selectedQue === typeOfQuestion[7].type">
+        <form name="main">
+          <div>
+            <p class="ads">Topic for speak</p>
+            <textarea class="textarea-admin" class="sm-textarea" placeholder="Write here.."></textarea>
+          </div>
+          <p class="ads">Level of question</p>
+          <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+        </form>
+      </div>
+
+    		<!--sound-manager>
+    			<button music-player add-song="song">+</button>
+    			<div class="seekBase" seek-track>
+    				<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
+				</div>ng-model="finalQue.options[$index]"
+				<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+				<button stop-music>Stop</button>
+
+    		</sound-manager-->
+
+		</div>
+	</div>
+</div>
+
+<form name="upload" ng-submit="submit()" ng-controller="addQuestionController"> 
+  <!--ng-model="file" name="myfile"-->
+    <input type="file"  fileread="vm.uploadme">
+    <input type="submit" value="Загрузить">
+  </form>
+
+  <div id="log">Прогресс загрузки</div>
+
+  <!--<script>
+    function log(html) {
       document.getElementById('log').innerHTML = html;
     }
 
@@ -106,7 +245,7 @@
     }
 
 
-function upload(file) {
+    function upload(file) {
 
       var xhr = new XMLHttpRequest();
 
@@ -129,111 +268,4 @@ function upload(file) {
       xhr.send(file);
 
     }
-          </script>
-
-          <form name="main">
-            <div>
-              <p class="ads">Text of question</p>
-              <textarea placeholder="Write here.." ng-model="finalQue.question" required></textarea>
-            </div>
-            <div>
-            </div>
-            <p class="ads">Level of question</p>
-            <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-            <button class="btn btn-info" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
-          </form>
-        </div>
-
-        <div ng-if="selectedQue === typeOfQuestion[5].type">
-        <form name="main"> 
-          <div>
-              <p class="ads">Add other information</p>
-              <textarea placeholder="Write here.." ng-model="finalQue.question" required></textarea>
-          </div>
-          <div>
-            <input type="file"/>
-            <!--ul>
-              <li ng-repeat="item in uploader.queue">
-                Name: <span ng-bind="item.file.name"></span>
-                <button ng-click="item.upload()">upload</button>
-              </li>
-            </ul-->
-          </div>
-          <p class="ads">Add other information</p>
-          <a ng-click="addAnswerItem()">
-            <span class="glyphicon glyphicon-plus"></span>                  
-          </a>
-          <a ng-click="removeAnswerItem()">
-            <span class="glyphicon glyphicon-minus"></span>                 
-          </a>
-          <div class="input-group options" ng-repeat="smth in finalQue.options track by $index">
-            <span class="input-group-addon">
-              <input type="radio" name="answer" aria-label="...">
-            </span>
-            <input type="text" class="form-control" aria-label="..." ng-model="finalQue.options[$index]" required> 
-          </div>
-          <p class="ads">Level of question</p>
-          <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-          <button class="btn btn-info" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
-        </form>
-      </div>
-
-      <div ng-if="selectedQue === typeOfQuestion[6].type">
-        <form name="main">
-        <div>
-              <p class="ads">Add other information</p>
-              <textarea placeholder="Write here.." ng-model="finalQue.question" required></textarea>
-            </div> 
-          <div>
-            <input type="file"/>
-            <!--ul>
-              <li ng-repeat="item in uploader.queue">
-                Name: <span ng-bind="item.file.name"></span>
-                <button ng-click="item.upload()">upload</button>
-              </li>
-            </ul-->
-          </div>
-          <p class="ads">Add other information</p>
-          <a ng-click="addAnswerItem()">
-            <span class="glyphicon glyphicon-plus"></span>                  
-          </a>
-          <a ng-click="removeAnswerItem()">
-            <span class="glyphicon glyphicon-minus"></span>                 
-          </a>
-          <div class="input-group options" ng-repeat="smth in finalQue.options track by $index">
-            <span class="input-group-addon">
-              <input type="checkbox" name="answer" aria-label="..." ng-model="finalQue.answers[$index]">
-            </span>
-            <input type="text" class="form-control" aria-label="..." required> 
-          </div>
-          <p class="ads">Level of question</p>
-          <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-          <button class="btn btn-info" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
-        </form>
-      </div>
-
-      <div ng-if="selectedQue === typeOfQuestion[7]">
-        <form name="main">
-          <div>
-            <p class="ads">Topic for speak</p>
-            <textarea class="sm-textarea" placeholder="Write here.."></textarea>
-          </div>
-          <p class="ads">Level of question</p>
-          <input type="text" class="form-control" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" required>
-          <button class="btn btn-info" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
-        </form>
-      </div>
-
-    		<!--sound-manager>
-    			<button music-player add-song="song">+</button>
-    			<div class="seekBase" seek-track>
-    				<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
-				</div>ng-model="finalQue.options[$index]"
-				<button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
-				<button stop-music>Stop</button>
-
-    		</sound-manager-->
-
-		</div>
-	</div>
-</div>
+  </script>-->

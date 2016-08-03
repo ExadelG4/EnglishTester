@@ -1,21 +1,21 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 formWrapper">
     <div class="formSelect col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" ng-controller="assignTchController">
-        <div class="form-group sel1 pull-left">
+        <div class="form-group sel1 sel1Tch">
 
             <ol class="nya-bs-select" size="7" title="Choose teacher" ng-model="selectedItem2" data-live-search="true" ng-change="chooseTeacher(selectedItem2)">
                 <li nya-bs-option="teacher in teachers">
                     <a>
-                        {{ teacher.fullName }}
+                        {{ teacher.fullName }} ({{teacher.assignTest}}/{{teacher.totalTests}})
                         <span class="glyphicon glyphicon-ok check-mark"></span>
                     </a>
                 </li>
             </ol>
 
-            <input type="text" size="40" ng-model="tchName" placeholder="Teacher's name" class="disable" disabled>
-            <input type="text" size="40" ng-model="tchMail" placeholder="Teacher's mail" class="disable" disabled>
-            <input type="text" size="40" ng-model="tchTel" placeholder="Teacher's telephone" class="disable" disabled>
+            <input type="text" ng-model="tchName" placeholder="Teacher's name" class="disable" disabled>
+            <input type="text" ng-model="tchMail" placeholder="Teacher's mail" class="disable" disabled>
+            <input type="text" ng-model="tchTel" placeholder="Teacher's telephone" class="disable" disabled>
         </div>
-        <div class="form-group sel2 pull-right">
+        <div class="form-group sel2 sel2Tch">
 
             <ol class="nya-bs-select" size="7" title="Choose student" ng-model="selectedItem3" data-live-search="true" ng-change="chooseUser(selectedItem3)">
                 <li nya-bs-option="student in students">
@@ -26,11 +26,11 @@
                 </li>
             </ol>
 
-            <input type="text" size="40" ng-model="stdName" placeholder="User's name" class="disable" disabled>
-            <input type="text" size="40" ng-model="stdMail" placeholder="User's mail" class="disable" disabled>
-            <input type="text" size="40" ng-model="stdTel" placeholder="User's telephone" class="disable" disabled>
+            <input type="text" ng-model="stdName" placeholder="User's name" class="disable" disabled>
+            <input type="text" ng-model="stdMail" placeholder="User's mail" class="disable" disabled>
+            <input type="text" ng-model="stdTel" placeholder="User's telephone" class="disable" disabled>
         </div>
-        <button class="btn btn-info btn-block submit-tch" type="submit" ng-click="submitTchStd()">Submit</button>
+        <button class="btn btn-info submit-tch" type="submit" ng-click="submitTchStd()" ng-disabled="!selectedItem2 || !selectedItem3">Submit</button>
     </div>
 
 

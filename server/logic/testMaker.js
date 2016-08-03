@@ -28,7 +28,7 @@ function getCounts(test,countL) {
 function getTests(test, counts, user) {
     var defer = q.defer();
     var tests =[];
-    var rand = getRandomArbitrary(0, counts[0]/5);
+    var rand = getRandomArbitrary(0, counts[0]/3);
     var pr = test.find({level: 1},{},{skip : Math.floor(rand), limit : 1 });
     var i = 1;
     var j = 0;
@@ -37,8 +37,8 @@ function getTests(test, counts, user) {
         pr = pr.then(function(data){            
             if(j < len){
 
-                if(i < 5){
-                    var edge = counts[j]/5;
+                if(i < 3){
+                    var edge = counts[j]/3;
                     if(data !==undefined){
                         var ans = [];
                         data[0].answers.forEach(function(element) {

@@ -15,7 +15,7 @@ function randomInteger(min, max) {
     return rand;
   };
 var enumArr = ['oneOfMany','manyOfMany','listeningWithOneOfMany','listeningWithManyOfMany'];
-var enumArrB = ['questionWithoutChoiceOfAnswers','essay','listeningWithoutChoiceOfAnswers'];
+var enumArrB = ['questionWithoutChoiceOfAnswers','essay','listeningWithoutChoiceOfAnswers','speaking'];
 var addQuestion = function(_level,count){
 			var defer = q.defer();
 			var prom = [];

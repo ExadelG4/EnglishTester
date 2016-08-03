@@ -1,17 +1,31 @@
 (function(){
     'use strict';
-    angular.module('admin').controller('assignStdController', ['$scope', 'userService', function($scope, userService) {
+    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', function($scope, userService, $location) {
         $scope.freeStudents = [];
+        $scope.copyFreeStudents = [];
         $scope.showList = [];
+        $scope.disabled = true;
         var chooseUserList = [];
         var currentStudent;
 
-        userService.getFreeUsers().then(function(data) {
-            data.forEach(function(item, i) {
-                $scope.freeStudents[i] = item;
-                $scope.freeStudents[i].fullName = item.firstName + ' ' + item.lastName;
+        (function(){
+            if($location.absUrl() == 'http://localhost:3000/home') {
+                fingOutURL(userService.getUsersRequests());
+            } else {
+                fingOutURL(userService.getFreeUsers());
+            }
+        })();
+
+        function fingOutURL (req) {
+            req.then(function(data) {
+                data.forEach(function(item, i) {
+                    $scope.freeStudents[i] = item;
+                    $scope.copyFreeStudents[i] = item;
+                    $scope.freeStudents[i].fullName = item.firstName + ' ' + item.lastName;
+                    $scope.copyFreeStudents[i].fullName = item.firstName + ' ' + item.lastName;
+                });
             });
-        });
+        }
 
         var stdConstructor = function(stdId, stdData, stdData2){
             this.userId =  stdId;
@@ -30,13 +44,16 @@
         $scope.reset = function(){
             $scope.showList = [];
             chooseUserList = [];
+            $scope.disabled = true;
         };
 
         $scope.addStudent = function() {
             var userId = currentStudent._id;
-            var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getTime(), $scope.dt4.getTime() + $scope.mytime4.getTime());
+            var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
+
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
+            $scope.disabled = false;
             $scope.freeStdName = '';
             $scope.freeStdMail = '';
             $scope.freeStdTel = '';
@@ -51,6 +68,7 @@
             userService.assignStudents(chooseUserList);
             $scope.showList = [];
             chooseUserList = [];
+            $scope.disabled = true;
         };
 
 
@@ -74,8 +92,8 @@
 
 
     $scope.toggleMin = function() {
-        $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-        $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+        $scope.minDate = $scope.minDate ? null : new Date();
+        $scope.minDate2 = $scope.minDate2 ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();

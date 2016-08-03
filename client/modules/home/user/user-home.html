@@ -15,7 +15,7 @@
                 <button class="btn-user btn-start-smile" ng-click="onStartTest()" ui-sref="passTest" ng-disabled="disStart"></button>
             </div>
             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
-                <div ng-if="!disStart" class="info-about-button">
+                <div ng-if="!disStart || !close" class="info-about-button">
                     Great! You can start to pass the test from {{dateStart}} to {{dateEnd}}.
                     You have 2 hours for this.
                 </div>
