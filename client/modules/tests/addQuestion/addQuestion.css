@@ -1,3 +1,7 @@
+.form-file {
+	margin: 20px 0 20px 10px;
+}
+
 .icon-block {
 	width: initial !important;
 }
@@ -59,6 +63,10 @@
 	background-image: url(../../../assets/images/icons/remove.png);
 	margin-right: 0 !important; 
 
+}
+
+input[type="file"] {
+	display: none;
 }
 
 @media screen and (max-width: 450px) {

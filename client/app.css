@@ -11,11 +11,11 @@ body, html {
     padding: 0;
 }
 
-textarea, input {
+textarea, input[type="text"] {
     outline: none !important;
 }
 
-button {
+button, .input-btn {
     padding: 5px 13px 5px 13px;
     font-size: 1.4em;
     border-radius: 5px;
@@ -25,6 +25,7 @@ button {
     color: white;
     font-family: 'Pavanam', sans-serif;
     outline: none !important;
+    font-weight: normal;
 }
 
 .btn-user{
@@ -68,8 +69,8 @@ h1, h2, h3, h4, h5 {
     text-align: center;
 }
 
-input {
-    background-color: white;
+input[type="text"], input[type="email"], input[type="password"] {
+    /*background-color: white;*/
     padding: 10px !important;
     height: 35px;
     outline: none;
