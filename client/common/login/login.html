@@ -6,8 +6,8 @@
         <h1><img src="assets/images/exadel_logo2.png"  alt="Exadel" class="logo"/></h1>
         <p ng-show="isNonValidCreds" class="warning-text">Wrong credentials! Try again.</p>
         <form ng-submit="login()">
-            <input type="email" ng-model="user.name" placeholder="Username">
-            <input type="password" ng-model="user.password" placeholder="Password">
+            <input type="email" ng-model="user.name" placeholder="Username" class="input-admin">
+            <input type="password" ng-model="user.password" placeholder="Password" class="input-admin">
             <button class="btn-login btn-admin" ng-click="login()" type="submit">Log in</button>
         </form>
     </div>

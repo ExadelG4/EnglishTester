@@ -16,7 +16,9 @@ var key = require('../../config.json');
 router.use(passport.initialize());
 require('../../passport')(passport);
 
-router.get('/getTests',passport.authenticate('jwt', { session: false }), function(req, res){
+
+router.get('/getTests', passport.authenticate('jwt', { session: false }), function(req, res){
+
 	
 	var tId = req.user._id;
 	stackService.findStack({teacherId : tId},{'date': 1, 'level': 1},{}).then(function (data) {
