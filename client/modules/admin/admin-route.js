@@ -20,5 +20,11 @@
                 controller: 'newUserController',
                 role:['admin']
             })
+            .state('badQuestions', {
+                url: '/admin/badQuestions',
+                templateUrl: 'modules/admin/badQuestion/badQuestion.html',
+                controller: 'badQuestionController',
+                role: ['admin']
+            })
     });
 }());
