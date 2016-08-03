@@ -12,12 +12,14 @@
             $scope.lastName = context.getLastName();
             $scope.dataStart;
             $scope.dataEnd;
+            $scope.close;
 
 
             $scope.updateButtons = function () {
                 $scope.disStart = true;
                 $scope.disReq = true;
-                if ($scope.status === 'open') {
+                $scope.close = true;
+                if ($scope.status === 'scha') {
                     $scope.disStart = false;
                     $scope.disReq = true;
                 }
@@ -28,6 +30,11 @@
                 else if($scope.status === 'req' || $scope.status === 'stack') {
                     $scope.disStart = true;
                     $scope.disReq = true;
+                }
+                else if ($scope.status === 'open') {
+                    $scope.disStart = true;
+                    $scope.disReq = true;
+                    $scope.close = false;
                 }
             }
 

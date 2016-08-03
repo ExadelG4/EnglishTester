@@ -1,11 +1,18 @@
-/*.ng-scope {*/
-	/*width: inherit;*/
-/*}*/
+.icon-block {
+	width: initial !important;
+}
+
+.input-option {
+	display: inline-block;
+}
+
+.btn-submit-que {
+	display: block;
+	margin-top: 20px;
+}
 
 .add-question .container-fluid {
-
 	width: inherit;
-	/*color: darkblue !important; */
 }
 
 .add-question .row-fluid {
@@ -13,13 +20,9 @@
 }
 
 .add-question .ads{
-	margin-top: 10px;
-	/*font-family: 'Raleway', sans-serif;*/
-    font-size: 16px
-}
-
-.add-question .glyphicon-plus, .glyphicon-minus {
-	margin-top: 0;
+	margin: 10px 0 10px 10px;
+    font-size: 1.5em;
+    font-family: 'Pavanam', sans-serif;
 }
 
 .add-question .options {
@@ -44,6 +47,18 @@
 	display: block;
 	margin-top: 10px;
 	float: right;
+}
+
+
+.plus-option {
+	background-image: url(../../../assets/images/icons/plus.png);
+	margin-right: 0 !important; 
+}
+
+.remove-option {
+	background-image: url(../../../assets/images/icons/remove.png);
+	margin-right: 0 !important; 
+
 }
 
 @media screen and (max-width: 450px) {
