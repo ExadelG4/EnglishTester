@@ -14,10 +14,6 @@
             });
         });
 
-        (function gfu() {
-
-        })()
-
         $scope.chooseTeacher = function(item) {
             $scope.tchName = item.fullName;
             $scope.tchMail = item.email;
