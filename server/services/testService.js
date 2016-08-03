@@ -44,14 +44,14 @@ function result(id, ans){
 	//temporarily
 	var count =0;
 	var rez =0;
-	ans.array.forEach(function(element) {
+	ans.forEach(function(element) {
 		count++;
 		rez +=element.mark;
 	});
 	rez/=count;
-	stackService.findStack({_id: id}, {}, {}).then(function (data){
+	stackService.findStack({_id: id}, {}, {}).then(function (data_){
 		var resultRecord = {};
-		
+		var data = data_[0];
 		resultRecord.userId = data.userId,
 		resultRecord.firstName = data.firstName,
 		resultRecord.lastName = data.lastName,
@@ -61,7 +61,7 @@ function result(id, ans){
 
 		resultRecord.result.autoMark = data.level;
 		resultRecord.result.teacherMark = rez;
-		resultRecord.result.level = (rez+data.level)/2;
+		resultRecord.result.level = (rez+data.level*100)/2;
 		
 
 		resultRecord.teacherId = data.teacherId;
@@ -71,7 +71,7 @@ function result(id, ans){
 		resultRecord.teacherEmail = teacherEmail;
 
 		stackService.addResults(resultRecord).then(function(data){
-			stackService.removeResultsCollection().then(function(data){
+			stackService.removeStackCollection({_id: id}).then(function(data){
 				pr.resolve();
 			}).catch(function(err){
 				pr.reject(err);
