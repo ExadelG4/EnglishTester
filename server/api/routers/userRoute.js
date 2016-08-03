@@ -39,7 +39,12 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 			if(data[0] !== undefined){
 				testService.getTest(data[0]).then(function(data){
 					res.send(data);
-					service.updateStatus(req.user._id, 'stack');
+					stackService.removeOpenTestsCollection({userId: req.user._id}).then(function(data){
+						service.updateStatus(req.user._id, 'stack');
+					}).catch(function(err){
+						res.status(401).send(err);
+					})
+					
 
 				}).catch(function(err){
 					res.json(err);

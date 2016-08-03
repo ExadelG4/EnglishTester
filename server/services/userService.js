@@ -28,7 +28,6 @@ function addNewUsers(info){
 }
 function authenticate(email, pass){
     var defer = q.defer();
-	// user.authenticate(email, pass).
     user.findOne({email: email},{},{}).then(function(user_){                
         if (!user_) {           
             defer.reject();
@@ -59,10 +58,8 @@ function authenticate(email, pass){
 
                     if(user.role == 'guest'){
                         stackService.findOpenTests({userId: user._id},{},{}).then(function(data){
-                           // console.log(data);
                             if(data.length){
                                 defer.resolve({ user : user, token: 'JWT ' + token, refreshToken: refreshToken, expiredTime: utc_timestamp});
-                              //  console.log(data);
                             }
                             else{
                                 defer.reject();
@@ -90,6 +87,9 @@ function removeCollection(query){
 
 function find(query, fields, options){
     return user.find(query, fields, options);
+}
+function update(query, update,options){
+    return user.update(query, update,options);
 }
 
 function getUserStatus(_userId){
@@ -151,25 +151,48 @@ function getUserStatus(_userId){
 
 function getFinishedList(){
     var defer = q.defer();
-    stackService.findStack({teacherId:'none'},{'userId': 1},{}).then(function (data) {
+    stackService.findStack({teacherId:'none'},{'userId': 1,'answers':1},{}).then(function (data) {
+      
+        var noobsId =[];
         var arrayId =[];
-        data.forEach(function(element) {
-            arrayId.push(element._doc.userId);
+        data.forEach(function(element){
+            
+           // console.log(element._doc);
+            if(element._doc.answers.length == 0){
+               
+                noobsId.push(element._doc.userId);
+                //console.log('noob '+element._doc.userId);
+            }
+            else{
+                arrayId.push(element._doc.userId);
+               // console.log('norm '+element._doc.userId);
+            }
         });
-        user.find({'_id': {$in:arrayId}},{'password': 0},{}).then(function (data_) {
-            defer.resolve(data_);
-        }).catch(function (err) {
+       // console.log(noobsId);
+        stackService.removeStackCollection({userId : {$in : noobsId}}).then(function(data){
+            update({_id : {$in:noobsId}},{ $set: { status: 'free' }},{multi: true}).then(function(data){
+                user.find({'_id': {$in:arrayId}},{'password': 0},{}).then(function (data_) {
+                    defer.resolve(data_);
+                }).catch(function (err) {
+                     defer.reject(err);
+                 });
+                
+            }).catch(function(err){
+                defer.reject(err);
+            });
+
+            
+        }).catch(function(err){
             defer.reject(err);
-        })
+        });
+        
     }).catch(function (err) {
         defer.reject(err);
     });
     return defer.promise;
 }
 
-function update(query, update,options){
-    return user.update(query, update,options);
-}
+
 
 function submit1(data, id){
     var defer = q.defer();
@@ -183,21 +206,20 @@ function submit1(data, id){
     }).catch(function(err){
         defer.reject(err);
     })
-
-
     return defer.promise;
 }
 
 function submit2(data, uid){
     var defer = q.defer();
 
-    data.array.forEach(function(element) {
+    data.forEach(function(element) {
         if(element.badForUser){
             testB.update({_id:element.qId},{ $set: { complaint: true }},{});
         }
     });
 
     stack.update({userId:uid},{ $set: { answers: data }},{}).then(function(data){
+        updateStatus(uid,'stack');
         defer.resolve(data);
     }).catch(function(err){
         defer.reject(err);
@@ -258,25 +280,21 @@ var pr = q.defer();
                         userInfo.email = data.email;
                         userInfo.number = data.number;
                         userInfo.role = data.role;
-                        userInfo.status = data.status;
+                       
            
             if(data.role == 'admin'){
              
-                pr.resolve(data);
+                pr.resolve(userInfo);
             }
             else if(data.role == 'user' || data.role == 'guest'){
-                stackService.findOneResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
+                    userInfo.status = data.status;
+                stackService.findResults({userId:id},{'_id':0,'result':1,'teacherId':1,'date':1,'teacherFirstName': 1,'teacherLastName': 1},{}).then(function(data2){
                         
                     if(data2){
-                        userInfo.result = data2.result;
-                        userInfo.teacherId = data2.teacherId;
-                        userInfo.date = data2.date;
-                        userInfo.teacherLastName = data2.teacherLastName;
-                        userInfo.teacherFirstName = data2.teacherFirstName;
-                
+                        userInfo.results = data2;
                         pr.resolve(userInfo);
                     }
-                    else pr.resolve(data);
+                    else pr.resolve(userInfo);
                 }).catch(function(err){
                     pr.reject(err);
                 });

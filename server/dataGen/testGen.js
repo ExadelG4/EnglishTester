@@ -25,7 +25,7 @@ var addQuestion = function(_level,count){
 							level: _level,
 							question: questRand.choose(),
 							options: [optionRand.choose(),optionRand.choose(),optionRand.choose()],
-							answers: [randomInteger(0,3)]
+							answers: [randomInteger(0,2)]
 							}));
 				}
 

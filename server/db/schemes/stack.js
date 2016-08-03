@@ -8,7 +8,7 @@ var stackScheme = new Schema(
 			type: Number,
 			default: Date.now()
 		},
-		
+		autoMark : Number,
 		level : Number,
 		userId: String,
 		firstName: String,
@@ -16,7 +16,7 @@ var stackScheme = new Schema(
 		email: String,
 
 		answersAuto: [{_qId: String, level: Number, answer: []}],
-		answers: [{_id: String, answer: String }],
+		answers: [{_qId: String, answer: String }],
 		
 		teacherId: {
 			type: String,
