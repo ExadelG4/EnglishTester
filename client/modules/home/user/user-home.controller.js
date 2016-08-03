@@ -19,6 +19,7 @@
                 $scope.disStart = true;
                 $scope.disReq = true;
                 $scope.close = true;
+
                 if ($scope.status === 'scha') {
                     $scope.disStart = false;
                     $scope.disReq = true;
