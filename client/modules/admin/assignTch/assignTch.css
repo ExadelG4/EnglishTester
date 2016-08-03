@@ -3,13 +3,24 @@
     position: relative;
 }
 
+.sel1 > *, .sel2 > * {
+    margin-top: 3%;
+}
+
+.sel1Tch, .sel2Tch {
+    padding: 10px;
+    display: inline-block;
+    width: 49%;
+}
+
 .sel1 > input, .sel2 > input {
     display: block;
     height: 45px;
+    width: 100%;
 }
 
-.sel1 > *, .sel2 > * {
-    margin-top: 3%;
+.sel1 > ol, .sel2 > ol {
+    width: 100% !important;
 }
 
 .formSelect {
@@ -21,20 +32,12 @@
     /*margin: 0 auto;*/
 /*}*/
 
-.sel1 > ol, .sel2 > ol {
-    width: 100% !important;
-}
-
 .btn-block {
     width: 100%;
     text-align: center;
 }
 
-.sel1, .sel2 {
-    padding: 10px;
-    display: inline-block;
-}
-
 .submit-tch {
-    width: 100%;
+    width: 25%;
+    margin: 10px;
 }

@@ -15,7 +15,7 @@ function randomInteger(min, max) {
     return rand;
   };
 var enumArr = ['oneOfMany','manyOfMany','listeningWithOneOfMany','listeningWithManyOfMany'];
-var enumArrB = ['questionWithoutChoiceOfAnswers','essay','listeningWithoutChoiceOfAnswers'];
+var enumArrB = ['questionWithoutChoiceOfAnswers','essay','listeningWithoutChoiceOfAnswers','speaking'];
 var addQuestion = function(_level,count){
 			var defer = q.defer();
 			var prom = [];
@@ -25,7 +25,7 @@ var addQuestion = function(_level,count){
 							level: _level,
 							question: questRand.choose(),
 							options: [optionRand.choose(),optionRand.choose(),optionRand.choose()],
-							answers: [randomInteger(0,2)]
+							answers: [randomInteger(0,3)]
 							}));
 				}
 

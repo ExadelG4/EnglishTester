@@ -115,6 +115,7 @@
                         return httpService.post(host+'/teacher/checkTest', data);
                     },
                     assignStudents: function(list) {
+                        console.log(list);
                         return httpService.post(host + '/admin/assignStudents', {students: list});
                     },
 
