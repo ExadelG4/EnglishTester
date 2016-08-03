@@ -20,9 +20,9 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 
 				var doc = {
 					userId: req.user._id ,
-					firstName: req.user.firstName,//decoded.firstName,
-					lastName: req.user.lastName,//decoded.lastName,
-					email: req.user.email//decoded.email
+					firstName: req.user.firstName,
+					lastName: req.user.lastName,
+					email: req.user.email
 				}
 				stackService.addRequest(doc).then(function(data){
 					service.updateStatus(doc.userId, 'req');
@@ -39,7 +39,12 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 			if(data[0] !== undefined){
 				testService.getTest(data[0]).then(function(data){
 					res.send(data);
-					service.updateStatus(req.user._id, 'stack');
+					stackService.removeOpenTestsCollection({userId: req.user._id}).then(function(data){
+						service.updateStatus(req.user._id, 'stack');
+					}).catch(function(err){
+						res.status(401).send(err);
+					})
+					
 
 				}).catch(function(err){
 					res.json(err);

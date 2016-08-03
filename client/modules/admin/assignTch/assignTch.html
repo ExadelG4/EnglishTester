@@ -5,7 +5,7 @@
             <ol class="nya-bs-select" size="7" title="Choose teacher" ng-model="selectedItem2" data-live-search="true" ng-change="chooseTeacher(selectedItem2)">
                 <li nya-bs-option="teacher in teachers">
                     <a>
-                        {{ teacher.fullName }}
+                        {{ teacher.fullName }} ({{teacher.assignTest}}/{{teacher.totalTests}})
                         <span class="glyphicon glyphicon-ok check-mark"></span>
                     </a>
                 </li>

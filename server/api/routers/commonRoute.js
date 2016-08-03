@@ -39,7 +39,7 @@ router.get('/refresh',contracts.refresh, passport.authenticate('jwt', { session:
 
 router.get('/status', passport.authenticate('jwt', { session: false }),function(req, res){	
 	service.getUserStatus(req.user._id).then(function(data){
-		console.log(data);
+		//console.log(data);
 		res.json(data);
 	}).catch(function(err){
 		res.status(404).send("User not found");

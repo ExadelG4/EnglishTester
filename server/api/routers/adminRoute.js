@@ -148,14 +148,16 @@ router.get('/getTeachers', function(req, res) {
 
 router.get('/getFinishedUsers', function(req, res){
 	service.getFinishedList().then(function (data) {
+		
 		res.json(data);
 	}).catch(function (err) {
+		
 		res.json(err);
 	})
 });
 
 router.get('/getUsersRequests', function(req, res){
-	stackService.findRequest({},{},{}).then(function(data){
+	service.find({status: 'req', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));

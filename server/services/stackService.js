@@ -3,6 +3,7 @@ var testA = require('../db/mongo').testA;
 var results = require('../db/mongo').results;
 var request = require('../db/mongo').request;
 var openTests = require('../db/mongo').openTests;
+var service = require('./userService');
 
 var q = require('q');
 
@@ -74,7 +75,17 @@ function findOpenTestsById(){
 }
 
 function assignTeacher(data){
-	return stack.update({userId: data.userId},{$set: { teacherId: data.teacherId }},{});
+		var pr = q.defer();
+		var tId = data.teacherId;
+		service.find({_id : tId},{'firstName':1,'lastName':1,'email':1},{}).then(function(data1){
+			stack.update({userId: data.userId},{$set: { teacherId: data.teacherId, teacherFirstName : data1[0].firstName, teacherLastName: data1[0].lastName, teacherEmail: data1[0].email}},{}).then(function(data){
+				pr.resolve(data);
+			})
+		}).catch(function(err){
+			pr.reject(err);
+		})
+	
+	return pr.promise;
 }
 
 
@@ -137,7 +148,7 @@ function checkFirstPart(data, id){
 					testA.update({_id:element.qId},{ $set: { complaint: true }},{});
 				}
 				stackRecord.answersAuto.forEach(function(element1) {
-					if(element.qId === element1._qId){
+					if(element.qId == element1._qId){
 						var f = true
 						element.answer.forEach(function(element, i, arr) {
 							if(element!= element1.answer[i]){
@@ -154,9 +165,15 @@ function checkFirstPart(data, id){
 			marks.forEach(function(element) {
 				rez+=element;
 			});
-			rez/=15;
-			rez = Math.floor(rez*5);
-			stack.update({_id:stackRecord._id},{ $set: { level: rez }},{}).then(function(){
+			
+			rez/=9;
+			var aMark = rez;
+			aMark *=100;
+			rez = Math.floor(rez*5)+1;
+			if(rez == 6) {
+				rez = 5;
+			}
+			stack.update({_id:stackRecord._id},{ $set: { level: rez, autoMark: aMark }},{}).then(function(){
 				pr.resolve(rez);
 			}).catch(function(err){
 				pr.reject(err);
