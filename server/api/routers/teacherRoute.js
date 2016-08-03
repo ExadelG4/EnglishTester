@@ -34,7 +34,16 @@ router.post('/checkTest',contracts.checkTest,passport.authenticate('jwt', { sess
 		res.status(400).send("Bad Request");
 	});
 
-})
+});
+
+router.post('/submit3',function(req, res){
+	testService.result(req.body.id, req.body.results ).then(function(data){
+		res.send(data);
+	}).catch(function(err){
+		res.status(400).send("Bad Request");
+	});
+});
+
 
 
 module.exports = router;

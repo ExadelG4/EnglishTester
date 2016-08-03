@@ -5,7 +5,9 @@
 
 
 			$scope.selectedQue = '';
-
+			$scope.tempQue = {
+				olo: 'hi'
+			}
 
 			$scope.typeOfQuestion = [ 
 			{
@@ -46,7 +48,6 @@
 				type: '',
 				question: '',
 				level: '',
-				audio: '',
 				options: [''],
 				answers: [-1]
 			};
@@ -58,6 +59,12 @@
     			url: ''
 
 			};
+
+			$scope.uspeh = function(a) {
+				$scope.finalQue.question = a;
+				console.log($scope.finalQue.question);
+				$scope.sendQue();
+			}
 
 			$scope.init = function(selectedQue) {
 				$scope.finalQue.type = selectedQue;
@@ -111,16 +118,18 @@
 					delete $scope.finalQue.answers;
 					delete $scope.finalQue.options;
 				}
+				if ($scope.finalQue.type === 'listeningWithManyOfMany' ||
+					$scope.finalQue.type === 'listeningWithoutChoiceOfAnswers' ||
+					$scope.finalQue.type === 'listeningWithOneOfMany') {
+					$scope.finalQue.question = $scope.tempQue;
+				}
+
 				userService.halfSmoke($scope.finalQue);
 				$scope.selectedQue = '';
 				notification.success("You have successfully added new question");
 			};
 
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 			$scope.fileNameChanged = function (ele) {
 				var files = ele.files;
@@ -132,11 +141,7 @@
 				}
 			}
 
-
-
-
 			$scope.submit = function(){
-				// var file = this.elements.myfile.files[0];
 				var file = $scope.vm.uploadme;
 				if (file) {
 					upload(file);
@@ -145,36 +150,36 @@
 			};
 
 			function upload(file) {
+				//$scope.finalQue.question = '';
 
 				var xhr = new XMLHttpRequest();
-
-				// обработчики можно объединить в один,
-				// если status == 200, то это успех, иначе ошибка
-				xhr.onload = xhr.onerror = function () {
+				/*xhr.onload = xhr.onerror = function () {
 					if (this.status == 200) {
 						log("success");
 					} else {
 						log("error " + this.status);
 					}
-				};
+				};*/
 
-				// обработчик для закачки
 				xhr.upload.onprogress = function (event) {
 					log(event.loaded + ' / ' + event.total);
 				}
 
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == XMLHttpRequest.DONE && xhr.responseText !== '') {
+						//$scope.tempQue.olo = xhr.responseText;
+        				//$scope.finalQue.question =  xhr.responseText;
+        				$scope.uspeh(xhr.responseText);
+    				}
+				}
+
 				xhr.open("POST", "upload", true);
 				xhr.send(file);
-
 			}
-
 
 			function log(html) {
 				document.getElementById('log').innerHTML = html;
 			}
-
-
-
 
 }]).directive("fileread", [function () {
     return {
@@ -183,21 +188,10 @@
         },
         link: function (scope, element, attributes) {
             element.bind("change", function (changeEvent) {
-                // var reader = new FileReader();
-                // reader.onload = function (loadEvent) {
-                //     scope.$apply(function () {
-                //         scope.fileread = loadEvent.target.result;
-                //     });
-                // }
-                // reader.readAsDataURL(changeEvent.target.files[0]);
 				scope.fileread = changeEvent.target.files[0];
             });
         }
     }
-
-	// return {
-	// 	changeEvent.target.files[0]
-	// }
 
 }])
 })();
