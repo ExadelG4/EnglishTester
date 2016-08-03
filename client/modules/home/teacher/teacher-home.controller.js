@@ -2,13 +2,14 @@
     'use strict';
 
     angular.module('home')
-        .controller('teacherHomeController', ['$scope',
-            function($scope) {
-                $scope.isShowList = true;
-                
-                /*$scope.changeIsShowList = function () {
-                    $scope.isShowList = !$scope.isShowList;
-                };*/
+        .controller('teacherHomeController', ['$scope', 'userService',
+            function($scope, userService) {
+                $scope.list = []
+
+                userService.getTestsList()
+                    .then ( function(data) {
+                        $scope.list = data;
+                    })
                 
                 $scope.testList = [
                     {

@@ -163,6 +163,12 @@
                             .then (function(result) {
                                 return result.data;
                             })
+                    },
+                    getTestsList : function() {
+                        return httpService.get(host + '/teacher/getTests')
+                            .then (function(result) {
+                                return result.data;
+                            })
                     }
                 };
             }]);

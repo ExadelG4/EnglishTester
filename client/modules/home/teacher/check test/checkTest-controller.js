@@ -18,7 +18,7 @@
 				'speaking': startUrl + '4.html'
 			};
 
-		$scope.questions = [
+		$scope.allQuestions = [
 			{
 				qId: '',
 				type: 'questionWithoutChoiceOfAnswers',
@@ -58,27 +58,26 @@
 			}
 		];
 
-		$scope.proven = [];
-		$scope.omg = {
-			tempMark:''
-		};
-		for (var i = 0; i < $scope.questions.length; ++i) {
-			var temp = {
-				qId: $scope.questions[i].qId,
-				mark: ''
-			};
-			$scope.proven.push(temp);
-		}
-
 		$scope.currentPage = 1;
-		$scope.totalCount = $scope.questions.length;
+		$scope.totalCount = $scope.allQuestions.length;
 		$scope.copyCurrentPage = 1;
 		$scope.neededNumPage = '';
 		$scope.validNeededNumPage = true;
 		$scope.forValidMark = [];
+		$scope.dirty = []
 
-		for(var i = 0; i < $scope.totalCount; ++i) {
+		$scope.proven = [];
+		$scope.omg = {
+			tempMark:''
+		};
+		for (var i = 0; i < $scope.totalCount; ++i) {
+			var temp = {
+				qId: $scope.allQuestions[i].qId,
+				mark: ''
+			};
+			$scope.proven.push(temp);
 			$scope.forValidMark.push(false);
+			$scope.dirty.push(false);
 		}
 
 		var song = {
@@ -90,29 +89,20 @@
 		var initNewPage = function (currentPage) {
 			$scope.omg.tempMark = $scope.proven[currentPage - 1].mark;
 			angularPlayer.init();
-			if($scope.questions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers') {
-				/*var song = {
-	    			id: 'one',
-	    			artist: 'Drake',
-	    			url: $scope.questions[currentPage - 1].audio
-    			}*/
-    			song.url = $scope.questions[currentPage - 1].audio;
+			if($scope.allQuestions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers') {
+    			song.url = $scope.allQuestions[currentPage - 1].audio;
 				angularPlayer.addTrack(song);
 			}
-			else if ($scope.questions[currentPage - 1].type ==='speaking') {
-				/*var song = {
-	    			id: 'one',
-	    			artist: 'Drake',
-	    			url: $scope.questions[currentPage - 1].audioAnswer
-    			}*/
-    			song.url = $scope.questions[currentPage - 1].audioAnswer;
+			else if ($scope.allQuestions[currentPage - 1].type ==='speaking') {
+    			song.url = $scope.allQuestions[currentPage - 1].audioAnswer;
 				angularPlayer.addTrack(song);
 			}
 
 		};
 
-		var savePrevPage = function(currentPage) {
-			$scope.proven[currentPage - 1].mark = $scope.omg.tempMark;
+		var savePrevPage = function(prevNumPage) {
+			$scope.dirty[prevNumPage - 1] = true;
+			$scope.proven[prevNumPage - 1].mark = $scope.omg.tempMark;
 			$scope.omg.tempMark = '';
 
 		};
@@ -133,7 +123,7 @@
   		};
 
   		$scope.setNumPage = function(numPage) {
-			if(numPage >= 0 && numPage <= $scope.questions.length)
+			if(numPage >= 0 && numPage <= $scope.allQuestions.length)
 				$scope.currentPage = numPage;
 			else  {
 				$scope.validNeededNumPage = false;
@@ -141,7 +131,7 @@
 		};
 
 		$scope.onlineWriteValid = function(currentPage) {
-			$scope.forValidMark[currentPage - 1] = $scope.validMark($scope.questions[currentPage - 1].scale);
+			$scope.forValidMark[currentPage - 1] = $scope.validMark($scope.allQuestions[currentPage - 1].scale);
 		}
 
 		$scope.createSong = function(urlAudio, song) {

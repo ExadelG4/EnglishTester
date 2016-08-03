@@ -20,9 +20,9 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 
 				var doc = {
 					userId: req.user._id ,
-					firstName: req.user.firstName,//decoded.firstName,
-					lastName: req.user.lastName,//decoded.lastName,
-					email: req.user.email//decoded.email
+					firstName: req.user.firstName,
+					lastName: req.user.lastName,
+					email: req.user.email
 				}
 				stackService.addRequest(doc).then(function(data){
 					service.updateStatus(doc.userId, 'req');
