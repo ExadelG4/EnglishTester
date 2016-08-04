@@ -9,7 +9,6 @@
         var currentStudent;
         var currentList;
 
-
         checkURL();
 
         function checkURL(){
@@ -33,6 +32,18 @@
                     $scope.copyFreeStudents[i].fullName = item.firstName + ' ' + item.lastName;
                 });
             });
+        }
+
+        function clear() {
+            $scope.disabled = false;
+            $scope.freeStdName = '';
+            $scope.freeStdMail = '';
+            $scope.freeStdTel = '';
+            $scope.mytime3 = null;
+            $scope.mytime4 = null;
+            $scope.selectedItem4 = '';
+            $scope.dt3 = null;
+            $scope.dt4 = null;
         }
 
         var stdConstructor = function(stdId, stdData, stdData2){
@@ -64,24 +75,13 @@
 
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
+
             var res;
             $scope.freeStudents.map(( obj, i ) =>
                 (obj.email == currentStudent.email) ? (res = i) : (false)
             );
-            console.log($scope.freeStudents.length);
-            console.log($scope.freeStudents);
             $scope.freeStudents.splice(res, 1);
-            console.log($scope.freeStudents.length);
-            console.log($scope.freeStudents);
-            $scope.disabled = false;
-            $scope.freeStdName = '';
-            $scope.freeStdMail = '';
-            $scope.freeStdTel = '';
-            $scope.mytime3 = null;
-            $scope.mytime4 = null;
-            $scope.selectedItem4 = '';
-            $scope.dt3 = null;
-            $scope.dt4 = null;
+            clear();
         };
 
         $scope.submitStudentsList = function() {
