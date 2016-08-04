@@ -137,7 +137,6 @@
 				$scope.userAnswers.push(tempAnswer);
 				$scope.validAnswers.push(false);
 				$scope.dirty.push(false);
-				//$scope.badForUser.push(false);
 			}
 	  		$scope.initNewPage($scope.currentPage);
 		}
@@ -222,7 +221,6 @@
 		$scope.pageChanged = function(prevNumPage, currentPage) {
     		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
-    		//$scope.omg.tempChoise = null;
     		if(angularPlayer.getPlaylist().length > 0)
     			angularPlayer.clearPlaylist( function() {
     				});    	
@@ -287,20 +285,24 @@
   				$scope.userAnswers[num].badForUser = true;
   		};
 
-  		$scope.sendFirstPart = function() {
+  		$scope.sendFirstPart = function(currentPage) {
+  			$scope.validNeededNumPage = true;
+    		$scope.savePrevPage(currentPage);
   			userService.sendFirstPart($scope.userAnswers)
   				.then ( function(data) {
-  					notification.success("You have successfully completed the first part of the text.");
+  					notification.success("You have successfully completed the first part of the test.");
   					$scope.whichPart = 2;
   					$scope.initVars();
   					$scope.initAll(data);
   				});
   		};
-  		$scope.sendSecondPart = function() {
+  		$scope.sendSecondPart = function(currentPage) {
+  			$scope.validNeededNumPage = true;
+    		$scope.savePrevPage(currentPage);
   			userService.sendSecondPart($scope.userAnswers)
   				.then ( function() {
   					$state.go('home');
-  					notification.success("You have successfully completed all text.");
+  					notification.success("You have successfully completed all test.");
   				});
   		};
 
