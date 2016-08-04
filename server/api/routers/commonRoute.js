@@ -61,6 +61,8 @@ router.get('/uploadtest',function(req, res){
 
 router.post('/editNumber',passport.authenticate('jwt', { session: false }),function(req,res){
 	
+	console.log(req.body);
+	console.log(req.body.number);
 	var id = req.user._id;
 	var newNumber = req.body.number;
 	service.update({_id:id},{ $set: { number: newNumber}},{}).then(function(data){

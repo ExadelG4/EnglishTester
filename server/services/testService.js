@@ -6,7 +6,12 @@ var stackService = require('./stackService');
 var service = require('./userService');
 
 
-
+function findA(query, fields, options){
+	return testA.find(query, fields, options);
+}
+function findB(query, fields, options){
+	return testB.find(query, fields, options);
+}
 function getAllQuestions(){
 	return testA.find({},{},{});
 }
@@ -96,7 +101,42 @@ function result(id, ans){
 	return pr.promise;
 }
 function checkTest(testId, tId){
-    stackService.find()
+    var pr = q.defer();
+    stackService.findStack({_id: testId},{'answers':1,'teacherId':1},{}).then(function(data){
+    	
+    	if(data[0].teacherId == tId){
+		    	var qIdArr =[];
+		    	var forTeacher =[];
+		    	data[0].answers.forEach(function(element){
+		    		qIdArr.push(element.qId);
+		    	});
+		    	console.log(qIdArr);
+		    	console.log(qIdArr.length);
+		    	findB({_id : {$in:qIdArr}},{'question':1,'type':1},{}).then(function(qdata){
+		    			console.log(qdata);
+		    		for(var i=0; i<qIdArr.length; i++){
+		    			var question ={};
+		    			question.qId = qdata[i]._id;
+		    			question.answer = data[0].answers[i].answer;
+		    			question.type = qdata[i].type;
+		    			question.question = qdata[i].question;
+		    			forTeacher.push(question);
+		    			
+		    		}
+		    		console.log(forTeacher);
+		    		pr.resolve({questions: forTeacher, tId : testId});
+
+		    	}).catch(function(err){
+		    		pr.reject(err);
+		    	})
+    	}
+    	else {
+    		pr.reject('ERROR. THIS TEST IS NOT FOR YOU');
+    	}
+    }).catch(function(err){
+    	pr.reject(err);
+    });
+    return pr.promise;
 };
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
@@ -112,4 +152,6 @@ module.exports.addQuestionArrayA = addQuestionArrayA;
 module.exports.addQuestionArrayB = addQuestionArrayB;
 module.exports.result = result;
 module.exports.checkTest = checkTest;
+module.exports.findA = findA;
+module.exports.findB = findB;
 

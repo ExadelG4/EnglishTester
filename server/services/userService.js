@@ -211,7 +211,7 @@ function submit1(data, id){
 
 function submit2(data, uid){
     var defer = q.defer();
-
+    console.log(data);
     data.forEach(function(element) {
         if(element.badForUser){
             testB.update({_id:element.qId},{ $set: { complaint: true }},{});
