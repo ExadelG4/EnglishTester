@@ -18,3 +18,7 @@
 .submitNewUser {
     width: 100% !important;
 }
+
+.formAddUser label{
+    margin-top: 10px;
+}

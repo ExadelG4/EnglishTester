@@ -1,6 +1,6 @@
 (function(){
     'use strict';
-    angular.module('admin').controller('assignTchController', ['$scope', 'userService', function($scope, userService) {
+    angular.module('admin').controller('assignTchController', ['$scope', 'userService', 'notification', function($scope, userService, notification) {
 
         $scope.teachers = [];
         $scope.students = [];
@@ -50,6 +50,7 @@
             userService.assignTeacher($scope.currentUser._id, $scope.currentTeacher._id);
             updateUserList();
             updateTeacherList();
+            notification.success("You have successfully assigned teachers on users test");
 
             $scope.stdName = '';
             $scope.stdMail = '';

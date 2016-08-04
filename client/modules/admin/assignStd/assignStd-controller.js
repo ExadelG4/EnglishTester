@@ -1,6 +1,6 @@
 (function(){
     'use strict';
-    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', function($scope, userService, $location) {
+    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', 'notification', function($scope, userService, $location, notification) {
         $scope.freeStudents = [];
         $scope.copyFreeStudents = [];
         $scope.showList = [];
@@ -70,6 +70,8 @@
         $scope.submitStudentsList = function() {
             userService.assignStudents(chooseUserList);
             checkURL();
+            notification.success("You have successfully assigned test for users");
+            console.log($scope.freeStudents);
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
