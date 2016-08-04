@@ -62,9 +62,6 @@ input[type="radio"], input[type="checkbox"] {
 
 .btn-prev {
     margin: 0 -4px 0 15px;
-    border-color: rgb(77, 181, 124);
-    border-right-width: 1px;
-    border-style: solid;
     border-radius: 5px 0 0 5px;
 }
 
@@ -79,24 +76,17 @@ input[type="radio"], input[type="checkbox"] {
 .form-num {
     display: block;
     vertical-align: middle;
-    margin: 10px 0 10px 15px;
+    margin: 70px 0 0 15px;
 }
 
 .pagination {
     margin-left: 15px;
 }
 
-.pagination> .active > a, .pagination> .active > a:hover   {
-    background-color: rgb(91, 212, 145);
-    border-color: rgb(91, 212, 145);
+.pagination> .active > a, .pagination> .active > a:hover, .pagination> li > a:hover   {
     color: white;
 }
 
-.pagination> li > a:hover {
-    background-color: rgb(99, 249, 168);
-    border-color: rgb(99, 249, 168);
-    color: white;
-}
 
 .pagination > li > a {
     color: rgba(51,51,51,1);
@@ -104,6 +94,26 @@ input[type="radio"], input[type="checkbox"] {
     width: 35px;
     text-align: center;
     font-size: 1em;
+}
+
+.user-pagi> .active > a, .user-pagi> .active > a:hover {
+    background-color: rgb(91, 212, 145);
+    border-color: rgb(91, 212, 145);
+}
+
+.user-pagi> li > a:hover {
+    background-color: rgb(99, 249, 168);
+    border-color: rgb(99, 249, 168);
+}
+
+.teacher-pagi> .active > a, .teacher-pagi> .active > a:hover   {
+    background-color: rgb(232, 134, 18);
+    border-color: rgb(232, 134, 18);
+}
+
+.teacher-pagi> li > a:hover {
+    background-color: rgb(255, 191, 81);
+    border-color: rgb(255, 191, 81);
 }
 
 .input-num-que {
@@ -147,7 +157,7 @@ input[type="radio"], input[type="checkbox"] {
     background-image: url(../../../../../assets/images/icons/good-question.png);
 }
 .btn-good-que {
-    background-image: url(../../../../../assets/images/icons/bad-question.png);
+    background-image: url(../../../../../assets/images/icons/badF-question.png);
 }
 .btn-fing + .label-fing {
     display: none;
@@ -173,8 +183,14 @@ input[type="radio"], input[type="checkbox"] {
 }
 .btn-submit {
     display: block;
-    float: right;
-    margin-top: 30px;
+    margin: 30px auto 0 auto;
+}
+
+.div-check-answer {
+    font-size: 1.6em;
+    padding: 10px;
+    background-color: rgba(255, 245, 171, 0.42);
+    margin-bottom: 30px;
 }
 
 @media (max-device-width: 767px) {
