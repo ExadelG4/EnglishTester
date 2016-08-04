@@ -18,6 +18,7 @@
 
         function fingOutURL (req) {
             req.then(function(data) {
+                console.log(data);
                 data.forEach(function(item, i) {
                     $scope.freeStudents[i] = item;
                     $scope.copyFreeStudents[i] = item;
