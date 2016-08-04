@@ -257,7 +257,7 @@
   				}
   			}
   			$scope.validAnswers[currentPage - 1] = false;
-  		}
+  		};
 
   		$scope.changeValidRT = function(currentPage) {
   			if ($scope.omg.tempChoise !== '') {

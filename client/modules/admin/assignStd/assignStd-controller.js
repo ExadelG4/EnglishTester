@@ -1,22 +1,25 @@
 (function(){
     'use strict';
-    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', function($scope, userService, $location) {
+    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', 'notification', function($scope, userService, $location, notification) {
         $scope.freeStudents = [];
         $scope.copyFreeStudents = [];
         $scope.showList = [];
         $scope.disabled = true;
         var chooseUserList = [];
         var currentStudent;
+        var currentList;
 
-        (function(){
+        checkURL();
+
+        function checkURL(){
             if($location.absUrl() == 'http://localhost:3000/home') {
-                fingOutURL(userService.getUsersRequests());
+                findOutURL(userService.getUsersRequests());
             } else {
-                fingOutURL(userService.getFreeUsers());
+                findOutURL(userService.getFreeUsers());
             }
-        })();
+        }
 
-        function fingOutURL (req) {
+        function findOutURL (req) {
             req.then(function(data) {
                 data.forEach(function(item, i) {
                     $scope.freeStudents[i] = item;
@@ -66,6 +69,9 @@
 
         $scope.submitStudentsList = function() {
             userService.assignStudents(chooseUserList);
+            checkURL();
+            notification.success("You have successfully assigned test for users");
+            console.log($scope.freeStudents);
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;

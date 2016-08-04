@@ -1,33 +1,40 @@
 (function(){
-    angular.module('profile').controller('editProfileController',['$scope', 'context', function($scope, context){
-        var fullName = context.getFirstName() + ' ' + context.getLastName();
-        $scope.userProfile = {
-            name: fullName,
-            email: context.getEmail(),
-            telNumber: context.getNumber()
-        };
+    'use strict';
+    angular.module('profile')
+        .controller('editProfileController',['$scope', 'context', 'userService', 'notification',
+            function($scope, context, userService, notification){
+                var fullName = context.getFirstName() + ' ' + context.getLastName();
+                $scope.userProfile = {
+                    name: fullName,
+                    email: context.getEmail(),
+                    telNumber: context.getNumber()
+                };
 
-        $scope.role = context.getRole();
-        $scope.disable2 = true;
+                $scope.role = context.getRole();
+                $scope.disable2 = true;
 
 
-        $scope.onScndInput = function() {
-            $scope.disable2 = false;
-        };
+                $scope.onScndInput = function() {
+                    $scope.disable2 = false;
+                };
 
-        $scope.changeMail = function() {
-            $scope.userProfile.email = $scope.mail;
-        };
+                $scope.changeMail = function() {
+                    $scope.userProfile.email = $scope.mail;
+                };
 
-        $scope.changeTelNumber = function() {
-            $scope.userProfile.telNumber = $scope.telNbr;
-            console.log($scope.telNbr);
-        };
+                $scope.changeTelNumber = function() {
+                    $scope.userProfile.telNumber = $scope.telNbr;
+                };
 
-        $scope.save = function() {
-            $scope.disable2 = true;
-        };
+                $scope.save = function() {
+                    $scope.disable2 = true;
+                    notification.success("You have successfully changed phone number");
+                    userService.editProfile($scope.userProfile.telNumber);
+                };
 
+                $scope.change = function() {
+                    $scope.disable2 = true;
+                }
 
     }]);
 
@@ -81,5 +88,3 @@
 
 
 })();
-
-
