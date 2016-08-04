@@ -38,6 +38,12 @@ function getComplaintedA(){
 function getComplaintedB(){
 	return testB.find({complaint: true},{'type':1, 'question':1, 'options':1},{});
 }
+function addQuestionArrayA(info){
+	return testA.create(info);
+}
+function addQuestionArrayB(info){
+	return testB.create(info);
+}
 
 function result(id, ans){
 	var pr = q.defer();
@@ -99,4 +105,7 @@ module.exports.removeCollectionB = removeCollectionB;
 module.exports.getSecondTest = getSecondTest;
 module.exports.getComplaintedA = getComplaintedA;
 module.exports.getComplaintedB = getComplaintedB;
+module.exports.addQuestionArrayA = addQuestionArrayA;
+module.exports.addQuestionArrayB = addQuestionArrayB;
 module.exports.result = result;
+

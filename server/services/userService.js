@@ -348,7 +348,51 @@ function getTeachers(){
         });
     return prom.promise;    
 }
+function assignStudents(students){
+    var prom = q.defer();
+            var userIds =[];
+            var tempArr = [];
+            var userArr = [];
+            tempArr = students;
+            for(var i=0; i<tempArr.length; i++){
+                var user = {};
+                user._id = tempArr[i].userId;
+                userArr.push(user);
+                userIds.push(tempArr[i].userId);
+            }
+            tempArr.forEach(function(element){
+                updateStatus(element.userId,'open');
+            });
+            
+            find({$or:userArr},{'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
+                
+                var openArr = [];
+                for(var i=0; i<data.length; i++){
+                    var open ={};
+                    open.firstName = data[i].firstName;
+                    open.lastName = data[i].lastName;
+                    open.email = data[i].email;
+                    open.userId = data[i]._id;
+                    open.dateStart = tempArr[i].dateStart;
+                    open.dateEnd = tempArr[i].dateEnd;
+                    openArr.push(open);
+                }
+                stackService.addOpenTestsArray(openArr).then(function(data){
+                     stackService.removeRequestCollection({userId : {$in : userIds}}).then(function(data){
+                        prom.resolve(data);
+                     }).catch(function(err){
+                        prom.reject(err);
+                     })
+                            
+                 }).catch(function (err) {
+                    prom.reject(err);
+                });
 
+            }).catch(function(err){
+                prom.reject(err);
+            });
+    return prom.promise;
+}
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
@@ -368,3 +412,5 @@ module.exports.userStatistics = userStatistics;
 module.exports.getTeachers = getTeachers;
 module.exports.getTeacherStatus = getTeacherStatus;
 module.exports.getTeacherCount = getTeacherCount;
+module.exports.assignStudents = assignStudents;
+

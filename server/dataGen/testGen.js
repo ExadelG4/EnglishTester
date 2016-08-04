@@ -2,8 +2,10 @@ var mongo = require('../db/mongo');
 var prompt = require('prompt');
 var testService = require('../services/testService');
 var bodyParser = require('body-parser');
-var q = require('q');
-var faker = require('faker');
+var testA = require('../db/tests/testA.json').tests;
+var testB = require('../db/tests/testB.json').tests;
+
+/*var faker = require('faker');
 
 var Moniker = require('moniker');
 var questRand = Moniker.generator([Moniker.adjective, Moniker.noun, Moniker.verb]);
@@ -99,12 +101,25 @@ var addAll = function(){
 			 console.log(err);
 		});
 }
+*/
+function addAll(testA,testB){
+	testService.addQuestionArrayA(testA).then(function(data){
+		console.log('Add Auto question ');
+		testService.addQuestionArrayB(testB).then(function(data){
+				console.log('Add teacher question ');
+		}).catch(function(err){
+			console.log(err);
+		});
+	}).catch(function(err){
+		console.log(err);
+	});
 
+}
 
 	console.log('Default testGen. Please, wait...');
 	testService.removeCollection({}).then(function(data){
 		testService.removeCollectionB({}).then(function(data){
-			addAll(10,10,10,10,10);
+			addAll(testA,testB);
 		}).catch(function(err){
 			console.log(err);
 		});
