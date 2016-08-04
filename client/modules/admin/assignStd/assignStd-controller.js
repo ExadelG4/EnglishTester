@@ -9,13 +9,16 @@
         var currentStudent;
         var currentList;
 
+
         checkURL();
 
         function checkURL(){
             if($location.absUrl() == 'http://localhost:3000/home') {
-                findOutURL(userService.getUsersRequests());
+                $scope.currentRequest = userService.getUsersRequests();
+                findOutURL($scope.currentRequest);
             } else {
-                findOutURL(userService.getFreeUsers());
+                $scope.currentRequest = userService.getFreeUsers();
+                findOutURL($scope.currentRequest);
             }
         }
 
@@ -41,6 +44,7 @@
 
         $scope.hasChanged = function(item){
             currentStudent = item;
+            console.log(item);
             $scope.freeStdName = item.fullName;
             $scope.freeStdMail = item.email;
             $scope.freeStdTel = item.number;
@@ -50,6 +54,8 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
+            checkURL();
+
         };
 
         $scope.addStudent = function() {
@@ -58,6 +64,15 @@
 
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
+            var res;
+            $scope.freeStudents.map(( obj, i ) =>
+                (obj.email == currentStudent.email) ? (res = i) : (false)
+            );
+            console.log($scope.freeStudents.length);
+            console.log($scope.freeStudents);
+            $scope.freeStudents.splice(res, 1);
+            console.log($scope.freeStudents.length);
+            console.log($scope.freeStudents);
             $scope.disabled = false;
             $scope.freeStdName = '';
             $scope.freeStdMail = '';
@@ -102,7 +117,7 @@
 
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
-        $scope.minDate2 = $scope.minDate2 ? null : new Date($scope.minDate);
+        $scope.minDate2 = $scope.minDate ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();
@@ -145,10 +160,6 @@
 
         return '';
     }
-
-
-    $scope.mytime3 = new Date();
-    $scope.mytime4 = new Date();
 
     $scope.hstep = 1;
     $scope.mstep = 1;
