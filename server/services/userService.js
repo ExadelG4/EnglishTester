@@ -7,7 +7,7 @@ var key = require('../config.json');
 var expires = require('../config.json').expires;
 var stackService = require('./stackService');
 var testService = require('./testService');
-
+var async = require('async');
 
 
 function getAllUsers(){
@@ -262,6 +262,7 @@ function getTeacherStatus(_tId){
     return pr.promise;
     
 }
+
 function getTeacherCount(_tId){
     getTeacherStatus(_tId).then(function(data){
         
@@ -322,25 +323,41 @@ function userStatistics(id){
 }
 function getTeachers(){
     var prom = q.defer();
-        
+        var functionArr = [];
         var teacherCount =[]
         var teachers = [];
         user.find({role: 'teacher'},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1},{}).then(function(data){               
-               // console.log(teachers);
-                data.forEach(function(element){
-                        var teacher = {};
-                        teacher._id = element._id;
-                        teacher.firstName = element.firstName;
-                        teacher.lastName = element.lastName;
-                        teacher.email = element.email;
-                        teacher.number = element.number;
+               
+                data.forEach(function(element,i){ 
+                        functionArr.push(function (callback){
+                            var count =  stackService.resultsCountAsync({teacherId:element._id});
+                            callback(null,count);
+                        });
+                        functionArr.push(function (callback){
+                            var count =  stackService.stackCountAsync({teacherId:element._id});
+                            callback(null,count);
+                        });
+                    });
+                      async.series(functionArr,function(err,results){
+                              
+                               console.log(results);
+                      });
+                        console.log(functionArr);
+                       // teacher._id = element._id;
+                       //  var teacher = {};
+                       // teachers.push(teacher);
+                       // teacher.firstName = element.firstName;
+                       // teacher.lastName = element.lastName;
+                      //  teacher.email = element.email;
+                       // teacher.number = element.number;
                         //console.log(getTeacherCount(element._id));
                         // var count = getTeacherCount(element._id);
                         // teacher.totalTests = count.totalTests;
                         // teacher.assignTest = count.assignTest;
-                         teachers.push(teacher);
-                });
+                         
+                
                // console.log(teachers);
+                teachers = [];
                 prom.resolve(teachers);
                // console.log(teachers);                               
         }).catch(function(err){

@@ -107,10 +107,10 @@ router.get('/getUsers', function(req, res) {
 });
 router.get('/getTeachers', function(req, res) {
   		
-  		service.getTeachers().then(function(data){
-			  res.send(data);
+  		service.find({role: 'teacher'},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
-			  res.status(401).send(err);
+			  res.send(JSON.stringify(err));
 		  });
 });
 
