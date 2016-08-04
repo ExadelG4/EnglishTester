@@ -36,7 +36,7 @@ button, .input-btn {
     background-color: rgb(42, 171, 210);
 }
 
-.btn-teacher, .input-teacher:focus::-webkit-input-placeholder {
+.btn-teacher {
     background-color: rgb(232, 134, 18);
 }
 
@@ -119,6 +119,27 @@ input::-webkit-input-placeholder {
 
 .input-teacher:focus::-webkit-input-placeholder, .textarea-teacher:focus::-webkit-input-placeholder {
     color: rgb(232, 134, 18);
+}
+.seekLoad {
+    height: 3px;
+}
+.btn-music {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-repeat: round;
+}
+
+.btn-music-play {
+    background-image: url(assets/images/icons/play.png);
+}
+
+.btn-music-pause {
+    background-image: url(assets/images/icons/pause.png);
+}
+
+.btn-music-stop {
+    background-image: url(assets/images/icons/stop.png);
 }
 
 select {
