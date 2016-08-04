@@ -1,13 +1,22 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('checkTestController', ['$scope', '$state','userService','angularPlayer', function($scope, $state, userService, angularPlayer) {
+	angular.module('home').controller('checkTestController', ['$scope', '$state','userService','angularPlayer','$rootScope',
+		 function($scope, $state, userService, angularPlayer, $rootScope) {
 		$scope.$on('$stateChangeStart', function () {
 			if (angularPlayer.getPlaylist().length > 0) {
 				angularPlayer.clearPlaylist( function() {			
 				});
 			}
 		});
+
+		if($rootScope.checking === true) {
+			$rootScope.checking = false;
+			//userService
+		}
+		else {
+			$state.go('home');
+		}
 
 		var startUrl = 'modules/home/teacher/check test/templateTests/templateTest';
 

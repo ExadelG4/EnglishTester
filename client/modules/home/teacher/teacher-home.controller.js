@@ -2,11 +2,12 @@
     'use strict';
 
     angular.module('home')
-        .controller('teacherHomeController', ['$scope', 'userService',
-            function($scope, userService) {
+        .controller('teacherHomeController', ['$scope', 'userService', '$rootScope',
+            function($scope, userService, $rootScope) {
 
                 $scope.list = [];
                 $scope.date = [];
+                $rootScope.checking = false;
 
                 userService.getTestsList()
                     .then ( function(data) {
@@ -15,7 +16,9 @@
                             $scope.date[i] = new Date($scope.list[i].date).toDateString();
                         }
                     })
-                
+                $scope.startCheck = function() {
+                    $rootScope.checking = true;
+                }             
 
             }]);
 })();

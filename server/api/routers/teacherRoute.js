@@ -37,7 +37,7 @@ router.post('/checkTest',contracts.checkTest,passport.authenticate('jwt', { sess
 });
 
 router.post('/submit3',function(req, res){
-	testService.result(req.body.id, req.body.results ).then(function(data){
+	testService.result(req.body.qid, req.body.results ).then(function(data){
 		res.send(data);
 	}).catch(function(err){
 		res.status(400).send("Bad Request");

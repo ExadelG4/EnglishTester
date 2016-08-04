@@ -144,10 +144,10 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .bnt-bad-que {
-    background-image: url(../../../../../assets/images/icons/bad-question.png);
+    background-image: url(../../../../../assets/images/icons/good-question.png);
 }
 .btn-good-que {
-    background-image: url(../../../../../assets/images/icons/good-question.png);
+    background-image: url(../../../../../assets/images/icons/bad-question.png);
 }
 .btn-fing + .label-fing {
     display: none;
