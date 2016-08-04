@@ -21,6 +21,8 @@
 
         function findOutURL (req) {
             req.then(function(data) {
+                $scope.freeStudents = [];
+                $scope.copyFreeStudents = [];
                 data.forEach(function(item, i) {
                     $scope.freeStudents[i] = item;
                     $scope.copyFreeStudents[i] = item;
@@ -68,8 +70,9 @@
         };
 
         $scope.submitStudentsList = function() {
-            userService.assignStudents(chooseUserList);
-            checkURL();
+            userService.assignStudents(chooseUserList).then(function() {
+                checkURL();
+            });
             notification.success("You have successfully assigned test for users");
             console.log($scope.freeStudents);
             $scope.showList = [];
