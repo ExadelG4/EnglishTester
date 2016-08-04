@@ -13,7 +13,8 @@
 
 		if($rootScope.checking === true) {
 			$rootScope.checking = false;
-			userService.getOneTest({id: $rootScope.idTest})
+			var a = {id: $rootScope.idTest};
+			userService.getOneTest(a)
 				.then( function(data) {
 					$scope.allQuestions = data.questions;
 					$scope.initFirst();
@@ -61,7 +62,6 @@
 		];*/
 
 		$scope.currentPage = 1;
-		$scope.totalCount = $scope.allQuestions.length;
 		$scope.copyCurrentPage = 1;
 		$scope.neededNumPage = '';
 		$scope.validNeededNumPage = true;
@@ -76,6 +76,7 @@
 		var forSong = [];
 
 		$scope.initFirst = function() {
+			$scope.totalCount = $scope.allQuestions.length;
 			for (var i = 0; i < $scope.totalCount; ++i) {
 				var temp = {
 					qId: $scope.allQuestions[i].qId,
@@ -155,7 +156,7 @@
 		};
 
 		$scope.onlineWriteValid = function(currentPage) {
-			$scope.forValidMark[currentPage - 1] = $scope.validMark($scope.allQuestions[currentPage - 1].scale);
+			$scope.forValidMark[currentPage - 1] = $scope.validMark(100);
 		}
 
 		$scope.validMark = function (scale) {
@@ -174,5 +175,17 @@
 			}
 			return true;
 		}
+		$scope.finishCheck = function() {
+			var rez = {
+				tid: $rootScope.idTest,
+				finalMarks: $scope.finalMarks
+			}
+			userService.finishCheck(rez)
+			.then( function() {
+				$state.go('home');
+  				notification.success("You have successfully completed check test.");
+			})
+		}
+
 	}]);
 })();

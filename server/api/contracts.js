@@ -118,7 +118,7 @@ exports.refresh = function(req, res, next){
 
 exports.checkTest = function(req, res, next){
     if(!req.body.id){	 	
-	 	res.status(401).send("Bad Request");
+	 	res.status(407).send("Bad Request");
 	 } else{
          next();
     } 

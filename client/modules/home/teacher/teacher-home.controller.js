@@ -18,7 +18,7 @@
                     })
                 $scope.startCheck = function(num) {
                     $rootScope.checking = true;
-                    $rootScope.idTest = $scope.list[num].id;
+                    $rootScope.idTest = $scope.list[num]._id;
                 }             
 
             }]);

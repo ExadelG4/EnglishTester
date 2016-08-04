@@ -171,7 +171,7 @@
                             })
                     },
                     getOneTest: function(data) {
-                        return httpService.post(host + '/teacher/checkTest')
+                        return httpService.post(host + '/teacher/checkTest', data)
                             .then (function(result) {
                                 return result.data;
                             })
@@ -179,6 +179,9 @@
                     },
                     editProfile: function(data) {
                         return httpService.post(host + '/editNumber', {number: data});
+                    },
+                    finishCheck: function(data) {
+                        return httpService.post(host + '/teacher/submit3', data);
                     }
                 };
             }]);

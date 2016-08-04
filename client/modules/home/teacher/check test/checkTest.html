@@ -21,9 +21,9 @@
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
 			<label class="label-missing" for="missing-que">You missing</label>
 			<span id="missing-que" ng-repeat="question in allQuestions track by $index"> 
-				<span ng-if="dirty[$index] && !validMarks[$index]"><a ng-click="setNumPage($index + 1)" class="a-missing">{{$index + 1}}</a></span>
+				<span ng-if="dirty[$index] && !forValidMark[$index]"><a ng-click="setNumPage($index + 1)" class="a-missing">{{$index + 1}}</a></span>
 			</span>
-			<button class="btn-teacher btn-submit" ng-disabled="!allValidMarks()" ng-click="finishCheck()">Submit</button>
+			<button class="btn-teacher btn-submit" ng-disabled="!validAll()" ng-click="finishCheck()">Submit</button>
 			!{{song.url}}!
 		</div>
 	</div>
