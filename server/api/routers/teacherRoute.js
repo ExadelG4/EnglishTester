@@ -28,7 +28,7 @@ router.get('/getTests', passport.authenticate('jwt', { session: false }), functi
 
 router.post('/checkTest',contracts.checkTest,passport.authenticate('jwt', { session: false }),function(req, res){
 	
-	testService.sendTest(req.body.id, req.user._id ).then(function(data){
+	testService.checkTest(req.body.id, req.user._id ).then(function(data){
 		res.send(data);
 	}).catch(function(err){
 		res.status(400).send("Bad Request");

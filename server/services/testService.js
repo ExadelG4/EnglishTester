@@ -3,6 +3,7 @@ var testB = require('../db/mongo').testB;
 var testMaker = require('../logic/testMaker');
 var q = require('q');
 var stackService = require('./stackService');
+var service = require('./userService');
 
 
 
@@ -94,7 +95,9 @@ function result(id, ans){
 
 	return pr.promise;
 }
-
+function checkTest(testId, tId){
+    stackService.find()
+};
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
 module.exports.addNewQuestion = addNewQuestion;
@@ -108,4 +111,5 @@ module.exports.getComplaintedB = getComplaintedB;
 module.exports.addQuestionArrayA = addQuestionArrayA;
 module.exports.addQuestionArrayB = addQuestionArrayB;
 module.exports.result = result;
+module.exports.checkTest = checkTest;
 
