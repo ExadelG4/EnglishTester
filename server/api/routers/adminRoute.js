@@ -51,44 +51,12 @@ router.post('/register',contracts.adminRegister,function(err, req, res) {
 });
 
 router.post('/assignStudents',contracts.assignStudent,function(req, res) {	 
-	 		
-	  		var tempArr = [];
-	  		var userArr = [];
-	  		tempArr = req.body.students;
-	  		for(var i=0; i<tempArr.length; i++){
-	  			var user = {};
-	  			user._id = tempArr[i].userId;
-	  			userArr.push(user);
-	  		}
-	  		tempArr.forEach(function(element){
-	  			service.updateStatus(element.userId,'open');
-	  		});
-	  		
-	  		service.find({$or:userArr},{'firstName': 1, 'lastName':1, 'email':1},{}).then(function(data){
-	  			console.log(data);
-	  			var openArr = [];
-	  			for(var i=0; i<data.length; i++){
-	  				var open ={};
-	  				open.firstName = data[i].firstName;
-	  				open.lastName = data[i].lastName;
-	  				open.email = data[i].email;
-	  				open.userId = data[i]._id;
-	  				open.dateStart = tempArr[i].dateStart;
-	  				open.dateEnd = tempArr[i].dateEnd;
-	  				openArr.push(open);
-	  			}
-	  			stackService.addOpenTestsArray(openArr).then(function(data){
-			  
-			 		 res.send('add');			  
-				
-		 		 }).catch(function (err) {
-			  		res.status(401).send("error");
-		  		});
-
-	  		}).catch(function(err){
-	  			res.status(401).send("error");
-	  		})
-	  		
+	 		var stud = req.body.students;
+	 		service.assignStudents(stud).then(function(data){
+	 			res.send('add');
+	 		}).catch(function(err){
+	 			res.status(401).send(err);
+	 		});	
 	  		
 });
 
@@ -157,7 +125,7 @@ router.get('/getFinishedUsers', function(req, res){
 });
 
 router.get('/getUsersRequests', function(req, res){
-	stackService.findRequest({},{},{}).then(function(data){
+	service.find({status: 'req', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));

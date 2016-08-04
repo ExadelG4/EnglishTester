@@ -5,7 +5,9 @@
 
 
 			$scope.selectedQue = '';
-
+			$scope.vm = {
+				uploadme: null
+			}
 
 			$scope.typeOfQuestion = [ 
 			{
@@ -46,7 +48,6 @@
 				type: '',
 				question: '',
 				level: '',
-				audio: '',
 				options: [''],
 				answers: [-1]
 			};
@@ -111,16 +112,13 @@
 					delete $scope.finalQue.answers;
 					delete $scope.finalQue.options;
 				}
+
 				userService.halfSmoke($scope.finalQue);
 				$scope.selectedQue = '';
 				notification.success("You have successfully added new question");
 			};
 
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 			$scope.fileNameChanged = function (ele) {
 				var files = ele.files;
@@ -132,49 +130,42 @@
 				}
 			}
 
-
-
-
-			$scope.submit = function(){
-				// var file = this.elements.myfile.files[0];
+			$scope.submit = function() {
 				var file = $scope.vm.uploadme;
 				if (file) {
-					upload(file);
+					$scope.upload(file);
 				}
 				return false;
 			};
 
-			function upload(file) {
+			$scope.upload = function(file) {
 
 				var xhr = new XMLHttpRequest();
-
-				// обработчики можно объединить в один,
-				// если status == 200, то это успех, иначе ошибка
-				xhr.onload = xhr.onerror = function () {
+				/*xhr.onload = xhr.onerror = function () {
 					if (this.status == 200) {
 						log("success");
 					} else {
 						log("error " + this.status);
 					}
-				};
+				};*/
 
-				// обработчик для закачки
 				xhr.upload.onprogress = function (event) {
 					log(event.loaded + ' / ' + event.total);
 				}
 
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == XMLHttpRequest.DONE) {
+        				$scope.finalQue.question =  xhr.responseText;
+    				}
+				}
+
 				xhr.open("POST", "upload", true);
 				xhr.send(file);
-
 			}
-
 
 			function log(html) {
 				document.getElementById('log').innerHTML = html;
 			}
-
-
-
 
 }]).directive("fileread", [function () {
     return {
@@ -183,21 +174,10 @@
         },
         link: function (scope, element, attributes) {
             element.bind("change", function (changeEvent) {
-                // var reader = new FileReader();
-                // reader.onload = function (loadEvent) {
-                //     scope.$apply(function () {
-                //         scope.fileread = loadEvent.target.result;
-                //     });
-                // }
-                // reader.readAsDataURL(changeEvent.target.files[0]);
 				scope.fileread = changeEvent.target.files[0];
             });
         }
     }
-
-	// return {
-	// 	changeEvent.target.files[0]
-	// }
 
 }])
 })();

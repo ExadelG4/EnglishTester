@@ -169,6 +169,13 @@
                             .then (function(result) {
                                 return result.data;
                             })
+                    },
+                    getOneTest: function() {
+                        return httpService.post(host + '/teacher/checkTest')
+                            .then (function(result) {
+                                return result.data;
+                            })
+
                     }
                 };
             }]);
