@@ -16,8 +16,9 @@
                             $scope.date[i] = new Date($scope.list[i].date).toDateString();
                         }
                     })
-                $scope.startCheck = function() {
+                $scope.startCheck = function(num) {
                     $rootScope.checking = true;
+                    $rootScope.idTest = $scope.list[num].id;
                 }             
 
             }]);

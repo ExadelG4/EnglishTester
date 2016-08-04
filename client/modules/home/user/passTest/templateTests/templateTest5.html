@@ -6,12 +6,12 @@
 					{{$index + 1}}. {{question.question}}
 				</label>
 				<sound-manager>
-    				<div class="seekBase" seek-track>
+					<button play-music class="btn-user btn-music btn-music-play"></button>
+					<button pause-music class="btn-user btn-music btn-music-pause"></button>
+					<button stop-music class="btn-user btn-music btn-music-stop"></button>
+					<div class="seekBase" seek-track>
     					<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
 					</div>
-					<button play-music class="btn-music-play">Play</button>
-					<button pause-music class="btn-music-pause">Pause</button>
-					<button stop-music class="btn-music-stop">Stop</button>
     			</sound-manager>
     			<div ng-repeat="ans in question.options track by $index" class="div-ans">
 					<input type="radio" name="ans" ng-model="omg.tempChoise" ng-value="$index" ng-change="changeValidRT(currentPage)" id="{{$parent.$index}}-{{$index}}"> 
