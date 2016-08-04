@@ -10,7 +10,7 @@
 <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 showUserInfo" ng-show="showUInfo == true">
     <h1>{{choosenUser.fullName}}</h1>
     <input type="text" size="40" ng-model="role" ng-value="'Role: ' +  choosenUser.role" class="disable" disabled>
-    <input type="text" size="40" ng-model="status" ng-value="'Status: ' + choosenUser.status" class="disable" disabled>
+    <input type="text" size="40" ng-model="status" ng-if="choosenUser.role == 'user'" ng-value="'Status: ' + choosenUser.status" class="disable" disabled>
     <input type="text" size="40" ng-model="mail" ng-value="'E-mail: ' + choosenUser.mail" class="disable" disabled>
     <input type="text" size="40" ng-model="tel" ng-value="'Phone number: ' + choosenUser.tel" class="disable" disabled>
     <input type="text" size="40" ng-model="assignTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of assign tests: ' + choosenUser.assignTest" class="disable" disabled>

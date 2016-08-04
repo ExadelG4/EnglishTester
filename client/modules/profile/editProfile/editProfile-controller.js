@@ -1,5 +1,5 @@
 (function(){
-    angular.module('profile').controller('editProfileController',['$scope', 'context', function($scope, context){
+    angular.module('profile').controller('editProfileController',['$scope', 'context', 'userService', function($scope, context, userService){
         var fullName = context.getFirstName() + ' ' + context.getLastName();
         $scope.userProfile = {
             name: fullName,
@@ -21,11 +21,12 @@
 
         $scope.changeTelNumber = function() {
             $scope.userProfile.telNumber = $scope.telNbr;
-            console.log($scope.telNbr);
         };
 
         $scope.save = function() {
+            debugger
             $scope.disable2 = true;
+            userService.editProfile($scope.userProfile.telNumber);
         };
 
 

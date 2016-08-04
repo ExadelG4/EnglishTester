@@ -176,6 +176,9 @@
                                 return result.data;
                             })
 
+                    },
+                    editProfile: function(data) {
+                        return httpService.post(host + '/editNumber', {number: data});
                     }
                 };
             }]);

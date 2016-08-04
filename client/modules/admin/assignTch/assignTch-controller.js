@@ -7,13 +7,29 @@
         $scope.currentUser = null;
         $scope.currentTeacher = null;
 
-        userService.getTeachers().then(function(data) {
-            console.log(data);
-            data.forEach(function(item, i){
-                $scope.teachers[i] = item;
-                $scope.teachers[i].fullName = item.firstName + ' ' + item.lastName;
+        updateUserList();
+        updateTeacherList();
+
+        function updateTeacherList () {
+            userService.getTeachers().then(function(data) {
+                console.log(data);
+                data.forEach(function(item, i){
+                    $scope.teachers[i] = item;
+                    $scope.teachers[i].fullName = item.firstName + ' ' + item.lastName;
+                });
             });
-        });
+        }
+
+        function updateUserList () {
+            userService.getFinishedUsers().then(function(data) {
+                console.log(data);
+                data.forEach(function(item, i) {
+                    $scope.students[i] = item;
+                    $scope.students[i].fullName = item.firstName + ' ' + item.lastName;
+                });
+            });
+        }
+
 
         $scope.chooseTeacher = function(item) {
             $scope.tchName = item.fullName;
@@ -32,6 +48,8 @@
 
         $scope.submitTchStd = function() {
             userService.assignTeacher($scope.currentUser._id, $scope.currentTeacher._id);
+            updateUserList();
+            updateTeacherList();
 
             $scope.stdName = '';
             $scope.stdMail = '';

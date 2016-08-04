@@ -79,6 +79,7 @@ input[type="text"], input[type="email"], input[type="password"] {
     border-width: 0 0 1px 0;
     border-radius: 0px !important;
     font-size: 1.2em;
+    box-shadow: none !important;
 }
 
 textarea {
