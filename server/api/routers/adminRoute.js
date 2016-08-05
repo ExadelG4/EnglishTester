@@ -17,7 +17,7 @@ require('../../passport')(passport);
 
 
 
-router.post('/register',contracts.adminRegister,function(err, req, res) {	
+router.post('/register',contracts.adminRegister,function(req, res) {	
   		var info ={
   			email : req.body.email,
   			password: req.body.password,
