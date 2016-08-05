@@ -33,3 +33,13 @@
         margin-top: 3%;
         width: 100%;
     }
+
+.statistics img {
+    height: 70px;
+    width: 70px;
+}
+
+.statistics input {
+    width: 80%;
+    display: inline-block;
+}

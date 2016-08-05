@@ -7,7 +7,7 @@
     width: 100%;
 }
 
-.dateTime > div:first-child{
+.dateTime > div:first-child {
     margin-top: 33px;
 }
 
@@ -15,10 +15,24 @@
     padding: 0 !important;
 }
 
+/*.dateTime button {*/
+    /*background-image: url(assets/images/icons/date.png);*/
+/*}*/
+
 .submitNewUser {
     width: 100% !important;
 }
 
-.formAddUser label{
+.formAddUser label {
     margin-top: 10px;
+}
+
+.newUserDate img {
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+}
+
+.newUserDate h4 {
+    display: inline-block;
 }
