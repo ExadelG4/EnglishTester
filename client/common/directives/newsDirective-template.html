@@ -1,0 +1,7 @@
+ <p class="card" >
+     <!--ng-show="model.list.length != null-->
+     <img src="{{model.imageLink}}">
+     <!--<message></message>-->
+     <span ng-repeat="user in model.list"><a ng-click="goToStat()">{{user.firstName}} {{user.lastName}}, </a></span>{{model.messageText}}
+     <button type="button" class="btn btn-info" ng-click="newsButtonClick()">{{model.buttonText}}</button>
+ </p>

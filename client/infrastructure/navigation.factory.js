@@ -3,6 +3,7 @@
     angular.module('myApp')
         .factory('navigationFactory', ['context',
         function (context) {
+
             var adminNav = [
                 {
                     name: 'Home',
@@ -14,6 +15,11 @@
                         {
                             name: 'Assign student',
                             state: 'assignStd'
+                        },
+                        {
+                            name: 'Assign teacher',
+                            state: 'assignTch'
+
                         },
                         {
                             name: 'Bad questions',
