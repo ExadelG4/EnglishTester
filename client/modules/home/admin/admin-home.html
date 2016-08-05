@@ -1,16 +1,19 @@
 <div ng-controller="adminHomeController" class="news">
-    <p class="card">
-        <img src="assets/images/icons/request.png">
-        First card
-    </p>
-    <p class="card">
-        <img src="assets/images/icons/forCheck.png">
-        Second card
-    </p>
-    <p class="card" ng-repeat="news in resNews"><a ng-click="showInfoNews(news.fullName)">
-        <img src="assets/images/icons/checkAll.png">
-        {{news.fullName}}</a> finished a test.
-        <br>
-        Mark of test part: {{news.result.autoMark}}. Level after test part: {{news.result.level}}. <a ng-click="showInfoNews(news.fullTeacherName)">{{news.fullTeacherName}}</a> checked and his mark: {{news.result.teacherMark}}.
-    </p>
+    <!--<p class="card">-->
+        <!--<img src="assets/images/icons/request.png">-->
+        <!--First card-->
+    <!--</p>-->
+    <!--<p class="card">-->
+        <!--<img src="assets/images/icons/forCheck.png">-->
+        <!--Second card-->
+    <!--</p>-->
+    <!--<p class="card" ng-repeat="news in resNews"><a ng-click="showInfoNews(news.fullName)">-->
+        <!--<img src="assets/images/icons/checkAll.png">-->
+        <!--{{news.fullName}}</a> finished a test.-->
+        <!--<br>-->
+        <!--Mark of test part: {{news.result.autoMark}}. Level after test part: {{news.result.level}}. <a ng-click="showInfoNews(news.fullTeacherName)">{{news.fullTeacherName}}</a> checked and his mark: {{news.result.teacherMark}}.-->
+    <!--</p>-->
+    <news-directive class="news" ng-repeat="news in newsList" model="news">
+    </news-directive>
+
 </div>

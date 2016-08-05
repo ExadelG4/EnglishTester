@@ -14,6 +14,7 @@
         'ui.bootstrap',
         'nya.bootstrap.select',
         'toaster',
-        'ngAnimate'
+        'ngAnimate',
+        'directives'
     ]);
 })();

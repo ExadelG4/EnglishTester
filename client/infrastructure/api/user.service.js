@@ -164,12 +164,14 @@
                                 return result.data;
                             })
                     },
+
                     getTestsList : function() {
                         return httpService.get(host + '/teacher/getTests')
                             .then (function(result) {
                                 return result.data;
                             })
                     },
+
                     getOneTest: function(data) {
                         return httpService.post(host + '/teacher/checkTest', data)
                             .then (function(result) {
@@ -177,11 +179,29 @@
                             })
 
                     },
+
                     editProfile: function(data) {
                         return httpService.post(host + '/editNumber', {number: data});
                     },
+
                     finishCheck: function(data) {
                         return httpService.post(host + '/teacher/submit3', data);
+                    },
+
+                    newsTypeOne: function(data) {
+                        return httpService.get(host + '/admin/getUsersRequestsNames')
+                            .then (function (result) {
+                                console.log(result.data);
+                                return result.data;
+                            })
+                    },
+
+                    newsTypeTwo: function(data) {
+                        return httpService.get(host + '/admin/getFinishedUsersNames')
+                            .then (function(result) {
+                                console.log(result.data);
+                                return result.data;
+                            })
                     }
                 };
             }]);
