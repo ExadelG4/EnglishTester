@@ -13,7 +13,7 @@
         <!--<br>-->
         <!--Mark of test part: {{news.result.autoMark}}. Level after test part: {{news.result.level}}. <a ng-click="showInfoNews(news.fullTeacherName)">{{news.fullTeacherName}}</a> checked and his mark: {{news.result.teacherMark}}.-->
     <!--</p>-->
-    <news-directive class="news" ng-repeat="news in newsList" model="news">
+    <news-directive class="news" ng-repeat="news in newsList track by $index" model="news">
     </news-directive>
 
 </div>

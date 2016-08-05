@@ -5,14 +5,14 @@ angular.module('directives').directive('newsDirective', ['$state', function($sta
         scope: {
             model: '='
         },
-        link: function(scope, elem, attrs) {
-            scope.model.list.then(function(result){
-                scope.model.list = result;
+        controller: function($scope, userService) {
+           $scope.model.reqList().then(function(result){
+                $scope.model.list = result.data;
             });
-            scope.newsButtonClick = function(){
-                $state.go(scope.model.goTo);
+            $scope.newsButtonClick = function(){
+                $state.go($scope.model.goTo);
             };
-            scope.goToStat = function() {
+            $scope.goToStat = function() {
                 $state.go('statistics');
             }
         }

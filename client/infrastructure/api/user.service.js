@@ -188,20 +188,17 @@
                         return httpService.post(host + '/teacher/submit3', data);
                     },
 
-                    newsTypeOne: function(data) {
-                        return httpService.get(host + '/admin/getUsersRequestsNames')
-                            .then (function (result) {
-                                console.log(result.data);
-                                return result.data;
-                            })
+                    newsTypeOne: function() {
+                        return httpService.get(host + '/admin/getUsersRequestsNames');
                     },
 
-                    newsTypeTwo: function(data) {
-                        return httpService.get(host + '/admin/getFinishedUsersNames')
-                            .then (function(result) {
-                                console.log(result.data);
-                                return result.data;
-                            })
+                    newsTypeTwo: function() {
+                        return httpService.get(host + '/admin/getFinishedUsersNames');
+                    },
+                    newsTypeThree: function() {
+                        return httpService.get(host + '/admin/getResultsNames').then (function(result) {
+                            console.log(result.data);
+                        });
                     }
                 };
             }]);

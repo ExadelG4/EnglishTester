@@ -17,11 +17,6 @@
                             state: 'assignStd'
                         },
                         {
-                            name: 'Assign teacher',
-                            state: 'assignTch'
-
-                        },
-                        {
                             name: 'Bad questions',
                             state: 'badQuestions'
                         },
