@@ -196,10 +196,11 @@
                         return httpService.get(host + '/admin/getFinishedUsersNames');
                     },
                     newsTypeThree: function() {
-                        return httpService.get(host + '/admin/getResultsNames').then (function(result) {
-                            console.log(result.data);
-                        });
-                    }
+                        return httpService.get(host + '/admin/getResultsNames');
+                    },
+
+
+
                 };
             }]);
 })();
