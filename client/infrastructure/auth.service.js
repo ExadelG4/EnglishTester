@@ -11,19 +11,31 @@
                             localContext.token = result.data.token;
                             localContext.refreshToken = result.data.refreshToken;
                             localContext.expiredTime = result.data.expiredTime;
+                            console.log(new Date(result.data.expiredTime));
                             localStorage.setItem('context', JSON.stringify(localContext));
                         });
                 }
 
                 function checkRefresh(self) {
-                    var intervalID = setInterval(function () {
+
+
+
+                    var intervalID = setTimeout(function f() {
                         var localContext = JSON.parse(localStorage.getItem('context'));
                         if (localContext) {
                             var expTime = localContext.expiredTime;
                             var now = new Date().getTime();
+                            console.log(expTime - now);
                             if (expTime > now) {
                                 if (expTime - now < 120 * 1000) {
-                                    refresh(localContext);
+                                    refresh(localContext).then(function(){
+                                        intervalID = setTimeout(f, 5 * 1000);
+                                    }).catch(function(err){
+                                        intervalID = setTimeout(f, 5 * 1000);
+                                    });
+
+                                } else{
+                                    intervalID = setTimeout(f, expTime - now - 120 * 1000);
                                 }
                             } else {
                                 self.isAuthenticated = false;
@@ -36,6 +48,31 @@
                             $state.go('login');
                         }
                     }, 5 * 1000);
+
+
+                    // var intervalID = setInterval(function () {
+                    //     var localContext = JSON.parse(localStorage.getItem('context'));
+                    //     if (localContext) {
+                    //         var expTime = localContext.expiredTime;
+                    //         var now = new Date().getTime();
+                    //         if (expTime > now) {
+                    //             if (expTime - now < 120 * 1000) {
+                    //                 refresh(localContext);
+                    //             }
+                    //         } else {
+                    //             self.isAuthenticated = false;
+                    //             context.clear();
+                    //             clearInterval(intervalID);
+                    //             $state.go('login');
+                    //         }
+                    //     } else {
+                    //         clearInterval(intervalID);
+                    //         $state.go('login');
+                    //     }
+                    // }, 5 * 1000);
+
+
+
                 }
 
                 return {

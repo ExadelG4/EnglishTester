@@ -13,9 +13,11 @@
 
         function checkURL(){
             if($location.absUrl() == 'http://localhost:3000/home') {
-                findOutURL(userService.getUsersRequests());
+                $scope.currentRequest = userService.getUsersRequests();
+                findOutURL($scope.currentRequest);
             } else {
-                findOutURL(userService.getFreeUsers());
+                $scope.currentRequest = userService.getFreeUsers();
+                findOutURL($scope.currentRequest);
             }
         }
 
@@ -32,32 +34,7 @@
             });
         }
 
-        var stdConstructor = function(stdId, stdData, stdData2){
-            this.userId =  stdId;
-            this.dateStart =  stdData;
-            this.dateEnd =  stdData2;
-
-        };
-
-        $scope.hasChanged = function(item){
-            currentStudent = item;
-            $scope.freeStdName = item.fullName;
-            $scope.freeStdMail = item.email;
-            $scope.freeStdTel = item.number;
-        };
-
-        $scope.reset = function(){
-            $scope.showList = [];
-            chooseUserList = [];
-            $scope.disabled = true;
-        };
-
-        $scope.addStudent = function() {
-            var userId = currentStudent._id;
-            var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
-
-            chooseUserList.push(newStudent);
-            $scope.showList.push(currentStudent.fullName);
+        function clear() {
             $scope.disabled = false;
             $scope.freeStdName = '';
             $scope.freeStdMail = '';
@@ -67,6 +44,44 @@
             $scope.selectedItem4 = '';
             $scope.dt3 = null;
             $scope.dt4 = null;
+        }
+
+        var stdConstructor = function(stdId, stdData, stdData2){
+            this.userId =  stdId;
+            this.dateStart =  stdData;
+            this.dateEnd =  stdData2;
+
+        };
+
+        $scope.hasChanged = function(item){
+            currentStudent = item;
+            console.log(item);
+            $scope.freeStdName = item.fullName;
+            $scope.freeStdMail = item.email;
+            $scope.freeStdTel = item.number;
+        };
+
+        $scope.reset = function(){
+            $scope.showList = [];
+            chooseUserList = [];
+            $scope.disabled = true;
+            checkURL();
+
+        };
+
+        $scope.addStudent = function() {
+            var userId = currentStudent._id;
+            var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
+
+            chooseUserList.push(newStudent);
+            $scope.showList.push(currentStudent.fullName);
+
+            var res;
+            $scope.freeStudents.map(( obj, i ) =>
+                (obj.email == currentStudent.email) ? (res = i) : (false)
+            );
+            $scope.freeStudents.splice(res, 1);
+            clear();
         };
 
         $scope.submitStudentsList = function() {
@@ -102,7 +117,7 @@
 
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
-        $scope.minDate2 = $scope.minDate2 ? null : new Date($scope.minDate);
+        $scope.minDate2 = $scope.minDate ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();
@@ -145,10 +160,6 @@
 
         return '';
     }
-
-
-    $scope.mytime3 = new Date();
-    $scope.mytime4 = new Date();
 
     $scope.hstep = 1;
     $scope.mstep = 1;

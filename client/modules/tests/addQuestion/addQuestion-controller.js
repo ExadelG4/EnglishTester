@@ -7,7 +7,7 @@
 			$scope.selectedQue = '';
 			$scope.vm = {
 				uploadme: null
-			}
+			};
 
 			$scope.typeOfQuestion = [ 
 			{

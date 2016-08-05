@@ -28,7 +28,7 @@ router.post('/login',contracts.login,function (req, res) {
 });
 
 
-router.get('/refresh',contracts.refresh, passport.authenticate('jwt', { session: false }), function(req, res) {
+router.get('/refresh', passport.authenticate('jwt', { session: false }), function(req, res) {
 	 contracts.refresh(req.header('refresh')).then(function(data){
 		 
 		 res.json(data);
