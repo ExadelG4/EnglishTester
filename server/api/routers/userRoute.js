@@ -6,18 +6,14 @@ var testService = require('../../services/testService');
 var path = require("path");
 var router = express.Router();
 
-
-
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 var key = require('../../config.json');
-
 
 router.use(passport.initialize());
 require('../../passport')(passport);
 
 router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
-
 				var doc = {
 					userId: req.user._id ,
 					firstName: req.user.firstName,
@@ -28,13 +24,12 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 					service.updateStatus(doc.userId, 'req');
 					res.send('ok');
 				}).catch(function(err){
-					res.status(422).send("Bad Request");
+					res.status(422).send(err);
 				});
 			
 });
 
 router.get('/getTest',  passport.authenticate('jwt', { session: false }),function(req, res){
-	
 		stackService.findOpenTests({userId: req.user._id},{},{}).then(function (data){
 			if(data[0] !== undefined){
 				testService.getTest(data[0]).then(function(data){
@@ -44,26 +39,22 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 					}).catch(function(err){
 						res.status(401).send(err);
 					})
-					
-
 				}).catch(function(err){
 					res.json(err);
 				});
 			}else{
 				res.status(401).send("unauthorized");
 			}
-			
 		}).catch(function(err){
 			res.json(err);
 		});
-	
 });
 
 router.post('/submit1', contracts.submit1, passport.authenticate('jwt', { session: false }), function(req,res){
 	service.submit1(req.body, req.user._id).then(function(data){
 		res.json(data);
 	}).catch(function(err){
-		res.send(err);
+		res.status(400).send(err);
 	});
 });
 

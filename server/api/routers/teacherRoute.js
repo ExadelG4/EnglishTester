@@ -22,7 +22,7 @@ router.get('/getTests', passport.authenticate('jwt', { session: false }), functi
 	stackService.findStack({teacherId : tId},{'date': 1, 'level': 1},{}).then(function (data) {
 		res.json(data);
 	}).catch(function (err) {
-		res.json(err);
+		res.status(400).send(err);
 	})
 });
 
@@ -33,7 +33,7 @@ router.post('/checkTest',contracts.checkTest,passport.authenticate('jwt', { sess
 		console.log(data);
 		res.send(data);
 	}).catch(function(err){
-		res.status(403).send("Bad Request");
+		res.status(400).send(err);
 	});
 
 });
@@ -43,7 +43,7 @@ router.post('/submit3',function(req, res){
 		res.send(data);
 	}).catch(function(err){
 		console.log(err);
-		res.status(400).send("Bad Request");
+		res.status(400).send(err);
 	});
 });
 
