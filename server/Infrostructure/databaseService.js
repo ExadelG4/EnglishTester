@@ -102,13 +102,7 @@ DatabasService.prototype.update = function (query, update,options) {
     });
     return defer.promise;
 }
-DatabasService.prototype.countAsync = function (query) {
-    
-    this.model.count(query, function(err ,data){
-        if(err) return err;
-        else return data;
-    });
-}
+
 
 module.exports = function(model){
     return new DatabasService(model);

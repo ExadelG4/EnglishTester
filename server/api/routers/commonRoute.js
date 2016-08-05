@@ -18,7 +18,6 @@ router.use(passport.initialize());
 require('../../passport')(passport);
 
 router.post('/login',contracts.login,function (req, res) {
-
 	service.authenticate(req.body.email, req.body.password).then(function (data) {
 		res.json(data);
 	}).catch(function (err) {
@@ -30,7 +29,6 @@ router.post('/login',contracts.login,function (req, res) {
 
 router.get('/refresh', passport.authenticate('jwt', { session: false }), function(req, res) {
 	 contracts.refresh(req.header('refresh')).then(function(data){
-		 
 		 res.json(data);
 	 }).catch(function(err){
 		 res.json(err);
@@ -39,7 +37,6 @@ router.get('/refresh', passport.authenticate('jwt', { session: false }), functio
 
 router.get('/status', passport.authenticate('jwt', { session: false }),function(req, res){	
 	service.getUserStatus(req.user._id).then(function(data){
-		//console.log(data);
 		res.json(data);
 	}).catch(function(err){
 		res.status(404).send("User not found");
@@ -60,7 +57,6 @@ router.get('/uploadtest',function(req, res){
 });
 
 router.post('/editNumber',passport.authenticate('jwt', { session: false }),function(req,res){
-	
 	console.log(req.body);
 	console.log(req.body.number);
 	var id = req.user._id;
