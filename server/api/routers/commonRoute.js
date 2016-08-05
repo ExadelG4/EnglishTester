@@ -18,11 +18,10 @@ router.use(passport.initialize());
 require('../../passport')(passport);
 
 router.post('/login',contracts.login,function (req, res) {
-
 	service.authenticate(req.body.email, req.body.password).then(function (data) {
 		res.json(data);
 	}).catch(function (err) {
-		res.status(401).send("unauthorized");
+		res.status(400).send(err);
 	});
 	
 });
@@ -30,19 +29,17 @@ router.post('/login',contracts.login,function (req, res) {
 
 router.get('/refresh', passport.authenticate('jwt', { session: false }), function(req, res) {
 	 contracts.refresh(req.header('refresh')).then(function(data){
-		 
 		 res.json(data);
 	 }).catch(function(err){
-		 res.json(err);
+		 res.status(400).send(err);
 	 });	
 });
 
 router.get('/status', passport.authenticate('jwt', { session: false }),function(req, res){	
 	service.getUserStatus(req.user._id).then(function(data){
-		//console.log(data);
 		res.json(data);
 	}).catch(function(err){
-		res.status(404).send("User not found");
+		res.status(400).send(err);
 	});	
 });
 
@@ -60,7 +57,6 @@ router.get('/uploadtest',function(req, res){
 });
 
 router.post('/editNumber',passport.authenticate('jwt', { session: false }),function(req,res){
-	
 	console.log(req.body);
 	console.log(req.body.number);
 	var id = req.user._id;
@@ -68,7 +64,7 @@ router.post('/editNumber',passport.authenticate('jwt', { session: false }),funct
 	service.update({_id:id},{ $set: { number: newNumber}},{}).then(function(data){
 		res.status(200).send("Number was edited");
 	}).catch(function(err){
-		res.status(402).send(err);
+		res.status(400).send(err);
 	})
 
 });

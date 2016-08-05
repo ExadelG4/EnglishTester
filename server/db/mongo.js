@@ -12,7 +12,9 @@ var request = require('./schemes/request');
 var openTests = require('./schemes/openTests');
 
 mongoose.connect(path.dbPath);
-
+exports.userAs = user;
+exports.stackAs = stack;
+exports.resultsAs = results;
 exports.user = infrostructure(user);
 exports.testA  = infrostructure(testA);
 exports.testB = infrostructure(testB);
