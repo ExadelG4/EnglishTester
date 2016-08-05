@@ -1,5 +1,5 @@
 <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
-    <input type="text" class="form-control" placeholder="Search for..." ng-model="searching" ng-change="searchUser()">
+    <input type="text" class="form-control input-admin" placeholder="Search for..." ng-model="searching" ng-change="searchUser()">
     <ul class="listOfSearch" ng-show="show == true">
         <li ng-repeat="item in searchList" ng-click="showInfo(item)">
             <a>{{item.fullName}}</em></a>

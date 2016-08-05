@@ -8,10 +8,12 @@
                 $scope.list = [];
                 $scope.date = [];
                 $rootScope.checking = false;
+                $scope.length;
 
                 userService.getTestsList()
                     .then ( function(data) {
                         $scope.list = data;
+                        $scope.length = data.length;
                         for (var i = 0; i < data.length; ++i) {
                             $scope.date[i] = new Date($scope.list[i].date).toDateString();
                         }

@@ -58,7 +58,7 @@
 
             $scope.update();
 
-            /*$scope.save = function(){
+            $scope.save = function(){
                 var c = recorderService.controller('audioInput');
                 //c.save('avazaza');
                 //$.get(window.URL.createObjectURL(c.audioModel), function(data) {
@@ -83,7 +83,7 @@
                       xhr.open("POST", "upload", true);
                       xhr.send(c.audioModel);
                 //});
-            }*/
+            }
         }]
     );
 })();

@@ -115,8 +115,15 @@ router.get('/getTeachers', function(req, res) {
 });
 
 router.get('/getFinishedUsers', function(req, res){
-	service.getFinishedList().then(function (data) {
+	service.getFinishedList({'pasword':0}).then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
 		
+		res.json(err);
+	})
+});
+router.get('/getFinishedUsersNames', function(req, res){
+	service.getFinishedList({'_id':0,'firstName': 1, 'lastName':1}).then(function (data) {
 		res.json(data);
 	}).catch(function (err) {
 		
@@ -126,6 +133,14 @@ router.get('/getFinishedUsers', function(req, res){
 
 router.get('/getUsersRequests', function(req, res){
 	service.find({status: 'req', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.send(JSON.stringify(err));
+		  });
+
+});
+router.get('/getUsersRequestsNames', function(req, res){
+	service.find({status: 'req', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':0,'firstName': 1, 'lastName':1},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
 			  res.send(JSON.stringify(err));
@@ -170,15 +185,15 @@ router.post('/showStatistics',contracts.showStstistics,function (req, res) {
 
 	});
 });
-router.post('/showTeacherCount',contracts.showTeacherCount,function (req, res) {	
-	service.getTeacherStatus(req.body.id).then(function (data) {
-		console.log(data);
-		res.send(data);
-	}).catch(function (err) {
-		console.log(err);
-		res.status(401).send("error");
-	});
-});
+// router.post('/showTeacherCount',contracts.showTeacherCount,function (req, res) {	
+// 	service.getTeacherStatus(req.body.id).then(function (data) {
+// 		console.log(data);
+// 		res.send(data);
+// 	}).catch(function (err) {
+// 		console.log(err);
+// 		res.status(401).send("error");
+// 	});
+// });
 
 router.get('/getComplainted',function(req, res){
 	testService.getComplaintedA().then(function(data){
@@ -187,5 +202,5 @@ router.get('/getComplainted',function(req, res){
 		})
 	});
 
-})
+});
 module.exports = router;
