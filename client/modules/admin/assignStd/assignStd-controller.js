@@ -1,23 +1,30 @@
 (function(){
     'use strict';
-    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', function($scope, userService, $location) {
+    angular.module('admin').controller('assignStdController', ['$scope', 'userService', '$location', 'notification', function($scope, userService, $location, notification) {
         $scope.freeStudents = [];
         $scope.copyFreeStudents = [];
         $scope.showList = [];
         $scope.disabled = true;
         var chooseUserList = [];
         var currentStudent;
+        var currentList;
 
-        (function(){
+        checkURL();
+
+        function checkURL(){
             if($location.absUrl() == 'http://localhost:3000/home') {
-                fingOutURL(userService.getUsersRequests());
+                $scope.currentRequest = userService.getUsersRequests();
+                findOutURL($scope.currentRequest);
             } else {
-                fingOutURL(userService.getFreeUsers());
+                $scope.currentRequest = userService.getFreeUsers();
+                findOutURL($scope.currentRequest);
             }
-        })();
+        }
 
-        function fingOutURL (req) {
+        function findOutURL (req) {
             req.then(function(data) {
+                $scope.freeStudents = [];
+                $scope.copyFreeStudents = [];
                 data.forEach(function(item, i) {
                     $scope.freeStudents[i] = item;
                     $scope.copyFreeStudents[i] = item;
@@ -25,6 +32,18 @@
                     $scope.copyFreeStudents[i].fullName = item.firstName + ' ' + item.lastName;
                 });
             });
+        }
+
+        function clear() {
+            $scope.disabled = false;
+            $scope.freeStdName = '';
+            $scope.freeStdMail = '';
+            $scope.freeStdTel = '';
+            $scope.mytime3 = null;
+            $scope.mytime4 = null;
+            $scope.selectedItem4 = '';
+            $scope.dt3 = null;
+            $scope.dt4 = null;
         }
 
         var stdConstructor = function(stdId, stdData, stdData2){
@@ -36,6 +55,7 @@
 
         $scope.hasChanged = function(item){
             currentStudent = item;
+            console.log(item);
             $scope.freeStdName = item.fullName;
             $scope.freeStdMail = item.email;
             $scope.freeStdTel = item.number;
@@ -45,6 +65,8 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
+            checkURL();
+
         };
 
         $scope.addStudent = function() {
@@ -53,19 +75,21 @@
 
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
-            $scope.disabled = false;
-            $scope.freeStdName = '';
-            $scope.freeStdMail = '';
-            $scope.freeStdTel = '';
-            $scope.mytime3 = null;
-            $scope.mytime4 = null;
-            $scope.selectedItem4 = '';
-            $scope.dt3 = null;
-            $scope.dt4 = null;
+
+            var res;
+            $scope.freeStudents.map(( obj, i ) =>
+                (obj.email == currentStudent.email) ? (res = i) : (false)
+            );
+            $scope.freeStudents.splice(res, 1);
+            clear();
         };
 
         $scope.submitStudentsList = function() {
-            userService.assignStudents(chooseUserList);
+            userService.assignStudents(chooseUserList).then(function() {
+                checkURL();
+            });
+            notification.success("You have successfully assigned test for users");
+            console.log($scope.freeStudents);
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
@@ -93,7 +117,7 @@
 
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
-        $scope.minDate2 = $scope.minDate2 ? null : new Date($scope.minDate);
+        $scope.minDate2 = $scope.minDate ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();
@@ -136,10 +160,6 @@
 
         return '';
     }
-
-
-    $scope.mytime3 = new Date();
-    $scope.mytime4 = new Date();
 
     $scope.hstep = 1;
     $scope.mstep = 1;

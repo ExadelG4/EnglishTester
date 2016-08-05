@@ -42,11 +42,9 @@
             $scope.update = function() { 
                     userService.getStatus().then(function (data) {
                         $scope.status = data.status;
-                        if($scope.status === 'open') {
+                        if($scope.status === 'scha') {
                             $scope.dateStart = new Date(data.dateStart).toUTCString();
                             $scope.dateEnd = new Date(data.dateEnd).toUTCString();
-                            //$scope.dateEnd = $scope.dateEnd2.splice(0, 4);
-                            //$scope.dateStart = dateStart.getDate()+'.'+dateStart.getMonth()+'.'+ dateStart.getFullYear()+' '+ dateStart.getHours()+':'+ dateStart.getMinutes()+':'+dateStart.getSeconds();
                         }
                         $scope.updateButtons();
                 });
@@ -59,12 +57,8 @@
             };
 
             $scope.update();
-            /*$scope.onStartTest = function() {
-                userService.getTest();
-                var 
-            }*/
 
-            $scope.save = function(){
+            /*$scope.save = function(){
                 var c = recorderService.controller('audioInput');
                 //c.save('avazaza');
                 //$.get(window.URL.createObjectURL(c.audioModel), function(data) {
@@ -89,7 +83,7 @@
                       xhr.open("POST", "upload", true);
                       xhr.send(c.audioModel);
                 //});
-            }
+            }*/
         }]
     );
 })();

@@ -27,19 +27,22 @@ router.get('/getTests', passport.authenticate('jwt', { session: false }), functi
 });
 
 router.post('/checkTest',contracts.checkTest,passport.authenticate('jwt', { session: false }),function(req, res){
-	
-	testService.sendTest(req.body.id, req.user._id ).then(function(data){
+	console.log(req.body);
+	console.log(req.body.id);
+	testService.checkTest(req.body.id, req.user._id ).then(function(data){
+		console.log(data);
 		res.send(data);
 	}).catch(function(err){
-		res.status(400).send("Bad Request");
+		res.status(403).send("Bad Request");
 	});
 
 });
 
 router.post('/submit3',function(req, res){
-	testService.result(req.body.qid, req.body.results ).then(function(data){
+	testService.result(req.body.tid, req.body.finalMarks ).then(function(data){
 		res.send(data);
 	}).catch(function(err){
+		console.log(err);
 		res.status(400).send("Bad Request");
 	});
 });

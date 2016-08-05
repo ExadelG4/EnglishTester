@@ -16,14 +16,13 @@
 			</div>
 
 			<form name="num" class="form-num">
-				<!--label for="numPage">Enter number of question</label-->
 				<input name="numPage" ng-model="neededNumPage" ng-pattern="'[0-9]{1,10}'" ng-change="validNeededNumPage = true;" placeholder="Number of question" class=".input-user input-num-que">
 				<button ng-click="setNumPage(neededNumPage)" ng-disabled="num.numPage.$invalid" class="btn-user btn-num-que">Go</button>
 				<span ng-show="!validNeededNumPage" class="error-mes">Question not found</span>
 
 			</form>
 
-			<uib-pagination class="pagination-sm" items-per-page="1" ng-model="currentPage" total-items="totalCount" max-size="4" boundary-link-numbers="true" direction-links="false" ng-change="pageChanged(copyCurrentPage, currentPage)"> 
+			<uib-pagination class="pagination-sm user-pagi" items-per-page="1" ng-model="currentPage" total-items="totalCount" max-size="4" boundary-link-numbers="true" direction-links="false" ng-change="pageChanged(copyCurrentPage, currentPage)"> 
 			</uib-pagination>
 		</div>
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -34,8 +33,8 @@
 			<span id="missing-que" ng-repeat="question in allQuestions track by $index"> 
 				<span ng-if="dirty[$index] && !validAnswers[$index]"><a ng-click="setNumPage($index + 1)" class="a-missing">{{$index + 1}}</a></span>
 			</span>
-			<button class="btn-user btn-submit" ng-if="whichPart === 1" ng-disabled="!allValidAnswers()" ng-click="sendFirstPart()">Submit</button>
-			<button class="btn-user btn-submit" ng-if="whichPart === 2" ng-disabled="!allValidAnswers()" ng-click="sendSecondPart()">Submit</button>
+			<button class="btn-user btn-submit" ng-if="whichPart === 1" ng-disabled="!allValidAnswers()" ng-click="sendFirstPart(currentPage)">Submit</button>
+			<button class="btn-user btn-submit" ng-if="whichPart === 2" ng-disabled="!allValidAnswers()" ng-click="sendSecondPart(currentPage)">Submit</button>
 		</div>
 	</div>
 </div>

@@ -6,8 +6,8 @@
             <div class="form-group sel2">
 
                 <ol class="nya-bs-select" size="7" title="Choose student" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
-                    <li nya-bs-option="freeStudent in freeStudents">
-                        <a>
+                    <li nya-bs-option="freeStudent in freeStudents" ng-model="test">
+                        <a class="noDisableUser" ng-model="test2">
                             {{ freeStudent.fullName }}
                             <span class="glyphicon glyphicon-ok check-mark"></span>
                         </a>
@@ -57,7 +57,7 @@
                 <label for="sel4">Choosen students</label>
                 <select ng-model="studentList" class="form-control" id="sel4" multiple="multiple" ng-options="user for user in showList"></select>
                 <button class="btn btn-info btn-block submitNewUser" type="submit" ng-click="submitStudentsList()" ng-disabled="disabled">Submit</button>
-                <button class="btn btn-info btn-block" type="submit"  ng-click="reset()" ng-disabled="disabled">Reset</button>
+                <button class="btn btn-info btn-block reset" type="submit"  ng-click="reset()" ng-disabled="disabled">Reset</button>
             </div>
         </div>
 

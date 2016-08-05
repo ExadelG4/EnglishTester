@@ -1,8 +1,8 @@
 (function() {
     'use strict';
     angular.module('admin')
-        .controller('newUserController', ['$scope', 'userService',
-            function ($scope, userService) {
+        .controller('newUserController', ['$scope', 'userService', 'notification',
+            function ($scope, userService, notification) {
 
                 $scope.newUser = function () {
                     var dateStart = $scope.dt.getTime() + $scope.mytime.getTime();
@@ -16,6 +16,7 @@
                     $scope.secondMd = null;
                     $scope.emailMd = null;
                     $scope.phnumberMd = null;
+                    notification.success("You have successfully added a new user");
                 };
 
                 $scope.inlineOptions = {

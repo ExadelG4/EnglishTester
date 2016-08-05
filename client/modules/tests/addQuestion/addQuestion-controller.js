@@ -5,9 +5,9 @@
 
 
 			$scope.selectedQue = '';
-			$scope.tempQue = {
-				olo: 'hi'
-			}
+			$scope.vm = {
+				uploadme: null
+			};
 
 			$scope.typeOfQuestion = [ 
 			{
@@ -59,12 +59,6 @@
     			url: ''
 
 			};
-
-			$scope.uspeh = function(a) {
-				$scope.finalQue.question = a;
-				console.log($scope.finalQue.question);
-				$scope.sendQue();
-			}
 
 			$scope.init = function(selectedQue) {
 				$scope.finalQue.type = selectedQue;
@@ -118,11 +112,6 @@
 					delete $scope.finalQue.answers;
 					delete $scope.finalQue.options;
 				}
-				if ($scope.finalQue.type === 'listeningWithManyOfMany' ||
-					$scope.finalQue.type === 'listeningWithoutChoiceOfAnswers' ||
-					$scope.finalQue.type === 'listeningWithOneOfMany') {
-					$scope.finalQue.question = $scope.tempQue;
-				}
 
 				userService.halfSmoke($scope.finalQue);
 				$scope.selectedQue = '';
@@ -141,16 +130,15 @@
 				}
 			}
 
-			$scope.submit = function(){
+			$scope.submit = function() {
 				var file = $scope.vm.uploadme;
 				if (file) {
-					upload(file);
+					$scope.upload(file);
 				}
 				return false;
 			};
 
-			function upload(file) {
-				//$scope.finalQue.question = '';
+			$scope.upload = function(file) {
 
 				var xhr = new XMLHttpRequest();
 				/*xhr.onload = xhr.onerror = function () {
@@ -166,10 +154,8 @@
 				}
 
 				xhr.onreadystatechange = function() {
-					if (xhr.readyState == XMLHttpRequest.DONE && xhr.responseText !== '') {
-						//$scope.tempQue.olo = xhr.responseText;
-        				//$scope.finalQue.question =  xhr.responseText;
-        				$scope.uspeh(xhr.responseText);
+					if (xhr.readyState == XMLHttpRequest.DONE) {
+        				$scope.finalQue.question =  xhr.responseText;
     				}
 				}
 

@@ -123,31 +123,37 @@ function makeAgain(test, level){
     }
     console.log(level);
 
-    test.count({ level: level }).then(function(data){
-        var rand = getRandomArbitrary(0, data/5);
-        var pr = test.find({level: level},{},{skip : Math.floor(rand), limit : 1 });
-        var edge = data/5;
-        (function t(){
-            pr = pr.then(function(data){ 
-                    if(i < 5){                        
-                        if(data !==undefined){
-                            tests.push(data[0]);                        
-                            //console.log(data);
-                        } 
-                        rand = getRandomArbitrary(i*edge, (i+1)*edge);
-                        pr = test.find({level:level},{},{skip : Math.floor(rand), limit : 1 });
-                        i++;
-                        t();                    
-                    }else{
-                        defer.resolve(tests);
-                    }    
-            
-            });
-     })();
+    // test.count({ level: level }).then(function(data){
+        // var rand = getRandomArbitrary(0, data/5);
+        test.find({level: level},{},{limit : 5}).then(function(data){
+            defer.resolve(data);
+        }).catch(function(err){
+            defer.reject(err);
+        });
 
-    }).catch(function(err){
-        defer.reject(err);
-    });
+        //skip :Math.floor(rand), limit : 1 });
+     //    var edge = data/5;
+     //    (function t(){
+     //        pr = pr.then(function(data){ 
+     //                if(i < 5){                        
+     //                    if(data !==undefined){
+     //                        tests.push(data[0]);                        
+     //                        //console.log(data);
+     //                    } 
+     //                    // rand = getRandomArbitrary(i*edge, (i+1)*edge);
+     //                    pr = test.find({level:level},{},{skip : Math.floor(rand), limit : 1 });
+     //                    i++;
+     //                    t();                    
+     //                }else{
+     //                    defer.resolve(tests);
+     //                }    
+            
+     //        });
+     // })();
+
+    // }).catch(function(err){
+    //     defer.reject(err);
+    // });
 
     return defer.promise;
 }

@@ -30,6 +30,18 @@
 .submitNewUser {
     margin-top: 5px;
 }
+
+.reset {
+    /*background-color: lightgoldenrodyellow;*/
+}
 /*.firstCalendar, .secondCalendar {*/
     /*margin-bottom: 5%;*/
 /*}*/
+
+.disableUser {
+    text-decoration: line-through;
+}
+
+.noDisableUser {
+    text-decoration: none;
+}

@@ -134,6 +134,13 @@ function openTestsCount(){
 	return openTests.count(arguments[0]);
 }
 
+function stackCountAsync(){
+	return stack.countAsync(arguments[0]);
+}
+function resultCountAsync(){
+	return stack.countAsync(arguments[0]);
+}
+
 
 function checkFirstPart(data, id){
 	var pr = q.defer();
@@ -227,3 +234,5 @@ module.exports.openTestsCount = openTestsCount;
 module.exports.requestCount = requestCount;
 module.exports.checkFirstPart = checkFirstPart;
 module.exports.sendTest = sendTest;
+module.exports.stackCountAsync = stackCountAsync;
+module.exports.resultCountAsync = resultCountAsync;

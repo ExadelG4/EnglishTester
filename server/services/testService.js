@@ -3,9 +3,15 @@ var testB = require('../db/mongo').testB;
 var testMaker = require('../logic/testMaker');
 var q = require('q');
 var stackService = require('./stackService');
+var service = require('./userService');
 
 
-
+function findA(query, fields, options){
+	return testA.find(query, fields, options);
+}
+function findB(query, fields, options){
+	return testB.find(query, fields, options);
+}
 function getAllQuestions(){
 	return testA.find({},{},{});
 }
@@ -50,10 +56,15 @@ function result(id, ans){
 	//temporarily
 	var count =0;
 	var rez =0;
+	console.log(ans);
 	ans.forEach(function(element) {
 		count++;
-		rez +=element.mark;
+		var qw = new Number(element.mark) ;
+		+qw;
+		rez +=qw;
+		console.log(rez);
 	});
+
 	rez/=count;
 	stackService.findStack({_id: id}, {}, {}).then(function (data_){
 		var resultRecord = {};
@@ -65,16 +76,16 @@ function result(id, ans){
 
 		resultRecord.result = {};
 
-		resultRecord.result.autoMark = data.level;
-		resultRecord.result.teacherMark = rez;
-		resultRecord.result.level = (rez+data.level*100)/2;
+		resultRecord.result.autoMark = data.autoMark;
+		resultRecord.result.teacherMark = (rez+data.level*100)/2;
+		resultRecord.result.level = data.level;
 		
 
 		resultRecord.teacherId = data.teacherId;
 		
 		resultRecord.teacherFirstName = data.teacherFirstName;
 		resultRecord.teacherLastName = data.teacherLastName;
-		resultRecord.teacherEmail = teacherEmail;
+		resultRecord.teacherEmail = data.teacherEmail;
 
 		stackService.addResults(resultRecord).then(function(data){
 			stackService.removeStackCollection({_id: id}).then(function(data){
@@ -94,7 +105,44 @@ function result(id, ans){
 
 	return pr.promise;
 }
+function checkTest(testId, tId){
+    var pr = q.defer();
+    stackService.findStack({_id: testId},{'answers':1,'teacherId':1},{}).then(function(data){
+    	
+    	if(data[0].teacherId == tId){
+		    	var qIdArr =[];
+		    	var forTeacher =[];
+		    	data[0].answers.forEach(function(element){
+		    		qIdArr.push(element.qId);
+		    	});
+		    	console.log(qIdArr);
+		    	console.log(qIdArr.length);
+		    	findB({_id : {$in:qIdArr}},{'question':1,'type':1},{}).then(function(qdata){
+		    			console.log(qdata);
+		    		for(var i=0; i<qIdArr.length; i++){
+		    			var question ={};
+		    			question.qId = qdata[i]._id;
+		    			question.answer = data[0].answers[i].answer;
+		    			question.type = qdata[i].type;
+		    			question.question = qdata[i].question;
+		    			forTeacher.push(question);
+		    			
+		    		}
+		    		console.log(forTeacher);
+		    		pr.resolve({questions: forTeacher, tId : testId});
 
+		    	}).catch(function(err){
+		    		pr.reject(err);
+		    	})
+    	}
+    	else {
+    		pr.reject('ERROR. THIS TEST IS NOT FOR YOU');
+    	}
+    }).catch(function(err){
+    	pr.reject(err);
+    });
+    return pr.promise;
+};
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
 module.exports.addNewQuestion = addNewQuestion;
@@ -108,4 +156,7 @@ module.exports.getComplaintedB = getComplaintedB;
 module.exports.addQuestionArrayA = addQuestionArrayA;
 module.exports.addQuestionArrayB = addQuestionArrayB;
 module.exports.result = result;
+module.exports.checkTest = checkTest;
+module.exports.findA = findA;
+module.exports.findB = findB;
 
