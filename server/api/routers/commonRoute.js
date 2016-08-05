@@ -28,7 +28,7 @@ router.post('/login',contracts.login,function (req, res) {
 });
 
 
-router.get('/refresh',contracts.refresh, passport.authenticate('jwt', { session: false }), function(req, res) {
+router.get('/refresh', passport.authenticate('jwt', { session: false }), function(req, res) {
 	 contracts.refresh(req.header('refresh')).then(function(data){
 		 
 		 res.json(data);
@@ -70,6 +70,15 @@ router.post('/editNumber',passport.authenticate('jwt', { session: false }),funct
 	}).catch(function(err){
 		res.status(402).send(err);
 	})
+
+});
+
+router.get('/profile',passport.authenticate('jwt', { session: false }), function(req,res){
+		service.userStatistics(req.user._id).then(function (data) {
+			res.send(data);
+		}).catch(function (err) {
+			res.status(401).send(err);
+		});
 
 });
 

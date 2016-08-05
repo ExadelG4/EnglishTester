@@ -176,6 +176,8 @@
 			return true;
 		}
 		$scope.finishCheck = function() {
+			$scope.validNeededNumPage = true;
+    		//$scope.savePrevPage(prevNumPage);
 			var rez = {
 				tid: $rootScope.idTest,
 				finalMarks: $scope.finalMarks

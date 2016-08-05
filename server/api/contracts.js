@@ -12,17 +12,27 @@ var expires = require('../config.json').expires;;
 
 function refresh(token){
     var defer = q.defer();
-
+    // console.log("*");
     jwt.verify(token, key.refreshsecret, function(err, decoded) {
         if(err) defer.reject(err);
         else{
             // var newtoken = jwt.sign(decoded, key.secret);
             // var newtokenrefresh = jwt.sign(decoded, key.refreshsecret);
 
-            var newtoken = jwt.sign(decoded._doc, key.secret,{
+            var obj = {};
+            obj._id = decoded._id;
+            obj.email = decoded.email;
+            obj.firstName = decoded.firstName;
+            obj.lastName = decoded.lastName;
+            obj.number = decoded.number;
+            obj.password = decoded.password;
+            obj.role = decoded.role;
+
+
+            var newtoken = jwt.sign(obj, key.secret,{
                         expiresIn: expires 
                     });
-            var newtokenrefresh = jwt.sign(decoded._doc, key.refreshsecret,{
+            var newtokenrefresh = jwt.sign(obj, key.refreshsecret,{
                         expiresIn: expires 
                     });
 
@@ -32,7 +42,7 @@ function refresh(token){
             now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
 
-        defer.resolve({token: 'JWT ' + newtoken, refreshToken: 'JWT ' + newtokenrefresh, expiredTime:  utc_timestamp});
+        defer.resolve({token: 'JWT ' + newtoken, refreshToken: newtokenrefresh, expiredTime:  utc_timestamp});
   
         }
         
@@ -108,13 +118,13 @@ exports.login = function(req,res, next){
          next();
     }   
 }
-exports.refresh = function(req, res, next){
-    if(!req.header('refresh')){	 	
-	 	res.status(400).send("Bad Request");
-	 } else{
-         next();
-    }   
-}
+// exports.refresh = function(req, res, next){
+//     if(!req.header('refresh')){	 	
+// 	 	res.status(400).send("Bad Request");
+// 	 } else{
+//          next();
+//     }   
+// }
 
 exports.checkTest = function(req, res, next){
     if(!req.body.id){	 	

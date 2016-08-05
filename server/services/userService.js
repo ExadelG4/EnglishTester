@@ -149,7 +149,7 @@ function getUserStatus(_userId){
     
 }
 
-function getFinishedList(){
+function getFinishedList(options){
     var defer = q.defer();
     stackService.findStack({teacherId:'none'},{'userId': 1,'answers':1},{}).then(function (data) {
       
@@ -157,21 +157,21 @@ function getFinishedList(){
         var arrayId =[];
         data.forEach(function(element){
             
-           // console.log(element._doc);
+           
             if(element._doc.answers.length == 0){
                
                 noobsId.push(element._doc.userId);
-                //console.log('noob '+element._doc.userId);
+                
             }
             else{
                 arrayId.push(element._doc.userId);
-               // console.log('norm '+element._doc.userId);
+               ;
             }
         });
-       // console.log(noobsId);
+       
         stackService.removeStackCollection({userId : {$in : noobsId}}).then(function(data){
             update({_id : {$in:noobsId}},{ $set: { status: 'free' }},{multi: true}).then(function(data){
-                user.find({'_id': {$in:arrayId}},{'password': 0},{}).then(function (data_) {
+                user.find({'_id': {$in:arrayId}},options,{}).then(function (data_) {
                     defer.resolve(data_);
                 }).catch(function (err) {
                      defer.reject(err);
