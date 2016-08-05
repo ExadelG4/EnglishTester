@@ -195,9 +195,17 @@
                     newsTypeTwo: function() {
                         return httpService.get(host + '/admin/getFinishedUsersNames');
                     },
+
                     newsTypeThree: function() {
                         return httpService.get(host + '/admin/getResultsNames');
                     },
+
+                    getProfileStatistics: function() {
+                        return httpService.get(host + '/profile')
+                            .then(function(result) {
+                                return result.data;
+                            })
+                    }
 
 
 

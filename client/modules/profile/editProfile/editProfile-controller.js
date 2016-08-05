@@ -1,16 +1,21 @@
 (function(){
     'use strict';
     angular.module('profile')
-        .controller('editProfileController',['$scope', 'context', 'userService', 'notification',
-            function($scope, context, userService, notification){
-                var fullName = context.getFirstName() + ' ' + context.getLastName();
-                $scope.userProfile = {
-                    name: fullName,
-                    email: context.getEmail(),
-                    telNumber: context.getNumber()
-                };
+        .controller('editProfileController',['$scope', 'userService', 'notification',
+            function($scope, userService, notification){
 
-                $scope.role = context.getRole();
+                $scope.userProfile = {};
+
+                userService.getProfileStatistics().then(
+                    function(data) {
+                        console.log(data);
+                        $scope.userProfile.name = data.firstName + ' ' + data.lastName;
+                        $scope.userProfile.email = data.email;
+                        $scope.userProfile.telNumber = data.number;
+                        $scope.role = data.role;
+                    }
+                );
+
                 $scope.disable2 = true;
 
 

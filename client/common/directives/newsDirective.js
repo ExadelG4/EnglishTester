@@ -8,7 +8,6 @@ angular.module('directives').directive('newsDirective', ['$state', function($sta
         controller: function($scope, userService) {
            $scope.model.reqList().then(function(result){
                 $scope.model.list = result.data;
-               console.log(result.data);
             });
             $scope.newsButtonClick = function(){
                 $state.go($scope.model.goTo);
