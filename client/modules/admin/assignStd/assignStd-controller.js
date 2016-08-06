@@ -11,9 +11,11 @@
 
         $scope.checkUsersList = function(value) {
             if (value == 'request') {
+                $scope.currentValue = value;
                 $scope.currentRequest = userService.getUsersRequests();
                 checkList($scope.currentRequest);
             } else {
+                $scope.currentValue = value;
                 $scope.currentRequest = userService.getFreeUsers();
                 checkList($scope.currentRequest);
             }
@@ -66,7 +68,7 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
-            checkList();
+            $scope.checkUsersList($scope.currentValue);
 
         };
 
@@ -87,7 +89,7 @@
 
         $scope.submitStudentsList = function() {
             userService.assignStudents(chooseUserList).then(function() {
-                checkList();
+                $scope.checkUsersList($scope.currentValue);
             });
             notification.success("You have successfully assigned test for users");
             console.log($scope.freeStudents);
