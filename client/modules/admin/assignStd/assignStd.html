@@ -48,7 +48,7 @@
                 </div>
 
 
-                <button class="btn btn-info btn-block" type="submit" ng-click="addStudent()" ng-disabled="!selectedItem4 || !dt3 || !dt4 || !mytime3 || !mytime4">Add student</button>
+                <button class="btn btn-admin btn-block" type="submit" ng-click="addStudent()" ng-disabled="!selectedItem4 || !dt3 || !dt4 || !mytime3 || !mytime4">Add student</button>
             </div>
             </form>
         </div>
@@ -57,9 +57,9 @@
         <div class="step2 col-xs-7 col-sm-3 col-md-4 col-lg-5 pull-right">
             <div class="form-group sel4">
                 <label for="sel4">Choosen students</label>
-                <select ng-model="studentList" class="form-control" id="sel4" multiple="multiple" ng-options="user for user in showList"></select>
-                <button class="btn btn-info btn-block submitNewUser" type="submit" ng-click="submitStudentsList()" ng-disabled="disabled">Submit</button>
-                <button class="btn btn-info btn-block reset" type="submit"  ng-click="reset()" ng-disabled="disabled">Reset</button>
+                <select ng-model="studentList" class="form-control card" id="sel4" multiple="multiple" ng-options="user for user in showList"></select>
+                <button class="btn btn-admin btn-block submitNewUser" type="submit" ng-click="submitStudentsList()" ng-disabled="disabled">Submit</button>
+                <button class="btn btn-admin btn-block reset" type="submit"  ng-click="reset()" ng-disabled="disabled">Reset</button>
             </div>
         </div>
 

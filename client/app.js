@@ -6,7 +6,7 @@
         'home',
         'admin',
         'tests',
-        'profile',
+        'personalProfile',
         'statistic',
         'angularSoundManager',
         'angularAudioRecorder',

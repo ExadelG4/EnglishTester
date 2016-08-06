@@ -37,11 +37,13 @@
     padding-left: 0px;
 }
 
+    .namesOfShedule li {
+        padding: 0;
+    }
+
     .namesOfShedule ul li span {
         float: left;
-        width: 110px;
-        margin-left: 55px;
-        margin-right: 55px;
+        width: 100%;
         text-align: center;
     }
 
@@ -50,14 +52,15 @@ hr {
     background-color: lightgrey;
     color: grey;
     height: 2px;
-    margin-top: 5px;
+    margin-top: 25px;
     margin-bottom: 15px;
 }
 
 .wrapperShedule {
     margin-top: 350px;
     box-shadow: 0 0 5px rgba(0,0,0,.12),0 0 20px rgba(0,0,0,.24) !important;
-    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin-bottom: 15px;
 }
 
