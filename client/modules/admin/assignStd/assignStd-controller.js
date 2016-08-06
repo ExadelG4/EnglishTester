@@ -9,19 +9,17 @@
         var currentStudent;
         var currentList;
 
-        checkURL();
-
-        function checkURL(){
-            if($location.absUrl() == 'http://localhost:3000/home') {
+        $scope.checkUsersList = function(value) {
+            if (value == 'request') {
                 $scope.currentRequest = userService.getUsersRequests();
-                findOutURL($scope.currentRequest);
+                checkList($scope.currentRequest);
             } else {
                 $scope.currentRequest = userService.getFreeUsers();
-                findOutURL($scope.currentRequest);
+                checkList($scope.currentRequest);
             }
-        }
+        };
 
-        function findOutURL (req) {
+        function checkList (req) {
             req.then(function(data) {
                 $scope.freeStudents = [];
                 $scope.copyFreeStudents = [];
@@ -33,6 +31,9 @@
                 });
             });
         }
+
+        $scope.checked = true;
+        $scope.checkUsersList('request');
 
         function clear() {
             $scope.disabled = false;
@@ -65,7 +66,7 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
-            checkURL();
+            checkList();
 
         };
 
@@ -86,7 +87,7 @@
 
         $scope.submitStudentsList = function() {
             userService.assignStudents(chooseUserList).then(function() {
-                checkURL();
+                checkList();
             });
             notification.success("You have successfully assigned test for users");
             console.log($scope.freeStudents);

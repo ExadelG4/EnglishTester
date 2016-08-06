@@ -4,6 +4,8 @@
         <div class="step1 col-xs-7 col-sm-6 col-md-6 col-lg-5 pull-left">
             <form data-toggle="validator" role="form">
             <div class="form-group sel2">
+                <input type="radio" name="browser" value="request" ng-model="checkRequest" ng-click="checkUsersList(checkRequest)" ng-checked="checked">Users, whose send request<Br>
+                <input type="radio" name="browser" value="free" ng-model="checkFree" ng-click="checkUsersList(checkFree)">Free users
 
                 <ol class="nya-bs-select" size="7" title="Choose student" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
                     <li nya-bs-option="freeStudent in freeStudents" ng-model="test">
