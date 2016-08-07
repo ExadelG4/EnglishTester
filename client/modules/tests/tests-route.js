@@ -9,8 +9,13 @@
             		url: '/tests/addQuestion',
             		templateUrl: 'modules/tests/addQuestion/addQuestion.html',
             		controller: 'addQuestionController',
-            		controllerAs: 'qCtrl',
 					role:['admin']
         		})
+                .state('badQuestions', {
+                    url: '/tests/badQuestions',
+                    templateUrl: 'modules/tests/badQuestion/badQuestion.html',
+                    controller: 'badQuestionController',
+                    role: ['admin']
+            })
 		});
 })();

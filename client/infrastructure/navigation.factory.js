@@ -38,20 +38,12 @@
                             state: 'addQuestion'
                         }
                     ]
-                },
-                {
-                    name: 'Contacts',
-                    state: 'home'
                 }
             ];
 
             var userNav = [
                 {
                     name: 'Home',
-                    state: 'home'
-                },
-                {
-                    name: 'Contacts',
                     state: 'home'
                 }
             ];
@@ -60,20 +52,12 @@
                 {
                     name: 'Home',
                     state: 'home'
-                },
-                {
-                    name: 'Contacts',
-                    state: 'home'
                 }
             ];
 
             var guestNav = [
                 {
                     name: 'Home',
-                    state: 'home'
-                },
-                {
-                    name: 'Contacts',
                     state: 'home'
                 }
             ];

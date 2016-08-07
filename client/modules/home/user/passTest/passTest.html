@@ -39,7 +39,7 @@
 				</span>
 			</div>
 			<button class="btn-user btn-submit" ng-if="whichPart === 1" ng-disabled="!allValidAnswers()" ng-click="sendFirstPart(currentPage)">Submit</button>
-			<button class="btn-user btn-submit" ng-if="whichPart === 2" ng-disabled="!allValidAnswers()" ng-click="sendSecondPart(currentPage)">Submit</button>
+			<button class="btn-user btn-submit" ng-if="whichPart === 2" ng-disabled="!allValidAnswers()" ng-click="sendSecondPart(currentPage, true)">Submit</button>
 		</div>
 	</div>
 </div>

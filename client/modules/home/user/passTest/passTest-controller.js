@@ -95,15 +95,31 @@
 
 		function testTimer(){
 			$scope.timer -= 1000;
-			    if ($scope.timer === 0){
-			    	//something
-			    } 
-			    else {
-			    	$scope.timerHours = Math.floor($scope.timer/1000/60/60);
-					$scope.timerMin = Math.floor($scope.timer/1000/60) - $scope.timerHours*60;
-					$scope.timerSec = Math.floor($scope.timer/1000) - $scope.timerMin*60 - $scope.timerHours*60*60;
-			        $timeout(testTimer,1000);
-			    }
+			if($scope.timer === 1000*60*60) {
+				notification.info("1 hour to finish");
+			}
+			else if($scope.timer === 1000*60*30) {
+				notification.info("30 minutes to finish");
+			}
+			else if($scope.timer === 1000*60*5) {
+				notification.warning("5 minutes to finish");
+			}
+		    if ($scope.timer === 0){
+		    	//something
+		    	if($scope.whichPart === 1) {
+		    		$state.go('home');
+		    		notification.error("You don't have time to finish first part.");
+		    	}
+		    	else if($scope.whichPart === 2) {
+		    		$scope.sendSecondPart($scope.currentPage, false);
+		    	}
+		    } 
+		    else {
+		    	$scope.timerHours = Math.floor($scope.timer/1000/60/60);
+				$scope.timerMin = Math.floor($scope.timer/1000/60) - $scope.timerHours*60;
+				$scope.timerSec = Math.floor($scope.timer/1000) - $scope.timerMin*60 - $scope.timerHours*60*60;
+		        $timeout(testTimer,1000);
+		    }
 		}
 		$timeout(testTimer,1000);
 
@@ -344,12 +360,17 @@
   					$scope.initAll(data);
   				});
   		};
-  		$scope.sendSecondPart = function(currentPage) {
+  		$scope.sendSecondPart = function(currentPage,which) {
     		$scope.savePrevPage(currentPage);
   			userService.sendSecondPart($scope.userAnswers)
   				.then ( function() {
   					$state.go('home');
-  					notification.success("You have successfully completed all test.");
+  					if(which === true) {
+  						notification.success("You have successfully completed all test");
+  					}
+  					else {
+  						notification.error("You don't have time to finish second part");
+  					}
   				});
   		};
 

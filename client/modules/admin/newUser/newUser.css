@@ -1,6 +1,7 @@
 .error-mes {
-    display: block;
-    color: red;
+    display: inline-block;        
+    color: #c53535;
+    font-size: 1.3em;
 }
 
 .dateTime {

@@ -11,23 +11,41 @@
         <div class="header-nav-lg col-sm-10">
             <ul>
                 <li uib-dropdown ng-repeat="menuItem in headerMenu">
-                    <a ng-if="menuItem.state" ui-sref="{{menuItem.state}}">{{menuItem.name}}</a>
-                    <a ng-if="!menuItem.state" href="" uib-dropdown-toggle>{{menuItem.name}}</a>
+                    <a ng-if="menuItem.state" ui-sref="{{menuItem.state}}" ng-click="timeToChangeA()"
+                    ng-class="{'choose-menu-admin': forChoise[$index] && role === 'admin', 
+                                'choose-menu-user': forChoise[$index] && role === 'user',
+                                'choose-menu-guest': forChoise[$index] && role === 'guest',
+                                'choose-menu-teacher': forChoise[$index] && role === 'teacher' }">
+                        {{menuItem.name}}
+                    </a>
+                    <a ng-if="!menuItem.state" href="" uib-dropdown-toggle 
+                    ng-class="{'choose-menu-admin': forChoise[$index] && role === 'admin', 
+                                'choose-menu-user': forChoise[$index] && role === 'user',
+                                'choose-menu-guest': forChoise[$index] && role === 'guest',
+                                'choose-menu-teacher': forChoise[$index] && role === 'teacher' }">
+                        {{menuItem.name}}
+                    </a>
                     <ul ng-if="!menuItem.state" uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
                         <li ng-repeat="subMenuItem in menuItem.tabs">
-                            <a ui-sref="{{subMenuItem.state}}">{{subMenuItem.name}}</a>
+                            <a ui-sref="{{subMenuItem.state}}" ng-click="timeToChangeA()">{{subMenuItem.name}}</a>
                         </li>
                     </ul>
                 </li>
 
                 <li uib-dropdown>
-                    <a href="" uib-dropdown-toggle>Profile</a>
+                    <a href="" uib-dropdown-toggle 
+                    ng-class="{'choose-menu-admin': forChoise[menuLength - 1] && role === 'admin', 
+                                'choose-menu-user': forChoise[menuLength - 1] && role === 'user',
+                                'choose-menu-guest': forChoise[menuLength - 1] && role === 'guest',
+                                'choose-menu-teacher': forChoise[menuLength -1] && role === 'teacher' }">
+                        Profile
+                    </a>
                     <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
                         <li>
-                            <a ui-sref="editProfile">{{personalName}}</a>
+                            <a ui-sref="editProfile" ng-click="timeToChangeA()">{{personalName}}</a>
                         </li>
                         <li>
-                            <a href="">Check microphone</a>
+                            <a href="" ng-click="timeToChangeA()">Check microphone</a>
                         </li>
                         <li>
                             <a href="" ng-click="logout()">Log out</a>

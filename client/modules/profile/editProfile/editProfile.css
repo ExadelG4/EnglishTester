@@ -94,7 +94,3 @@ hr {
     .chart div:hover::after {
         content: attr(data-title);
     }
-
-.error-mes {
-    display: inline-block;
-}

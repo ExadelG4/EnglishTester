@@ -10,7 +10,7 @@
 			}
 		});
 
-		if($rootScope.checking === true) {
+		/*if($rootScope.checking === true) {
 			$rootScope.checking = false;
 			var a = {id: $rootScope.idTest};
 			userService.getOneTest(a)
@@ -21,7 +21,7 @@
 		}
 		else {
 			$state.go('home');
-		}
+		}*/
 
 		var startUrl = 'modules/home/teacher/check test/templateTests/templateTest';
 
@@ -32,7 +32,7 @@
 				'speaking': startUrl + '4.html'
 			};
 
-		/*$scope.allQuestions = [
+		$scope.allQuestions = [
 			{
 				qId: '',
 				type: 'questionWithoutChoiceOfAnswers',
@@ -58,9 +58,9 @@
 				question: 'Vladimerski central - ?',
 				answer: 'assets/audio/vcvc.mp3',
 			}
-		];*/
+		];
 
-		$scope.allQuestions = [];
+		//$scope.allQuestions = [];
 		$scope.currentPage = 1;
 		$scope.copyCurrentPage = 1;
 		$scope.forValidMark = [];
@@ -69,6 +69,7 @@
 		$scope.omg = {
 			tempMark:''
 		};
+		$scope.focus = true;
 		angularPlayer.init();
 		$scope.forSong = [];
 
@@ -97,11 +98,11 @@
 				    	url: $scope.allQuestions[i].answer
 				    }
 				}
+				$scope.initNewPage($scope.currentPage);
 			}
 		}
 
 		$scope.initNewPage = function (currentPage) {
-			//document.getElementById('myMenuList').focus();
 			$scope.omg.tempMark = $scope.finalMarks[currentPage - 1].mark;
 			$scope.currentPage = currentPage;
 
@@ -167,6 +168,26 @@
   				notification.success("You have successfully completed check test.");
 			})
 		}
+		$scope.initFirst();
 
 	}]);
+
+	angular.module('home').directive('focus',
+	function($timeout) {
+		return {
+			scope : {
+				trigger : '@focus'
+			},
+			link : function(scope, element) {
+				scope.$watch('trigger', function(value) {
+					if (value === "true") {
+						$timeout(function() {
+							element[0].focus();
+						});
+					}
+				});
+			}
+		};
+	}
+); 
 })();
