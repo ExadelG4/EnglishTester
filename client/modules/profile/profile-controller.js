@@ -1,4 +1,4 @@
 (function(){
-    angular.module('profile', []).controller('profileController',['$scope', 'context', function($scope, context){
+    angular.module('personalProfile', []).controller('profileController',['$scope', 'context', function($scope, context){
 
     }])})();

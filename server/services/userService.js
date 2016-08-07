@@ -8,7 +8,9 @@ var expires = require('../config.json').expires;
 var stackService = require('./stackService');
 var testService = require('./testService');
 var async = require('async');
-
+var userAs = require('../db/mongo').userAs;
+var stackAs = require('../db/mongo').stackAs;
+var resultsAs = require('../db/mongo').resultsAs;
 
 function getAllUsers(){
 	return user.find({},{},{});
@@ -36,9 +38,8 @@ function authenticate(email, pass){
                 if (isMatch && !err) {
                     var user = {};
                     user.email = user_.email;
-                    user.number = user_.number;
                     user.role = user_.role;
-                    user.password = user_.password;
+                    //user.password = user_.password;
                     user.firstName = user_.firstName;
                     user.lastName = user_.lastName;
                     user._id = user_._id;
@@ -149,29 +150,24 @@ function getUserStatus(_userId){
     
 }
 
-function getFinishedList(){
+function getFinishedList(options){
     var defer = q.defer();
     stackService.findStack({teacherId:'none'},{'userId': 1,'answers':1},{}).then(function (data) {
-      
         var noobsId =[];
         var arrayId =[];
-        data.forEach(function(element){
-            
-           // console.log(element._doc);
+        data.forEach(function(element){ 
             if(element._doc.answers.length == 0){
-               
-                noobsId.push(element._doc.userId);
-                //console.log('noob '+element._doc.userId);
+                noobsId.push(element._doc.userId);      
             }
             else{
                 arrayId.push(element._doc.userId);
-               // console.log('norm '+element._doc.userId);
+               ;
             }
         });
-       // console.log(noobsId);
+       
         stackService.removeStackCollection({userId : {$in : noobsId}}).then(function(data){
             update({_id : {$in:noobsId}},{ $set: { status: 'free' }},{multi: true}).then(function(data){
-                user.find({'_id': {$in:arrayId}},{'password': 0},{}).then(function (data_) {
+                user.find({'_id': {$in:arrayId}},options,{}).then(function (data_) {
                     defer.resolve(data_);
                 }).catch(function (err) {
                      defer.reject(err);
@@ -323,46 +319,53 @@ function userStatistics(id){
 }
 function getTeachers(){
     var prom = q.defer();
-        var functionArr = [];
-        var teacherCount =[]
-        var teachers = [];
-        user.find({role: 'teacher'},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1},{}).then(function(data){               
-               
-                data.forEach(function(element,i){ 
-                        functionArr.push(function (callback){
-                            var count =  stackService.resultsCountAsync({teacherId:element._id});
-                            callback(null,count);
+        userAs.find({role: 'teacher'},{},{},function(err,data){
+            if(err){
+            }
+            else{
+                var dermo = [];
+                async.each(data,function(dat,callback) {
+                            stackAs.count({teacherId : dat._id},function(err,data1){
+                                if(err) {
+                                    callback(err,'error');
+                                }
+                                else{ 
+                                    resultsAs.count({teacherId :  dat._id},function(err,data2){
+                                        if(err) {
+                                            callback(err,'error');
+                                        }
+                                        else{
+                                            var teacher = {
+                                                _id : dat._id,
+                                                firstName : dat.firstName,
+                                                lastName : dat.lastName,
+                                                email : dat.email,
+                                                number : dat.number,
+                                                totalTests : data2,
+                                                assignTest : data1
+                                            };
+                                            dermo.push(teacher);
+                                            callback(null,teacher); 
+                                        }
+                                    })  
+                                }
                         });
-                        functionArr.push(function (callback){
-                            var count =  stackService.stackCountAsync({teacherId:element._id});
-                            callback(null,count);
-                        });
-                    });
-                      async.series(functionArr,function(err,results){
-                              
-                               console.log(results);
-                      });
-                        console.log(functionArr);
-                       // teacher._id = element._id;
-                       //  var teacher = {};
-                       // teachers.push(teacher);
-                       // teacher.firstName = element.firstName;
-                       // teacher.lastName = element.lastName;
-                      //  teacher.email = element.email;
-                       // teacher.number = element.number;
-                        //console.log(getTeacherCount(element._id));
-                        // var count = getTeacherCount(element._id);
-                        // teacher.totalTests = count.totalTests;
-                        // teacher.assignTest = count.assignTest;
-                         
-                
-               // console.log(teachers);
-                teachers = [];
-                prom.resolve(teachers);
-               // console.log(teachers);                               
-        }).catch(function(err){
-             prom.reject(err);
+            
+                    }, function (err) {
+                        if(err) {
+                            prom.reject(err);
+                        }
+                        else {
+                             prom.resolve(dermo);
+                            
+                            }
+                 });
+            }
+
         });
+            
+
+    
     return prom.promise;    
 }
 function assignStudents(students){

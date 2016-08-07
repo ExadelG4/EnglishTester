@@ -6,7 +6,7 @@
         'home',
         'admin',
         'tests',
-        'profile',
+        'personalProfile',
         'statistic',
         'angularSoundManager',
         'angularAudioRecorder',
@@ -14,6 +14,7 @@
         'ui.bootstrap',
         'nya.bootstrap.select',
         'toaster',
-        'ngAnimate'
+        'ngAnimate',
+        'directives'
     ]);
 })();

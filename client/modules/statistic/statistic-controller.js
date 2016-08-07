@@ -1,22 +1,32 @@
 (function () {
     'use strict';
 
-    angular.module('statistic', []).controller('statisticController', ['$scope', '$state', 'userService', function($scope, $state, userService) {
+    angular.module('statistic', []).controller('statisticController', ['$scope', '$state', '$rootScope', 'userService', 'getStatisticsFromNews', function($scope, $state, $rootScope, userService, getStatisticsFromNews) {
 
         $scope.searchList = [];
         $scope.show = false;
         $scope.showUInfo = false;
+
+        function showPersonList() {
+            userService.searchUser($scope.searching).then(function(data) {
+                $scope.show = true;
+                data.forEach(function(item, i) {
+                    $scope.searchList[i] = item;
+                    $scope.searchList[i].fullName = item.firstName + ' ' + item.lastName;
+                });
+            });
+        }
+
+        if(getStatisticsFromNews.getPersonStatistic() != undefined ) {
+            $scope.searching = getStatisticsFromNews.getPersonStatistic();
+            showPersonList();
+        }
+
         $scope.searchUser = function() {
             $scope.searchList = [];
             $scope.showUInfo = false;
             if ($scope.searching.length >= 3) {
-                userService.searchUser($scope.searching).then(function(data) {
-                        $scope.show = true;
-                        data.forEach(function(item, i) {
-                            $scope.searchList[i] = item;
-                            $scope.searchList[i].fullName = item.firstName + ' ' + item.lastName;
-                        });
-                });
+                showPersonList();
             }
         };
 

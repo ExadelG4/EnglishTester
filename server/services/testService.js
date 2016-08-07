@@ -56,10 +56,15 @@ function result(id, ans){
 	//temporarily
 	var count =0;
 	var rez =0;
+	//console.log(ans);
 	ans.forEach(function(element) {
 		count++;
-		rez +=element.mark;
+		var qw = new Number(element.mark) ;
+		+qw;
+		rez +=qw;
+		//console.log(rez);
 	});
+
 	rez/=count;
 	stackService.findStack({_id: id}, {}, {}).then(function (data_){
 		var resultRecord = {};
@@ -71,19 +76,20 @@ function result(id, ans){
 
 		resultRecord.result = {};
 
-		resultRecord.result.autoMark = data.level;
-		resultRecord.result.teacherMark = rez;
-		resultRecord.result.level = (rez+data.level*100)/2;
+		resultRecord.result.autoMark = data.autoMark;
+		resultRecord.result.teacherMark = (rez+data.level*100)/2;
+		resultRecord.result.level = data.level;
 		
 
 		resultRecord.teacherId = data.teacherId;
 		
 		resultRecord.teacherFirstName = data.teacherFirstName;
 		resultRecord.teacherLastName = data.teacherLastName;
-		resultRecord.teacherEmail = teacherEmail;
+		resultRecord.teacherEmail = data.teacherEmail;
 
 		stackService.addResults(resultRecord).then(function(data){
 			stackService.removeStackCollection({_id: id}).then(function(data){
+				service.updateStatus(resultRecord.userId,'free');
 				pr.resolve();
 			}).catch(function(err){
 				pr.reject(err);
@@ -110,8 +116,8 @@ function checkTest(testId, tId){
 		    	data[0].answers.forEach(function(element){
 		    		qIdArr.push(element.qId);
 		    	});
-		    	console.log(qIdArr);
-		    	console.log(qIdArr.length);
+		    	//console.log(qIdArr);
+		    //	console.log(qIdArr.length);
 		    	findB({_id : {$in:qIdArr}},{'question':1,'type':1},{}).then(function(qdata){
 		    			console.log(qdata);
 		    		for(var i=0; i<qIdArr.length; i++){
@@ -123,7 +129,7 @@ function checkTest(testId, tId){
 		    			forTeacher.push(question);
 		    			
 		    		}
-		    		console.log(forTeacher);
+		    	//	console.log(forTeacher);
 		    		pr.resolve({questions: forTeacher, tId : testId});
 
 		    	}).catch(function(err){

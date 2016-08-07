@@ -12,20 +12,13 @@
 				<div ng-if="$index === $parent.currentPage - 1" ng-include="urls[question.type]">
 				</div>
 			</div>
-
-			<!--form name="num" class="form-num">
-				<input type="text" name="numPage" ng-model="neededNumPage" ng-pattern="'[0-9]{1,10}'" ng-change="validNeededNumPage = true;" placeholder="Number of question" class="input-teacher input-num-que">
-				<button ng-click="setNumPage(neededNumPage)" ng-disabled="num.numPage.$invalid" class="btn-teacher btn-num-que">Go</button>
-				<span ng-show="!validNeededNumPage" class="error-mes">Question not found</span>
-			</form-->
-
 		</div>
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
 			<label class="label-missing" for="missing-que">You missing</label>
 			<span id="missing-que" ng-repeat="question in allQuestions track by $index"> 
 				<span ng-if="dirty[$index] && !validMarks[$index]"><button ng-click="setNumPage($index + 1)" class="btn-missing">{{$index + 1}}</button></span>
 			</span>
-			<button class="btn-teacher btn-submit" ng-disabled="!allValidMarks()" ng-click="finishCheck()">Submit</button>
+			<button class="btn-teacher btn-submit" ng-disabled="!validAll()" ng-click="finishCheck(currentPage)">Submit</button>
 		</div>
 	</div>
 </div>

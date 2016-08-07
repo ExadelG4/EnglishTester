@@ -164,19 +164,51 @@
                                 return result.data;
                             })
                     },
+
                     getTestsList : function() {
                         return httpService.get(host + '/teacher/getTests')
                             .then (function(result) {
                                 return result.data;
                             })
                     },
+
                     getOneTest: function(data) {
-                        return httpService.post(host + '/teacher/checkTest')
+                        return httpService.post(host + '/teacher/checkTest', data)
                             .then (function(result) {
                                 return result.data;
                             })
 
+                    },
+
+                    editProfile: function(data) {
+                        return httpService.post(host + '/editNumber', {number: data});
+                    },
+
+                    finishCheck: function(data) {
+                        return httpService.post(host + '/teacher/submit3', data);
+                    },
+
+                    newsTypeOne: function() {
+                        return httpService.get(host + '/admin/getUsersRequestsNames');
+                    },
+
+                    newsTypeTwo: function() {
+                        return httpService.get(host + '/admin/getFinishedUsersNames');
+                    },
+
+                    newsTypeThree: function() {
+                        return httpService.get(host + '/admin/getResultsNames');
+                    },
+
+                    getProfileStatistics: function() {
+                        return httpService.get(host + '/profile')
+                            .then(function(result) {
+                                return result.data;
+                            })
                     }
+
+
+
                 };
             }]);
 })();

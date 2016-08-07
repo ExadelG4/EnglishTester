@@ -9,18 +9,22 @@
         var currentStudent;
         var currentList;
 
-        checkURL();
-
-        function checkURL(){
-            if($location.absUrl() == 'http://localhost:3000/home') {
-                findOutURL(userService.getUsersRequests());
+        $scope.checkUsersList = function(value) {
+            if (value == 'request') {
+                $scope.currentValue = value;
+                $scope.currentRequest = userService.getUsersRequests();
+                checkList($scope.currentRequest);
             } else {
-                findOutURL(userService.getFreeUsers());
+                $scope.currentValue = value;
+                $scope.currentRequest = userService.getFreeUsers();
+                checkList($scope.currentRequest);
             }
-        }
+        };
 
-        function findOutURL (req) {
+        function checkList (req) {
             req.then(function(data) {
+                $scope.freeStudents = [];
+                $scope.copyFreeStudents = [];
                 data.forEach(function(item, i) {
                     $scope.freeStudents[i] = item;
                     $scope.copyFreeStudents[i] = item;
@@ -28,6 +32,21 @@
                     $scope.copyFreeStudents[i].fullName = item.firstName + ' ' + item.lastName;
                 });
             });
+        }
+
+        $scope.checked = true;
+        $scope.checkUsersList('request');
+
+        function clear() {
+            $scope.disabled = false;
+            $scope.freeStdName = '';
+            $scope.freeStdMail = '';
+            $scope.freeStdTel = '';
+            $scope.mytime3 = null;
+            $scope.mytime4 = null;
+            $scope.selectedItem4 = '';
+            $scope.dt3 = null;
+            $scope.dt4 = null;
         }
 
         var stdConstructor = function(stdId, stdData, stdData2){
@@ -39,6 +58,7 @@
 
         $scope.hasChanged = function(item){
             currentStudent = item;
+            console.log(item);
             $scope.freeStdName = item.fullName;
             $scope.freeStdMail = item.email;
             $scope.freeStdTel = item.number;
@@ -48,6 +68,8 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
+            $scope.checkUsersList($scope.currentValue);
+
         };
 
         $scope.addStudent = function() {
@@ -56,20 +78,19 @@
 
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName);
-            $scope.disabled = false;
-            $scope.freeStdName = '';
-            $scope.freeStdMail = '';
-            $scope.freeStdTel = '';
-            $scope.mytime3 = null;
-            $scope.mytime4 = null;
-            $scope.selectedItem4 = '';
-            $scope.dt3 = null;
-            $scope.dt4 = null;
+
+            var res;
+            $scope.freeStudents.map(( obj, i ) =>
+                (obj.email == currentStudent.email) ? (res = i) : (false)
+            );
+            $scope.freeStudents.splice(res, 1);
+            clear();
         };
 
         $scope.submitStudentsList = function() {
-            userService.assignStudents(chooseUserList);
-            checkURL();
+            userService.assignStudents(chooseUserList).then(function() {
+                $scope.checkUsersList($scope.currentValue);
+            });
             notification.success("You have successfully assigned test for users");
             console.log($scope.freeStudents);
             $scope.showList = [];
@@ -99,7 +120,7 @@
 
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
-        $scope.minDate2 = $scope.minDate2 ? null : new Date($scope.minDate);
+        $scope.minDate2 = $scope.minDate ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();
@@ -142,10 +163,6 @@
 
         return '';
     }
-
-
-    $scope.mytime3 = new Date();
-    $scope.mytime4 = new Date();
 
     $scope.hstep = 1;
     $scope.mstep = 1;

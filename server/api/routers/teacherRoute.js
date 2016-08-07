@@ -22,26 +22,28 @@ router.get('/getTests', passport.authenticate('jwt', { session: false }), functi
 	stackService.findStack({teacherId : tId},{'date': 1, 'level': 1},{}).then(function (data) {
 		res.json(data);
 	}).catch(function (err) {
-		res.json(err);
+		res.status(400).send(err);
 	})
 });
 
 router.post('/checkTest',contracts.checkTest,passport.authenticate('jwt', { session: false }),function(req, res){
-	
+	console.log(req.body);
+	console.log(req.body.id);
 	testService.checkTest(req.body.id, req.user._id ).then(function(data){
 		console.log(data);
 		res.send(data);
 	}).catch(function(err){
-		res.status(400).send("Bad Request");
+		res.status(400).send(err);
 	});
 
 });
 
 router.post('/submit3',function(req, res){
-	testService.result(req.body.qid, req.body.results ).then(function(data){
+	testService.result(req.body.tid, req.body.finalMarks ).then(function(data){
 		res.send(data);
 	}).catch(function(err){
-		res.status(400).send("Bad Request");
+		console.log(err);
+		res.status(400).send(err);
 	});
 });
 

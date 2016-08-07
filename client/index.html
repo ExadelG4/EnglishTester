@@ -37,8 +37,11 @@
 </head>
 <body ng-controller="appController">
     <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
-    <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
-        <div ui-view class="main"></div>
+    <div class="container">
+        <header ng-if="!isLoginPage()" ng-include="'common/header/header.html'"></header>
+            <div ui-view class="main"></div>
+    </div>
+    <footer ng-if="!isLoginPage()"><h3><em>© Exadel</em></h3></footer>
 
         <script type="text/javascript" src="../bower_components/d3/d3.min.js"></script>
         <script type="text/javascript" src="../bower_components/d3.chart/d3.chart.min.js"></script>
@@ -69,6 +72,7 @@
         <script type="text/javascript" src="common/login/login-controller.js"></script>
         <script type="text/javascript" src="modules/home/home-controller.js"></script>
         <script type="text/javascript" src="modules/home/teacher/teacher-home.controller.js"></script>
+        <script type="text/javascript" src="modules/home/admin/adminHome-service.js"></script>
         <script type="text/javascript" src="modules/home/admin/admin-home.controller.js"></script>
         <script type="text/javascript" src="modules/home/user/user-home.controller.js"></script>
         <script type="text/javascript" src="modules/admin/assignStd/assignStd-controller.js"></script>
@@ -78,6 +82,7 @@
         <script type="text/javascript" src="modules/tests/tests-controller.js"></script>
         <script type="text/javascript" src="modules/tests/addQuestion/addQuestion-controller.js"></script>
         <script type="text/javascript" src="modules/tests/addQuestion/upload.js"></script>
+        <script type="text/javascript" src="infrastructure/toastr/news-statistics-service.js"></script>
         <script type="text/javascript" src="modules/statistic/statistic-controller.js"></script>
         <script type="text/javascript" src="modules/statistic/statistics-route.js"></script>
         <script type="text/javascript" src="modules/tests/tests-route.js"></script>
@@ -91,7 +96,8 @@
         <script type="text/javascript" src="modules/home/teacher/teacher-home.controller.js"></script>
         <script type="text/javascript" src="modules/home/teacher/teacher-home.route.js"></script>
         <script type="text/javascript" src="modules/home/teacher/check test/checkTest-controller.js"></script>
-        <script type="text/javascript" src="modules/home/admin/resultNews-controller.js"></script>
+        <script type="text/javascript" src="common/directives/commonDirectiveModule.js"></script>
+        <script type="text/javascript" src="common/directives/newsDirective.js"></script>
 
 
         <!--script type="text/javascript" src="../bower_components/angular-file-upload/dist/angular-file-upload.js"></script-->
