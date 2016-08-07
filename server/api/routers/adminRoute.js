@@ -172,7 +172,11 @@ router.get('/getComplainted',function(req, res){
 });
 
 router.post('/blockComplained', function(req, res){
-
+	testService.blockComlained(req.body.A,req.body.B).then(function(data){
+		res.send('ok');
+	}).catch(function(err){
+		res.status(400).send(err);
+	})
 });
 
 module.exports = router;

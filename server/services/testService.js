@@ -77,7 +77,7 @@ function result(id, ans){
 		resultRecord.result = {};
 
 		resultRecord.result.autoMark = data.autoMark;
-		resultRecord.result.teacherMark = (rez+data.level*100)/2;
+		resultRecord.result.teacherMark = rez;
 		resultRecord.result.level = data.level;
 		
 
@@ -144,6 +144,29 @@ function checkTest(testId, tId){
     });
     return pr.promise;
 };
+
+
+function blockComplained(A, B){
+	var pr = q.defer();
+	testA.update({_id : {$in : A}},{ $set: { complaint: true }},{}).then(function(data){
+		testB.update({_id : {$in : B}},{ $set: { complaint: true }},{}).then(function(data){
+			pr.resolve();
+		}).catch(function(err){
+			pr.reject(err);
+		});
+	}).catch(function(err){
+		pr.reject(err);
+	})
+	return pr.promise;
+}
+
+
+
+
+
+
+
+
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
 module.exports.addNewQuestion = addNewQuestion;
@@ -160,4 +183,4 @@ module.exports.result = result;
 module.exports.checkTest = checkTest;
 module.exports.findA = findA;
 module.exports.findB = findB;
-
+module.exports.blockComlained = blockComplained;
