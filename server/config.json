@@ -3,5 +3,11 @@
 	"refreshsecret": "supersecretrefreshkey",
 	"dbPath" : "mongodb://localhost:27017/test",
 	"expires" : 7200,
-	"host" : "http://localhost:3000/"
+	"host" : "http://localhost:3000/",
+	"typesOfSecondPart" : [
+		"questionWithoutChoiceOfAnswers",
+		"essay",
+		"listeningWithoutChoiceOfAnswers",
+		"speaking"
+	]
 }
