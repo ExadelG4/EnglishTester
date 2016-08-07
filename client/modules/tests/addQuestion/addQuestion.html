@@ -1,6 +1,7 @@
 <div class="container-fluid add-question">
 	<div class="row-fluid">
 		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+            <img src="assets/images/icons/chooseType.png">
 			<p class="ads">Choose type of question </p>
             <select class="form-control input-admin input-option" ng-model="selectedQue" ng-change="changeQue(selectedQue)">
                 <option ng-repeat="que in typeOfQuestion" ng-value="que.type">{{que.text}}</option>
@@ -118,7 +119,7 @@
           </div>
           <p class="ads">Level of question</p>
           <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
-          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === ''" ng-click="sendQue()" >Submit</input>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === ''" ng-click="sendQue()" >Submit</button>
         </form>
       </div>
 

@@ -8,20 +8,33 @@
     width: 100%;
 }
 
-.dateTime > div:first-child {
-    margin-top: 33px;
+    .dateTime > div:first-child {
+        margin-top: 33px;
+    }
+
+    .dateTime  div {
+        padding: 0 !important;
+    }
+
+.time > table{
+   float: right;
 }
 
-.dateTime  div {
-    padding: 0 !important;
+.chooseDateTime {
+    width: 255px;
+    position: inherit;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
-
-/*.dateTime button {*/
-    /*background-image: url(assets/images/icons/date.png);*/
-/*}*/
 
 .submitNewUser {
-    width: 100% !important;
+    width: 85px;
+    left: 0;
+    right: 0;
+    bottom: -45px;
+    margin: auto;
+    position: absolute;
 }
 
 .formAddUser label {
@@ -29,9 +42,9 @@
 }
 
 .newUserDate img {
-    height: 50px;
-    width: 50px;
-    padding: 5px;
+    padding: 0;
+    width: 35px;
+    height: 35px;
 }
 
 .newUserDate h4 {

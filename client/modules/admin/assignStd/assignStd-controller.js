@@ -109,6 +109,7 @@
         };
 
         $scope.submitStudentsList = function() {
+            console.log(chooseUserList);
             userService.assignStudents(chooseUserList).then(function() {
                 $scope.checkUsersList($scope.currentValue);
             });

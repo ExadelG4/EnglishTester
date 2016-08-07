@@ -1,5 +1,5 @@
 <div ng-controller="newUserController">
-    <div class="pull-left col-xs-5 col-sm-5 col-md-5 col-lg-5">
+    <div class="pull-left col-xs-12 col-sm-12 col-md-5 col-lg-5">
             <img src="assets/images/icons/addUser.png">
         <h3>Create guest</h3>
             <form name="user" class="formAddUser"  ng-model="formAddingUser" novalidate>
@@ -19,20 +19,22 @@
                 <input type="text" name="phnumber" ng-model="phnumberMd" class="form-control" aria-label="..." placeholder="+375299379992" ng-pattern="'[+]{1}[375]{1}[0-9]{11,11}'" required>
             </form>
     </div>
-    <div class="pull-right col-xs-5 col-sm-5 col-md-5 col-lg-5 newUserDate">
-        <img src="assets/images/icons/time.png">
-        <h4>Choose date and time for test:</h4>
+    <div class="pull-right col-xs-12 col-sm-12 col-md-5 col-lg-5 newUserDate">
+        <div class="chooseDateTime">
+            <img src="assets/images/icons/time.png">
+            <h4>Choose date and time for test:</h4>
+        </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pull-left dateTime">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1 pull-left">
                 <p class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup1.opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default dateIcon" ng-click="open1()"><img src="assets/images/icons/date.png"></button>
                             </span>
                 </p>
             </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time pull-right">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time">
                 <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
             </div>
         </div>
@@ -42,12 +44,12 @@
                 <p class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened" min-date="minDate2" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default dateIcon" ng-click="open2()"><img src="assets/images/icons/date.png"></button>
                             </span>
                 </p>
             </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time pull-right">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time">
                 <div uib-timepicker ng-model="mytime2" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
             </div>
         </div>

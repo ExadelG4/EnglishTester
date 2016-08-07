@@ -54,6 +54,20 @@
     text-decoration: none;
 }
 
+.dateIcon {
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    border: 0;
+}
+
+.reset {
+    margin-top: 10px;
+    background-color: indianred !important;
+}
+
+
+
 
 .control {
     position: relative;
