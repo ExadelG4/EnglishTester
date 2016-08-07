@@ -77,7 +77,7 @@ function result(id, ans){
 		resultRecord.result = {};
 
 		resultRecord.result.autoMark = data.autoMark;
-		resultRecord.result.teacherMark = (rez+data.level*100)/2;
+		resultRecord.result.teacherMark = rez;
 		resultRecord.result.level = data.level;
 		
 
