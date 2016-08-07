@@ -13,6 +13,8 @@
                         $scope.userProfile.name = data.firstName + ' ' + data.lastName;
                         $scope.userProfile.email = data.email;
                         $scope.userProfile.telNumber = data.number;
+                        $scope.userProfile.totalTests = data.totalTests;
+                        $scope.userProfile.assignTests = data.assignTest;
                         $scope.results = data.results;
                         $scope.role = data.role;
                     }
