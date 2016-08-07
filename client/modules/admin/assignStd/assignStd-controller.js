@@ -8,7 +8,6 @@
         $scope.disabled2 = true;
         var chooseUserList = [];
         var currentStudent;
-        var currentList;
         var studentForDelete;
 
         $scope.checkUsersList = function(value) {
@@ -93,17 +92,21 @@
         };
 
         $scope.clickOnName = function(name) {
-            console.log(name);
             studentForDelete = name;
             $scope.disabled2 = false;
         };
 
         $scope.deletePerson = function() {
+            var mail = studentForDelete[0].slice(studentForDelete[0].indexOf('(')+1, studentForDelete[0].indexOf(')'));
             var res;
             $scope.showList.map(( obj, i ) =>
                 (obj == studentForDelete) ? (res = i) : (false)
             );
             $scope.showList.splice(res, 1);
+            $scope.copyFreeStudents.map(( obj, i ) =>
+                (obj.email == mail) ? (res = obj) : (false)
+            );
+            $scope.freeStudents.push(res);
         };
 
         $scope.submitStudentsList = function() {
@@ -111,7 +114,6 @@
                 $scope.checkUsersList($scope.currentValue);
             });
             notification.success("You have successfully assigned test for users");
-            console.log($scope.freeStudents);
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
