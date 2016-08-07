@@ -32,7 +32,7 @@ function getTests(test, counts, user) {
     var defer = q.defer();
     var tests =[];
     var rand = getRandomArbitrary(0, counts[0]/3);
-    var pr = test.find({level: 1},{},{skip : Math.floor(rand), limit : 1 });
+    var pr = test.find({level: 1, complaint: false },{},{skip : Math.floor(rand), limit : 1 });
     var i = 1;
     var j = 0;
     var len = counts.length;
@@ -55,7 +55,7 @@ function getTests(test, counts, user) {
                    
                    
                     rand = getRandomArbitrary(i*edge, (i+1)*edge);
-                    pr = test.find({level: j+1},{},{skip : Math.floor(rand), limit : 1 });
+                    pr = test.find({level: j+1, complaint: false },{},{skip : Math.floor(rand), limit : 1 });
                     i++;
                     t();
                 }else{
