@@ -1,6 +1,9 @@
 var q = require('q');
 var stack = require('../services/stackService');
 var userService = require('../services/userService');
+
+var types = require('../config.json').typesOfSecondPart;
+
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -116,6 +119,7 @@ function make(test , usr){
 function makeAgain(test, level){
     var defer = q.defer();
     var tests =[];
+    var len = types.length;
     
     var i = 0;
     if(level === 0) {
@@ -123,37 +127,48 @@ function makeAgain(test, level){
     }
     console.log(level);
 
-    // test.count({ level: level }).then(function(data){
-        // var rand = getRandomArbitrary(0, data/5);
-        test.find({level: level},{},{limit : 5}).then(function(data){
-            defer.resolve(data);
-        }).catch(function(err){
-            defer.reject(err);
-        });
+    test.count({ level: level, type : types[0]}).then(function(data){
+        var rand = getRandomArbitrary(0, data);
+        // test.find({level: level},{},{limit : 5}).then(function(data){
+        //     defer.resolve(data);
+        // }).catch(function(err){
+        //     defer.reject(err);
+        // });
 
-        //skip :Math.floor(rand), limit : 1 });
+        test.find({level: level, type : types[0]},{},{skip :Math.floor(rand), limit : 1 });
      //    var edge = data/5;
-     //    (function t(){
-     //        pr = pr.then(function(data){ 
-     //                if(i < 5){                        
-     //                    if(data !==undefined){
-     //                        tests.push(data[0]);                        
-     //                        //console.log(data);
-     //                    } 
-     //                    // rand = getRandomArbitrary(i*edge, (i+1)*edge);
-     //                    pr = test.find({level:level},{},{skip : Math.floor(rand), limit : 1 });
-     //                    i++;
-     //                    t();                    
-     //                }else{
-     //                    defer.resolve(tests);
-     //                }    
-            
-     //        });
-     // })();
+        (function t() {
+            pr = pr.then(function (data) {
+                if (i < len) {
+                    if (data !== undefined) {
+                        tests.push(data[0]);
+                        //console.log(data);
+                    }
 
-    // }).catch(function(err){
-    //     defer.reject(err);
-    // });
+                    test.count({ level: level, type : types[0]}).then(function(data){
+                        rand = getRandomArbitrary(0, data);
+                        pr = test.find({ level: level, type : types[i]}, {}, { skip: Math.floor(rand), limit: 1 });
+                        i++;
+                        t();
+
+                    }).catch(function (err) {
+                        defer.reject(err);
+                    })
+
+
+
+                    // rand = getRandomArbitrary(i*edge, (i+1)*edge);
+                    
+                } else {
+                    defer.resolve(tests);
+                }
+
+            });
+        })();
+
+    }).catch(function(err){
+        defer.reject(err);
+    });
 
     return defer.promise;
 }
