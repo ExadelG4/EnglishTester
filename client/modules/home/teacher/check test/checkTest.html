@@ -16,7 +16,7 @@
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
 			<label class="label-missing" for="missing-que">You missing</label>
 			<span id="missing-que" ng-repeat="question in allQuestions track by $index"> 
-				<span ng-if="dirty[$index] && !validMarks[$index]"><button ng-click="setNumPage($index + 1)" class="btn-missing">{{$index + 1}}</button></span>
+				<span ng-if="dirty[$index] && !forValidMark[$index]"><button ng-click="setNumPage($index + 1)" class="btn-missing">{{$index + 1}}</button></span>
 			</span>
 			<button class="btn-teacher btn-submit" ng-disabled="!validAll()" ng-click="finishCheck(currentPage)">Submit</button>
 		</div>

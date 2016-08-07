@@ -1,13 +1,14 @@
 (function () {
 	'use strict';
 	angular.module('tests')
-		.controller('addQuestionController', ['$scope','userService','notification', function($scope, userService, notification) {
+		.controller('addQuestionController', ['$scope','userService','notification','$timeout', function($scope, userService, notification, $timeout) {
 
 
 			$scope.selectedQue = '';
 			$scope.vm = {
 				uploadme: null
 			};
+			$scope.qqq;
 
 			$scope.typeOfQuestion = [ 
 			{
@@ -49,7 +50,8 @@
 				question: '',
 				level: '',
 				options: [''],
-				answers: [-1]
+				answers: [-1],
+				qqq: ''
 			};
 
 			$scope.song = {
@@ -66,6 +68,7 @@
 				$scope.finalQue.level = '';
 				$scope.finalQue.options = [''];
 				$scope.finalQue.answers = [-1];
+				$scope.qqq = 'hiiii';
 				if (selectedQue === 'listeningWithManyOfMany' || selectedQue === 'manyOfMany') {
 					$scope.finalQue.answers[0] = false;
 				}
@@ -78,6 +81,7 @@
 				if ($scope.selectedQue === 'listeningWithManyOfMany' || $scope.selectedQue === 'manyOfMany') {
 					$scope.finalQue.answers.push(false);
 				}
+				$scope.finalQue.question = $scope.qqq;
 			};
 			$scope.removeAnswerItem = function() {
 				if ($scope.finalQue.options.length !== 1) {
@@ -118,6 +122,12 @@
 				notification.success("You have successfully added new question");
 			};
 
+			$scope.finishUp = function() {
+				$timeout( function() {
+					$scope.finalQue.question = $scope.qqq;
+				}, 100);
+			}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 			$scope.fileNameChanged = function (ele) {
@@ -156,6 +166,7 @@
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == XMLHttpRequest.DONE) {
         				$scope.finalQue.question =  xhr.responseText;
+        				$scope.qqq = xhr.responseText;
     				}
 				}
 

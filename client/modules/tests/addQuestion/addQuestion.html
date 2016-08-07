@@ -81,8 +81,8 @@
 
           <form name="upload" ng-submit="submit()"  class="form-file">
             <label for="btn-file" class="input-btn btn-admin">Choose file</label>
-            <input type="file" fileread="vm.uploadme" id="btn-file">
-            <input type="submit" value="Upload" class="input-btn btn-admin">
+            <input type="file" fileread="vm.uploadme" id="btn-file" accept="audio/*">
+            <input type="submit" value="Upload" class="input-btn btn-admin" ng-click="finishUp()">
             <div id="log">Process of upload</div>
           </form>
 
@@ -91,7 +91,7 @@
             </div>
             <p class="ads">Level of question</p>
             <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
-            <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+            <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === ''" ng-click="sendQue()">Submit</button>
           </form>
         </div>
 
@@ -99,8 +99,8 @@
 
         <form name="upload" ng-submit="submit()" class="form-file">
           <label for="btn-file" class="input-btn btn-admin">Choose file</label>
-          <input type="file" fileread="vm.uploadme" id="btn-file">
-          <input type="submit" value="Upload" class="input-btn btn-admin">
+          <input type="file" fileread="vm.uploadme" id="btn-file" accept="audio/*">
+          <input type="submit" value="Upload" class="input-btn btn-admin" ng-click="finishUp()">
           <div id="log">Process of upload</div>
         </form>
 
@@ -118,7 +118,7 @@
           </div>
           <p class="ads">Level of question</p>
           <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
-          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()" >Submit</input>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === ''" ng-click="sendQue()" >Submit</input>
         </form>
       </div>
 
@@ -126,8 +126,8 @@
 
         <form name="upload" ng-submit="submit()" class="form-file">
           <label for="btn-file" class="input-btn btn-admin">Choose file</label>
-          <input type="file" fileread="vm.uploadme" id="btn-file">
-          <input type="submit" value="Upload" class="input-btn btn-admin">
+          <input type="file" fileread="vm.uploadme" id="btn-file" accept="audio/*">
+          <input type="submit" value="Upload" class="input-btn btn-admin" ng-click="finishUp()">
           <div id="log">Process of upload</div>
         </form>
 
@@ -144,7 +144,7 @@
           </div>
           <p class="ads">Level of question</p>
           <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
-          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === ''" ng-click="sendQue()">Submit</button>
         </form>
       </div>
 

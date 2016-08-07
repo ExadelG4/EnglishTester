@@ -91,10 +91,6 @@ header a:focus {
     color: dodgerblue !important;
 }
 
-.header-nav-lg a:focus {
-    color: black;
-}
-
 .dropdown-menu-right li {
     margin-left: 0;
     width: 100%;
@@ -127,6 +123,8 @@ header a:focus {
     color: dodgerblue !important;
 }
 
+
+
 .main-nav-sm .panel-body {
     position: fixed;
     width: 100%;
@@ -150,6 +148,19 @@ header a:focus {
     width: 100%;
     text-align: center;
 }
+
+.choose-menu-user, .choose-menu-user:focus, .choose-menu-guest, .choose-menu-guest:focus {
+    color: rgb(91, 212, 145);
+}
+
+.choose-menu-admin, .choose-menu-admin:focus {
+    color: rgb(42, 171, 210);
+}
+
+.choose-menu-teacher, .choose-menu-teacher:focus  {
+    color: rgb(232, 134, 18);
+}
+
 
 @media (max-width: 767px) {
     .header-nav-lg {
