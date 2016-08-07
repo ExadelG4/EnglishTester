@@ -5,9 +5,11 @@
         $scope.copyFreeStudents = [];
         $scope.showList = [];
         $scope.disabled = true;
+        $scope.disabled2 = true;
         var chooseUserList = [];
         var currentStudent;
         var currentList;
+        var studentForDelete;
 
         $scope.checkUsersList = function(value) {
             if (value == 'request') {
@@ -19,6 +21,10 @@
                 $scope.currentRequest = userService.getFreeUsers();
                 checkList($scope.currentRequest);
             }
+            $scope.showList = [];
+            chooseUserList = [];
+            clear();
+            $scope.disabled = true;
         };
 
         function checkList (req) {
@@ -58,7 +64,6 @@
 
         $scope.hasChanged = function(item){
             currentStudent = item;
-            console.log(item);
             $scope.freeStdName = item.fullName;
             $scope.freeStdMail = item.email;
             $scope.freeStdTel = item.number;
@@ -77,7 +82,7 @@
             var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
 
             chooseUserList.push(newStudent);
-            $scope.showList.push(currentStudent.fullName);
+            $scope.showList.push(currentStudent.fullName + ' (' + currentStudent.email + ')');
 
             var res;
             $scope.freeStudents.map(( obj, i ) =>
@@ -85,6 +90,20 @@
             );
             $scope.freeStudents.splice(res, 1);
             clear();
+        };
+
+        $scope.clickOnName = function(name) {
+            console.log(name);
+            studentForDelete = name;
+            $scope.disabled2 = false;
+        };
+
+        $scope.deletePerson = function() {
+            var res;
+            $scope.showList.map(( obj, i ) =>
+                (obj == studentForDelete) ? (res = i) : (false)
+            );
+            $scope.showList.splice(res, 1);
         };
 
         $scope.submitStudentsList = function() {
