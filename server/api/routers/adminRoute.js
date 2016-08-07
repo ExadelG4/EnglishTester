@@ -187,5 +187,10 @@ router.get('/getComplainted',function(req, res){
 		})
 	});
 
-})
+});
+
+router.post('/blockComplained', function(req, res){
+
+});
+
 module.exports = router;

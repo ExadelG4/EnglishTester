@@ -125,7 +125,7 @@ function makeAgain(test, level){
     if(level === 0) {
         level = 1;
     }
-    console.log(level);
+    // console.log(level);
 
     test.count({ level: level, type : types[0]}).then(function(data){
         var rand = getRandomArbitrary(0, data);
