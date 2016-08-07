@@ -1,13 +1,16 @@
 var q = require('q');
 var stack = require('../services/stackService');
 var userService = require('../services/userService');
+
+var types = require('../config.json').typesOfSecondPart;
+
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 function getCounts(test,countL) {
     var defer = q.defer();  
     var i =0;
-    var pr = test.count({ level: i+1 });
+    var pr = test.count({ level: i+1, complaint: false });
     (function c(){
         pr = pr.then(function(data){
             
@@ -15,7 +18,7 @@ function getCounts(test,countL) {
                 countL.push(data);
                 //console.log(data);
                 i++;
-                pr = test.count({ level: i+1 });
+                pr = test.count({ level: i+1 , complaint: false });
                 c();
             }else{
                 defer.resolve(countL);
@@ -29,7 +32,7 @@ function getTests(test, counts, user) {
     var defer = q.defer();
     var tests =[];
     var rand = getRandomArbitrary(0, counts[0]/3);
-    var pr = test.find({level: 1},{},{skip : Math.floor(rand), limit : 1 });
+    var pr = test.find({level: 1, complaint: false },{},{skip : Math.floor(rand), limit : 1 });
     var i = 1;
     var j = 0;
     var len = counts.length;
@@ -52,7 +55,7 @@ function getTests(test, counts, user) {
                    
                    
                     rand = getRandomArbitrary(i*edge, (i+1)*edge);
-                    pr = test.find({level: j+1},{},{skip : Math.floor(rand), limit : 1 });
+                    pr = test.find({level: j+1, complaint: false },{},{skip : Math.floor(rand), limit : 1 });
                     i++;
                     t();
                 }else{
@@ -116,44 +119,57 @@ function make(test , usr){
 function makeAgain(test, level){
     var defer = q.defer();
     var tests =[];
+    var len = types.length;
     
-    var i = 0;
+    var i = 1;
     if(level === 0) {
         level = 1;
     }
-    console.log(level);
+    // console.log(level);
 
-    // test.count({ level: level }).then(function(data){
-        // var rand = getRandomArbitrary(0, data/5);
-        test.find({level: level},{},{limit : 5}).then(function(data){
-            defer.resolve(data);
-        }).catch(function(err){
-            defer.reject(err);
-        });
+    test.count({ level: level, type : types[0], complaint: false }).then(function(data){
+        var rand = getRandomArbitrary(0, data);
+        // test.find({level: level},{},{limit : 5}).then(function(data){
+        //     defer.resolve(data);
+        // }).catch(function(err){
+        //     defer.reject(err);
+        // });
 
-        //skip :Math.floor(rand), limit : 1 });
+        var pr = test.find({level: level, type : types[0], complaint: false },{},{skip :Math.floor(rand), limit : 1 });
      //    var edge = data/5;
-     //    (function t(){
-     //        pr = pr.then(function(data){ 
-     //                if(i < 5){                        
-     //                    if(data !==undefined){
-     //                        tests.push(data[0]);                        
-     //                        //console.log(data);
-     //                    } 
-     //                    // rand = getRandomArbitrary(i*edge, (i+1)*edge);
-     //                    pr = test.find({level:level},{},{skip : Math.floor(rand), limit : 1 });
-     //                    i++;
-     //                    t();                    
-     //                }else{
-     //                    defer.resolve(tests);
-     //                }    
-            
-     //        });
-     // })();
+        (function t() {
+            pr = pr.then(function (data) {
+                if (i < len) {
+                    if (data !== undefined) {
+                        tests.push(data[0]);
+                        //console.log(data);
+                    }
 
-    // }).catch(function(err){
-    //     defer.reject(err);
-    // });
+                    test.count({ level: level, type : types[i], complaint: false }).then(function(data){
+                        rand = getRandomArbitrary(0, data);
+                        pr = test.find({ level: level, type : types[i], complaint: false }, {}, { skip: Math.floor(rand), limit: 1 });
+                        i++;
+                        t();
+
+                    }).catch(function (err) {
+                        defer.reject(err);
+                    })
+
+
+
+                    // rand = getRandomArbitrary(i*edge, (i+1)*edge);
+                    
+                } else {
+                    tests.push(data[0]);
+                    defer.resolve(tests);
+                }
+
+            });
+        })();
+
+    }).catch(function(err){
+        defer.reject(err);
+    });
 
     return defer.promise;
 }

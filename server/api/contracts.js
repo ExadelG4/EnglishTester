@@ -35,7 +35,7 @@ function refresh(token){
                         expiresIn: expires 
                     });
 
-            var now = new Date;
+            var now = new Date();
             now.setSeconds(now.getSeconds() + expires);
             var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
             now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
@@ -145,4 +145,13 @@ exports.submit2 = function(req, res, next){
 	 } else{
          next();
     } 
+}
+exports.roleSecurity = function(req,res,role,callback){
+    if(req.user.role == role){
+       callback();
+    }
+    else{
+        res.status(403).send('Forbidden');
+    }
+
 }

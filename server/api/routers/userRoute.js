@@ -1,5 +1,6 @@
 var express = require('express');
 var contracts = require('../contracts');
+var roleSecurity = require('../contracts').roleSecurity;
 var service = require('../../services/userService');
 var stackService = require('../../services/stackService');
 var testService = require('../../services/testService');
@@ -13,7 +14,10 @@ var key = require('../../config.json');
 router.use(passport.initialize());
 require('../../passport')(passport);
 
+
+
 router.get('/requestTest', passport.authenticate('jwt', { session: false }),  function(req, res){
+			roleSecurity(req,res,'user',function(){
 				var doc = {
 					userId: req.user._id ,
 					firstName: req.user.firstName,
@@ -26,11 +30,12 @@ router.get('/requestTest', passport.authenticate('jwt', { session: false }),  fu
 				}).catch(function(err){
 					res.status(422).send(err);
 				});
-			
+			});			
 });
 
 router.get('/getTest',  passport.authenticate('jwt', { session: false }),function(req, res){
-		stackService.findOpenTests({userId: req.user._id},{},{}).then(function (data){
+		if(req.user.role == 'user' || req.user.role == 'guest' ){
+       		stackService.findOpenTests({userId: req.user._id},{},{}).then(function (data){
 			if(data[0] !== undefined){
 				testService.getTest(data[0]).then(function(data){
 					res.send(data);
@@ -48,6 +53,11 @@ router.get('/getTest',  passport.authenticate('jwt', { session: false }),functio
 		}).catch(function(err){
 			res.json(err);
 		});
+    	}
+    	else{
+        	res.status(403).send('Forbidden');
+    	}
+		
 });
 
 router.post('/submit1', contracts.submit1, passport.authenticate('jwt', { session: false }), function(req,res){

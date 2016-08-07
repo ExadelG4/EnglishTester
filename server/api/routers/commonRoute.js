@@ -43,7 +43,7 @@ router.get('/status', passport.authenticate('jwt', { session: false }),function(
 	});	
 });
 
-router.post('/upload',function(req, res){
+router.post('/upload',passport.authenticate('jwt', { session: false }),function(req, res){
 	var date = new Date().getTime();
 	var uuid = UUID.fromTime(date, false);	
 	var ws = req.pipe(fs.createWriteStream(path.join(__dirname +'./../../../uploadFiles/'+uuid+'.mp3')));
@@ -52,9 +52,9 @@ router.post('/upload',function(req, res){
 	});
 });
 
-router.get('/uploadtest',function(req, res){
-	res.sendFile(path.join(__dirname + '/../../../../modules/saving file in server/index.html'));
-});
+// router.get('/uploadtest',function(req, res){
+// 	res.sendFile(path.join(__dirname + '/../../../../modules/saving file in server/index.html'));
+// });
 
 router.post('/editNumber',passport.authenticate('jwt', { session: false }),function(req,res){
 	console.log(req.body);

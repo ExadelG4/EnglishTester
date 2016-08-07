@@ -2,6 +2,9 @@
 	"secret": "supersecretkey",
 	"refreshsecret": "supersecretrefreshkey",
 	"dbPath" : "mongodb://localhost:27017/test",
-	"expires" : 1800000,
-	"host" : "http://localhost:3000/"
+	"expires" : 7200,
+	"host" : "http://localhost:3000/",
+	"typesOfSecondPart" : [
+		"essay"
+	]
 }

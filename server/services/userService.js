@@ -18,7 +18,6 @@ function getAllUsers(){
 function getAllRole(_role){
 	return user.find({role: _role},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1},{});
 }	
-
 function userInfo(id){
     return user.findOne({_id: id},{},{});
 }
@@ -27,6 +26,15 @@ function addNewUser(info){
 }
 function addNewUsers(info){
     return user.create(info); 
+}
+function removeCollection(query){
+    return user.remove(query);
+}
+function find(query, fields, options){
+    return user.find(query, fields, options);
+}
+function update(query, update,options){
+    return user.update(query, update,options);
 }
 function authenticate(email, pass){
     var defer = q.defer();
@@ -82,16 +90,7 @@ function authenticate(email, pass){
 
     return defer.promise;
 }
-function removeCollection(query){
-	return user.remove(query);
-}
 
-function find(query, fields, options){
-    return user.find(query, fields, options);
-}
-function update(query, update,options){
-    return user.update(query, update,options);
-}
 
 function getUserStatus(_userId){
     var pr = q.defer();
@@ -259,14 +258,6 @@ function getTeacherStatus(_tId){
     
 }
 
-function getTeacherCount(_tId){
-    getTeacherStatus(_tId).then(function(data){
-        
-        return data;
-    }).catch(function(err){
-        return err;
-    });
-}
 function userStatistics(id){
     var pr = q.defer();
     user.findOne({_id: id},{'_id':0,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1, 'status':1},{}).then(function(data){
@@ -431,6 +422,5 @@ module.exports.updateStatus = updateStatus;
 module.exports.userStatistics = userStatistics;
 module.exports.getTeachers = getTeachers;
 module.exports.getTeacherStatus = getTeacherStatus;
-module.exports.getTeacherCount = getTeacherCount;
 module.exports.assignStudents = assignStudents;
 

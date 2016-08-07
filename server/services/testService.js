@@ -77,10 +77,14 @@ function result(id, ans){
 		resultRecord.result = {};
 
 		resultRecord.result.autoMark = data.autoMark;
-		resultRecord.result.teacherMark = (rez+data.level*100)/2;
+		resultRecord.result.teacherMark = rez;
 		resultRecord.result.level = data.level;
-		
-
+		if(data.level == 1){
+			resultRecord.result.totalMark = data.autoMark + (rez*0.2);
+		}
+		else {
+			resultRecord.result.totalMark = ((data.level - 1)*20) + (rez*0.2);
+		}
 		resultRecord.teacherId = data.teacherId;
 		
 		resultRecord.teacherFirstName = data.teacherFirstName;
@@ -113,14 +117,14 @@ function checkTest(testId, tId){
     	if(data[0].teacherId == tId){
 		    	var qIdArr =[];
 		    	var forTeacher =[];
+		    	console.log(forTeacher);
 		    	data[0].answers.forEach(function(element){
 		    		qIdArr.push(element.qId);
 		    	});
-		    	//console.log(qIdArr);
-		    //	console.log(qIdArr.length);
+		    	console.log(qIdArr);
+		    
 		    	findB({_id : {$in:qIdArr}},{'question':1,'type':1},{}).then(function(qdata){
-		    			console.log(qdata);
-		    		for(var i=0; i<qIdArr.length; i++){
+		    		for(var i=0; i<qdata.length; i++){
 		    			var question ={};
 		    			question.qId = qdata[i]._id;
 		    			question.answer = data[0].answers[i].answer;
@@ -129,7 +133,7 @@ function checkTest(testId, tId){
 		    			forTeacher.push(question);
 		    			
 		    		}
-		    	//	console.log(forTeacher);
+		    		console.log(forTeacher);
 		    		pr.resolve({questions: forTeacher, tId : testId});
 
 		    	}).catch(function(err){
@@ -144,6 +148,29 @@ function checkTest(testId, tId){
     });
     return pr.promise;
 };
+
+
+function blockComplained(A, B){
+	var pr = q.defer();
+	testA.update({_id : {$in : A}},{ $set: { complaint: true }},{}).then(function(data){
+		testB.update({_id : {$in : B}},{ $set: { complaint: true }},{}).then(function(data){
+			pr.resolve();
+		}).catch(function(err){
+			pr.reject(err);
+		});
+	}).catch(function(err){
+		pr.reject(err);
+	})
+	return pr.promise;
+}
+
+
+
+
+
+
+
+
 module.exports.getAllQuestions = getAllQuestions;
 module.exports.getQFromLevel = getQFromLevel;
 module.exports.addNewQuestion = addNewQuestion;
@@ -160,4 +187,4 @@ module.exports.result = result;
 module.exports.checkTest = checkTest;
 module.exports.findA = findA;
 module.exports.findB = findB;
-
+module.exports.blockComlained = blockComplained;

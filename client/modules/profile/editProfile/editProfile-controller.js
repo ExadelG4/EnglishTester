@@ -5,6 +5,7 @@
             function($scope, userService, notification){
 
                 $scope.userProfile = {};
+                $scope.disable2 = true;
 
                 userService.getProfileStatistics().then(
                     function(data) {
@@ -12,12 +13,12 @@
                         $scope.userProfile.name = data.firstName + ' ' + data.lastName;
                         $scope.userProfile.email = data.email;
                         $scope.userProfile.telNumber = data.number;
+                        $scope.userProfile.totalTests = data.totalTests;
+                        $scope.userProfile.assignTests = data.assignTest;
                         $scope.results = data.results;
                         $scope.role = data.role;
                     }
                 );
-
-                $scope.disable2 = true;
 
 
                 $scope.onScndInput = function() {
@@ -87,9 +88,26 @@
         return directiveDefinitionObject;
     });
 
-    angular.module('personalProfile').controller('myCtrl', ['$scope', function($scope) {
-        var t = 50; var s = 80; var m = 60; var g = 45; var b = 25;
-        $scope.myData = [t, s, m, g, b];
+    angular.module('personalProfile').controller('myCtrl', ['$scope', '$q', 'userService', function($scope, $q, userService) {
+        // var t = 50; var s = 80; var m = 60; var g = 45; var b = 25;
+
+        $scope.myData = [];
+        function getChartData () {
+            userService.getProfileStatistics().then(
+                function(data) {
+                    var arr = [];
+                    data.results.forEach(function(item, i) {
+                        debugger;
+                        $scope.myData[i] = (item.result.autoMark + item.result.teacherMark + 10)/2;
+                    });
+                }
+            ).then(function() {
+                console.log($scope.myData);
+            })
+        }
+
+        getChartData();
+        // $scope.myData = [t, s, m, g, b];
     }]);
 
 

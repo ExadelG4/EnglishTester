@@ -5,9 +5,10 @@
         $scope.copyFreeStudents = [];
         $scope.showList = [];
         $scope.disabled = true;
+        $scope.disabled2 = true;
         var chooseUserList = [];
         var currentStudent;
-        var currentList;
+        var studentForDelete;
 
         $scope.checkUsersList = function(value) {
             if (value == 'request') {
@@ -19,6 +20,10 @@
                 $scope.currentRequest = userService.getFreeUsers();
                 checkList($scope.currentRequest);
             }
+            $scope.showList = [];
+            chooseUserList = [];
+            clear();
+            $scope.disabled = true;
         };
 
         function checkList (req) {
@@ -58,7 +63,6 @@
 
         $scope.hasChanged = function(item){
             currentStudent = item;
-            console.log(item);
             $scope.freeStdName = item.fullName;
             $scope.freeStdMail = item.email;
             $scope.freeStdTel = item.number;
@@ -77,7 +81,7 @@
             var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
 
             chooseUserList.push(newStudent);
-            $scope.showList.push(currentStudent.fullName);
+            $scope.showList.push(currentStudent.fullName + ' (' + currentStudent.email + ')');
 
             var res;
             $scope.freeStudents.map(( obj, i ) =>
@@ -87,12 +91,29 @@
             clear();
         };
 
+        $scope.clickOnName = function(name) {
+            studentForDelete = name;
+            $scope.disabled2 = false;
+        };
+
+        $scope.deletePerson = function() {
+            var mail = studentForDelete[0].slice(studentForDelete[0].indexOf('(')+1, studentForDelete[0].indexOf(')'));
+            var res;
+            $scope.showList.map(( obj, i ) =>
+                (obj == studentForDelete) ? (res = i) : (false)
+            );
+            $scope.showList.splice(res, 1);
+            $scope.copyFreeStudents.map(( obj, i ) =>
+                (obj.email == mail) ? (res = obj) : (false)
+            );
+            $scope.freeStudents.push(res);
+        };
+
         $scope.submitStudentsList = function() {
             userService.assignStudents(chooseUserList).then(function() {
                 $scope.checkUsersList($scope.currentValue);
             });
             notification.success("You have successfully assigned test for users");
-            console.log($scope.freeStudents);
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
@@ -120,7 +141,6 @@
 
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
-        $scope.minDate2 = $scope.minDate ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();
@@ -180,6 +200,17 @@
         $scope.mytime4 = d;
     };
 
+        $scope.$watch('dt3',function(oldVal,newVal,attr){
+            if($scope.dt3 > $scope.dt4){
+                $scope.dt4 = newVal;
+            }
+        });
+
+        $scope.$watch('dt4',function(oldVal,newVal,attr){
+            if($scope.dt3 > $scope.dt4){
+                $scope.dt3 = newVal;
+            }
+        });
 
 
 }]);})();

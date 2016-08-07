@@ -13,24 +13,28 @@
     margin-top: 5%;
 }
 
-.info > input{
-    height: 45px;
-    padding: 5px;
-    text-align: center;
-}
+    .info > * {
+        margin-bottom: 3%;
+    }
 
-.info a {
-    margin-bottom: 0;
-    height: 45px;
-}
+    .info > input{
+        height: 45px;
+        padding: 5px;
+    }
 
-.info span {
-    margin-top: 10px;
-}
+    .info a {
+        margin-bottom: 0;
+        height: 45px;
+    }
 
-.info > * {
-    margin-bottom: 3%;
-}
+    .info span {
+        margin-top: 10px;
+    }
+
+    .info img {
+        height: 45px;
+        width: 50px;
+    }
 
 .namesOfShedule > ul {
     list-style-type: none;

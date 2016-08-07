@@ -37,8 +37,20 @@
 
                 $scope.toggleMin = function () {
                     $scope.minDate = $scope.minDate ? null : new Date();
-                    $scope.minDate2 = $scope.minDate2 ? null : new Date();
+                    // $scope.minDate2 = $scope.minDate2 ? null : new Date();
                 };
+
+                $scope.$watch('dt',function(oldVal,newVal,attr){
+                    if($scope.dt > $scope.dt2){
+                        $scope.dt2 = newVal;
+                    }
+                });
+
+                $scope.$watch('dt2',function(oldVal,newVal,attr){
+                    if($scope.dt > $scope.dt2){
+                        $scope.dt = newVal;
+                    }
+                });
 
                 $scope.toggleMin();
 
