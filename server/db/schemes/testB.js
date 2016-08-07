@@ -19,6 +19,10 @@ var TestBScheme = new Schema(
 			type:String,
 			required: true
 
+		},
+		complaint:{
+			type: Boolean,
+			default: false
 		}
 	});
 	
