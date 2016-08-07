@@ -1,45 +1,24 @@
 <div class="container">
 	<div class="row">
 		<div class="div-test col-xs-12 col-sm-8 col-md-offset-1 col-md-6 col-lg-offset-2 col-lg-6">
+
 			<button ng-click="setNumPage(currentPage - 1)" ng-disabled="currentPage === 1" class="btn-teacher btn-prev">Prev</button>
+
+			<uib-pagination class="pagination-sm teacher-pagi" items-per-page="1" ng-model="currentPage" total-items="totalCount" max-size="4" boundary-link-numbers="true" direction-links="false" ng-change="pageChanged(copyCurrentPage, currentPage)"> 
+			</uib-pagination>
+
 			<button ng-click="setNumPage(currentPage + 1)" ng-disabled="currentPage === totalCount" class="btn-teacher btn-next">Next</button>
 			<div ng-repeat="question in allQuestions track by $index">
 				<div ng-if="$index === $parent.currentPage - 1" ng-include="urls[question.type]">
 				</div>
 			</div>
-
-			<form name="num" class="form-num">
-				<input type="text" name="numPage" ng-model="neededNumPage" ng-pattern="'[0-9]{1,10}'" ng-change="validNeededNumPage = true;" placeholder="Number of question" class="input-teacher input-num-que">
-				<button ng-click="setNumPage(neededNumPage)" ng-disabled="num.numPage.$invalid" class="btn-teacher btn-num-que">Go</button>
-				<span ng-show="!validNeededNumPage" class="error-mes">Question not found</span>
-			</form>
-
-			<uib-pagination class="pagination-sm teacher-pagi" items-per-page="1" ng-model="currentPage" total-items="totalCount" max-size="4" boundary-link-numbers="true" direction-links="false" ng-change="pageChanged(copyCurrentPage, currentPage)"> 
-			</uib-pagination>
-
 		</div>
 		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
 			<label class="label-missing" for="missing-que">You missing</label>
 			<span id="missing-que" ng-repeat="question in allQuestions track by $index"> 
-				<span ng-if="dirty[$index] && !forValidMark[$index]"><a ng-click="setNumPage($index + 1)" class="a-missing">{{$index + 1}}</a></span>
+				<span ng-if="dirty[$index] && !validMarks[$index]"><button ng-click="setNumPage($index + 1)" class="btn-missing">{{$index + 1}}</button></span>
 			</span>
-			<button class="btn-teacher btn-submit" ng-disabled="!validAll()" ng-click="finishCheck()">Submit</button>
-			!{{song.url}}!
+			<button class="btn-teacher btn-submit" ng-disabled="!validAll()" ng-click="finishCheck(currentPage)">Submit</button>
 		</div>
 	</div>
 </div>
-
-
-<!--uib-pagination items-per-page="1" ng-model="currentPage" total-items="totalCount" ng-change="pageChanged(copyCurrentPage)"> 
-</uib-pagination>
-
-<form name="num">
-	<label for="numPage">Enter number of question</label>
-	<input name="numPage" ng-model="neededNumPage" ng-pattern="'[0-9]{1,10}'" ng-change="validNeededNumPage = true;">
-	<button class="btn" ng-click="setNumPage(neededNumPage)" ng-disabled="num.numPage.$invalid">Go</button>
-	<span ng-show="!validNeededNumPage" class="error-mes">Question not found</span>
-
-</form>
-
-
-<button class="btn" ng-click="finishCheck()" ng-disabled="!validAll()">Finish check</button-->

@@ -49,11 +49,8 @@
 	float: right;
 }
 
-.date-and-time {
-	padding: 0;
-	color: green;
-	display: block;
-	width: inherit;
+.date-color-user {
+	color: rgb(91, 212, 145);
 }
 
 .welcome-all {

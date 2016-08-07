@@ -4,6 +4,8 @@
         .controller('newUserController', ['$scope', 'userService', 'notification',
             function ($scope, userService, notification) {
 
+                $scope.phnumberMd = '+375';
+
                 $scope.newUser = function () {
                     var dateStart = $scope.dt.getTime() + $scope.mytime.getHours() + $scope.mytime.getMinutes();
                     var dateEnd = $scope.dt2.getTime() + $scope.mytime2.getHours() + $scope.mytime2.getMinutes();

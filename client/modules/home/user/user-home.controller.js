@@ -2,8 +2,8 @@
     'use strict';
     
     angular.module('home')
-        .controller('userHomeController', ['$scope', '$state', 'userService', 'context', 'notification', 'recorderService', 
-            function($scope, $state, userService, context, notification, recorderService) {
+        .controller('userHomeController', ['$scope', '$state', 'userService', 'context', 'notification', 
+            function($scope, $state, userService, context, notification) {
 
             $scope.disStart;
             $scope.disReq;
@@ -42,7 +42,7 @@
             $scope.update = function() { 
                     userService.getStatus().then(function (data) {
                         $scope.status = data.status;
-                        if($scope.status === 'scha') {
+                        if($scope.status === 'scha' || $scope.status === 'open') {
                             $scope.dateStart = new Date(data.dateStart).toUTCString();
                             $scope.dateEnd = new Date(data.dateEnd).toUTCString();
                         }
@@ -57,33 +57,6 @@
             };
 
             $scope.update();
-
-            $scope.save = function(){
-                var c = recorderService.controller('audioInput');
-                //c.save('avazaza');
-                //$.get(window.URL.createObjectURL(c.audioModel), function(data) {
-                     //alert(data);
-                     var xhr = new XMLHttpRequest();
-
-                      // обработчики можно объединить в один,
-                      // если status == 200, то это успех, иначе ошибка
-                      xhr.onload = xhr.onerror = function() {
-                        if (this.status == 200) {
-                          //log("success");
-                        } else {
-                          //log("error " + this.status);
-                        }
-                      };
-
-                      // обработчик для закачки
-                      xhr.upload.onprogress = function(event) {
-                        log(event.loaded + ' / ' + event.total);
-                      }
-
-                      xhr.open("POST", "upload", true);
-                      xhr.send(c.audioModel);
-                //});
-            }
         }]
     );
 })();

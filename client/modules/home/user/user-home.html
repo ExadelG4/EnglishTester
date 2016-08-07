@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
                 <div ng-if="!disStart || !close" class="info-about-button">
-                    Great! You can start to pass the test from {{dateStart}} to {{dateEnd}}.
+                    Great! You can start to pass the test.<br> From: <span class="date-color-user">{{dateStart}}</span><br>To: <span class="date-color-user">{{dateEnd}}<br></span>
                     You have 2 hours for this.
                 </div>
                 <div ng-if="disStart" class="info-about-button">
@@ -50,28 +50,5 @@
             </div>
         </div>
     </div>
-
-
-<ng-audio-recorder id='audioInput' audio-model='recordedInput'>
-  <div ng-if="recorder.isAvailable">
-    <button ng-click="recorder.startRecord()" type="button" ng-disabled="recorder.status.isRecording" class="btn-user">
-        Start Record
-    </button>
-    <button ng-click="recorder.stopRecord()" type="button" ng-disabled="recorder.status.isRecording === false" class="btn-user">
-        Stop Record
-    </button>
-    <button ng-click="recorder.playbackRecording()" type="button"
-            ng-disabled="recorder.status.isRecording || !recorder.audioModel" class="btn-user">
-        Play Back
-    </button>
-  </div>
-
-  <div ng-if="!recorder.isAvailable">
-    Message for users when recording is not possible.
-  </div>
-</ng-audio-recorder>
-
-
-    <button ng-click="save()" class="btn-user">Save</button>
 </div>
 
