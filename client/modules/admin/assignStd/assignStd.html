@@ -4,7 +4,7 @@
         <div class="step1 col-xs-7 col-sm-6 col-md-6 col-lg-5 pull-left">
             <form data-toggle="validator" role="form">
             <div class="form-group sel2">
-                <input type="radio" name="browser" value="request" ng-model="checkRequest" ng-click="checkUsersList(checkRequest)" ng-checked="checked">Users, whose send request<Br>
+                <input type="radio" name="browser" value="request" ng-model="checkRequest" ng-click="checkUsersList(checkRequest)" ng-checked="checked">Users request<Br>
                 <input type="radio" name="browser" value="free" ng-model="checkFree" ng-click="checkUsersList(checkFree)">Free users
 
                 <ol class="nya-bs-select" size="7" title="Choose student" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
@@ -57,9 +57,10 @@
         <div class="step2 col-xs-7 col-sm-3 col-md-4 col-lg-5 pull-right">
             <div class="form-group sel4">
                 <label for="sel4">Choosen students</label>
-                <select ng-model="studentList" class="form-control card" id="sel4" multiple="multiple" ng-options="user for user in showList"></select>
+                <select ng-model="studentList" class="form-control card" id="sel4" multiple="multiple" ng-options="user for user in showList" ng-change="clickOnName(studentList)" ng-selected="selected"></select>
                 <button class="btn btn-admin btn-block submitNewUser" type="submit" ng-click="submitStudentsList()" ng-disabled="disabled">Submit</button>
                 <button class="btn btn-admin btn-block reset" type="submit"  ng-click="reset()" ng-disabled="disabled">Reset</button>
+                <button class="btn btn-admin btn-block reset" type="submit"  ng-click="deletePerson()" ng-disabled="disabled2">Delete person</button>
             </div>
         </div>
 

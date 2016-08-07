@@ -25,9 +25,7 @@
         $scope.searchUser = function() {
             $scope.searchList = [];
             $scope.showUInfo = false;
-            if ($scope.searching.length >= 3) {
-                showPersonList();
-            }
+            showPersonList();
         };
 
         $scope.showInfo = function(item) {
