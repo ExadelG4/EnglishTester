@@ -97,7 +97,7 @@ router.post('/assignTeacher', contracts.assignTeacher,passport.authenticate('jwt
 
 router.get('/getTeachers',passport.authenticate('jwt', { session: false }), function(req, res) {
   		roleSecurity(req,res,'admin',function(){
-		service.getTeachers().then(function(data){
+			service.getTeachers().then(function(data){
 					  res.send(JSON.stringify(data));
 			}).catch(function (err) {
 					  res.status(400).send(err);
