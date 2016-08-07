@@ -149,7 +149,7 @@ function checkTest(testId, tId){
 function blockComplained(A, B){
 	var pr = q.defer();
 	testA.update({_id : {$in : A}},{ $set: { complaint: true }},{}).then(function(data){
-		testB.update({_id : {$in : A}},{ $set: { complaint: true }},{}).then(function(data){
+		testB.update({_id : {$in : B}},{ $set: { complaint: true }},{}).then(function(data){
 			pr.resolve();
 		}).catch(function(err){
 			pr.reject(err);
