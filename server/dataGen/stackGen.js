@@ -14,73 +14,102 @@ var fillStack = function (num, skip) {
     
 }
 
+function getRandom(min, max) {
+    var rand = min - 0.5 + Math.random() * (max - min + 1)
+    rand = Math.round(rand);
+    return rand;
+}
 var fillCollections = function () {
     // fillStack(3, 0);
     var users = [];
     var teachers = [];
-    userService.find({role: 'user'},{},{ limit : 12 }).then(function (data) {
-        users = data;
-        
-        userService.find({role: 'teacher'},{},{}).then(function (dataTeach) {
-            teachers = dataTeach;
+    testService.findB({},{'_id':1},{limit: 4}).then(function(testBdata){
+                 var answers =[];
+                 testBdata.forEach(function(element){
+                        var answer ={};
+                        answer.qId = element._id;
+                        answer.answer = 'my testGen answer';
+                        answers.push(answer);
+                 });
+                 userService.find({role: 'user'},{},{ limit : 14 }).then(function (data) {
+                         users = data;
             
+                    userService.find({role: 'teacher'},{},{}).then(function (dataTeach) {
+                         teachers = dataTeach;
+                        
 
-            for(var i =0; i<users.length;i++){
-                    var id = users[i]._doc._id;
-                    var firstName = users[i]._doc.firstName;
-                    var lastName = users[i]._doc.lastName;
-                    var email = users[i]._doc.email;
+                        for(var i =0; i<users.length;i++){
+                                var id = users[i]._doc._id;
+                                var firstName = users[i]._doc.firstName;
+                                var lastName = users[i]._doc.lastName;
+                                var email = users[i]._doc.email;
 
-                    var tid = teachers[i%teachers.length]._doc._id;
-                    var tfirstName = teachers[i%teachers.length]._doc.firstName;
-                    var tlastName = teachers[i%teachers.length]._doc.lastName;
-                    var temail = teachers[i%teachers.length]._doc.email;
-                
-                if(i<3){
-                    
-                    userService.updateStatus(id,'stack');
-                    users[i] = {userId: id, teacherId: tid, firstName: firstName, lastName: lastName, email: email, teacherFirstName: tfirstName, teacherLastName: tlastName, teacherEmail: temail};
-                }
-                 if(i>=3 && i<6){
-                    
-                    userService.updateStatus(id,'req');
-                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email};
-                }
-                if(i >= 6 && i< 9){
-                     userService.updateStatus(id,'res');
-                    users[i] = {teacherId: tid,teacherEmail: temail,teacherFirstName: tfirstName, teacherLastName: tlastName,userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,result: {autoMark: 0,	teacherMark: 0,	level: 0}};
-                }
-                 if (i >=9){
-                     
-                     userService.updateStatus(id,'open');
-                     var now = new Date();
-                     now.setSeconds(now.getSeconds()+20000);
-                
-                    users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,dateStart: new Date().getTime() , dateEnd: now.getTime()};
-                }}; 
-            
-            stackService.addStacks(users.slice(0, 3)).then(function (data) {
-                console.log('stack filled');
-                stackService.addRequests(users.slice(3, 6)).then(function (data) {
-                    console.log('requests filled');
-                    stackService.addResultArray(users.slice(6, 9)).then(function (data) {
-                        console.log('results filled');
-                        stackService.addOpenTestsArray(users.slice(9, users.length)).then(function (data) {
-                            console.log('opentest filled');
-                        }).catch(function(err){
-                                console.log(' ERROR');
+                                var tid = teachers[i%teachers.length]._doc._id;
+                                var tfirstName = teachers[i%teachers.length]._doc.firstName;
+                                var tlastName = teachers[i%teachers.length]._doc.lastName;
+                                var temail = teachers[i%teachers.length]._doc.email;
+                            
+                            if(i == 0){
+
+                                userService.updateStatus(id,'stack');
+                                users[i] = {userId: id, teacherId: tid, firstName: firstName, lastName: lastName, email: email, teacherFirstName: tfirstName, teacherLastName: tlastName, teacherEmail: temail,answers : answers};
+                            }
+                            if (i>=1 && i<5){
+                                userService.updateStatus(id,'stack');
+                                users[i] = {userId: id,  firstName: firstName, lastName: lastName, email: email,answers : answers};
+                            }
+                            if(i>=5 && i<8){
+                                
+                                userService.updateStatus(id,'req');
+                                users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email};
+                            }
+                            if(i >= 8 && i< 11){
+                                
+                                var autoMark = getRandom(1,99);
+                                var teacherMark = getRandom(1,99);
+                                var level = getRandom(1,5);
+                                var totalMark = (level-1)*20 + (teacherMark*0.2);
+                                var resultOne ={autoMark: autoMark, teacherMark: teacherMark, level: level, totalMark : totalMark };
+                                userService.updateStatus(id,'free');
+                                users[i] = {teacherId: tid,teacherEmail: temail,teacherFirstName: tfirstName, teacherLastName: tlastName,userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,result:resultOne };
+                            }
+                             if (i >=11 && i<14){
+                                 
+                                 userService.updateStatus(id,'open');
+                                 var now = new Date();
+                                 now.setSeconds(now.getSeconds()+20000);
+                            
+                                users[i] = {userId: users[i]._doc._id,firstName: firstName, lastName: lastName, email: email,dateStart: new Date().getTime() , dateEnd: now.getTime()};
+                            }}; 
+                        
+                        stackService.addStacks(users.slice(0, 5)).then(function (data) {
+                            console.log('stack filled');
+                            stackService.addRequests(users.slice(5, 8)).then(function (data) {
+                                console.log('requests filled');
+                                stackService.addResultArray(users.slice(8, 11)).then(function (data) {
+                                    console.log('results filled');
+                                    stackService.addOpenTestsArray(users.slice(11, users.length)).then(function (data) {
+                                        console.log('opentest filled');
+                                    }).catch(function(err){
+                                            console.log(' ERROR');
+                                    });
+                                });
+                            });
                         });
+                        
+                        
+                        
                     });
-                });
-            });
             
             
             
         });
-        
-        
-        
-    });
+    
+
+    }).catch(function(err){
+         console.log(' ERROR');
+    })
+   
 }
 
 console.log('Default stackGen. Please, wait...');
