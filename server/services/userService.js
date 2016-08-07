@@ -38,9 +38,8 @@ function authenticate(email, pass){
                 if (isMatch && !err) {
                     var user = {};
                     user.email = user_.email;
-                    user.number = user_.number;
                     user.role = user_.role;
-                    user.password = user_.password;
+                    //user.password = user_.password;
                     user.firstName = user_.firstName;
                     user.lastName = user_.lastName;
                     user._id = user_._id;
