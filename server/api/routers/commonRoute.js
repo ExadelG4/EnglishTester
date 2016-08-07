@@ -43,7 +43,7 @@ router.get('/status', passport.authenticate('jwt', { session: false }),function(
 	});	
 });
 
-router.post('/upload',function(req, res){
+router.post('/upload',passport.authenticate('jwt', { session: false }),function(req, res){
 	var date = new Date().getTime();
 	var uuid = UUID.fromTime(date, false);	
 	var ws = req.pipe(fs.createWriteStream(path.join(__dirname +'./../../../uploadFiles/'+uuid+'.mp3')));

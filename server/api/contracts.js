@@ -146,3 +146,12 @@ exports.submit2 = function(req, res, next){
          next();
     } 
 }
+exports.roleSecurity = function(req,res,role,callback){
+    if(req.user.role == role){
+       callback();
+    }
+    else{
+        res.status(403).send('Forbidden');
+    }
+
+}

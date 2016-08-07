@@ -79,8 +79,12 @@ function result(id, ans){
 		resultRecord.result.autoMark = data.autoMark;
 		resultRecord.result.teacherMark = rez;
 		resultRecord.result.level = data.level;
-		
-
+		if(data.level == 1){
+			resultRecord.result.totalMark = data.autoMark + (rez*0.2);
+		}
+		else {
+			resultRecord.result.totalMark = ((data.level - 1)*20) + (rez*0.2);
+		}
 		resultRecord.teacherId = data.teacherId;
 		
 		resultRecord.teacherFirstName = data.teacherFirstName;
@@ -113,13 +117,14 @@ function checkTest(testId, tId){
     	if(data[0].teacherId == tId){
 		    	var qIdArr =[];
 		    	var forTeacher =[];
+		    	console.log(forTeacher);
 		    	data[0].answers.forEach(function(element){
 		    		qIdArr.push(element.qId);
 		    	});
+		    	console.log(qIdArr);
 		    
 		    	findB({_id : {$in:qIdArr}},{'question':1,'type':1},{}).then(function(qdata){
-		    			console.log(qdata);
-		    		for(var i=0; i<qIdArr.length; i++){
+		    		for(var i=0; i<qdata.length; i++){
 		    			var question ={};
 		    			question.qId = qdata[i]._id;
 		    			question.answer = data[0].answers[i].answer;
@@ -128,7 +133,7 @@ function checkTest(testId, tId){
 		    			forTeacher.push(question);
 		    			
 		    		}
-		    	
+		    		console.log(forTeacher);
 		    		pr.resolve({questions: forTeacher, tId : testId});
 
 		    	}).catch(function(err){
