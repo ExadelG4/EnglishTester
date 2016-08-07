@@ -17,7 +17,8 @@ var resultsScheme = new Schema(
 		result: {
 			autoMark: Number,
 			teacherMark: Number,
-			level: Number
+			level: Number,
+			totalMark: Number
 		},
 		teacherId: {
 			type: String,

@@ -116,8 +116,7 @@ function checkTest(testId, tId){
 		    	data[0].answers.forEach(function(element){
 		    		qIdArr.push(element.qId);
 		    	});
-		    	//console.log(qIdArr);
-		    //	console.log(qIdArr.length);
+		    
 		    	findB({_id : {$in:qIdArr}},{'question':1,'type':1},{}).then(function(qdata){
 		    			console.log(qdata);
 		    		for(var i=0; i<qIdArr.length; i++){
@@ -129,7 +128,7 @@ function checkTest(testId, tId){
 		    			forTeacher.push(question);
 		    			
 		    		}
-		    	//	console.log(forTeacher);
+		    	
 		    		pr.resolve({questions: forTeacher, tId : testId});
 
 		    	}).catch(function(err){
