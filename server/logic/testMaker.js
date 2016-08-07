@@ -10,7 +10,7 @@ function getRandomArbitrary(min, max) {
 function getCounts(test,countL) {
     var defer = q.defer();  
     var i =0;
-    var pr = test.count({ level: i+1 });
+    var pr = test.count({ level: i+1, complaint: false });
     (function c(){
         pr = pr.then(function(data){
             
@@ -18,7 +18,7 @@ function getCounts(test,countL) {
                 countL.push(data);
                 //console.log(data);
                 i++;
-                pr = test.count({ level: i+1 });
+                pr = test.count({ level: i+1 , complaint: false });
                 c();
             }else{
                 defer.resolve(countL);
