@@ -121,7 +121,7 @@ function makeAgain(test, level){
     var tests =[];
     var len = types.length;
     
-    var i = 0;
+    var i = 1;
     if(level === 0) {
         level = 1;
     }
@@ -135,7 +135,7 @@ function makeAgain(test, level){
         //     defer.reject(err);
         // });
 
-        test.find({level: level, type : types[0]},{},{skip :Math.floor(rand), limit : 1 });
+        var pr = test.find({level: level, type : types[0]},{},{skip :Math.floor(rand), limit : 1 });
      //    var edge = data/5;
         (function t() {
             pr = pr.then(function (data) {
@@ -145,7 +145,7 @@ function makeAgain(test, level){
                         //console.log(data);
                     }
 
-                    test.count({ level: level, type : types[0]}).then(function(data){
+                    test.count({ level: level, type : types[i]}).then(function(data){
                         rand = getRandomArbitrary(0, data);
                         pr = test.find({ level: level, type : types[i]}, {}, { skip: Math.floor(rand), limit: 1 });
                         i++;
@@ -160,6 +160,7 @@ function makeAgain(test, level){
                     // rand = getRandomArbitrary(i*edge, (i+1)*edge);
                     
                 } else {
+                    tests.push(data[0]);
                     defer.resolve(tests);
                 }
 
