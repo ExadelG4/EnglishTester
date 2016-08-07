@@ -24,7 +24,6 @@ function refresh(token){
             obj.email = decoded.email;
             obj.firstName = decoded.firstName;
             obj.lastName = decoded.lastName;
-            obj.number = decoded.number;
             obj.password = decoded.password;
             obj.role = decoded.role;
 

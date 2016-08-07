@@ -1,12 +1,13 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer','notification', '$timeout',
-		 function($scope, $state, userService, angularPlayer, notification, $timeout) {
+	angular.module('home').controller('passTestController', ['$scope', '$state','userService', 'angularPlayer','notification', '$timeout', 'recorderService',
+		 function($scope, $state, userService, angularPlayer, notification, $timeout, recorderService) {
 
 		$scope.$on('$stateChangeStart', function () {
-			if(angularPlayer.getPlaylist().length > 0)
-    			angularPlayer.clearPlaylist( function() {}); 
+			if (angularPlayer.isPlayingStatus() === true ) {
+				$timeout( function() {angularPlayer.pause();});
+			}
 		});
 
 		userService.getStatus().then ( function(result) {
@@ -16,21 +17,74 @@
 			}
 		})
 
+		/*$scope.allQuestions = [
+			{
+				qId: '',
+				type: 'oneOfMany',
+				question: 'Mimimi nyanyanya. What you choose?',
+				options: [
+					'Mimimi',
+					'Nyanyanya',
+					'No, I am normal man'
+				]
+			},
+			{
+				qId: '',
+				type: 'manyOfMany',
+				question: 'Which colors do you like?',
+				options: [
+					'The red',
+					'Cian',
+					'Yellow, mmm'
+				]
+			},
+			{
+				qId: '',
+				type: 'questionWithoutChoiceOfAnswers',
+				question: 'Which colors do you like?',
+			},
+			{
+				qId: '',
+				type: 'listeningWithOneOfMany',
+				question: 'assets/audio/papa_roach_-_last_resort(zaycev.net).mp3',
+				options: [
+					'Behind blue eyes',
+					'Last resort',
+					'Riot'
+				]
+			},
+			{
+				qId: '',
+				type: 'listeningWithManyOfMany',
+				question: 'assets/audio/Three Days Grace - Animal I Have Become.mp3',
+				options: [
+					'One-X',
+					'Life starts now',
+					'TDG'
+				]
+			},
+			{
+				qId: '',
+				type: 'speaking',
+				question: 'aga'
+			},
+		];*/
+
 		$scope.whichPart = 1;
 
 		$scope.initVars = function() { 
 			$scope.allQuestions = null;
 			$scope.currentPage = 1;
 			$scope.copyCurrentPage = 1;
-			$scope.neededNumPage = '';
-			$scope.validNeededNumPage = true;
 			$scope.userAnswers = [];
 			$scope.validAnswers = [];
 			$scope.dirty = [];
 			$scope.totalCount = null;
+			$scope.forSong = [];
 			$scope.omg = {
 				tempChoise: null
 			};
+			$scope.success = '';
 		}
 		$scope.initTimer = function() {
 			$scope.timer = 1000*60*60*2;
@@ -53,7 +107,6 @@
 		}
 		$timeout(testTimer,1000);
 
-		$scope.initVars();
 
 		/*$scope.allQuestions = [
 			{
@@ -121,46 +174,7 @@
 			return type === 'speaking';
 		}
 
-		$scope.initAll = function(result) {
-			$scope.allQuestions = result;
-			$scope.totalCount = $scope.allQuestions.length;
-
-			for (let i = 0; i < $scope.totalCount; ++i) {
-				var tempAnswer = {
-					qId: '',
-					answer: [],
-					audioAnswer: '',
-					badForUser: false
-				};
-				tempAnswer.qId = $scope.allQuestions[i]._id;
-				tempAnswer.type = $scope.allQuestions[i].type;
-				$scope.userAnswers.push(tempAnswer);
-				$scope.validAnswers.push(false);
-				$scope.dirty.push(false);
-			}
-	  		$scope.initNewPage($scope.currentPage);
-		}
-
-		userService.getTest().then( function(result) {
-			$scope.initAll(result);
-	 	});
-
-		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
-
-		$scope.urls = {
-				'oneOfMany': startUrl + '1.html',
-				'manyOfMany': startUrl + '2.html',
-				'questionWithoutChoiceOfAnswers': startUrl + '3.html',
-				'essay': startUrl + '4.html',
-				'listeningWithOneOfMany': startUrl + '5.html',
-				'listeningWithManyOfMany': startUrl + '6.html',
-				'listeningWithoutChoiceOfAnswers': startUrl + '7.html',
-				'speaking': startUrl + '8.html'
-			};
-
-
 		$scope.initNewPage = function(currentPage) {
-			$scope.neededNumPage = '';
 			if (isCheckboxType($scope.allQuestions[currentPage - 1].type)) {
 		 		$scope.omg.tempChoise = [];
 			 	for (var i = 0; i < $scope.allQuestions[currentPage - 1].options.length; ++i) {
@@ -178,23 +192,67 @@
 	    			$scope.omg.tempChoise = -1;
 	    		}
 	    	}
-	    	else if (isTextType($scope.allQuestions[currentPage - 1].type)) {
-	    		$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answer[0];
-    		}
     		else {
-    			//audio ans
+    			$scope.omg.tempChoise = $scope.userAnswers[currentPage - 1].answer[0];
     		}
     		$scope.currentPage = currentPage;
 
-    		angularPlayer.init();
-			if($scope.allQuestions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers' || 
-				$scope.allQuestions[currentPage - 1].type === 'listeningWithOneOfMany' ||
-				$scope.allQuestions[currentPage - 1].type === 'listeningWithManyOfMany') {
-    			$scope.song.url = $scope.allQuestions[currentPage - 1].audio; 
-				$timeout( function() {angularPlayer.addTrack($scope.song);});
-			}
-
 		};
+
+		$scope.initAll = function(result) {
+			$scope.allQuestions = result;
+			$scope.totalCount = $scope.allQuestions.length;
+
+			for (let i = 0; i < $scope.totalCount; ++i) {
+				var tempAnswer = {
+					qId: '',
+					answer: [],
+					badForUser: false
+				};
+				tempAnswer.qId = $scope.allQuestions[i]._id;
+				tempAnswer.type = $scope.allQuestions[i].type;
+				$scope.userAnswers.push(tempAnswer);
+				$scope.validAnswers.push(false);
+				$scope.dirty.push(false);
+				$scope.forSong.push({});
+				if ($scope.allQuestions[i].type === 'listeningWithoutChoiceOfAnswers' || 
+					$scope.allQuestions[i].type === 'listeningWithManyOfMany' ||
+					$scope.allQuestions[i].type === 'listeningWithOneOfMany' ) {
+					$scope.forSong[i] = {
+				    	id: i,
+				    	artist: '',
+				    	url: $scope.allQuestions[i].question
+				    }
+				}
+				else if ($scope.allQuestions[i].type === 'speaking' ) {
+					 $scope.forSong[i] = {
+				    	id: i,
+				    	artist: '',
+				    	url: $scope.allQuestions[i].answer
+				    }
+			}
+	  		$scope.initNewPage($scope.currentPage);
+			}
+		}
+
+		$scope.initVars();
+
+		userService.getTest().then( function(result) {
+			$scope.initAll(result);
+	 	});
+
+		var startUrl = 'modules/home/user/passTest/templateTests/templateTest';
+
+		$scope.urls = {
+				'oneOfMany': startUrl + '1.html',
+				'manyOfMany': startUrl + '2.html',
+				'questionWithoutChoiceOfAnswers': startUrl + '3.html',
+				'essay': startUrl + '4.html',
+				'listeningWithOneOfMany': startUrl + '5.html',
+				'listeningWithManyOfMany': startUrl + '6.html',
+				'listeningWithoutChoiceOfAnswers': startUrl + '7.html',
+				'speaking': startUrl + '8.html'
+			};
 
 		$scope.savePrevPage = function(prevNumPage) {
 			$scope.dirty[prevNumPage - 1] = true;
@@ -214,12 +272,11 @@
 		 		$scope.userAnswers[prevNumPage - 1].answer[0] = $scope.omg.tempChoise;
 		 	}
 		 	else {
-		 		//audio ans
+		 		$scope.userAnswers[prevNumPage - 1].answer[0] = $scope.omg.tempChoise;
 		 	}			
 		};
 
 		$scope.pageChanged = function(prevNumPage, currentPage) {
-    		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
     		if(angularPlayer.getPlaylist().length > 0)
     			angularPlayer.clearPlaylist( function() {
@@ -230,25 +287,17 @@
   		};
 
 		$scope.setNumPage = function(numPage) {
-			if(numPage >= 0 && numPage <= $scope.totalCount) {
-				$scope.dirty[$scope.copyCurrentPage - 1] = true;
-				$scope.pageChanged($scope.copyCurrentPage, numPage);
-				//$scope.currentPage = numPage;
-			}
-			else  {
-				$scope.validNeededNumPage = false;
-			}
+			$scope.dirty[$scope.copyCurrentPage - 1] = true;
+			$scope.pageChanged($scope.copyCurrentPage, numPage);
 		};
 
 		$scope.song = {
     			id: 'one',
     			artist: 'Drake',
-    			//url: 'http://cdndl.zaycev.net/6100/1726613/anberlin_-_the_feel_good_drag_(zaycev.net).mp3'
     			url: 'assets/audio/Three Days Grace - Animal I Have Become.mp3'
 
 		};
 
-  		
   		$scope.changeValidC = function(currentPage) {
   			for(var i = 0; i < $scope.totalCount; ++i) {
   				if( $scope.omg.tempChoise[i] === true) {
@@ -286,7 +335,6 @@
   		};
 
   		$scope.sendFirstPart = function(currentPage) {
-  			$scope.validNeededNumPage = true;
     		$scope.savePrevPage(currentPage);
   			userService.sendFirstPart($scope.userAnswers)
   				.then ( function(data) {
@@ -297,7 +345,6 @@
   				});
   		};
   		$scope.sendSecondPart = function(currentPage) {
-  			$scope.validNeededNumPage = true;
     		$scope.savePrevPage(currentPage);
   			userService.sendSecondPart($scope.userAnswers)
   				.then ( function() {
@@ -305,6 +352,36 @@
   					notification.success("You have successfully completed all test.");
   				});
   		};
+
+  		$scope.save = function(currentPage) {
+            var c = recorderService.controller('audioInput');
+            var xhr = new XMLHttpRequest();
+			xhr.onload = xhr.onerror = function() {
+                if (this.status == 200) {
+                  //log("success");
+                } else {
+                  //log("error " + this.status);
+                }
+              };
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                $scope.omg.tempChoise =  xhr.responseText;
+                $scope.validAnswers[currentPage - 1] = true;
+                $scope.success = 'Success';
+                }
+            }
+
+            /*xhr.upload.onprogress = function(event) {
+                log(event.loaded + ' / ' + event.total);
+            }*/
+
+            xhr.open("POST", "upload", true);
+            xhr.send(c.audioModel);
+        }
+        $scope.isPlayingMy = false;
+        $scope.startPlay = function() {
+        	$scope.isPlayingMy = true;
+        }
 
 	}]);
 })();

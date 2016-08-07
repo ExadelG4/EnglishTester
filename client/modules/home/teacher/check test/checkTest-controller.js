@@ -3,13 +3,12 @@
 
 	angular.module('home').controller('checkTestController', ['$scope', '$state','userService','angularPlayer','$rootScope','$timeout',
 		 function($scope, $state, userService, angularPlayer, $rootScope, $timeout) {
+
 		$scope.$on('$stateChangeStart', function () {
-			if (angularPlayer.getPlaylist().length > 0) {
-				angularPlayer.clearPlaylist( function() {			
-				});
+			if (angularPlayer.isPlayingStatus() === true ) {
+				$timeout( function() {angularPlayer.pause();});
 			}
 		});
-		$scope.allQuestions = [];
 
 		if($rootScope.checking === true) {
 			$rootScope.checking = false;
@@ -61,19 +60,17 @@
 			}
 		];*/
 
+		$scope.allQuestions = [];
 		$scope.currentPage = 1;
 		$scope.copyCurrentPage = 1;
-		$scope.neededNumPage = '';
-		$scope.validNeededNumPage = true;
 		$scope.forValidMark = [];
 		$scope.dirty = []
-
 		$scope.finalMarks = [];
 		$scope.omg = {
 			tempMark:''
 		};
 		angularPlayer.init();
-		var forSong = [];
+		$scope.forSong = [];
 
 		$scope.initFirst = function() {
 			$scope.totalCount = $scope.allQuestions.length;
@@ -85,42 +82,27 @@
 				$scope.finalMarks.push(temp);
 				$scope.forValidMark.push(false);
 				$scope.dirty.push(false);
-				forSong.push({});
+				$scope.forSong.push({});
 				if($scope.allQuestions[i].type === 'listeningWithoutChoiceOfAnswers') {
-					forSong[i] = {
+					$scope.forSong[i] = {
 				    	id: i,
 				    	artist: '',
 				    	url: $scope.allQuestions[i].question
 				    }
-					/*$timeout( function() {*/angularPlayer.addToPlaylist(forSong[i]);/*});*/
 				}
 				else if ($scope.allQuestions[i].type === 'speaking' ) {
-					 forSong[i] = {
+					 $scope.forSong[i] = {
 				    	id: i,
 				    	artist: '',
 				    	url: $scope.allQuestions[i].answer
 				    }
-					/*$timeout( function() {*/angularPlayer.addToPlaylist(forSong[i]);/*});*/
 				}
 			}
 		}
 
 		$scope.initNewPage = function (currentPage) {
+			//document.getElementById('myMenuList').focus();
 			$scope.omg.tempMark = $scope.finalMarks[currentPage - 1].mark;
-			//angularPlayer.init();
-			if($scope.allQuestions[currentPage - 1].type ==='listeningWithoutChoiceOfAnswers') {
-    			//$scope.song.url = $scope.allQuestions[currentPage - 1].question;
-				//$timeout( function() {angularPlayer.addTrack($scope.song);});
-				/*$timeout(function() {*/
-					angularPlayer.setCurrentTrack(currentPage - 1);
-				/*});*/
-			}
-			else if ($scope.allQuestions[currentPage - 1].type ==='speaking') {
-    			//$scope.song.url = $scope.allQuestions[currentPage - 1].answer;
-				//$timeout( function() {angularPlayer.addTrack($scope.song);});
-					angularPlayer.setCurrentTrack(currentPage - 1);
-
-			}
 			$scope.currentPage = currentPage;
 
 		};
@@ -133,26 +115,17 @@
 		};
 
 		$scope.pageChanged = function(prevNumPage, currentPage) {
-    		$scope.validNeededNumPage = true;
     		$scope.savePrevPage(prevNumPage);
-    		if (angularPlayer.getPlaylist().length > 0) {
-				//angularPlayer.clearPlaylist( function() {});
-				//angularPlayer.removeSong($scope.song, 0);
-				$timeout( function() {angularPlayer.stop();});
+    		if (angularPlayer.isPlayingStatus() === true ) {
+				$timeout( function() {angularPlayer.pause();});
 			}
 			$scope.initNewPage(currentPage);
     		$scope.copyCurrentPage = $scope.currentPage;
   		};
 
   		$scope.setNumPage = function(numPage) {
-			if(numPage >= 0 && numPage <= $scope.totalCount) {
-				$scope.dirty[$scope.copyCurrentPage - 1] = true;
-				$scope.pageChanged($scope.copyCurrentPage, numPage);
-				//$scope.currentPage = numPage;
-			}
-			else  {
-				$scope.validNeededNumPage = false;
-			}
+			$scope.dirty[$scope.copyCurrentPage - 1] = true;
+			$scope.pageChanged($scope.copyCurrentPage, numPage);
 		};
 
 		$scope.onlineWriteValid = function(currentPage) {
@@ -175,7 +148,15 @@
 			}
 			return true;
 		}
-		$scope.finishCheck = function() {
+
+		$scope.isPlayingMy = false;
+        $scope.startPlay = function() {
+        	$scope.isPlayingMy = true;
+        }
+
+		$scope.finishCheck = function(num) {
+			$scope.validNeededNumPage = true;
+    		$scope.savePrevPage(num);
 			var rez = {
 				tid: $rootScope.idTest,
 				finalMarks: $scope.finalMarks

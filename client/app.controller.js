@@ -21,6 +21,9 @@
                 $scope.isGuest = function () {
                     return context.getRole() === 'guest';
                 };
+                $scope.setUserName = function(name) {
+                    $scope.userName = name;
+                }
             }
         ]);
 })();

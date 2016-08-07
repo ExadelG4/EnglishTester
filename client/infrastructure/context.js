@@ -9,8 +9,7 @@
                     firstName: "",
                     lastName: "",
                     role: "",
-                    email: "",
-                    number: ""
+                    email: ""
                 };
 
                 return {
@@ -21,7 +20,7 @@
                             user.lastName = userData.lastName;
                             user.role = userData.role;
                             user.email = userData.email;
-                            user.number = userData.number;
+                            
                         }
                     },
                     clear: function () {
@@ -30,7 +29,7 @@
                         user.lastName = "";
                         user.role = "";
                         user.email = "";
-                        user.number = "";
+                        
                     },
                     getRole: function () {
                         return user.role;
@@ -55,9 +54,6 @@
                     },
                     getEmail: function() {
                         return user.email;
-                    },
-                    getNumber: function() {
-                        return user.number;
                     },
                     getId: function() {
                         return user.id;

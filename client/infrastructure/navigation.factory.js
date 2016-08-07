@@ -3,6 +3,7 @@
     angular.module('myApp')
         .factory('navigationFactory', ['context',
         function (context) {
+
             var adminNav = [
                 {
                     name: 'Home',

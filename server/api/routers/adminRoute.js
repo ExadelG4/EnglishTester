@@ -11,11 +11,8 @@ var passport = require('passport');
 var jwt = require('jsonwebtoken');
 var key = require('../../config.json');
 
-
 router.use(passport.initialize());
 require('../../passport')(passport);
-
-
 
 router.post('/register',contracts.adminRegister,function(req, res) {	
   		var info ={
@@ -45,7 +42,7 @@ router.post('/register',contracts.adminRegister,function(req, res) {
 					//console.log("guest is not in openTests");
 				});
 		}).catch(function(err){
-			res.status(400).send("Bad Request");
+			res.status(400).send(err);
 		});
 
 });
@@ -82,45 +79,31 @@ router.post('/assignTeacher', contracts.assignTeacher, function (req, res) {
 	stackService.assignTeacher(req.body).then(function (data) {
 		res.send('ok');
 	}).catch(function (err) {
-		res.status(400).send("Bad Request");
+		res.status(400).send(err);
 	});
 });
 
-
-router.get('/getAll',passport.authenticate('jwt', { session: false }), function(req, res) {
-	
-  		service.getAllUsers().then(function(data){
-			  res.send(JSON.stringify(data));
-		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
-		  });
-
-});
-router.get('/getUsers', function(req, res) {
-
-  		service.getAllRole('user').then(function(data){
-			  res.send(JSON.stringify(data));
-		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
-		  });
-
-});
 router.get('/getTeachers', function(req, res) {
-  		
-  		service.find({role: 'teacher'},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
+  		service.getTeachers().then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
+			  res.status(400).send(err);
 		  });
 });
 
 router.get('/getFinishedUsers', function(req, res){
-	service.getFinishedList().then(function (data) {
-		
+	service.getFinishedList({'pasword':0}).then(function (data) {
+		res.json(data);
+	}).catch(function (err) {
+		res.status(400).send(err);
+	})
+});
+router.get('/getFinishedUsersNames', function(req, res){
+	service.getFinishedList({'_id':0,'firstName': 1, 'lastName':1}).then(function (data) {
 		res.json(data);
 	}).catch(function (err) {
 		
-		res.json(err);
+		res.status(400).send(err);
 	})
 });
 
@@ -128,37 +111,47 @@ router.get('/getUsersRequests', function(req, res){
 	service.find({status: 'req', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
+			  res.status(400).send(err);
 		  });
 
+});
+router.get('/getUsersRequestsNames', function(req, res){
+	service.find({status: 'req', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':0,'firstName': 1, 'lastName':1},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.status(400).send(err);
+		  });
 });
 
 router.get('/getFreeUsers', function(req, res){
-	
 	service.find({status: 'free', $or:[{'role': 'guest'},{'role': 'user'}]},{'_id':1,'firstName': 1, 'lastName':1, 'email':1, 'number':1, 'role':1},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
+			 res.status(400).send(err);
 		  });
 });
 router.get('/getResults', function(req, res){
-	
 	stackService.findResults({},{},{}).then(function(data){
 			  res.send(JSON.stringify(data));
 		  }).catch(function (err) {
-			  res.send(JSON.stringify(err));
+			  res.status(400).send(err);
 		  });
 });
-
-router.post('/getFromReg',contracts.getFromReg,function(req, res) {
-	 
+router.get('/getResultsNames', function(req, res){
+	stackService.findResults({},{'_id':0,'firstName':1,'lastName':1},{}).then(function(data){
+			  res.send(JSON.stringify(data));
+		  }).catch(function (err) {
+			  res.status(400).send(err);
+		  });
+})
+router.post('/getFromReg',contracts.getFromReg,function(req, res) { 
 	var a = req.body.name;
 	var b = a;
 	var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
 	service.find({ fullName: new RegExp(c, "i") }, { '_id': 1, 'firstName': 1, 'lastName': 1, 'email': 1 }, {}).then(function (data) {
 		res.send(data);
 	}).catch(function (err) {
-		res.status(401).send("error");
+		res.status(400).send(err);
 	});
 
 });
@@ -166,17 +159,7 @@ router.post('/showStatistics',contracts.showStstistics,function (req, res) {
 	service.userStatistics(req.body.id).then(function (data) {
 		res.send(data);
 	}).catch(function (err) {
-		res.status(401).send("error");
-
-	});
-});
-router.post('/showTeacherCount',contracts.showTeacherCount,function (req, res) {	
-	service.getTeacherStatus(req.body.id).then(function (data) {
-		console.log(data);
-		res.send(data);
-	}).catch(function (err) {
-		console.log(err);
-		res.status(401).send("error");
+		res.status(400).send(err);
 	});
 });
 
@@ -186,7 +169,6 @@ router.get('/getComplainted',function(req, res){
 			res.send(data.concat(data1));
 		})
 	});
-
 });
 
 router.post('/blockComplained', function(req, res){

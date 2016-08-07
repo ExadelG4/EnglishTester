@@ -33,7 +33,7 @@ button, .input-btn {
 }
 
 .btn-admin{
-    background-color: rgb(42, 171, 210);
+    background-color: rgb(47, 196, 241);
 }
 
 .btn-teacher {
@@ -57,7 +57,7 @@ button, .input-btn {
 }
 
 .btn-admin:disabled {
-    background-color: rgb(77, 92, 123);
+    background-color: #2e6da4;
 }
 
 .btn-teacher:disabled {
@@ -128,6 +128,7 @@ input::-webkit-input-placeholder {
     height: 50px;
     border-radius: 25px;
     background-repeat: round;
+    margin: 5px;
 }
 
 .btn-music-play {
@@ -140,6 +141,15 @@ input::-webkit-input-placeholder {
 
 .btn-music-stop {
     background-image: url(assets/images/icons/stop.png);
+}
+
+.btn-music-start-record {
+    background-image: url(assets/images/icons/microphone.png);
+}
+
+.div-music-player {
+    padding: 10px;
+    margin-bottom: 15px;
 }
 
 select {

@@ -2,18 +2,38 @@ var q = require('q');
 var jwt = require('jsonwebtoken');
 var key = require('../config.json');
 
+var Promiseeee = q.Promise;
+
 var DatabasService = function (model){
     this.model = model;
 }
-DatabasService.prototype.find = function(query, fields, options){
-    var defer = q.defer();
-    this.model.find(query, fields, options,function(err ,data){
-        if(err) defer.reject(err);
-        defer.resolve(data);
+// DatabasService.prototype.find = function(query, fields, options){
+//     var defer = q.defer();
+//     this.model.find(query, fields, options,function(err ,data){
+//         if(err) defer.reject(err);
+//         defer.resolve(data);
 
+//     });
+//     return defer.promise;
+// }
+
+DatabasService.prototype.find = function(query, fields, options){
+
+    var self = this;
+
+    var p = new Promiseeee(function(resolve, reject) {
+        self.model.find(query, fields, options, function(err ,data){
+            if(err) {
+                reject(err);   
+            }
+            resolve(data);
+        });    
     });
-    return defer.promise;
+    
+    return p;
 }
+
+
 DatabasService.prototype.findById = function(id, fields, options){
     var defer = q.defer();
     this.model.findById(id, fields, options,function(err ,data){
@@ -82,13 +102,7 @@ DatabasService.prototype.update = function (query, update,options) {
     });
     return defer.promise;
 }
-DatabasService.prototype.countAsync = function (query) {
-    
-    this.model.count(query, function(err ,data){
-        if(err) return err;
-        else return data;
-    });
-}
+
 
 module.exports = function(model){
     return new DatabasService(model);

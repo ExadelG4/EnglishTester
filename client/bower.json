@@ -31,6 +31,7 @@
     "angular-bootstrap": "^1.3.3",
     "angular-ui-bootstrap": "^2.0.0",
     "d3.chart": "^0.3.0",
-    "bootstrap-validator": "^0.11.5"
+    "bootstrap-validator": "^0.11.5",
+    "d3.chart.pie": "^0.4.2"
   }
 }

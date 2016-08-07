@@ -4,7 +4,7 @@
             <form name="user" class="formAddUser"  ng-model="formAddingUser" novalidate>
                 <label>First name: </label>
                 <!--<span ng-show="user.first.$error.required && user.first.$dirty" class="error-mes">This field is required</span>-->
-                <input type="text" name="first" ng-model="firstMd" class="form-control" aria-label="..." placeholder="Ivan" required/>
+                <input ng-focus="true" type="text" name="first" ng-model="firstMd" class="form-control" aria-label="..." placeholder="Ivan" required/>
                 <label>Second name: </label>
                 <!--<span ng-show="user.second.$error.required && user.second.$dirty" class="error-mes">This field is required</span>-->
                 <input type="text" name="second" ng-model="secondMd" class="form-control" aria-label="..." placeholder="Petrov" required>
@@ -18,7 +18,8 @@
                 <input type="text" name="phnumber" ng-model="phnumberMd" class="form-control" aria-label="..." placeholder="+375299379992" ng-pattern="'[+]{1}[375]{1}[0-9]{11,11}'" required>
             </form>
     </div>
-    <div class="pull-right col-xs-5 col-sm-5 col-md-5 col-lg-5">
+    <div class="pull-right col-xs-5 col-sm-5 col-md-5 col-lg-5 newUserDate">
+        <img src="assets/images/icons/time.png">
         <h4>Choose date and time for test:</h4>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pull-left dateTime">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1 pull-left">
