@@ -2,8 +2,6 @@
     'use strict';
     angular.module('admin').controller('assignTchController', ['$scope', 'userService', 'notification', function($scope, userService, notification) {
 
-        $scope.teachers = [];
-        $scope.students = [];
         $scope.currentUser = null;
         $scope.currentTeacher = null;
 
@@ -11,6 +9,7 @@
         updateTeacherList();
 
         function updateTeacherList () {
+            $scope.teachers = [];
             userService.getTeachers().then(function(data) {
                 data.forEach(function(item, i){
                     $scope.teachers[i] = item;
@@ -20,6 +19,7 @@
         }
 
         function updateUserList () {
+            $scope.students = [];
             userService.getFinishedUsers().then(function(data) {
                 data.forEach(function(item, i) {
                     $scope.students[i] = item;

@@ -41,3 +41,8 @@
     width: 25%;
     margin: 10px;
 }
+
+.comment {
+    color: gray;
+    padding: 10px;
+}
