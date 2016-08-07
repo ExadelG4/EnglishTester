@@ -141,7 +141,6 @@
 
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
-        $scope.minDate2 = $scope.minDate ? null : new Date($scope.minDate);
     };
 
     $scope.toggleMin();
@@ -201,6 +200,17 @@
         $scope.mytime4 = d;
     };
 
+        $scope.$watch('dt3',function(oldVal,newVal,attr){
+            if($scope.dt3 > $scope.dt4){
+                $scope.dt4 = newVal;
+            }
+        });
+
+        $scope.$watch('dt4',function(oldVal,newVal,attr){
+            if($scope.dt3 > $scope.dt4){
+                $scope.dt3 = newVal;
+            }
+        });
 
 
 }]);})();
