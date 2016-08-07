@@ -4,7 +4,7 @@
             <form name="user" class="formAddUser"  ng-model="formAddingUser" novalidate>
                 <label>First name: </label>
                 <!--<span ng-show="user.first.$error.required && user.first.$dirty" class="error-mes">This field is required</span>-->
-                <input type="text" name="first" ng-model="firstMd" class="form-control" aria-label="..." placeholder="Ivan" required/>
+                <input ng-focus="true" type="text" name="first" ng-model="firstMd" class="form-control" aria-label="..." placeholder="Ivan" required/>
                 <label>Second name: </label>
                 <!--<span ng-show="user.second.$error.required && user.second.$dirty" class="error-mes">This field is required</span>-->
                 <input type="text" name="second" ng-model="secondMd" class="form-control" aria-label="..." placeholder="Petrov" required>

@@ -52,11 +52,14 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .label-text-que {
-    margin-top: 10px;
-    font-size: 2em;
+    margin-top: 25px;
+    font-size: 1.8em;
+    display: block;
+    -webkit-user-select: none;
 }
 
 .btn-next {
+    margin-left: -4px;
     border-radius: 0 5px 5px 0;
 }
 
@@ -64,6 +67,7 @@ input[type="radio"], input[type="checkbox"] {
     margin: 0 -4px 0 15px;
     border-radius: 5px 0 0 5px;
 }
+
 
 .textarea-que {
     width: 100%;
@@ -80,10 +84,11 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .pagination {
-    margin-left: 15px;
+    margin-bottom: -11px;
+    border-radius: 0;
 }
 
-.pagination> .active > a, .pagination> .active > a:hover, .pagination> li > a:hover   {
+.pagination> .active > a, .pagination> .active > a:hover, .pagination> li > a:hover {
     color: white;
 }
 
@@ -94,9 +99,10 @@ input[type="radio"], input[type="checkbox"] {
     width: 35px;
     text-align: center;
     font-size: 1em;
+    border-radius: 0 !important;
 }
 
-.user-pagi> .active > a, .user-pagi> .active > a:hover {
+.user-pagi> .active > a, .user-pagi> .active > a:hover, .user-pagi> .active > a:focus {
     background-color: rgb(91, 212, 145);
     border-color: rgb(91, 212, 145);
 }
@@ -106,7 +112,7 @@ input[type="radio"], input[type="checkbox"] {
     border-color: rgb(99, 249, 168);
 }
 
-.teacher-pagi> .active > a, .teacher-pagi> .active > a:hover   {
+.teacher-pagi> .active > a, .teacher-pagi> .active > a:hover, .teacher-pagi> .active > a:focus {
     background-color: rgb(232, 134, 18);
     border-color: rgb(232, 134, 18);
 }
@@ -139,11 +145,12 @@ input[type="radio"], input[type="checkbox"] {
 }
 .div-fing {
     display: inline-flex;
+    margin-top: 40px;
 }
 
 .btn-fing {
     width: 35px;
-    margin: 15px 20px;
+    margin: 15px 20px 0 20px;
     background-size: contain;
     background-color: rgba(255, 255, 255, 0);
     display: block;
@@ -157,7 +164,7 @@ input[type="radio"], input[type="checkbox"] {
     background-image: url(../../../../../assets/images/icons/good-question.png);
 }
 .btn-good-que {
-    background-image: url(../../../../../assets/images/icons/badF-question.png);
+    background-image: url(../../../../../assets/images/icons/bad-question.png);
 }
 .btn-fing + .label-fing {
     display: none;
@@ -173,9 +180,17 @@ input[type="radio"], input[type="checkbox"] {
     font-size: 1.5em;
 }
 
-.a-missing {
+.btn-missing {
+    display: inline-block;
     font-size: 1.5em;
     color: rgb(51,51,51);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #c53535;
+    color: white;
+    margin-bottom: 5px;
+}
 }
 
 .a-missing {
@@ -184,6 +199,10 @@ input[type="radio"], input[type="checkbox"] {
 .btn-submit {
     display: block;
     margin: 30px auto 0 auto;
+    width: 150px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 2em;
 }
 
 .div-check-answer {
@@ -196,5 +215,14 @@ input[type="radio"], input[type="checkbox"] {
 @media (max-device-width: 767px) {
     .btn-fing +.label-fing {
         display: inline;
+    }
+}
+
+@media (max-width: 767px) {
+     .div-fing {
+        margin: 15px 0;
+    }
+    .pagination {
+        display: none;
     }
 }

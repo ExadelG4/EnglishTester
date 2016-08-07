@@ -3,13 +3,14 @@
 		<div class="main-que col-xs-12 col-offset-sm-2 col-sm-10">
 			<form name="main" novalidate>
 				<label class="label-text-que">
-					{{$index + 1}}.
+					{{$index + 1}}/{{totalCount}}
 				</label>
 					<sound-manager>
 	    				<div class="seekBase" seek-track>
 	    					<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
 						</div>
-						<button play-music class="btn-teacher btn-music btn-music-play"></button>
+						<button music-player="play" add-song="forSong[$index]" class="btn-teacher btn-music btn-music-play" ng-click="startPlay()" ng-if="!isPlayingMy"></button>
+						<button play-music class="btn-teacher btn-music btn-music-play" ng-if="isPlayingMy"></button>
 						<button pause-music class="btn-teacher btn-music btn-music-pause"></button>
 						<button stop-music class="btn-teacher btn-music btn-music-stop"></button>
 	    			</sound-manager>

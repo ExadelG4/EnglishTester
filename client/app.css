@@ -127,6 +127,7 @@ input::-webkit-input-placeholder {
     height: 50px;
     border-radius: 25px;
     background-repeat: round;
+    margin: 5px;
 }
 
 .btn-music-play {
@@ -139,6 +140,15 @@ input::-webkit-input-placeholder {
 
 .btn-music-stop {
     background-image: url(assets/images/icons/stop.png);
+}
+
+.btn-music-start-record {
+    background-image: url(assets/images/icons/microphone.png);
+}
+
+.div-music-player {
+    padding: 10px;
+    margin-bottom: 15px;
 }
 
 select {
