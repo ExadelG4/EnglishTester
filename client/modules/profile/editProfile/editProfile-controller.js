@@ -1,6 +1,6 @@
 (function(){
     'use strict';
-    angular.module('profile')
+    angular.module('personalProfile')
         .controller('editProfileController',['$scope', 'userService', 'notification',
             function($scope, userService, notification){
 
@@ -12,6 +12,7 @@
                         $scope.userProfile.name = data.firstName + ' ' + data.lastName;
                         $scope.userProfile.email = data.email;
                         $scope.userProfile.telNumber = data.number;
+                        $scope.results = data.results;
                         $scope.role = data.role;
                     }
                 );
@@ -44,7 +45,7 @@
     }]);
 
 
-    angular.module('profile').directive('barsChart', function ($parse) {
+    angular.module('personalProfile').directive('barsChart', function ($parse) {
         //explicitly creating a directive definition variable
         //this may look verbose but is good for clarification purposes
         //in real life you'd want to simply return the object {...}
@@ -86,7 +87,7 @@
         return directiveDefinitionObject;
     });
 
-    angular.module('profile').controller('myCtrl', ['$scope', function($scope) {
+    angular.module('personalProfile').controller('myCtrl', ['$scope', function($scope) {
         var t = 50; var s = 80; var m = 60; var g = 45; var b = 25;
         $scope.myData = [t, s, m, g, b];
     }]);

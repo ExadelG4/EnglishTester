@@ -2,5 +2,5 @@
      <img src="{{model.imageLink}}">
      <!--<message></message>-->
      <span ng-repeat="user in model.list track by $index"><a ng-click="goToStat()">{{user.firstName}} {{user.lastName}}, </a></span>{{model.messageText}}
-     <button type="button" class="btn btn-info" ng-click="newsButtonClick()">{{model.buttonText}}</button>
+     <button type="button" class="btn btn-admin" ng-click="newsButtonClick()">{{model.buttonText}}</button>
  </p>
