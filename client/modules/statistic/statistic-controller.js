@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('statistic', []).controller('statisticController', ['$scope', '$state', '$rootScope', 'userService', 'getStatisticsFromNews', 'getObjToChartCtrl',
-        function($scope, $state, $rootScope, userService, getStatisticsFromNews, getObjToChartCtrl) {
+    angular.module('statistic', []).controller('statisticController', ['$scope', '$state', '$rootScope', 'userService', 'getStatisticsFromNews', 'getObjToChart',
+        function($scope, $state, $rootScope, userService, getStatisticsFromNews, getObjToChart) {
 
         $scope.searchList = [];
         $scope.show = false;
@@ -60,7 +60,7 @@
            $scope.showUInfo = true;
            userService.showInfoProfile(item._id).then(function(data) {
                console.log(data);
-               getObjToChartCtrl.setPersonObj(data);
+               getObjToChart.setPersonObj(data);
                $scope.choosenUser = data;
                $scope.choosenUser.fullName = data.firstName + ' ' + data.lastName;
                $scope.choosenUser.role = data.role;
@@ -88,19 +88,33 @@
         ]
     }]);
 
-    angular.module('myApp').controller('chartCtrl', ['$scope', '$q', 'userService', 'getObjToChartCtrl', function($scope, $q, userService, getObjToChartCtrl) {
+    angular.module('myApp').controller('chartCtrl', ['$scope', '$q', 'userService', 'getObjToChart', function($scope, $q, userService, getObjToChart) {
         // var t = 50; var s = 80; var m = 60; var g = 45; var b = 25;
 
         $scope.myData = [];
 
         function getChartData () {
+            $scope.loaded = false;
             var arr = [];
             debugger;
-            getObjToChartCtrl.getPersonObj().results.map(function(item, i) {
-                $scope.myData[i] = item.result.totalMark;
+            console.log(getObjToChart.getPersonObj());
+            getObjToChart.getPersonPromise().then(function(data) {
+                $scope.myData = data.results.map(function (item, i) {
+                    return item.result.totalMark;
+                });
+            }).finally(function(){
+                $scope.loaded = true;
             });
-            $scope.loaded = true;
+
         }
+
+        $scope.$watch(function() {
+            return getObjToChart.getPersonObj();
+        }, function (newValue, oldValue) {
+            if (!angular.equals(newValue,oldValue)) {
+                getChartData();
+            }
+        });
 
 
         getChartData();
