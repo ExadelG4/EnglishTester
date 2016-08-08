@@ -36,9 +36,12 @@
         width: 100%;
     }
 
-    .showUserInfo h1{
+    .showUserInfo h1,
+    .showUserInfo h3 {
         width: 100%;
+        color: grey;
     }
+
 
 .statistics img {
     height: 70px;
