@@ -7,25 +7,48 @@
         $scope.show = false;
         $scope.showUInfo = false;
 
-        function showPersonList() {
-            userService.searchUser($scope.searching).then(function(data) {
+        $scope.objFlags = {
+            name: '',
+            res: false,
+            req: false,
+            finish: false
+        };
+
+        function showPersonList(obj) {
+            userService.searchUser(obj).then(function(data) {
                 $scope.show = true;
                 data.forEach(function(item, i) {
                     $scope.searchList[i] = item;
                     $scope.searchList[i].fullName = item.firstName + ' ' + item.lastName;
                 });
-            });
+            }).then (function() {
+                getStatisticsFromNews.setPersonStatistic();
+                console.log(getStatisticsFromNews.getPersonStatistic());
+            })
         }
 
         if(getStatisticsFromNews.getPersonStatistic() != undefined ) {
-            $scope.searching = getStatisticsFromNews.getPersonStatistic();
-            showPersonList();
+            alert(getStatisticsFromNews.getPersonStatistic());
+            var resFlag = getStatisticsFromNews.getPersonStatistic();
+            switch(resFlag) {
+                case 'res':
+                    $scope.objFlags.res = true;
+                    break;
+                case 'req':
+                    $scope.objFlags.req = true;
+                    break;
+                case 'finish':
+                    $scope.objFlags.finish = true;
+                    break;
+            }
+            showPersonList($scope.objFlags);
         }
 
         $scope.searchUser = function() {
             $scope.searchList = [];
             $scope.showUInfo = false;
-            showPersonList();
+            $scope.objFlags.name = $scope.searching;
+            showPersonList($scope.objFlags);
         };
 
         $scope.showInfo = function(item) {

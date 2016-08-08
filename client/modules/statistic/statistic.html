@@ -2,7 +2,8 @@
 
     <img src="assets/images/icons/statistic.png">
     <input type="text" class="form-control" placeholder="Search for name or for email..." ng-model="searching" ng-change="searchUser()">
-    <ul class="listOfSearch card" ng-show="show == true && searching" >
+    <ul class="listOfSearch card">
+    <!--<ul class="listOfSearch card" ng-show="show == true && searching" >-->
 
         <li ng-repeat="item in searchList" ng-click="showInfo(item)">
             <a>{{item.fullName}}</em></a>
