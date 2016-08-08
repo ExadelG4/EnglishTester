@@ -7,7 +7,7 @@
                 url: '/passTest',
                 templateUrl: 'modules/home/user/passTest/passTest.html',
                 controller: 'passTestController',
-                role: ['user']
+                role: ['user', 'guest']
             })
         }
     )

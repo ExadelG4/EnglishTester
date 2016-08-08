@@ -1,16 +1,34 @@
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="start col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-1 col-md-5 col-lg-offset-2 col-lg-4">
-			<button class="btn start-test">START<br>TEST</button>
-		</div>
-		<div class="jjj col-xs-12 col-sm-5 col-md-5 col-lg-4">
-			<div class="info-about-button"> 
-                You can to start to pass the test from {29.06.2016 11:00:00} to {29.06.2016 15:00:00}.
-                You have {2} hour\hours for this.
+<div class="container" ng-controller="guestHomeController">
+    <div class="row">
+        <div class="welcome-all col-xs-12 col-sm-12 col-md-offset-1 col-md-11 col-lg-offset-1 col-lg-11">
+            <div class="welcome-name">
+                Hello, {{firstName}} {{lastName}}
             </div>
-            <!--div>
-            	You can't to start to pass the test.
-            </div-->
+            <div class="welcome">
+                Welcome to English Tester
+            </div>
         </div>
-	</div>
+    </div>
+    <div class="row">
+        <div class="card card-user-home col-xs-12 col-sm-12 col-md-10 col-lg-offset-1 col-lg-8">
+            <div class="start col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                <button class="btn-user btn-start-smile" ng-click="onStartTest()" ui-sref="passTest" ng-disabled="!openNow"></button>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+                <div ng-if="!disStart" class="info-about-button">
+                    Great! You can start to pass the test.<br> From: <span class="date-color-user">{{dateStart}}</span><br>To: <span class="date-color-user">{{dateEnd}}<br></span>
+                    You have 2 hours for this.
+                </div>
+                <div ng-if="disStart" class="info-about-button">
+                	You have successfully passed the test.<br>
+                	Log out, please. Goodbye! 
+                </div>
+            </div>
+            <div class="row" ng-if="openNow">
+                <div class="col-xs-offset-10 col-xs-2 col-sm-offset-11 col-sm-1">
+                    <button class="btn-user btn-start" ng-click="onStartTest()" ui-sref="passTest">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
