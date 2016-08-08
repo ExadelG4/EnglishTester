@@ -27,7 +27,7 @@
       		</div>
           <p class="ads">Level of question</p>
           <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5" required>
-      		<button class="btn-admin btn-submit-que"  ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+      		<button class="btn-admin btn-submit-que"  ng-disabled="main.$invalid|| finalQue.answers[0] === -1" ng-click="sendQue()">Submit</button>
       	</form>
     	</div>
 
@@ -49,7 +49,7 @@
         		</div>
             <p class="ads">Level of question</p>
             <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
-        		<button class="btn-admin btn-submit-que" ng-disabled="main.$invalid" ng-click="sendQue()">Submit</button>
+        		<button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || !someCheckbox()" ng-click="sendQue()">Submit</button>
           </form>
     		</div>
 
@@ -118,7 +118,7 @@
           </div>
           <p class="ads">Level of question</p>
           <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
-          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === ''" ng-click="sendQue()" >Submit</input>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === '' || finalQue.answers[0] === -1" ng-click="sendQue()" >Submit</input>
         </form>
       </div>
 
@@ -144,7 +144,7 @@
           </div>
           <p class="ads">Level of question</p>
           <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
-          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === ''" ng-click="sendQue()">Submit</button>
+          <button class="btn-admin btn-submit-que" ng-disabled="main.$invalid || finalQue.question === '' || !someCheckbox" ng-click="sendQue()">Submit</button>
         </form>
       </div>
 

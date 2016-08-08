@@ -36,6 +36,10 @@
                         {
                             name: 'Add question',
                             state: 'addQuestion'
+                        },
+                        {
+                            name: 'Bad questions',
+                            state: 'badQuestions'
                         }
                     ]
                 }

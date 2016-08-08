@@ -112,6 +112,16 @@ input[type="radio"], input[type="checkbox"] {
     border-color: rgb(99, 249, 168);
 }
 
+.admin-pagi> .active > a, .admin-pagi> .active > a:hover, .admin-pagi> .active > a:focus {
+    background-color: rgb(47, 196, 241);
+    border-color: rgb(47, 196, 241);
+}
+
+.admin-pagi> li > a:hover {
+    background-color: rgb(140, 215, 239);
+    border-color: rgb(140, 215, 239);
+}
+
 .teacher-pagi> .active > a, .teacher-pagi> .active > a:hover, .teacher-pagi> .active > a:focus {
     background-color: rgb(232, 134, 18);
     border-color: rgb(232, 134, 18);
@@ -149,7 +159,8 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .btn-fing {
-    width: 35px;
+    width: 40px;
+    height: 40px;
     margin: 15px 20px 0 20px;
     background-size: contain;
     background-color: rgba(255, 255, 255, 0);
@@ -161,17 +172,22 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .bnt-bad-que {
-    background-image: url(../../../../../assets/images/icons/good-question.png);
-}
-.btn-good-que {
     background-image: url(../../../../../assets/images/icons/bad-question.png);
 }
+.btn-good-que {
+    background-image: url(../../../../../assets/images/icons/good-question.png);
+}
+.btn-hz-que {
+    background-image: url(../../../../../assets/images/icons/hz-question.png);
+}
+
 .btn-fing + .label-fing {
     display: none;
 }
 
 .btn-fing:hover + .label-fing {
     display: inline;
+    font-size: 1.2em;
 }
 
 .label-missing {

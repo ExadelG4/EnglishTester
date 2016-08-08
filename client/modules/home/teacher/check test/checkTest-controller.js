@@ -1,8 +1,8 @@
 (function () {
 	'use strict';
 
-	angular.module('home').controller('checkTestController', ['$scope', '$state','userService','angularPlayer','$rootScope','$timeout',
-		 function($scope, $state, userService, angularPlayer, $rootScope, $timeout) {
+	angular.module('home').controller('checkTestController', ['$scope', '$state','userService','angularPlayer','$rootScope','$timeout','notification',
+		 function($scope, $state, userService, angularPlayer, $rootScope, $timeout, notification) {
 
 		$scope.$on('$stateChangeStart', function () {
 			if (angularPlayer.isPlayingStatus() === true ) {
@@ -10,7 +10,7 @@
 			}
 		});
 
-		/*if($rootScope.checking === true) {
+		if($rootScope.checking === true) {
 			$rootScope.checking = false;
 			var a = {id: $rootScope.idTest};
 			userService.getOneTest(a)
@@ -21,7 +21,7 @@
 		}
 		else {
 			$state.go('home');
-		}*/
+		}
 
 		var startUrl = 'modules/home/teacher/check test/templateTests/templateTest';
 
@@ -32,7 +32,7 @@
 				'speaking': startUrl + '4.html'
 			};
 
-		$scope.allQuestions = [
+		/*$scope.allQuestions = [
 			{
 				qId: '',
 				type: 'questionWithoutChoiceOfAnswers',
@@ -58,9 +58,9 @@
 				question: 'Vladimerski central - ?',
 				answer: 'assets/audio/vcvc.mp3',
 			}
-		];
+		];*/
 
-		//$scope.allQuestions = [];
+		$scope.allQuestions = [];
 		$scope.currentPage = 1;
 		$scope.copyCurrentPage = 1;
 		$scope.forValidMark = [];
@@ -168,7 +168,6 @@
   				notification.success("You have successfully completed check test.");
 			})
 		}
-		$scope.initFirst();
 
 	}]);
 

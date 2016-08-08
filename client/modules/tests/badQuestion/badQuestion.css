@@ -1,0 +1,19 @@
+.div-main-fing {
+	padding-top: 40px;
+}
+
+.div-help {
+	margin-top: -25px;
+	border-bottom-width: 1px;
+    border-bottom-color: rgba(0,0,0,0);
+    border-bottom-style: solid;
+    padding-bottom: 5px;
+}
+
+.label-admin-fing {
+	padding-top: 25px;
+}
+
+.div-choosen {
+	border-bottom-color: rgb(140, 215, 239);
+}

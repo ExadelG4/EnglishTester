@@ -205,6 +205,15 @@
                             .then(function(result) {
                                 return result.data;
                             })
+                    },
+                    getBadQuestions: function() {
+                        return httpService.get(host + '/admin/getComplainted')
+                            .then (function(result) {
+                                return result.data;
+                            })
+                    },
+                    sendBadQuestions: function(data) {
+                        return httpService.post(host + '/admin/blockComplained', data);
                     }
 
 

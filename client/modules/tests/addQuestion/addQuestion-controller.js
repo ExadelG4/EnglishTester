@@ -83,6 +83,15 @@
 				}
 				$scope.finalQue.question = $scope.qqq;
 			};
+
+			$scope.someCheckbox = function() {
+				for(var i = 0; i < $scope.finalQue.answers.length; ++i) {
+					if($scope.finalQue.answers[i] === true) {
+						return true;
+					}
+				}
+				return false;
+			}
 			$scope.removeAnswerItem = function() {
 				if ($scope.finalQue.options.length !== 1) {
 					$scope.finalQue.options.splice($scope.finalQue.options.length - 1, 1);

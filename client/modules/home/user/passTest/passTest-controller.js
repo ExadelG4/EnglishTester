@@ -123,59 +123,6 @@
 		}
 		$timeout(testTimer,1000);
 
-
-		/*$scope.allQuestions = [
-			{
-				qId: '',
-				type: 'oneOfMany',
-				question: 'Mimimi nyanyanya. What you choose?',
-				audio: '',
-				options: [
-					'Mimimi',
-					'Nyanyanya',
-					'No, I am normal man'
-				]
-			},
-			{
-				qId: '',
-				type: 'manyOfMany',
-				question: 'Which colors do you like?',
-				audio: '',
-				options: [
-					'The red',
-					'Cian',
-					'Yellow, mmm'
-				]
-			},
-			{
-				qId: '',
-				type: 'questionWithoutChoiceOfAnswers',
-				question: 'Which colors do you like?',
-			},
-			{
-				qId: '',
-				type: 'listeningWithOneOfMany',
-				question: 'How named this song?',
-				audio: 'assets/audio/papa_roach_-_last_resort(zaycev.net).mp3',
-				options: [
-					'Behind blue eyes',
-					'Last resort',
-					'Riot'
-				]
-			},
-			{
-				qId: '',
-				type: 'listeningWithManyOfMany',
-				question: 'Which albums this band do you like?',
-				audio: 'assets/audio/Three Days Grace - Animal I Have Become.mp3',
-				options: [
-					'One-X',
-					'Life starts now',
-					'TDG'
-				]
-			}
-		];*/
-
 		var isCheckboxType = function(type) {
 			return type === 'manyOfMany' || type === 'listeningWithManyOfMany';
 		};
@@ -294,9 +241,9 @@
 
 		$scope.pageChanged = function(prevNumPage, currentPage) {
     		$scope.savePrevPage(prevNumPage);
-    		if(angularPlayer.getPlaylist().length > 0)
-    			angularPlayer.clearPlaylist( function() {
-    				});    	
+    		if (angularPlayer.isPlayingStatus() === true ) {
+				$timeout( function() {angularPlayer.pause();});
+			}   	
     		$scope.initNewPage(currentPage);
     		$scope.copyCurrentPage = $scope.currentPage;
 

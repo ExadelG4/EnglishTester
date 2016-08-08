@@ -18,11 +18,12 @@
             $scope.updateButtons = function () {
                 $scope.disStart = true;
                 $scope.disReq = true;
-                $scope.close = true;
+                $scope.openNow = false;
 
                 if ($scope.status === 'scha') {
                     $scope.disStart = false;
                     $scope.disReq = true;
+                    $scope.openNow = true;
                 }
                 else if($scope.status === 'free') {
                     $scope.disStart = true;
@@ -33,9 +34,8 @@
                     $scope.disReq = true;
                 }
                 else if ($scope.status === 'open') {
-                    $scope.disStart = true;
+                    $scope.disStart = false;
                     $scope.disReq = true;
-                    $scope.close = false;
                 }
             }
 
