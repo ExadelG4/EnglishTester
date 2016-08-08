@@ -79,7 +79,8 @@ function result(id, ans){
 		resultRecord.result.autoMark = data.autoMark;
 		resultRecord.result.teacherMark = rez;
 		resultRecord.result.level = data.level;
-		resultRecord.result.totalMark = data.autoMark * 0.3 + rez*0.7;
+		var total = data.autoMark * 0.3 + rez*0.7;
+		resultRecord.result.totalMark = Math.round(total);
 		//((data.level - 1)*20) + (rez*0.2);
 		resultRecord.teacherId = data.teacherId;
 		resultRecord.teacherFirstName = data.teacherFirstName;

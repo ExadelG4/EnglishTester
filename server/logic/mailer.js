@@ -22,8 +22,8 @@ var mailOptions={
         text : 'Your Text',
         html : 'HTML GENERATED'
     };
-
-        smtpTransport.sendMail(mailOptions, function(error, response){
+function sendMail(options){
+     smtpTransport.sendMail(options, function(error, response){
             if(error){
                 console.log(error);
                 
@@ -32,5 +32,26 @@ var mailOptions={
                
             }
         });
+}
+
+function sendMails(people,options){
+     people.forEach(function(element){
+        options.to = element;
+             smtpTransport.sendMail(options, function(error, response){
+                if(error){
+                     console.log(error);
+                
+                }else{
+                    console.log("Message sent: " + response.message);
+               
+                }
+             });
+     });
+    
+}
+
+module.exports.sendMail = sendMail;
+module.exports.sendMails = sendMails;
+       
    
 
