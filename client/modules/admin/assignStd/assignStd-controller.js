@@ -77,8 +77,7 @@
         };
 
         $scope.addStudent = function() {
-            var userId = currentStudent._id;
-            var newStudent = new stdConstructor(userId, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
+            var newStudent = new stdConstructor(currentStudent._id, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
 
             chooseUserList.push(newStudent);
             $scope.showList.push(currentStudent.fullName + ' (' + currentStudent.email + ')');
@@ -110,6 +109,7 @@
         };
 
         $scope.submitStudentsList = function() {
+            console.log(chooseUserList);
             userService.assignStudents(chooseUserList).then(function() {
                 $scope.checkUsersList($scope.currentValue);
             });

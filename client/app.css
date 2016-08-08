@@ -28,6 +28,22 @@ button, .input-btn {
     font-weight: normal;
 }
 
+.btn, input, select, option, li, textarea, p, a, span {
+    font-family: 'Pavanam', sans-serif;
+    font-weight: normal;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Pavanam', sans-serif;
+    font-weight: bold;
+}
+
+label {
+    font-family: 'Pavanam', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 .btn-user{
     background-color: rgb(91, 212, 145);
 }
@@ -67,6 +83,7 @@ button, .input-btn {
 
 h1, h2, h3, h4, h5 {
     text-align: center;
+    display: inline-block;
 }
 
 input[type="text"], input[type="email"], input[type="password"] {

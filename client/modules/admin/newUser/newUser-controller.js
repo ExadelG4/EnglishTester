@@ -5,6 +5,8 @@
             function ($scope, userService, notification) {
 
                 $scope.phnumberMd = '+375';
+                $scope.dt = new Date();
+                $scope.dt2 = new Date();
 
                 $scope.newUser = function () {
                     var dateStart = $scope.dt.getTime() + $scope.mytime.getHours() + $scope.mytime.getMinutes();

@@ -33,11 +33,15 @@
 /*}*/
 
 .btn-block {
-    width: 100%;
     text-align: center;
 }
 
 .submit-tch {
     width: 25%;
     margin: 10px;
+}
+
+.comment {
+    color: gray;
+    padding: 10px;
 }
