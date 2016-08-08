@@ -24,6 +24,10 @@
     padding-right: 3%;
 }
 
+    .showUserInfo .wrapperShedule {
+        margin-top: 20px;
+    }
+
     .showUserInfo input {
         display: block;
         height: 45px;
