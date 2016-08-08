@@ -1,13 +1,17 @@
 (function() {
     angular.module('myApp')
-        .service('getObjToChartCtrl', [function(){
+        .service('getObjToChart', ['$q', function($q){
             var modelStatistic;
             return {
                 setPersonObj: function(item) {
                     modelStatistic = item;
                 },
 
-                getPersonObj: function() {
+                getPersonPromise: function() {
+                    return $q.when(modelStatistic);
+                },
+
+                getPersonObj: function () {
                     return modelStatistic;
                 }
 
