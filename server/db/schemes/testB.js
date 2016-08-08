@@ -23,6 +23,10 @@ var TestBScheme = new Schema(
 		complaint:{
 			type: Boolean,
 			default: false
+		},
+		bad: {
+			type: Boolean,
+			default: false
 		}
 	});
 	

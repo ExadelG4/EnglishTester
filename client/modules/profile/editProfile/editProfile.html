@@ -48,7 +48,7 @@
         </div>
 
         <div ng-controller="myCtrl" class="graphicWrapper">
-            <bars-chart chart-data="myData"></bars-chart>
+            <bars-chart ng-if="loaded" chart-data="myData" ></bars-chart>
         </div>
 
     </div>

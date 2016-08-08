@@ -1,4 +1,4 @@
- <p class="card" ng-show="model.list != []">
+ <p class="card" ng-show="model.list.length">
      <img src="{{model.imageLink}}">
      <!--<message></message>-->
      <span ng-repeat="user in model.list track by $index"><a ng-click="goToStat()">{{user.firstName}} {{user.lastName}}, </a></span>{{model.messageText}}

@@ -92,19 +92,26 @@
         // var t = 50; var s = 80; var m = 60; var g = 45; var b = 25;
 
         $scope.myData = [];
+
         function getChartData () {
             userService.getProfileStatistics().then(
                 function(data) {
                     var arr = [];
-                    data.results.forEach(function(item, i) {
+                    data.results.map(function(item, i) {
                         debugger;
-                        $scope.myData[i] = (item.result.autoMark + item.result.teacherMark + 10)/2;
+                        $scope.myData[i] = item.result.totalMark;
                     });
+
                 }
             ).then(function() {
                 console.log($scope.myData);
+                $scope.loaded = true;
             })
         }
+
+            $scope.$watch("myData", function(newValue, oldValue) {
+
+            });
 
         getChartData();
         // $scope.myData = [t, s, m, g, b];
