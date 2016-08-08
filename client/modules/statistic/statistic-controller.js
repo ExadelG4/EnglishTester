@@ -16,6 +16,7 @@
         };
         $scope.showSearchList = function(value) {
             $scope.searching = '';
+            $scope.objFlags.name = '';
             switch (value) {
                 case 'userReq':
                     $scope.objFlags.req = true;
