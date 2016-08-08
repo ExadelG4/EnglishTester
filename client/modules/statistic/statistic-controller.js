@@ -8,7 +8,7 @@
         $scope.showUInfo = false;
 
         $scope.objFlags = {
-            name: '',
+            name: "",
             res: false,
             req: false,
             finish: false
@@ -23,7 +23,12 @@
                 });
             }).then (function() {
                 getStatisticsFromNews.setPersonStatistic();
-                console.log(getStatisticsFromNews.getPersonStatistic());
+                $scope.objFlags = {
+                    name: "",
+                    res: false,
+                    req: false,
+                    finish: false
+                };
             })
         }
 
