@@ -6,10 +6,17 @@
     padding: 20px;
     width: 65%;
     font-size: medium;
+    position: relative;
 }
 
 .news img {
     height: 50px;
     width: 50px;
     padding: 5px;
+}
+
+.news button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
