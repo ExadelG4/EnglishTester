@@ -152,8 +152,8 @@ function checkTest(testId, tId){
 
 function blockComplained(A, B){
 	var pr = q.defer();
-	testA.update({_id : {$in : A}},{ $set: { bad: true }},{}).then(function(data){
-		testB.update({_id : {$in : B}},{ $set: { bad: true }},{}).then(function(data){
+	testA.update({_id : {$in : A}},{ $set: { bad: true, complaint: false }},{}).then(function(data){
+		testB.update({_id : {$in : B}},{ $set: { bad: true, complaint: false }},{}).then(function(data){
 			pr.resolve();
 		}).catch(function(err){
 			pr.reject(err);
@@ -164,7 +164,7 @@ function blockComplained(A, B){
 	return pr.promise;
 }
 
-function blockComplained(A, B){
+function disblockComplained(A, B){
 	var pr = q.defer();
 	testA.update({_id : {$in : A}},{ $set: { complaint: false, bad : false }},{}).then(function(data){
 		testB.update({_id : {$in : B}},{ $set: { complaint: false, bad : false }},{}).then(function(data){
@@ -200,3 +200,4 @@ module.exports.checkTest = checkTest;
 module.exports.findA = findA;
 module.exports.findB = findB;
 module.exports.blockComlained = blockComplained;
+module.exports.disblockComlained = disblockComplained;

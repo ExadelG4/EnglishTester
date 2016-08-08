@@ -58,6 +58,10 @@ header a:focus {
     margin-right: -5px;
 }
 
+.panel-heading h4{
+    display: block;
+}
+
 .header-block .dropdown-toggle {
     padding: 0;
 }

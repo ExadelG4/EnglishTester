@@ -16,7 +16,6 @@
                 });
 
                 $scope.showInfoNews = function(item) {
-                    console.log(item);
                     getStatisticsFromNews.setPersonStatistic(item);
                     $state.go('statistics');
                 };
