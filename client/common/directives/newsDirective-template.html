@@ -1,6 +1,6 @@
- <p class="card" ng-show="model.list.length">
+  <p class="card card-admin-home" ng-show="model.list.length">
      <img src="{{model.imageLink}}">
      <!--<message></message>-->
-     <span ng-repeat="user in model.list track by $index"><a ng-click="goToStat()">{{user.firstName}} {{user.lastName}}, </a></span>{{model.messageText}}
-     <button type="button" class="btn btn-admin" ng-click="newsButtonClick()">{{model.buttonText}}</button>
+     <span ng-repeat="user in model.list track by $index"><a ng-click="personClick()">{{user.firstName}} {{user.lastName}}, </a></span>{{model.messageText}}
+     <button type="button" class="btn-admin btn-news" ng-click="newsButtonClick()">{{model.buttonText}}</button>
  </p>
