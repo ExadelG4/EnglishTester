@@ -1,6 +1,6 @@
-  <p class="card card-admin-home" ng-show="model.list.length">
+ <p class="card card-admin-home" ng-if="model.list.length">
      <img src="{{model.imageLink}}">
      <!--<message></message>-->
-     <span ng-repeat="user in model.list track by $index"><a ng-click="personClick()">{{user.firstName}} {{user.lastName}}, </a></span>{{model.messageText}}
-     <button type="button" class="btn-admin btn-news" ng-click="newsButtonClick()">{{model.buttonText}}</button>
+     <span ng-if="model.list.length < 4" ng-repeat="user in model.list track by $index"><a ng-click="personClick()">{{user.firstName}} {{user.lastName}}</a><span ng-if="!$last">, </span></span><span ng-if="model.list.length > 3"><a ng-click="personClick()">{{model.list.length}} people</a></span> {{model.messageText}}
+     <button type="button" class="btn btn-admin" ng-click="newsButtonClick()">{{model.buttonText}}</button>
  </p>

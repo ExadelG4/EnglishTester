@@ -152,7 +152,7 @@
                     },
 
                     searchUser: function(data) {
-                        return httpService.post(host + '/admin/getFromReg', {name: data})
+                        return httpService.post(host + '/admin/getFromReg', data)
                             .then (function(result) {
                                 return result.data;
                         })

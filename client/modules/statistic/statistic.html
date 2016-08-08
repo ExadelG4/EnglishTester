@@ -2,7 +2,7 @@
 
     <img src="assets/images/icons/statistic.png">
     <input type="text" class="form-control input-admin" placeholder="Search for name or for email..." ng-model="searching" ng-change="searchUser()">
-    <ul class="listOfSearch card" ng-show="show == true && searching" >
+    <ul class="listOfSearch card">
 
         <li ng-repeat="item in searchList" ng-click="showInfo(item)">
             <a>{{item.fullName}}</em></a>
@@ -18,4 +18,25 @@
     <input type="text" size="40" ng-model="tel" ng-value="'Phone number: ' + choosenUser.tel" class="disable" disabled>
     <input type="text" size="40" ng-model="assignTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of assign tests: ' + choosenUser.assignTest" class="disable" disabled>
     <input type="text" size="40" ng-model="totalTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of total tests: ' + choosenUser.totalTests" class="disable" disabled>
+    <div class="wrapperShedule card" ng-if="choosenUser.role == 'user' ">
+
+        <div class="namesOfShedule">
+            <ul>
+                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
+                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Pre-Intermediate</span></li>
+                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Intermediate</span></li>
+                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Upper-Intermediate</span></li>
+                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Advance</span></li>
+                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Native</span></li>
+            </ul>
+        </div>
+        <br>
+
+        <div>
+            <hr>
+        </div>
+        <div ng-controller="chartCtrl" class="graphicWrapper" ng-if="choosenUser.role == 'user'">
+            <bars-chart ng-if="loaded" chart-data="myData" ></bars-chart>
+        </div>
+    </div>
 </div>

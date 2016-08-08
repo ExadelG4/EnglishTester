@@ -108,7 +108,7 @@ router.get('/getTeachers',passport.authenticate('jwt', { session: false }), func
 
 router.get('/getFinishedUsers', passport.authenticate('jwt', { session: false }),function(req, res){
 	roleSecurity(req,res,'admin',function(){
-		service.getFinishedList({'pasword':0}).then(function (data) {
+		service.getFinishedList(false,{'pasword':0}).then(function (data) {
 				res.json(data);
 			}).catch(function (err) {
 				res.status(400).send(err);
@@ -118,7 +118,7 @@ router.get('/getFinishedUsers', passport.authenticate('jwt', { session: false })
 });
 router.get('/getFinishedUsersNames', passport.authenticate('jwt', { session: false }),function(req, res){
 	roleSecurity(req,res,'admin',function(){
-			service.getFinishedList({'_id':0,'firstName': 1, 'lastName':1}).then(function (data) {
+			service.getFinishedList(false,{'_id':0,'firstName': 1, 'lastName':1}).then(function (data) {
 					res.json(data);
 				}).catch(function (err) {
 					
@@ -182,14 +182,11 @@ router.get('/getResultsNames',passport.authenticate('jwt', { session: false }), 
 })
 router.post('/getFromReg',contracts.getFromReg,passport.authenticate('jwt', { session: false }),function(req, res) { 
 	roleSecurity(req,res,'admin',function(){
-			var a = req.body.name;
-			var b = a;
-			var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
-			service.find({ fullName: new RegExp(c, "i") }, { '_id': 1, 'firstName': 1, 'lastName': 1, 'email': 1 }, {}).then(function (data) {
+			service.statisticsFind(req.body).then(function(data){
 				res.send(data);
-			}).catch(function (err) {
+			}).catch(function(err){
 				res.status(400).send(err);
-			});
+			})
   	});
 	
 

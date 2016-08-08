@@ -1,4 +1,3 @@
-
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport");
 
@@ -29,7 +28,6 @@ var mailOptions={
                 console.log(error);
                 
             }else{
-                console.log(response.response.toString());
                 console.log("Message sent: " + response.message);
                
             }
