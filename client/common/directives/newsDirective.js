@@ -13,7 +13,6 @@ angular.module('directives').directive('newsDirective', ['$state', 'getStatistic
                 $state.go($scope.model.goTo);
             };
             $scope.personClick = function() {
-                alert($scope.model.typeFlag);
                 getStatisticsFromNews.setPersonStatistic($scope.model.typeFlag);
                 $state.go('statistics');
 

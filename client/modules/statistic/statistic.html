@@ -2,6 +2,24 @@
 
     <img src="assets/images/icons/statistic.png">
     <input type="text" class="form-control input-admin" placeholder="Search for name or for email..." ng-model="searching" ng-change="searchUser()">
+
+    <label class="control control--radio">Users request
+        <input type="radio" name="browser" value="userReq" ng-model="listUserReq" ng-click="showSearchList(listUserReq)" ng-checked="checked1">
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--radio">For teacher assign
+        <input type="radio" name="browser" value="teacherReq" ng-model="listforTchAssign" ng-click="showSearchList(listforTchAssign)" ng-checked="checked2">
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--radio">Finished test
+        <input type="radio" name="browser" value="finishTest" ng-model="finishList" ng-click="showSearchList(finishList)" ng-checked="checked3">
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--radio">Free users
+        <input type="radio" name="browser" value="free" ng-model="freeList" ng-click="showSearchList(freeList)" ng-checked="checked4">
+        <div class="control__indicator"></div>
+    </label>
+
     <ul class="listOfSearch card">
 
         <li ng-repeat="item in searchList" ng-click="showInfo(item)">
@@ -18,7 +36,7 @@
     <input type="text" size="40" ng-model="tel" ng-value="'Phone number: ' + choosenUser.tel" class="disable" disabled>
     <input type="text" size="40" ng-model="assignTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of assign tests: ' + choosenUser.assignTest" class="disable" disabled>
     <input type="text" size="40" ng-model="totalTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of total tests: ' + choosenUser.totalTests" class="disable" disabled>
-    <div class="wrapperShedule card" ng-if="choosenUser.role == 'user' ">
+    <div class="wrapperShedule card" ng-if="choosenUser.role == 'user' || choosenUser.role == 'guest'">
 
         <div class="namesOfShedule">
             <ul>
@@ -35,7 +53,7 @@
         <div>
             <hr>
         </div>
-        <div ng-controller="chartCtrl" class="graphicWrapper" ng-if="choosenUser.role == 'user'">
+        <div ng-controller="chartCtrl" class="graphicWrapper">
             <bars-chart ng-if="loaded" chart-data="myData"></bars-chart>
         </div>
     </div>
