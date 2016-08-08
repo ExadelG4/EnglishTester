@@ -227,4 +227,14 @@ router.post('/blockComplained',passport.authenticate('jwt', { session: false }),
 	
 });
 
+router.post('/disblockComplained',function(req, res){
+	testService.disblockComlained(req.body.A,req.body.B).then(function(data){
+				res.send('ok');
+			}).catch(function(err){
+				res.status(400).send(err);
+		});
+});
+
+
+
 module.exports = router;

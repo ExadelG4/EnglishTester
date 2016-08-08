@@ -24,6 +24,10 @@ var TestAScheme = new Schema(
 			type: Boolean,
 			default: false
 		},
+		bad: {
+			type: Boolean,
+			default: false
+		},
 		options: [],
 		answers: []
 
