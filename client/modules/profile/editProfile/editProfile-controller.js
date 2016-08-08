@@ -46,7 +46,7 @@
     }]);
 
 
-    angular.module('personalProfile').directive('barsChart', function ($parse) {
+    angular.module('myApp').directive('barsChart', function ($parse) {
         //explicitly creating a directive definition variable
         //this may look verbose but is good for clarification purposes
         //in real life you'd want to simply return the object {...}
@@ -98,23 +98,14 @@
                 function(data) {
                     var arr = [];
                     data.results.map(function(item, i) {
-                        debugger;
                         $scope.myData[i] = item.result.totalMark;
                     });
-
+                    $scope.loaded = true;
                 }
-            ).then(function() {
-                console.log($scope.myData);
-                $scope.loaded = true;
-            })
+            )
         }
 
-            $scope.$watch("myData", function(newValue, oldValue) {
-
-            });
-
         getChartData();
-        // $scope.myData = [t, s, m, g, b];
     }]);
 
 
