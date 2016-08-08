@@ -8,6 +8,7 @@
 
 .input-option {
 	display: inline-block;
+	width: 80%;
 }
 
 .btn-submit-que {
@@ -32,7 +33,7 @@
 	margin: 10px 0 10px 10px;
     font-size: 1.5em;
     font-family: 'Pavanam', sans-serif;
-	display: inline-block;
+	display: block;
 }
 
 .add-question .options {
@@ -44,7 +45,7 @@
 	margin-bottom: 10px;
 	padding: 10px;
 	resize: none;
-	width: 100%;
+	width: 80%;
 	height: 200px;
 	border-color: rgb(204,204,204);
 }
