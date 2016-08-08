@@ -70,7 +70,9 @@ router.post('/editNumber',passport.authenticate('jwt', { session: false }),funct
 });
 
 router.get('/profile',passport.authenticate('jwt', { session: false }), function(req,res){
+		
 		service.userStatistics(req.user._id).then(function (data) {
+			
 			res.send(data);
 		}).catch(function (err) {
 			res.status(401).send(err);

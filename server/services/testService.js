@@ -154,6 +154,7 @@ function blockComplained(A, B){
 	var pr = q.defer();
 	testA.update({_id : {$in : A}},{ $set: { bad: true, complaint: false }},{}).then(function(data){
 		testB.update({_id : {$in : B}},{ $set: { bad: true, complaint: false }},{}).then(function(data){
+			console.log('ya dro4y pravoi');
 			pr.resolve();
 		}).catch(function(err){
 			pr.reject(err);
@@ -168,6 +169,7 @@ function disblockComplained(A, B){
 	var pr = q.defer();
 	testA.update({_id : {$in : A}},{ $set: { complaint: false, bad : false }},{}).then(function(data){
 		testB.update({_id : {$in : B}},{ $set: { complaint: false, bad : false }},{}).then(function(data){
+			console.log('ya dro4y levoi');
 			pr.resolve();
 		}).catch(function(err){
 			pr.reject(err);
