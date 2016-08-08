@@ -1,7 +1,26 @@
 <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 statistics">
 
+    <label class="control control--radio">Users request
+        <input type="radio" name="browser" value="userReq" ng-model="listUserReq" ng-click="showSearchList(listUserReq)" ng-checked="checked1">
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--radio">For teacher assign
+        <input type="radio" name="browser" value="teacherReq" ng-model="listforTchAssign" ng-click="showSearchList(listforTchAssign)" ng-checked="checked2">
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--radio">Finished test
+        <input type="radio" name="browser" value="finishTest" ng-model="finishList" ng-click="showSearchList(finishList)" ng-checked="checked3">
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--radio">Free users
+        <input type="radio" name="browser" value="free" ng-model="freeList" ng-click="showSearchList(freeList)" ng-checked="checked4">
+        <div class="control__indicator"></div>
+    </label>
+    <br>
+
     <img src="assets/images/icons/statistic.png">
     <input type="text" class="form-control input-admin" placeholder="Search for name or for email..." ng-model="searching" ng-change="searchUser()">
+
     <ul class="listOfSearch card">
 
         <li ng-repeat="item in searchList" ng-click="showInfo(item)">
@@ -18,24 +37,31 @@
     <input type="text" size="40" ng-model="tel" ng-value="'Phone number: ' + choosenUser.tel" class="disable" disabled>
     <input type="text" size="40" ng-model="assignTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of assign tests: ' + choosenUser.assignTest" class="disable" disabled>
     <input type="text" size="40" ng-model="totalTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of total tests: ' + choosenUser.totalTests" class="disable" disabled>
-    <div class="wrapperShedule card" ng-if="choosenUser.role == 'user' ">
 
-        <div class="namesOfShedule">
-            <ul>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Pre-Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Upper-Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Advance</span></li>
-            </ul>
-        </div>
-        <br>
+    <div class="wrapperShedule card" ng-controller="chartCtrl" ng-if="choosenUser.role == 'user' || choosenUser.role == 'guest'">
+        <div ng-if="myData.length">
+            <div class="namesOfShedule">
+                <ul>
+                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
+                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Pre-Intermediate</span></li>
+                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Intermediate</span></li>
+                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Upper-Intermediate</span></li>
+                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Advance</span></li>
+                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Native</span></li>
+                </ul>
+            </div>
+            <br>
 
-        <div>
-            <hr>
+
+            <div>
+                <hr>
+            </div>
+            <div class="graphicWrapper" ng-if="myData.length">
+                <bars-chart ng-if="loaded" chart-data="myData"></bars-chart>
+            </div>
         </div>
-        <div ng-controller="chartCtrl" class="graphicWrapper" ng-if="choosenUser.role == 'user'">
-            <bars-chart ng-if="loaded" chart-data="myData"></bars-chart>
+        <div ng-if="!myData.length">
+            <h3>This person hasn't passed the test yet.</h3>
         </div>
     </div>
 </div>
