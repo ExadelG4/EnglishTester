@@ -97,7 +97,7 @@
 }
 
 @media (max-device-width: 767px) {
-	.card .btn-start {
+	.card-user-home .btn-start {
 		display: block;
 		float: right;
 	}

@@ -57,7 +57,8 @@
 
 
                     }
-                    else if($scope.choosen === 'editProfile') {
+                    else if($scope.choosen === 'editProfile' ||
+                            $scope.choosen === 'checkMicrophone') {
                         $scope.forChoise[$scope.menuLength - 1] = true;
                     }
                 }

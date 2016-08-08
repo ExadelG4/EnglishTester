@@ -6,9 +6,9 @@
 					{{$index + 1}}/{{totalCount}}
 				</label>
 					<sound-manager>
-	    				<div class="seekBase" seek-track>
-	    					<div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
-						</div>
+	    				<div class="seekBase seekBase-teacher" seek-track>
+      						<div class="seekLoad seekLoad-teacher" ng-style="{width : ( progress + '%' ) }"></div>
+   						</div>
 						<button music-player="play" add-song="forSong[$index]" class="btn-teacher btn-music btn-music-play" ng-click="startPlay()" ng-if="!isPlayingMy"></button>
 						<button play-music class="btn-teacher btn-music btn-music-play" ng-if="isPlayingMy"></button>
 						<button pause-music class="btn-teacher btn-music btn-music-pause"></button>
