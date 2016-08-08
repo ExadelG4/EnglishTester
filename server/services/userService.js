@@ -149,7 +149,7 @@ function getUserStatus(_userId){
     
 }
 
-function getFinishedList(options){
+function getFinishedList(flag,options,reg){
     var defer = q.defer();
     stackService.findStack({teacherId:'none'},{'userId': 1,'answers':1},{}).then(function (data) {
         var noobsId =[];
@@ -166,12 +166,22 @@ function getFinishedList(options){
        
         stackService.removeStackCollection({userId : {$in : noobsId}}).then(function(data){
             update({_id : {$in:noobsId}},{ $set: { status: 'free' }},{multi: true}).then(function(data){
-                user.find({'_id': {$in:arrayId}},options,{}).then(function (data_) {
-                    defer.resolve(data_);
-                }).catch(function (err) {
-                     defer.reject(err);
-                 });
+               
                 
+                if(flag == true){
+                    user.find({'_id': {$in:arrayId},$or:[{'firstName': new RegExp(reg, "i")},{'lastName': new RegExp(reg, "i")},{'email': new RegExp(reg, "i")}]},options,{}).then(function (data_) {
+                        defer.resolve(data_);
+                    }).catch(function (err) {
+                        defer.reject(err);
+                    });
+                }
+                else {
+                    user.find({'_id': {$in:arrayId}},options,{}).then(function (data_) {
+                        defer.resolve(data_);
+                    }).catch(function (err) {
+                        defer.reject(err);
+                    });
+                }
             }).catch(function(err){
                 defer.reject(err);
             });
@@ -405,6 +415,65 @@ function assignStudents(students){
     return prom.promise;
 }
 
+function statisticsFind(body){
+    var prom = q.defer();
+            var a = body.name;
+            var b = a;
+            var c = b.replace(/(\.|\\|\+|\*|\?|\[|\^|\]|\$|\(|\)|\{|\}|\=|\!|\<|\>|\||\:|\-)/g, '\\$1');
+            if(body.name!="" && body.res != true && body.req != true && body.finish != true){
+                find({ fullName: new RegExp(c, "i") }, { '_id': 1, 'firstName': 1, 'lastName': 1, 'email': 1 }, {}).then(function (data) {
+                   prom.resolve(data);
+                }).catch(function (err) {
+                    prom.reject(err);
+                });
+            } 
+            else if(body.name=="" && body.res != true && body.req != true && body.finish != true){
+                var arr =[];
+                prom.resolve(arr);
+            }
+            else if(body.res == true){
+                stackService.findResults({ $or:[{'firstName': new RegExp(c, "i")},{'lastName': new RegExp(c, "i")},{'email': new RegExp(c, "i")}] }, { '_id': 0, 'firstName': 1, 'lastName': 1, 'email': 1,'userId':1 }, {}).then(function (data) {
+                   var arr = [];
+                   data.forEach(function(element){
+                        var user ={};
+                        user.firstName = element.firstName;
+                        user.lastName = element.lastName;
+                        user.email = element.email;
+                        user._id = element.userId;
+                        arr.push(user);
+                   });
+                   prom.resolve(arr)
+                }).catch(function (err) {
+                    prom.reject(err);
+                });
+            }
+            else if(body.req == true){
+                 stackService.findRequest({ $or:[{'firstName': new RegExp(c, "i")},{'lastName': new RegExp(c, "i")},{'email': new RegExp(c, "i")}] }, { '_id': 0, 'firstName': 1, 'lastName': 1, 'email': 1,'userId':1 }, {}).then(function (data) {
+                   var arr = [];
+                   data.forEach(function(element){
+                        var user ={};
+                        user.firstName = element.firstName;
+                        user.lastName = element.lastName;
+                        user.email = element.email;
+                        user._id = element.userId;
+                        arr.push(user);
+                   });
+                   prom.resolve(arr);
+                }).catch(function (err) {
+                    prom.reject(err);
+                });
+            }
+            else if(body.finish == true){
+                
+                getFinishedList(true,{ '_id': 1, 'firstName': 1, 'lastName': 1, 'email': 1 },c).then(function (data) {
+                   prom.resolve(data);
+                }).catch(function (err) {
+                    prom.reject(err);
+                });
+            }
+    return prom.promise;
+}
+
 module.exports.getAllUsers = getAllUsers;
 module.exports.addNewUser = addNewUser;
 module.exports.addNewUsers = addNewUsers;
@@ -423,4 +492,4 @@ module.exports.userStatistics = userStatistics;
 module.exports.getTeachers = getTeachers;
 module.exports.getTeacherStatus = getTeacherStatus;
 module.exports.assignStudents = assignStudents;
-
+module.exports.statisticsFind = statisticsFind;
