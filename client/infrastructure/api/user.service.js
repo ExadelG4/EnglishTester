@@ -214,6 +214,9 @@
                     },
                     sendBadQuestions: function(data) {
                         return httpService.post(host + '/admin/blockComplained', data);
+                    },
+                    sendGoodQustions: function(data) {
+                        return httpService.post(host + '/admin/disblockComplained', data);
                     }
 
 

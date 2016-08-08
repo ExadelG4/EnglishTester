@@ -74,20 +74,46 @@
 			$scope.pageChanged($scope.copyCurrentPage, numPage);
 		};
 
-		$scope.sendBadQuestions = function() {
-			$scope.adminSayAll = [];
+		$scope.sendQuestions = function() {
+			$scope.adminSayBad = {
+				A:[],
+				B:[]
+			}
+			$scope.adminSayGood = {
+				A:[],
+				B:[]
+			}
 			for (var i = 0; i < $scope.totalCount; ++ i) {
-				if($scope.adminSay[i].normal === true || $scope.adminSay[i].normal === false ){
-					$scope.adminSayAll.push($scope.adminSay[i]);
+				if ($scope.allQuestions[i].type === 'oneOfMany' || 
+					$scope.allQuestions[i].type === 'manyOfMany' ||
+					$scope.allQuestions[i].type === 'listeningWithManyOfMany' ||
+					$scope.allQuestions[i].type === 'listeningWithOneOfMany') {
+
+					if($scope.adminSay[i].normal === true){
+						$scope.adminSayGood.A.push($scope.adminSay[i].qId);
+					}
+					else if($scope.adminSay[i].normal === false ){
+						$scope.adminSayBad.A.push($scope.adminSay[i].qId);
+					}
+				}
+				else {
+					if($scope.adminSay[i].normal === true){
+						$scope.adminSayGood.B.push($scope.adminSay[i].qId);
+					}
+					else if($scope.adminSay[i].normal === false ){
+						$scope.adminSayBad.B.push($scope.adminSay[i].qId);
+					}
 				}
 			}
-			userService.sendBadQuestions($scope.adminSayAll)
+			userService.sendBadQuestions($scope.adminSayBad)
 				.then( function() {
-					$state.go('home');
-					notification.success("You have successfully send some questions");
+					userService.sendGoodQuestions($scope.adminSayGood)
+						.then( function() {
+							$state.go('home');
+							notification.success("You have successfully send some questions");
+						})
 				})
 		}
 
     }])
-
 })();
