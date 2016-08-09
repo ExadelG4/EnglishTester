@@ -77,7 +77,6 @@
         }
 
         $scope.searchUser = function() {
-            $scope.searchList = [];
             $scope.showUInfo = false;
             $scope.objFlags.name = $scope.searching;
             showPersonList($scope.objFlags);
