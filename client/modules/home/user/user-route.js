@@ -1,5 +1,5 @@
 (function(){
-    angular.module('home').config(
+    angular.module('home').config(['$stateProvider', '$urlRouterProvider', 
         function($stateProvider, $urlRouterProvider) {
 
             $stateProvider
@@ -10,5 +10,5 @@
                 role: ['user', 'guest']
             })
         }
-    )
+    ])
 })();

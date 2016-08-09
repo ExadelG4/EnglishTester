@@ -166,7 +166,7 @@
 			$scope.allQuestions = result;
 			$scope.totalCount = $scope.allQuestions.length;
 
-			for (let i = 0; i < $scope.totalCount; ++i) {
+			for (var i = 0; i < $scope.totalCount; i++) {
 				var tempAnswer = {
 					qId: '',
 					answer: [],

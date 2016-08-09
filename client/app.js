@@ -1,11 +1,9 @@
 (function () {
     angular.module('myApp', [
+        'directives',
         'ui.router',
         'login',
         'infrastructure',
-        'home',
-        'admin',
-        'tests',
         'personalProfile',
         'statistic',
         'angularSoundManager',
@@ -15,6 +13,8 @@
         'nya.bootstrap.select',
         'toaster',
         'ngAnimate',
-        'directives'
+        'admin',     
+        'home',   
+        'tests'
     ]);
 })();
