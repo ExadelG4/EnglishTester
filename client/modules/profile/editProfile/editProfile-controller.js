@@ -9,13 +9,6 @@
 
                 userService.getProfileStatistics().then(
                     function(data) {
-                        console.log(data);
-                        $scope.testData = data.results.map(function(item) {
-                            console.log(item.date);
-                            var buf = new Date(item.date);
-                            console.log(buf);
-                            return (buf.getDate() + '.' + buf.getMonth() + '.' + buf.getFullYear());
-                        });
                         $scope.userProfile.name = data.firstName + ' ' + data.lastName;
                         $scope.userProfile.email = data.email;
                         $scope.userProfile.telNumber = data.number;
@@ -23,9 +16,15 @@
                         $scope.userProfile.assignTests = data.assignTest;
                         $scope.results = data.results;
                         $scope.role = data.role;
-                        $scope.myData = data.results.map(function(item, i) {
-                            return item.result.totalMark;
-                        })
+                        if(data.results) {
+                            $scope.testData = data.results.map(function(item) {
+                                var buf = new Date(item.date);
+                                return (buf.getDate() + '.' + buf.getMonth() + '.' + buf.getFullYear());
+                            });
+                            $scope.myData = data.results.map(function(item, i) {
+                                return item.result.totalMark;
+                            })
+                        }
                     }
                 );
 
