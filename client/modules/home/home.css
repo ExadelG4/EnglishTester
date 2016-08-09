@@ -11,6 +11,7 @@
     transition: all 500ms;
     font-family: 'Oxygen', sans-serif;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .card:hover {

@@ -15,6 +15,7 @@
             finish: false
         };
         $scope.showSearchList = function(value) {
+            $scope.showUInfo = false;
             $scope.searching = '';
             $scope.objFlags.name = '';
             switch (value) {
