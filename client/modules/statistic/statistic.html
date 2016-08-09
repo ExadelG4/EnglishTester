@@ -41,12 +41,7 @@
         <div ng-if="myData.length && loaded">
             <div class="namesOfShedule">
                 <ul>
-                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
-                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Pre-Intermediate</span></li>
-                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Intermediate</span></li>
-                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Upper-Intermediate</span></li>
-                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Advance</span></li>
-                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Native</span></li>
+                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="level in levels"><span>{{level.name}}</span></li>
                 </ul>
             </div>
             <br>

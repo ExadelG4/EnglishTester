@@ -101,5 +101,26 @@
                $scope.choosenUser.totalTests = data.totalTests;
            })
         };
+
+        $scope.levels = [
+            {
+                name: 'Begginer',
+            },
+            {
+                name: 'Pre-Intermediate',
+            },
+            {
+                name: 'Intermediate',
+            },
+            {
+                name: 'Upper-Intermediate',
+            },
+            {
+                name: 'Advance',
+            },
+            {
+                name: 'Native',
+            },
+        ]
     }]);
 })();

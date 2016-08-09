@@ -28,6 +28,17 @@
             });
         }
 
+        function clear() {
+            $scope.stdName = '';
+            $scope.stdMail = '';
+            $scope.stdTel = '';
+            $scope.tchName = '';
+            $scope.tchMail = '';
+            $scope.tchTel = '';
+            $scope.selectedItem2 = '';
+            $scope.selectedItem3 = '';
+        }
+
 
         $scope.chooseTeacher = function(item) {
             $scope.tchName = item.fullName;
@@ -50,18 +61,9 @@
                 updateTeacherList();
             });
             notification.success("You have successfully assigned teachers on users test");
+            clear();
 
-            $scope.stdName = '';
-            $scope.stdMail = '';
-            $scope.stdTel = '';
-            $scope.tchName = '';
-            $scope.tchMail = '';
-            $scope.tchTel = '';
-            $scope.selectedItem2 = '';
-            $scope.selectedItem3 = '';
-
-        }
-
+        };
 
     }]);
 })();
