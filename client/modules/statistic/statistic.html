@@ -37,8 +37,8 @@
     <input type="text" size="40" ng-model="tel" ng-value="'Phone number: ' + choosenUser.tel" class="disable" disabled>
     <input type="text" size="40" ng-model="assignTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of assign tests: ' + choosenUser.assignTest" class="disable" disabled>
     <input type="text" size="40" ng-model="totalTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of total tests: ' + choosenUser.totalTests" class="disable" disabled>
-    <div class="wrapperShedule card" ng-controller="chartCtrl" ng-if="choosenUser.role == 'user' || choosenUser.role == 'guest'">
-        <div ng-if="myData.length">
+    <div class="wrapperShedule card"  ng-if="choosenUser.role == 'user' || choosenUser.role == 'guest'">
+        <div ng-if="myData.length && loaded">
             <div class="namesOfShedule">
                 <ul>
                     <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
@@ -54,8 +54,8 @@
             <div>
                 <hr>
             </div>
-            <div class="graphicWrapper" ng-if="myData.length">
-                <bars-chart ng-if="loaded" chart-data="myData"></bars-chart>
+            <div class="graphicWrapper">
+                <bars-chart chart-data="myData"></bars-chart>
             </div>
         </div>
         <div ng-if="!myData.length">

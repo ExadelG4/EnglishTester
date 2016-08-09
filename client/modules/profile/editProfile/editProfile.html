@@ -10,46 +10,44 @@
 
         <button class="btn btn-admin col-xs-11 col-sm-11 col-md-11 col-lg-11" type="submit" ng-disabled="disable2 == true || user.phnum.$error.pattern" ng-click="save()">Save</button>
     </form>
-    <!--<div class="schedule" ng-if="role == 'user' ">-->
-        <!--<div class="scheduleContainer">-->
-            <!--<ul class="rows">-->
-                <!--<li><span>Advanced</span></li>-->
-                <!--<li><span>Intermediate</span></li>-->
-                <!--<li><span>Pre-Intermediate</span></li>-->
-                <!--<li><span>Beginner</span></li>-->
-            <!--</ul>-->
-            <!--<ul class="columns">-->
-                <!--<li class="monday"><span>17</span></li>-->
-                <!--<li class="tuesday"><span>19</span></li>-->
-                <!--<li class="wednesday"><span>27</span></li>-->
-                <!--<li class="thursday"><span>33</span></li>-->
-                <!--<li class="friday"><span>28</span></li>-->
-                <!--<li class="saturday"><span>34</span></li>-->
-                <!--<li class="sunday"><span>31</span></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-    <div class="wrapperShedule" ng-if="role == 'user' || role == 'guest'">
 
-        <div class="namesOfShedule">
-            <ul>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Pre-Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Upper-Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Advance</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Native</span></li>
-            </ul>
-        </div>
-        <br>
+    <div class="wrapperShedule card" ng-if="role == 'user' || role == 'guest'">
+        <div ng-if="myData.length">
+            <div>
+                <div class="namesOfShedule">
+                    <ul>
+                        <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
+                        <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Pre-Intermediate</span></li>
+                        <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Intermediate</span></li>
+                        <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Upper-Intermediate</span></li>
+                        <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Advance</span></li>
+                        <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Native</span></li>
+                    </ul>
+                </div>
+                <br>
 
-        <div>
-            <hr>
+                <div>
+                    <hr>
+                </div>
+
+                <div>
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                </div>
+
+                <div class="graphicWrapper" >
+                    <bars-chart chart-data="myData" ></bars-chart>
+                </div>
+            </div>
+        </div>
+        <div ng-if="!myData.length">
+            <h3>You haven't passed the test yet.</h3>
         </div>
 
-        <div ng-controller="myCtrl" class="graphicWrapper">
-            <bars-chart ng-if="loaded" chart-data="myData" ></bars-chart>
-        </div>
 
     </div>
 
