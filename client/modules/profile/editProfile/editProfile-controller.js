@@ -9,6 +9,13 @@
 
                 userService.getProfileStatistics().then(
                     function(data) {
+                        console.log(data);
+                        $scope.testData = data.results.map(function(item) {
+                            console.log(item.date);
+                            var buf = new Date(item.date);
+                            console.log(buf);
+                            return (buf.getDate() + '.' + buf.getMonth() + '.' + buf.getFullYear());
+                        });
                         $scope.userProfile.name = data.firstName + ' ' + data.lastName;
                         $scope.userProfile.email = data.email;
                         $scope.userProfile.telNumber = data.number;
@@ -62,9 +69,11 @@
                         name: 'Advance',
                     },
                     {
-                        name: 'Native',
-                    },
+                        name: 'Date: ',
+                    }
                 ]
+
+                $scope.color = 'red';
 
     }]);
 
