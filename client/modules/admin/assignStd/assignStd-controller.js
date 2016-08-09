@@ -6,6 +6,7 @@
         $scope.showList = [];
         $scope.disabled = true;
         $scope.disabled2 = true;
+        $scope.disabled3 = true;
         var chooseUserList = [];
         var currentStudent;
         var studentForDelete;
@@ -20,8 +21,6 @@
                 $scope.currentRequest = userService.getFreeUsers();
                 checkList($scope.currentRequest);
             }
-            $scope.showList = [];
-            chooseUserList = [];
             clear();
             $scope.disabled = true;
         };
@@ -72,6 +71,8 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
+            $scope.disabled2 = true;
+            $scope.disabled3 = true;
             $scope.checkUsersList($scope.currentValue);
 
         };
@@ -87,6 +88,7 @@
                 (obj.email == currentStudent.email) ? (res = i) : (false)
             );
             $scope.freeStudents.splice(res, 1);
+            $scope.disabled3 = false;
             clear();
         };
 
@@ -102,9 +104,15 @@
                 (obj == studentForDelete) ? (res = i) : (false)
             );
             $scope.showList.splice(res, 1);
+            chooseUserList.splice(res, 1);
             $scope.copyFreeStudents.map(( obj, i ) =>
                 (obj.email == mail) ? (res = obj) : (false)
             );
+            if (!chooseUserList.length) {
+                $scope.disabled = true;
+                $scope.disabled2 = true;
+                $scope.disabled3 = true;
+            }
             $scope.freeStudents.push(res);
         };
 
@@ -117,6 +125,8 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
+            $scope.disabled2 = true;
+            $scope.disabled3 = true;
         };
 
 
