@@ -10,15 +10,10 @@
 }
 
 .news img {
-    height: 50px;
-    width: 50px;
-    padding: 5px;
-}
-
-.news button {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+    height: 128px;
+    width: 128px;
+    margin: auto;
+    display: block;
 }
 
 .card-admin-home .btn-news {

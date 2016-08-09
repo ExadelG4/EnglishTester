@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular.module('tests')
-		.config(function($stateProvider, $urlRouterProvider) {
+		.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     		//$urlRouterProvider.otherwise('/tests');
 
 			$stateProvider
@@ -17,5 +17,5 @@
                     controller: 'badQuestionController',
                     role: ['admin']
             })
-		});
+		}])
 })();

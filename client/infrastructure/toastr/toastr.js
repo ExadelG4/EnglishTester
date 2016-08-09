@@ -3,7 +3,7 @@
 
     //Getting from http://ngmodules.org/modules/AngularJS-Toaster
     angular.module('toaster', [])
-        .service('toaster', function ($rootScope) {
+        .service('toaster',['$rootScope', function ($rootScope) {
             this.pop = function (type, title, body) {
                 this.toast = {
                     type: type,
@@ -12,8 +12,8 @@
                 };
                 $rootScope.$broadcast('toaster-newToast');
             };
-        })
-        .constant('toasterConfig', {
+        }]);
+        angular.module('toaster').constant('toasterConfig', {
             'tap-to-dismiss': true,
             'newest-on-top': true,
             'time-out': 5000, // Set timeOut and extendedTimeout to 0 to make it sticky
@@ -27,8 +27,8 @@
             'position-class': 'toast-top-right',
             'title-class': 'toast-title',
             'message-class': 'toast-message'
-        })
-        .directive('toasterContainer', ['$compile', '$timeout', 'toasterConfig', 'toaster',
+        });
+        angular.module('toaster').directive('toasterContainer', ['$compile', '$timeout', 'toasterConfig', 'toaster',
             function ($compile, $timeout, toasterConfig, toaster) {
                 return {
                     replace: true,
@@ -80,7 +80,7 @@
                             addToast(toaster.toast);
                         });
                     },
-                    controller: function($scope, $element, $attrs) {
+                    controller: ['$scope', '$element', '$attrs',function($scope, $element, $attrs) {
 
                         $scope.stopTimer = function(toast){
                             if(toast.timeout)
@@ -101,7 +101,7 @@
                                 $scope.removeToast(id);
                             }
                         };
-                    },
+                    }],
                     templateUrl: 'infrastructure/toastr/toastr.html'
                 };
             }]);

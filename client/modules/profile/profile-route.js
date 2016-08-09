@@ -1,5 +1,5 @@
 (function(){
-    angular.module('personalProfile').config(function($stateProvider, $urlRouterProvider) {
+    angular.module('personalProfile').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('editProfile', {
@@ -14,5 +14,5 @@
                 controller: 'checkMicrophoneController',
                 role: ['admin', 'user', 'teacher']
             });
-    });
+    }]);
 }());

@@ -1,4 +1,5 @@
 #  .gitignore
+/client/node_modules/*
 node_modules/*
 /client/bower_components/*
 /server/.vscode

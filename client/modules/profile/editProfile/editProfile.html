@@ -1,55 +1,57 @@
 <div class="profile col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="info col-xs-10 col-sm-10 col-md-7 col-lg-7" name="user" novalidate>
         <h1 class="col-xs-11 col-sm-11 col-md-11 col-lg-11">{{userProfile.name}}</h1>
-        <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="mail" ng-value="userProfile.email" disabled>
-        <span ng-show="user.phnum.$error.pattern" class="error-mes" ng-pattern="'[+]{1}[375]{1}[0-9]{11,11}'" name="errValidation" ng-model="disButton">Enter valid phone number</span>
-        <input type="text" name="phnum" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="telNbr" ng-disabled="disable2 == true" ng-change="changeTelNumber()" ng-value="userProfile.telNumber" ng-pattern="'[+]{1}[375]{1}[0-9]{11,11}'" required>
-        <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="onScndInput()"><img src="assets/images/icons/editProfile.png"></a>
-        <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="totalTests" ng-value="'Count of assign tests: ' + userProfile.totalTests" ng-if="role == 'teacher' " disabled>
-        <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="assignTests" ng-value="'Count of total tests: ' + userProfile.assignTests" ng-if="role == 'teacher' " disabled>
-
-        <button class="btn btn-admin col-xs-11 col-sm-11 col-md-11 col-lg-11" type="submit" ng-disabled="disable2 == true || user.phnum.$error.pattern" ng-click="save()">Save</button>
+        <div class="row">
+            <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="mail" ng-value="userProfile.email" disabled>
+            <span ng-show="user.phnum.$error.pattern" class="error-mes" ng-pattern="'[+]{1}[375]{1}[0-9]{11,11}'" name="errValidation" ng-model="disButton">Enter valid phone number</span>
+            <input type="text" name="phnum" size="40" class="input-with-img col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="telNbr" ng-disabled="disable2 == true" 
+                ng-change="changeTelNumber()" ng-value="userProfile.telNumber" ng-pattern="'[+]{1}[375]{1}[0-9]{11,11}'" required>
+            <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="onScndInput()" data-toggle="tooltip" title="Edit number">
+                <img src="assets/images/icons/editProfile.png">
+            </a>
+            <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="totalTests" ng-value="'Count of assign tests: ' + userProfile.totalTests" 
+                ng-if="role == 'teacher' " disabled>
+            <input type="text" size="40" class="col-xs-11 col-sm-11 col-md-11 col-lg-11 disable" ng-model="assignTests" ng-value="'Count of total tests: ' + userProfile.assignTests" 
+                ng-if="role == 'teacher' " disabled>
+        </div>
+        <button class="btn-admin" type="submit" ng-disabled="disable2 == true || user.phnum.$error.pattern" ng-click="save()">Save</button>
     </form>
-    <!--<div class="schedule" ng-if="role == 'user' ">-->
-        <!--<div class="scheduleContainer">-->
-            <!--<ul class="rows">-->
-                <!--<li><span>Advanced</span></li>-->
-                <!--<li><span>Intermediate</span></li>-->
-                <!--<li><span>Pre-Intermediate</span></li>-->
-                <!--<li><span>Beginner</span></li>-->
-            <!--</ul>-->
-            <!--<ul class="columns">-->
-                <!--<li class="monday"><span>17</span></li>-->
-                <!--<li class="tuesday"><span>19</span></li>-->
-                <!--<li class="wednesday"><span>27</span></li>-->
-                <!--<li class="thursday"><span>33</span></li>-->
-                <!--<li class="friday"><span>28</span></li>-->
-                <!--<li class="saturday"><span>34</span></li>-->
-                <!--<li class="sunday"><span>31</span></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-    <div class="wrapperShedule" ng-if="role == 'user' || role == 'guest'">
 
-        <div class="namesOfShedule">
-            <ul>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Begginer</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Pre-Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Upper-Intermediate</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Advance</span></li>
-                <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><span>Native</span></li>
-            </ul>
-        </div>
-        <br>
+    <div class="wrapperShedule card" ng-if="role == 'user' || role == 'guest'">
+        <div ng-if="myData.length">
+            <div>
+                <div class="namesOfShedule">
+                    <ul>
+                        <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="level in levels"><span>{{level.name}}</span></li>
+                    </ul>
+                </div>
+                <br>
 
-        <div>
-            <hr>
+                <div>
+                    <hr>
+                </div>
+
+                <div>
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                    <!--<div><span>25.07.2016</span></div>-->
+                </div>
+
+                <div class="graphicWrapper">
+                    <div class="row">
+                        <bars-chart chart-data="myData" class="col-xs-10 col-sm-10 col col-md-10 col-lg-10"></bars-chart>
+                        <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="item in testData track by $index">{{item}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="!myData.length">
+            <h3>You haven't passed the test yet.</h3>
         </div>
 
-        <div ng-controller="myCtrl" class="graphicWrapper">
-            <bars-chart ng-if="loaded" chart-data="myData" ></bars-chart>
-        </div>
 
     </div>
 

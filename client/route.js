@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('myApp').config(
+    angular.module('myApp').config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         function($stateProvider, $urlRouterProvider, $locationProvider) {
             $stateProvider
                 .state('login', {
@@ -21,5 +21,5 @@
             // use the HTML5 History API
             $locationProvider.html5Mode(true);
         }
-    )
+    ])
 })();

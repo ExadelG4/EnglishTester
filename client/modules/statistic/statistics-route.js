@@ -1,5 +1,5 @@
 (function(){
-    angular.module('statistic').config(function($stateProvider, $urlRouterProvider) {
+    angular.module('statistic',[]).config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('statistics', {
@@ -8,5 +8,5 @@
                 controller: 'statisticController',
                 role: ['admin']
             });
-    })
+    }])
 })();

@@ -9,7 +9,6 @@
 
                 userService.getProfileStatistics().then(
                     function(data) {
-                        console.log(data);
                         $scope.userProfile.name = data.firstName + ' ' + data.lastName;
                         $scope.userProfile.email = data.email;
                         $scope.userProfile.telNumber = data.number;
@@ -17,6 +16,15 @@
                         $scope.userProfile.assignTests = data.assignTest;
                         $scope.results = data.results;
                         $scope.role = data.role;
+                        if(data.results) {
+                            $scope.testData = data.results.map(function(item) {
+                                var buf = new Date(item.date);
+                                return (buf.getDate() + '.' + buf.getMonth() + '.' + buf.getFullYear());
+                            });
+                            $scope.myData = data.results.map(function(item, i) {
+                                return item.result.totalMark;
+                            })
+                        }
                     }
                 );
 
@@ -41,7 +49,30 @@
 
                 $scope.change = function() {
                     $scope.disable2 = true;
-                }
+                };
+
+                $scope.levels = [
+                    {
+                        name: 'Begginer',
+                    },
+                    {
+                        name: 'Pre-Intermediate',
+                    },
+                    {
+                        name: 'Intermediate',
+                    },
+                    {
+                        name: 'Upper-Intermediate',
+                    },
+                    {
+                        name: 'Advance',
+                    },
+                    {
+                        name: 'Date: ',
+                    }
+                ]
+
+                $scope.color = 'red';
 
     }]);
 
@@ -75,7 +106,8 @@
 
                     .data(scope.data).enter().append("div")
                     .transition().ease("elastic")
-                    .style("width", function(d) { return d + "%"; })
+                    .style("width", function(d) {return d + "%"; })
+                    .style("min-width", "55px")
                     .style("height", "25px")
                     .style("padding", "5px")
                     .style("data-title", '25.07.2016')
@@ -87,27 +119,4 @@
         };
         return directiveDefinitionObject;
     });
-
-    angular.module('personalProfile').controller('myCtrl', ['$scope', '$q', 'userService', function($scope, $q, userService) {
-        // var t = 50; var s = 80; var m = 60; var g = 45; var b = 25;
-
-        $scope.myData = [];
-
-        function getChartData () {
-            userService.getProfileStatistics().then(
-                function(data) {
-                    var arr = [];
-                    data.results.map(function(item, i) {
-                        $scope.myData[i] = item.result.totalMark;
-                    });
-                    $scope.loaded = true;
-                }
-            )
-        }
-
-
-        getChartData();
-    }]);
-
-
 })();

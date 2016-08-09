@@ -1,5 +1,8 @@
 <div class="container">
-	<div class="row">
+	<div ng-if="totalCount === 0" class="div-empty">
+		There are no promlems with questions
+	</div>
+	<div class="row" ng-if="totalCount > 0">
 		<div class="div-test col-xs-12 col-sm-8 col-md-offset-1 col-md-6 col-lg-offset-1 col-lg-6">
 
 			<button ng-click="setNumPage(currentPage - 1)" ng-disabled="currentPage === 1" class="btn-admin btn-prev">Prev</button>

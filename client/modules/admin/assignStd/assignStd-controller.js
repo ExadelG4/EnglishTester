@@ -7,17 +7,22 @@
         $scope.disabled = true;
         $scope.disabled2 = true;
         var chooseUserList = [];
-        var currentStudent;
+        $scope.currentStudent = null;
+        $scope.needList = false;
         var studentForDelete;
 
         $scope.checkUsersList = function(value) {
             if (value == 'request') {
                 $scope.currentValue = value;
                 $scope.currentRequest = userService.getUsersRequests();
+                $scope.currentStudent = null;
+                $scope.needList = false;
                 checkList($scope.currentRequest);
             } else {
                 $scope.currentValue = value;
                 $scope.currentRequest = userService.getFreeUsers();
+                $scope.currentStudent = null;
+                $scope.needList = false;
                 checkList($scope.currentRequest);
             }
             $scope.showList = [];
@@ -62,7 +67,7 @@
         };
 
         $scope.hasChanged = function(item){
-            currentStudent = item;
+            $scope.currentStudent = item;
             $scope.freeStdName = item.fullName;
             $scope.freeStdMail = item.email;
             $scope.freeStdTel = item.number;
@@ -77,17 +82,20 @@
         };
 
         $scope.addStudent = function() {
-            var newStudent = new stdConstructor(currentStudent._id, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
+            $scope.needList = true;
+            var newStudent = new stdConstructor($scope.currentStudent._id, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
 
             chooseUserList.push(newStudent);
-            $scope.showList.push(currentStudent.fullName + ' (' + currentStudent.email + ')');
+            $scope.showList.push($scope.currentStudent.fullName + ' (' + $scope.currentStudent.email + ')');
 
             var res;
-            $scope.freeStudents.map(( obj, i ) =>
-                (obj.email == currentStudent.email) ? (res = i) : (false)
+            $scope.freeStudents.map(function( obj, i ) {
+                return (obj.email == currentStudent.email) ? (res = i) : (false);                   
+                }
             );
             $scope.freeStudents.splice(res, 1);
             clear();
+            $scope.currentStudent = null;
         };
 
         $scope.clickOnName = function(name) {
@@ -98,12 +106,14 @@
         $scope.deletePerson = function() {
             var mail = studentForDelete[0].slice(studentForDelete[0].indexOf('(')+1, studentForDelete[0].indexOf(')'));
             var res;
-            $scope.showList.map(( obj, i ) =>
-                (obj == studentForDelete) ? (res = i) : (false)
+            $scope.showList.map(function( obj, i ){
+                return (obj == studentForDelete) ? (res = i) : (false);
+                }
             );
             $scope.showList.splice(res, 1);
-            $scope.copyFreeStudents.map(( obj, i ) =>
-                (obj.email == mail) ? (res = obj) : (false)
+            $scope.copyFreeStudents.map(function( obj, i ) {
+                return(obj.email == mail) ? (res = obj) : (false);
+                }
             );
             $scope.freeStudents.push(res);
         };
