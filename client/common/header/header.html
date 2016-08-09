@@ -41,7 +41,7 @@
                         Profile
                     </a>
                     <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
-                        <li>
+                        <li ng-if="role !== 'guest'">
                             <a ui-sref="editProfile" ng-click="timeToChangeA()">{{personalName}}</a>
                         </li>
                         <li>

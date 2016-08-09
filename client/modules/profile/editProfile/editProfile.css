@@ -5,7 +5,6 @@
 .info {
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -39,6 +38,7 @@
 
 .input-with-img {
     width: calc(100% - 80px);
+
 }
 
 .namesOfShedule > ul {
@@ -56,6 +56,14 @@
         text-align: center;
     }
 
+.graphicWrapper span {
+    margin-top: 8px;
+    font-weight: bold;
+    text-align: center;
+    font-size: large;
+    color: grey;
+}
+
 hr {
     border: none;
     background-color: lightgrey;
@@ -70,6 +78,11 @@ hr {
     padding-top: 15px;
     padding-bottom: 15px;
     margin-bottom: 15px;
+}
+
+.wrapperShedule h3 {
+    width: 100%;
+    color: grey;
 }
 
 .chart {

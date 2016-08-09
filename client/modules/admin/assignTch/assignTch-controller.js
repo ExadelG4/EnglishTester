@@ -28,6 +28,17 @@
             });
         }
 
+        function clear() {
+            $scope.stdName = '';
+            $scope.stdMail = '';
+            $scope.stdTel = '';
+            $scope.tchName = '';
+            $scope.tchMail = '';
+            $scope.tchTel = '';
+            $scope.selectedItem2 = '';
+            $scope.selectedItem3 = '';
+        }
+
 
         $scope.chooseTeacher = function(item) {
             $scope.tchName = item.fullName;
@@ -45,22 +56,14 @@
         };
 
         $scope.submitTchStd = function() {
-            userService.assignTeacher($scope.currentUser._id, $scope.currentTeacher._id);
-            updateUserList();
-            updateTeacherList();
+            userService.assignTeacher($scope.currentUser._id, $scope.currentTeacher._id).then(function() {
+                updateUserList();
+                updateTeacherList();
+            });
             notification.success("You have successfully assigned teachers on users test");
+            clear();
 
-            $scope.stdName = '';
-            $scope.stdMail = '';
-            $scope.stdTel = '';
-            $scope.tchName = '';
-            $scope.tchMail = '';
-            $scope.tchTel = '';
-            $scope.selectedItem2 = '';
-            $scope.selectedItem3 = '';
-
-        }
-
+        };
 
     }]);
 })();
