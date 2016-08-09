@@ -87,9 +87,15 @@
            $scope.showUInfo = true;
             $scope.loaded = false;
            userService.showInfoProfile(item._id).then(function(data) {
-               $scope.myData = data.results.map(function (item, i) {
-                   return item.result.totalMark;
-               });
+               if(data.results) {
+                   $scope.myData = data.results.map(function (item, i) {
+                       return item.result.totalMark;
+                   });
+                   $scope.testData = data.results.map(function(item) {
+                       var buf = new Date(item.date);
+                       return (buf.getDate() + '.' + buf.getMonth() + '.' + buf.getFullYear());
+                   });
+               }
                $scope.loaded = true;
                $scope.choosenUser = data;
                $scope.choosenUser.fullName = data.firstName + ' ' + data.lastName;
@@ -119,7 +125,7 @@
                 name: 'Advance',
             },
             {
-                name: 'Native',
+                name: 'Date: ',
             },
         ]
     }]);

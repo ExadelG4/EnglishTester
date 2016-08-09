@@ -50,7 +50,10 @@
                 <hr>
             </div>
             <div class="graphicWrapper">
-                <bars-chart chart-data="myData"></bars-chart>
+                <div class="row">
+                    <bars-chart chart-data="myData" class="col-xs-10 col-sm-10 col col-md-10 col-lg-10"></bars-chart>
+                    <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="item in testData track by $index">{{item}}</span>
+                </div>
             </div>
         </div>
         <div ng-if="!myData.length">
