@@ -83,8 +83,9 @@
             $scope.showList.push(currentStudent.fullName + ' (' + currentStudent.email + ')');
 
             var res;
-            $scope.freeStudents.map(( obj, i ) =>
-                (obj.email == currentStudent.email) ? (res = i) : (false)
+            $scope.freeStudents.map(function( obj, i ) {
+                return (obj.email == currentStudent.email) ? (res = i) : (false);                   
+                }
             );
             $scope.freeStudents.splice(res, 1);
             clear();
@@ -98,12 +99,14 @@
         $scope.deletePerson = function() {
             var mail = studentForDelete[0].slice(studentForDelete[0].indexOf('(')+1, studentForDelete[0].indexOf(')'));
             var res;
-            $scope.showList.map(( obj, i ) =>
-                (obj == studentForDelete) ? (res = i) : (false)
+            $scope.showList.map(function( obj, i ){
+                return (obj == studentForDelete) ? (res = i) : (false);
+                }
             );
             $scope.showList.splice(res, 1);
-            $scope.copyFreeStudents.map(( obj, i ) =>
-                (obj.email == mail) ? (res = obj) : (false)
+            $scope.copyFreeStudents.map(function( obj, i ) {
+                return(obj.email == mail) ? (res = obj) : (false);
+                }
             );
             $scope.freeStudents.push(res);
         };

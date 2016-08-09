@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('statistic', []).controller('statisticController', ['$scope', '$state', '$rootScope', 'userService', 'getStatisticsFromNews', function($scope, $state, $rootScope, userService, getStatisticsFromNews) {
+    angular.module('statistic').controller('statisticController', ['$scope', '$state', '$rootScope', 'userService', 'getStatisticsFromNews', function($scope, $state, $rootScope, userService, getStatisticsFromNews) {
 
         $scope.searchList = [];
         $scope.show = false;

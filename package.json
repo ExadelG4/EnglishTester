@@ -16,8 +16,14 @@
   },
   "homepage": "https://github.com/ExadelG4/EnglishTester#readme",
   "devDependencies": {
-    "express": "^4.14.0",
-    "q": "^1.4.1"
+    "grunt": "~0.4.1",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-qunit":  "*",
+    "grunt-contrib-concat": "~1.0.1",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-uglify": "~2.0.0",
+    "grunt-usemin": "~3.1.1",
+    "grunt-contrib-copy": "~1.0.0"
   },
   "description": "",
   "dependencies": {
@@ -37,6 +43,7 @@
     "passport-jwt": "~2.1.0",
     "prompt": "^1.0.0",
     "pubsub-js": "^1.5.3",
-    "uuid-js": "~0.7.5"
+    "uuid-js": "~0.7.5",
+    "ng-strict-di": "~2.0.0"
   }
 }

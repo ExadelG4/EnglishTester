@@ -1,5 +1,5 @@
 (function(){
-    angular.module('personalProfile').config(function($stateProvider, $urlRouterProvider) {
+    angular.module('personalProfile').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('editProfile', {
@@ -7,6 +7,6 @@
                 templateUrl: 'modules/profile/editProfile/editProfile.html',
                 controller: 'editProfileController',
                 role: ['admin', 'user', 'teacher']
-            });
-    });
+            })
+    }])
 }());
