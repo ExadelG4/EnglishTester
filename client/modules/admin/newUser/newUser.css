@@ -6,6 +6,14 @@
 
 .dateTime {
     width: 100%;
+    padding-right: 0;
+}
+.dateTime1 {
+    margin-top: 5px;
+}
+.dateTime2 {
+    margin-top: 43px;
+    margin-bottom: 60px;
 }
 
     .dateTime > div:first-child {
@@ -28,25 +36,32 @@
     margin: auto;
 }
 
-.submitNewUser {
-    width: 85px;
-    left: 0;
-    right: 0;
-    bottom: -45px;
-    margin: auto;
-    position: absolute;
-}
-
 .formAddUser label {
     margin-top: 10px;
 }
 
-.newUserDate img {
+.img-date {
     padding: 0;
     width: 35px;
     height: 35px;
 }
 
-.newUserDate h4 {
-    display: inline-block;
+.img-new-user {
+    width: 64px;
+    display: block;
+    margin: auto;
+}
+
+.h3-block {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .dateTime2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    .newUserDate {
+        margin-top: 20px;
+    }
 }

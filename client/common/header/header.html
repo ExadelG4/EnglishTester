@@ -41,11 +41,11 @@
                         Profile
                     </a>
                     <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
-                        <li>
+                        <li ng-if="role !== 'guest'">
                             <a ui-sref="editProfile" ng-click="timeToChangeA()">{{personalName}}</a>
                         </li>
                         <li>
-                            <a href="" ng-click="timeToChangeA()">Check microphone</a>
+                            <a ui-sref="checkMicrophone" ng-click="timeToChangeA()">Check audio</a>
                         </li>
                         <li>
                             <a href="" ng-click="logout()">Log out</a>

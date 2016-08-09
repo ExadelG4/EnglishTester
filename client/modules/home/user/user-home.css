@@ -96,8 +96,8 @@
 	}
 }
 
-@media (max-device-width: 767px) {
-	.card .btn-start {
+@media (max-device-width: 1024px) {
+	.card-user-home .btn-start {
 		display: block;
 		float: right;
 	}

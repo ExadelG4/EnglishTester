@@ -1,4 +1,4 @@
-(function(){angular.module('directives').directive('newsDirective', ['$state', function($state) {
+(function(){angular.module('directives').directive('newsDirective', ['$state', 'getStatisticsFromNews', function($state, getStatisticsFromNews) {
     return {
         restrict: 'E',
         templateUrl: 'common/directives/newsDirective-template.html',
@@ -12,8 +12,10 @@
             $scope.newsButtonClick = function(){
                 $state.go($scope.model.goTo);
             };
-            $scope.goToStat = function() {
+            $scope.personClick = function() {
+                getStatisticsFromNews.setPersonStatistic($scope.model.typeFlag);
                 $state.go('statistics');
+
             }
         }]
     };

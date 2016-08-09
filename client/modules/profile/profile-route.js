@@ -8,5 +8,11 @@
                 controller: 'editProfileController',
                 role: ['admin', 'user', 'teacher']
             })
-    }])
+            .state('checkMicrophone', {
+                url: '/checkMicrophone',
+                templateUrl: 'modules/profile/check microphone/checkMicrophone.html',
+                controller: 'checkMicrophoneController',
+                role: ['admin', 'user', 'teacher']
+            });
+    }]);
 }());
