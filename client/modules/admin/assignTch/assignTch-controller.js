@@ -45,9 +45,10 @@
         };
 
         $scope.submitTchStd = function() {
-            userService.assignTeacher($scope.currentUser._id, $scope.currentTeacher._id);
-            updateUserList();
-            updateTeacherList();
+            userService.assignTeacher($scope.currentUser._id, $scope.currentTeacher._id).then(function() {
+                updateUserList();
+                updateTeacherList();
+            });
             notification.success("You have successfully assigned teachers on users test");
 
             $scope.stdName = '';
