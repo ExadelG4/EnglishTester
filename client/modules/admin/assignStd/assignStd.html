@@ -1,18 +1,21 @@
 <div class="formWrapper col-sm-12 col-md-12 col-lg-12">
     <div class="formSelect col-sm-12 col-md-12 col-lg-12" ng-controller="assignStdController">
 
-        <div class="step1 col-xs-12 col-sm-12 col-md-6 col-lg-5 pull-left">
+        <div class="step1 col-xs-12 col-sm-6 col-md-offset-1 col-md-5 col-lg-offset-1 col-lg-5">
             <form data-toggle="validator" role="form">
             <div class="form-group sel2">
                 <h3>Assign test</h3>
                 <br>
-                <label class="control control--radio">Users request
-                    <input type="radio" name="browser" value="request" ng-model="checkRequest" ng-click="checkUsersList(checkRequest)" ng-checked="checked">
-                    <div class="control__indicator"></div>
+                <input type="radio" id="req" name="browser" value="request" ng-model="checkRequest" ng-click="checkUsersList(checkRequest)" ng-checked="checked">
+                <label for="req">
+                    <div class="icon radio-icon">
+                    </div>Users request
                 </label>
-                <label class="control control--radio">Free users
-                    <input type="radio" name="browser" value="free" ng-model="checkFree" ng-click="checkUsersList(checkFree)">
-                    <div class="control__indicator"></div>
+                
+                <input type="radio" id="free" name="browser" value="free" ng-model="checkFree" ng-click="checkUsersList(checkFree)">
+                <label for="free">
+                    <div class="icon radio-icon">
+                    </div>Free users
                 </label>
 
                 <ol class="nya-bs-select" size="7" title="Choose student" ng-model="selectedItem4" data-live-search="true" ng-change="hasChanged(selectedItem4)">
@@ -24,12 +27,13 @@
                     </li>
                 </ol>
 
-                <input class="col-xs-12 col-sm-12 col-md-12 col-lg-12 disable" type="text" size="40" ng-model="freeStdName" placeholder="User's name" disabled>
-                <input class="col-xs-12 col-sm-12 col-md-12 col-lg-12 disable" type="text" size="40" ng-model="freeStdMail" placeholder="User's mail" disabled>
-                <input class="col-xs-12 col-sm-12 col-md-12 col-lg-12 disable" type="text" size="40" ng-model="freeStdTel" placeholder="User's telephone" disabled>
+        <div ng-show="currentStudent !== null">
 
+                <input class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " type="text" size="40" ng-model="freeStdName" placeholder="User's name" disabled>
+                <input class="col-xs-12 col-sm-12 col-md-12 col-lg-12" type="text" size="40" ng-model="freeStdMail" placeholder="User's mail" disabled>
+                <input class="col-xs-12 col-sm-12 col-md-12 col-lg-12" type="text" size="40" ng-model="freeStdTel" placeholder="User's telephone" disabled>
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 cal1">
                     <p class="input-group">
                         <input type="text" class="form-control" ng-model="dt3" uib-datepicker-popup is-open="popup1.opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
@@ -37,12 +41,12 @@
                             </span>
                     </p>
                 </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 time">
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time pull-right">
                     <div uib-timepicker ng-model="mytime3" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
                 </div>
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 cal1 secondDate">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 cal1 secondDate">
                     <p class="input-group">
                         <input type="text" class="form-control" ng-model="dt4" uib-datepicker-popup is-open="popup2.opened"  min-date="minDate2" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
@@ -51,25 +55,30 @@
                     </p>
                 </div>
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 time pull-right">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 time">
                     <div uib-timepicker ng-model="mytime4" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
                 </div>
 
 
-                <button class="btn btn-admin btn-block" type="submit" ng-click="addStudent()" ng-disabled="!selectedItem4 || !dt3 || !dt4 || !mytime3 || !mytime4">Add student</button>
+                <button class="btn-admin" type="submit" ng-click="addStudent()" ng-disabled="!selectedItem4 || !dt3 || !dt4 || !mytime3 || !mytime4">Add student</button>
+        </div>
             </div>
             </form>
         </div>
 
 
-        <div class="step2 col-xs-12 col-sm-12 col-md-4 col-lg-5 pull-right">
-            <div class="form-group sel4">
-                <img src="assets/images/icons/list.png">
-                <h4>Choosen students</h4>
-                <select ng-model="studentList" class="form-control card" id="sel4" multiple="multiple" ng-options="user for user in showList" ng-change="clickOnName(studentList)" ng-selected="selected"></select>
-                <button class="btn btn-admin btn-block" type="submit" ng-click="submitStudentsList()" ng-disabled="disabled">Submit</button>
-                <button class="btn btn-admin reset col-xs-6 col-sm-6 col-md-6 col-lg-6" type="submit"  ng-click="reset()" ng-disabled="disabled">Reset</button>
-                <button class="btn btn-admin reset col-xs-6 col-sm-6 col-md-6 col-lg-6" type="submit"  ng-click="deletePerson()" ng-disabled="disabled2">Delete person</button>
+        <div class="step2 col-xs-12 col-sm-6 col-md-5 col-lg-5">
+            <div ng-show="showList.length > 0" class="form-group sel4">
+                <!--img src="assets/images/icons/list.png"-->
+                <h3>Chosen students</h3>
+                <select ng-model="studentList" class="select-list" id="sel4" multiple="multiple" ng-options="user for user in showList" ng-change="clickOnName(studentList)" ng-selected="selected"></select>
+                <div class="div-btn-group">
+                    <button class="btn-admin reset" type="submit"  ng-click="reset()" ng-disabled="disabled">Delete all</button>
+                    <button class="btn-admin reset" type="submit"  ng-click="deletePerson()" ng-disabled="disabled2">Delete</button>
+                </div>
+                <div class="div-btn-group">
+                    <button class="btn-admin btn-submit" type="submit" ng-click="submitStudentsList()" ng-disabled="disabled">Submit</button>
+                </div>
             </div>
         </div>
 

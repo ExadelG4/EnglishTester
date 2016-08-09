@@ -4,6 +4,7 @@
 
 .formSelect {
     display: inline-block;
+    padding: 0;
 }
 
     .formSelect img {
@@ -19,24 +20,22 @@
     display: inline-block;
 }
 
-.sel1, .sel2 {
-    width: 100%;
-}
-
-.sel2 .cal1, .sel2 .cal2 {
+.sel2 div .cal1, .sel2 div .cal2 {
     padding: 0;
     margin-top: 33px;
 }
 
-.sel2 input[type="radio"] {
+.sel4 {
+    margin-left: 15%;
+    margin-top: 38px;
+}
+
+/*.sel2 input[type="radio"] {
     display: inline-block;
     height: inherit;
     width: initial;
-}
+}*/
 
-.secondDate {
-    margin-top: 58px !important;
-}
 
 .time {
     margin: 0 !important;
@@ -62,89 +61,43 @@
 }
 
 .reset {
-    margin-top: 10px;
-    background-color: indianred !important;
+    margin-left: 10px;
 }
 
-
-
-
-.control {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 15px;
-    padding-left: 30px;
-    cursor: pointer;
-    margin-left: 25px;
-    font-weight: 200;
-    font-size: larger;
+.div-btn-group {
+    text-align: right;
+    margin: 15px 0 0 0
 }
 
-.control input {
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
+.select-list {
+    width: 100%;
+    overflow-y: hidden;
+    border: 1px solid rgb(47, 196, 241);
 }
 
-.control__indicator {
-    position: absolute;
-    top: 2px;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    background: #e6e6e6;
+.select-list > option {
+    padding: 3px;
+    font-size: 1.2em;
 }
 
-.control--radio .control__indicator {
-    border-radius: 50%;
+ol button {
+    background-color: rgb(47, 196, 241) !important;
+    background-image: none !important;
+    font-size: 1.3em !important;
+    padding-top: 5px !important;
+    color: white !important;
+    border: none !important;
 }
 
-/* Hover and focus states */
-.control:hover input ~ .control__indicator,
-.control input:focus ~ .control__indicator {
-    background: #ccc;
+p span button, p span button:hover, p span button:active {
+    background-image: none !important;
+    background-color: transparent !important;
+    border: none !important;
 }
 
-/* Checked state */
-.control input:checked ~ .control__indicator {
-    background: #2aa1c0;
-}
-
-/* Hover state whilst checked */
-.control:hover input:not([disabled]):checked ~ .control__indicator,
-.control input:checked:focus ~ .control__indicator {
-    background: #0e647d;
-}
-
-/* Check mark */
-.control__indicator:after {
-    position: absolute;
-    display: none;
-    content: '';
-}
-
-/* Show check mark */
-.control input:checked ~ .control__indicator:after {
-    display: block;
-}
-
-/* Checkbox tick */
-.control--checkbox .control__indicator:after {
-    top: 4px;
-    left: 8px;
-    width: 3px;
-    height: 8px;
-    transform: rotate(45deg);
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
-}
-
-/* Radio button inner circle */
-.control--radio .control__indicator:after {
-    top: 7px;
-    left: 7px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #fff;
+@media(max-width: 768px) {
+    .sel4 {
+        margin-left: 0;
+        margin-top: 0;
+    }
 }

@@ -40,12 +40,21 @@
         width: 100%;
     }
 
-.statistics img {
-    height: 70px;
-    width: 70px;
-}
-
 .statistics input {
     width: 80%;
     display: inline-block;
+}
+
+.img-stat {
+    width: 64px;
+}
+
+@media (max-width: 767px) {
+    .img-stat {
+        margin: auto;
+        display: block;
+    }
+    .statistics input {
+        width: 100%;
+    }
 }
