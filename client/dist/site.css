@@ -7846,7 +7846,6 @@ body, .login-wrapper {
 
 .input-option {
 	display: inline-block;
-	width: 80%;
 }
 
 .btn-submit-que {
@@ -7854,10 +7853,6 @@ body, .login-wrapper {
 	margin-top: 20px;
 }
 
-.add-question img{
-	height: 41px;
-	width: 41px;
-}
 
 .add-question .container-fluid {
 	width: inherit;
@@ -8109,7 +8104,7 @@ select {
 }
 
 .disable {
-    background-color: rgba(208, 211, 222, 0.09);
+   margin-top: 10px;
 }
 
 
@@ -8612,6 +8607,7 @@ p span button, p span button:hover, p span button:active {
     transition: all 500ms;
     font-family: 'Oxygen', sans-serif;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .card:hover {

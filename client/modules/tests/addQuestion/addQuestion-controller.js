@@ -105,10 +105,12 @@
 			};
 		
 			$scope.changeQue = function(selectedQue) {
+				$scope.song.url = '';
 				$scope.init(selectedQue);
 			};
 
-			$scope.sendQue = function () {
+			$scope.sendQue = function () { 
+				$scope.song.url = '';
 				if ($scope.selectedQue === 'listeningWithManyOfMany' || $scope.selectedQue === 'manyOfMany') {
 					var tempNum = angular.copy($scope.finalQue.answers);
 					$scope.finalQue.answers = [];
@@ -133,10 +135,10 @@
 			};
 
 			$scope.finishUp = function() {
-				$timeout( function() {
+				/*$timeout( function() {
 					$scope.finalQue.question = $scope.qqq;
 					$scope.song.url = $scope.qqq;
-				}, 1000);
+				}, 1000);*/
 			}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -178,6 +180,11 @@
 					if (xhr.readyState == XMLHttpRequest.DONE) {
         				$scope.finalQue.question =  xhr.responseText;
         				$scope.qqq = xhr.responseText;
+        				$scope.$apply( function() {
+        					$timeout(function() {
+        						$scope.song.url = $scope.qqq;
+        					}, 100);
+        				});
     				}
 				}
 

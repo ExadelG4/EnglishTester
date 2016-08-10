@@ -90,7 +90,7 @@
 
             var res;
             $scope.freeStudents.map(function( obj, i ) {
-                return (obj.email == currentStudent.email) ? (res = i) : (false);                   
+                return (obj.email == $scope.currentStudent.email) ? (res = i) : (false);                   
                 }
             );
             $scope.freeStudents.splice(res, 1);
