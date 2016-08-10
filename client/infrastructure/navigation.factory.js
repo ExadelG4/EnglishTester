@@ -17,10 +17,6 @@
                             state: 'assignStd'
                         },
                         {
-                            name: 'Bad questions',
-                            state: 'badQuestions'
-                        },
-                        {
                             name: 'New user',
                             state: 'newUser'
                         }
