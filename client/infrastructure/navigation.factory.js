@@ -13,7 +13,7 @@
                     name: 'Admin',
                     tabs: [
                         {
-                            name: 'Assign student',
+                            name: 'Assign a test for users',
                             state: 'assignStd'
                         },
                         {

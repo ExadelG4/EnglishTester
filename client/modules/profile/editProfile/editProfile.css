@@ -16,8 +16,10 @@
         margin-bottom: 10px;
     }
 
-    .info > input{
-        height: 45px;
+    .profile input{
+        height: 35px;
+        margin-top: 15px;
+        font-size: x-large;
         padding: 5px;
     }
 
@@ -34,11 +36,16 @@
         height: 45px;
         margin-top: 10px;
         cursor: pointer;
+        vertical-align: bottom;
     }
 
 .input-with-img {
     width: calc(100% - 80px);
 
+}
+
+.submit {
+    margin-left: 45%;
 }
 
 .namesOfShedule > ul {

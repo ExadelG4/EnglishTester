@@ -6,6 +6,7 @@
         $scope.showList = [];
         $scope.disabled = true;
         $scope.disabled2 = true;
+        $scope.disabled3 = true;
         var chooseUserList = [];
         $scope.currentStudent = null;
         $scope.needList = false;
@@ -25,8 +26,6 @@
                 $scope.needList = false;
                 checkList($scope.currentRequest);
             }
-            $scope.showList = [];
-            chooseUserList = [];
             clear();
             $scope.disabled = true;
         };
@@ -77,6 +76,8 @@
             $scope.showList = [];
             chooseUserList = [];
             $scope.disabled = true;
+            $scope.disabled2 = true;
+            $scope.disabled3 = true;
             $scope.checkUsersList($scope.currentValue);
 
         };
@@ -90,10 +91,11 @@
 
             var res;
             $scope.freeStudents.map(function( obj, i ) {
-                return (obj.email == $scope.currentStudent.email) ? (res = i) : (false);                   
+                return (obj.email == $scope.currentStudent.email) ? (res = i) : (false);
                 }
             );
             $scope.freeStudents.splice(res, 1);
+            $scope.disabled3 = false;
             clear();
             $scope.currentStudent = null;
         };
@@ -111,8 +113,9 @@
                 }
             );
             $scope.showList.splice(res, 1);
+            chooseUserList.splice(res, 1);
             $scope.copyFreeStudents.map(function( obj, i ) {
-                return(obj.email == mail) ? (res = obj) : (false);
+                return (obj.email == mail) ? (res = obj) : (false);
                 }
             );
             $scope.freeStudents.push(res);
@@ -126,7 +129,6 @@
             notification.success("You have successfully assigned test for users");
             $scope.showList = [];
             chooseUserList = [];
-            $scope.disabled = true;
         };
 
 
