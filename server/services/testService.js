@@ -53,16 +53,16 @@ function addQuestionArrayB(info){
 
 function result(id, ans){
 	var pr = q.defer();
-	//temporarily
+	
 	var count =0;
 	var rez =0;
-	//console.log(ans);
+	
 	ans.forEach(function(element) {
 		count++;
 		var qw = new Number(element.mark) ;
 		+qw;
 		rez +=qw;
-		//console.log(rez);
+		
 	});
 
 	rez/=count;
@@ -79,14 +79,10 @@ function result(id, ans){
 		resultRecord.result.autoMark = data.autoMark;
 		resultRecord.result.teacherMark = rez;
 		resultRecord.result.level = data.level;
-		if(data.level == 1){
-			resultRecord.result.totalMark = data.autoMark + (rez*0.2);
-		}
-		else {
-			resultRecord.result.totalMark = ((data.level - 1)*20) + (rez*0.2);
-		}
+		var total = data.autoMark * 0.3 + rez*0.7;
+		resultRecord.result.totalMark = Math.round(total);
+		//((data.level - 1)*20) + (rez*0.2);
 		resultRecord.teacherId = data.teacherId;
-		
 		resultRecord.teacherFirstName = data.teacherFirstName;
 		resultRecord.teacherLastName = data.teacherLastName;
 		resultRecord.teacherEmail = data.teacherEmail;
@@ -152,8 +148,10 @@ function checkTest(testId, tId){
 
 function blockComplained(A, B){
 	var pr = q.defer();
-	testA.update({_id : {$in : A}},{ $set: { bad: true, complaint: false }},{}).then(function(data){
-		testB.update({_id : {$in : B}},{ $set: { bad: true, complaint: false }},{}).then(function(data){
+	testA.update({_id : {$in : A}},{ $set: { bad: true, complaint: false }},{multi: true}).then(function(data){
+		
+		testB.update({_id : {$in : B}},{ $set: { bad: true, complaint: false }},{multi: true}).then(function(data){
+			
 			pr.resolve();
 		}).catch(function(err){
 			pr.reject(err);
@@ -166,8 +164,10 @@ function blockComplained(A, B){
 
 function disblockComplained(A, B){
 	var pr = q.defer();
-	testA.update({_id : {$in : A}},{ $set: { complaint: false, bad : false }},{}).then(function(data){
-		testB.update({_id : {$in : B}},{ $set: { complaint: false, bad : false }},{}).then(function(data){
+	testA.update({_id : {$in : A}},{ $set: { complaint: false, bad : false }},{multi: true}).then(function(data){
+		
+		testB.update({_id : {$in : B}},{ $set: { complaint: false, bad : false }},{multi: true}).then(function(data){
+			
 			pr.resolve();
 		}).catch(function(err){
 			pr.reject(err);

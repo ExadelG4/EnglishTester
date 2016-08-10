@@ -1,0 +1,126 @@
+$ loadtest -c 1000 http://localhost:3000/
+[Wed Aug 10 2016 03:02:52 GMT+0300 (Беларусь (зима))] INFO Requests: 0, requests per second: 0, mean latency: 0 ms
+[Wed Aug 10 2016 03:02:57 GMT+0300 (Беларусь (зима))] INFO Requests: 9750, requests per second: 1946, mean latency: 480 ms
+[Wed Aug 10 2016 03:02:57 GMT+0300 (Беларусь (зима))] INFO Errors: 353, accumulated errors: 353, 3.6% of total requests
+[Wed Aug 10 2016 03:03:02 GMT+0300 (Беларусь (зима))] INFO Requests: 20282, requests per second: 2098, mean latency: 490 ms
+[Wed Aug 10 2016 03:03:02 GMT+0300 (Беларусь (зима))] INFO Errors: 197, accumulated errors: 550, 2.7% of total requests
+[Wed Aug 10 2016 03:03:07 GMT+0300 (Беларусь (зима))] INFO Requests: 31243, requests per second: 2204, mean latency: 450 ms
+[Wed Aug 10 2016 03:03:07 GMT+0300 (Беларусь (зима))] INFO Errors: 106, accumulated errors: 656, 2.1% of total requests
+[Wed Aug 10 2016 03:03:12 GMT+0300 (Беларусь (зима))] INFO Requests: 42118, requests per second: 2164, mean latency: 460 ms
+[Wed Aug 10 2016 03:03:12 GMT+0300 (Беларусь (зима))] INFO Errors: 423, accumulated errors: 1079, 2.6% of total requests
+[Wed Aug 10 2016 03:03:17 GMT+0300 (Беларусь (зима))] INFO Requests: 53000, requests per second: 2165, mean latency: 460 ms
+[Wed Aug 10 2016 03:03:17 GMT+0300 (Беларусь (зима))] INFO Errors: 446, accumulated errors: 1525, 2.9% of total requests
+[Wed Aug 10 2016 03:03:22 GMT+0300 (Беларусь (зима))] INFO Requests: 63164, requests per second: 2026, mean latency: 500 ms
+[Wed Aug 10 2016 03:03:22 GMT+0300 (Беларусь (зима))] INFO Errors: 148, accumulated errors: 1673, 2.6% of total requests
+[Wed Aug 10 2016 03:03:27 GMT+0300 (Беларусь (зима))] INFO Requests: 73646, requests per second: 2128, mean latency: 470 ms
+[Wed Aug 10 2016 03:03:27 GMT+0300 (Беларусь (зима))] INFO Errors: 292, accumulated errors: 1965, 2.7% of total requests
+[Wed Aug 10 2016 03:03:32 GMT+0300 (Беларусь (зима))] INFO Requests: 84637, requests per second: 2182, mean latency: 450 ms
+[Wed Aug 10 2016 03:03:32 GMT+0300 (Беларусь (зима))] INFO Errors: 187, accumulated errors: 2152, 2.5% of total requests
+[Wed Aug 10 2016 03:03:37 GMT+0300 (Беларусь (зима))] INFO Requests: 95192, requests per second: 2129, mean latency: 470 ms
+[Wed Aug 10 2016 03:03:37 GMT+0300 (Беларусь (зима))] INFO Errors: 130, accumulated errors: 2282, 2.4% of total requests
+[Wed Aug 10 2016 03:03:42 GMT+0300 (Беларусь (зима))] INFO Requests: 105615, requests per second: 2082, mean latency: 480 ms
+[Wed Aug 10 2016 03:03:42 GMT+0300 (Беларусь (зима))] INFO Errors: 180, accumulated errors: 2462, 2.3% of total requests
+[Wed Aug 10 2016 03:03:47 GMT+0300 (Беларусь (зима))] INFO Requests: 116072, requests per second: 2081, mean latency: 480 ms
+[Wed Aug 10 2016 03:03:47 GMT+0300 (Беларусь (зима))] INFO Errors: 223, accumulated errors: 2685, 2.3% of total requests
+[Wed Aug 10 2016 03:03:52 GMT+0300 (Беларусь (зима))] INFO Requests: 126756, requests per second: 2150, mean latency: 480 ms
+[Wed Aug 10 2016 03:03:52 GMT+0300 (Беларусь (зима))] INFO Errors: 174, accumulated errors: 2859, 2.3% of total requests
+[Wed Aug 10 2016 03:03:57 GMT+0300 (Беларусь (зима))] INFO Requests: 137443, requests per second: 2140, mean latency: 450 ms
+[Wed Aug 10 2016 03:03:57 GMT+0300 (Беларусь (зима))] INFO Errors: 169, accumulated errors: 3028, 2.2% of total requests
+[Wed Aug 10 2016 03:04:02 GMT+0300 (Беларусь (зима))] INFO Requests: 147901, requests per second: 2090, mean latency: 480 ms
+[Wed Aug 10 2016 03:04:02 GMT+0300 (Беларусь (зима))] INFO Errors: 486, accumulated errors: 3514, 2.4% of total requests
+[Wed Aug 10 2016 03:04:07 GMT+0300 (Беларусь (зима))] INFO Requests: 158639, requests per second: 2139, mean latency: 460 ms
+[Wed Aug 10 2016 03:04:07 GMT+0300 (Беларусь (зима))] INFO Errors: 165, accumulated errors: 3679, 2.3% of total requests
+[Wed Aug 10 2016 03:04:12 GMT+0300 (Беларусь (зима))] INFO Requests: 169520, requests per second: 2175, mean latency: 460 ms
+[Wed Aug 10 2016 03:04:12 GMT+0300 (Беларусь (зима))] INFO Errors: 310, accumulated errors: 3989, 2.4% of total requests
+[Wed Aug 10 2016 03:04:17 GMT+0300 (Беларусь (зима))] INFO Requests: 180211, requests per second: 2144, mean latency: 480 ms
+[Wed Aug 10 2016 03:04:17 GMT+0300 (Беларусь (зима))] INFO Errors: 262, accumulated errors: 4251, 2.4% of total requests
+[Wed Aug 10 2016 03:04:22 GMT+0300 (Беларусь (зима))] INFO Requests: 190332, requests per second: 2029, mean latency: 490 ms
+[Wed Aug 10 2016 03:04:22 GMT+0300 (Беларусь (зима))] INFO Errors: 160, accumulated errors: 4411, 2.3% of total requests
+[Wed Aug 10 2016 03:04:27 GMT+0300 (Беларусь (зима))] INFO Requests: 200322, requests per second: 2000, mean latency: 500 ms
+[Wed Aug 10 2016 03:04:27 GMT+0300 (Беларусь (зима))] INFO Errors: 313, accumulated errors: 4724, 2.4% of total requests
+[Wed Aug 10 2016 03:04:32 GMT+0300 (Беларусь (зима))] INFO Requests: 210883, requests per second: 2097, mean latency: 470 ms
+[Wed Aug 10 2016 03:04:32 GMT+0300 (Беларусь (зима))] INFO Errors: 393, accumulated errors: 5117, 2.4% of total requests
+[Wed Aug 10 2016 03:04:37 GMT+0300 (Беларусь (зима))] INFO Requests: 221785, requests per second: 2181, mean latency: 470 ms
+[Wed Aug 10 2016 03:04:37 GMT+0300 (Беларусь (зима))] INFO Errors: 145, accumulated errors: 5262, 2.4% of total requests
+[Wed Aug 10 2016 03:04:42 GMT+0300 (Беларусь (зима))] INFO Requests: 231065, requests per second: 1859, mean latency: 540 ms
+[Wed Aug 10 2016 03:04:42 GMT+0300 (Беларусь (зима))] INFO Errors: 170, accumulated errors: 5432, 2.4% of total requests
+[Wed Aug 10 2016 03:04:47 GMT+0300 (Беларусь (зима))] INFO Requests: 241222, requests per second: 2041, mean latency: 490 ms
+[Wed Aug 10 2016 03:04:47 GMT+0300 (Беларусь (зима))] INFO Errors: 213, accumulated errors: 5645, 2.3% of total requests
+[Wed Aug 10 2016 03:04:52 GMT+0300 (Беларусь (зима))] INFO Requests: 252485, requests per second: 2256, mean latency: 440 ms
+[Wed Aug 10 2016 03:04:52 GMT+0300 (Беларусь (зима))] INFO Errors: 134, accumulated errors: 5779, 2.3% of total requests
+[Wed Aug 10 2016 03:04:57 GMT+0300 (Беларусь (зима))] INFO Requests: 262459, requests per second: 1988, mean latency: 510 ms
+[Wed Aug 10 2016 03:04:57 GMT+0300 (Беларусь (зима))] INFO Errors: 296, accumulated errors: 6075, 2.3% of total requests
+[Wed Aug 10 2016 03:05:02 GMT+0300 (Беларусь (зима))] INFO Requests: 271947, requests per second: 1904, mean latency: 530 ms
+[Wed Aug 10 2016 03:05:02 GMT+0300 (Беларусь (зима))] INFO Errors: 77, accumulated errors: 6152, 2.3% of total requests
+[Wed Aug 10 2016 03:05:07 GMT+0300 (Беларусь (зима))] INFO Requests: 282599, requests per second: 2132, mean latency: 460 ms
+[Wed Aug 10 2016 03:05:07 GMT+0300 (Беларусь (зима))] INFO Errors: 57, accumulated errors: 6209, 2.2% of total requests
+[Wed Aug 10 2016 03:05:12 GMT+0300 (Беларусь (зима))] INFO Requests: 292629, requests per second: 2007, mean latency: 510 ms
+[Wed Aug 10 2016 03:05:12 GMT+0300 (Беларусь (зима))] INFO Errors: 62, accumulated errors: 6271, 2.1% of total requests
+[Wed Aug 10 2016 03:05:17 GMT+0300 (Беларусь (зима))] INFO Requests: 302411, requests per second: 1957, mean latency: 510 ms
+[Wed Aug 10 2016 03:05:17 GMT+0300 (Беларусь (зима))] INFO Errors: 484, accumulated errors: 6755, 2.2% of total requests
+[Wed Aug 10 2016 03:05:22 GMT+0300 (Беларусь (зима))] INFO Requests: 313565, requests per second: 2224, mean latency: 450 ms
+[Wed Aug 10 2016 03:05:22 GMT+0300 (Беларусь (зима))] INFO Errors: 204, accumulated errors: 6959, 2.2% of total requests
+[Wed Aug 10 2016 03:05:27 GMT+0300 (Беларусь (зима))] INFO Requests: 322842, requests per second: 1854, mean latency: 520 ms
+[Wed Aug 10 2016 03:05:27 GMT+0300 (Беларусь (зима))] INFO Errors: 159, accumulated errors: 7118, 2.2% of total requests
+[Wed Aug 10 2016 03:05:32 GMT+0300 (Беларусь (зима))] INFO Requests: 333087, requests per second: 2042, mean latency: 490 ms
+[Wed Aug 10 2016 03:05:32 GMT+0300 (Беларусь (зима))] INFO Errors: 238, accumulated errors: 7356, 2.2% of total requests
+[Wed Aug 10 2016 03:05:37 GMT+0300 (Беларусь (зима))] INFO Requests: 343416, requests per second: 2074, mean latency: 500 ms
+[Wed Aug 10 2016 03:05:37 GMT+0300 (Беларусь (зима))] INFO Errors: 65, accumulated errors: 7421, 2.2% of total requests
+[Wed Aug 10 2016 03:05:42 GMT+0300 (Беларусь (зима))] INFO Requests: 352609, requests per second: 1843, mean latency: 540 ms
+[Wed Aug 10 2016 03:05:42 GMT+0300 (Беларусь (зима))] INFO Errors: 135, accumulated errors: 7556, 2.1% of total requests
+[Wed Aug 10 2016 03:05:47 GMT+0300 (Беларусь (зима))] INFO Requests: 363338, requests per second: 2148, mean latency: 460 ms
+[Wed Aug 10 2016 03:05:47 GMT+0300 (Беларусь (зима))] INFO Errors: 350, accumulated errors: 7906, 2.2% of total requests
+[Wed Aug 10 2016 03:05:52 GMT+0300 (Беларусь (зима))] INFO Requests: 373388, requests per second: 2010, mean latency: 510 ms
+[Wed Aug 10 2016 03:05:52 GMT+0300 (Беларусь (зима))] INFO Errors: 120, accumulated errors: 8026, 2.1% of total requests
+[Wed Aug 10 2016 03:05:57 GMT+0300 (Беларусь (зима))] INFO Requests: 383389, requests per second: 1990, mean latency: 500 ms
+[Wed Aug 10 2016 03:05:57 GMT+0300 (Беларусь (зима))] INFO Errors: 153, accumulated errors: 8179, 2.1% of total requests
+[Wed Aug 10 2016 03:06:02 GMT+0300 (Беларусь (зима))] INFO Requests: 395092, requests per second: 2339, mean latency: 430 ms
+[Wed Aug 10 2016 03:06:02 GMT+0300 (Беларусь (зима))] INFO Errors: 431, accumulated errors: 8610, 2.2% of total requests
+[Wed Aug 10 2016 03:06:07 GMT+0300 (Беларусь (зима))] INFO Requests: 404915, requests per second: 1973, mean latency: 500 ms
+[Wed Aug 10 2016 03:06:07 GMT+0300 (Беларусь (зима))] INFO Errors: 64, accumulated errors: 8674, 2.1% of total requests
+[Wed Aug 10 2016 03:06:12 GMT+0300 (Беларусь (зима))] INFO Requests: 415020, requests per second: 2004, mean latency: 490 ms
+[Wed Aug 10 2016 03:06:12 GMT+0300 (Беларусь (зима))] INFO Errors: 248, accumulated errors: 8922, 2.1% of total requests
+[Wed Aug 10 2016 03:06:17 GMT+0300 (Беларусь (зима))] INFO Requests: 426745, requests per second: 2357, mean latency: 440 ms
+[Wed Aug 10 2016 03:06:17 GMT+0300 (Беларусь (зима))] INFO Errors: 257, accumulated errors: 9179, 2.2% of total requests
+[Wed Aug 10 2016 03:06:22 GMT+0300 (Беларусь (зима))] INFO Requests: 436602, requests per second: 1984, mean latency: 490 ms
+[Wed Aug 10 2016 03:06:22 GMT+0300 (Беларусь (зима))] INFO Errors: 160, accumulated errors: 9339, 2.1% of total requests
+[Wed Aug 10 2016 03:06:27 GMT+0300 (Беларусь (зима))] INFO Requests: 447992, requests per second: 2266, mean latency: 430 ms
+[Wed Aug 10 2016 03:06:27 GMT+0300 (Беларусь (зима))] INFO Errors: 274, accumulated errors: 9613, 2.1% of total requests
+[Wed Aug 10 2016 03:06:32 GMT+0300 (Беларусь (зима))] INFO Requests: 456482, requests per second: 1691, mean latency: 610 ms
+[Wed Aug 10 2016 03:06:32 GMT+0300 (Беларусь (зима))] INFO Errors: 59, accumulated errors: 9672, 2.1% of total requests
+[Wed Aug 10 2016 03:06:37 GMT+0300 (Беларусь (зима))] INFO Requests: 465535, requests per second: 1793, mean latency: 540 ms
+[Wed Aug 10 2016 03:06:37 GMT+0300 (Беларусь (зима))] INFO Errors: 60, accumulated errors: 9732, 2.1% of total requests
+[Wed Aug 10 2016 03:06:42 GMT+0300 (Беларусь (зима))] INFO Requests: 475756, requests per second: 2074, mean latency: 510 ms
+[Wed Aug 10 2016 03:06:42 GMT+0300 (Беларусь (зима))] INFO Errors: 554, accumulated errors: 10286, 2.2% of total requests
+[Wed Aug 10 2016 03:06:47 GMT+0300 (Беларусь (зима))] INFO Requests: 484228, requests per second: 1702, mean latency: 560 ms
+[Wed Aug 10 2016 03:06:47 GMT+0300 (Беларусь (зима))] INFO Errors: 71, accumulated errors: 10357, 2.1% of total requests
+[Wed Aug 10 2016 03:06:52 GMT+0300 (Беларусь (зима))] INFO Requests: 494965, requests per second: 2148, mean latency: 460 ms
+[Wed Aug 10 2016 03:06:52 GMT+0300 (Беларусь (зима))] INFO Errors: 215, accumulated errors: 10572, 2.1% of total requests
+[Wed Aug 10 2016 03:06:57 GMT+0300 (Беларусь (зима))] INFO Requests: 504330, requests per second: 1873, mean latency: 550 ms
+[Wed Aug 10 2016 03:06:57 GMT+0300 (Беларусь (зима))] INFO Errors: 347, accumulated errors: 10919, 2.2% of total requests
+[Wed Aug 10 2016 03:07:02 GMT+0300 (Беларусь (зима))] INFO Requests: 514337, requests per second: 1990, mean latency: 490 ms
+[Wed Aug 10 2016 03:07:02 GMT+0300 (Беларусь (зима))] INFO Errors: 151, accumulated errors: 11070, 2.2% of total requests
+[Wed Aug 10 2016 03:07:07 GMT+0300 (Беларусь (зима))] INFO Requests: 525926, requests per second: 2319, mean latency: 440 ms
+[Wed Aug 10 2016 03:07:07 GMT+0300 (Беларусь (зима))] INFO Errors: 56, accumulated errors: 11126, 2.1% of total requests
+[Wed Aug 10 2016 03:07:12 GMT+0300 (Беларусь (зима))] INFO Requests: 534702, requests per second: 1766, mean latency: 570 ms
+[Wed Aug 10 2016 03:07:12 GMT+0300 (Беларусь (зима))] INFO Errors: 6, accumulated errors: 11132, 2.1% of total requests
+[Wed Aug 10 2016 03:07:17 GMT+0300 (Беларусь (зима))] INFO Requests: 545312, requests per second: 2119, mean latency: 470 ms
+[Wed Aug 10 2016 03:07:17 GMT+0300 (Беларусь (зима))] INFO Errors: 126, accumulated errors: 11258, 2.1% of total requests
+[Wed Aug 10 2016 03:07:22 GMT+0300 (Беларусь (зима))] INFO Requests: 552915, requests per second: 1524, mean latency: 650 ms
+[Wed Aug 10 2016 03:07:22 GMT+0300 (Беларусь (зима))] INFO Errors: 242, accumulated errors: 11500, 2.1% of total requests
+[Wed Aug 10 2016 03:07:27 GMT+0300 (Беларусь (зима))] INFO Requests: 562640, requests per second: 1945, mean latency: 530 ms
+[Wed Aug 10 2016 03:07:27 GMT+0300 (Беларусь (зима))] INFO Errors: 131, accumulated errors: 11631, 2.1% of total requests
+[Wed Aug 10 2016 03:07:32 GMT+0300 (Беларусь (зима))] INFO Requests: 572301, requests per second: 1927, mean latency: 520 ms
+[Wed Aug 10 2016 03:07:32 GMT+0300 (Беларусь (зима))] INFO Errors: 210, accumulated errors: 11841, 2.1% of total requests
+[Wed Aug 10 2016 03:07:37 GMT+0300 (Беларусь (зима))] INFO Requests: 581759, requests per second: 1888, mean latency: 520 ms
+[Wed Aug 10 2016 03:07:37 GMT+0300 (Беларусь (зима))] INFO Errors: 0, accumulated errors: 11841, 2% of total requests
+[Wed Aug 10 2016 03:07:42 GMT+0300 (Беларусь (зима))] INFO Requests: 591816, requests per second: 2009, mean latency: 500 ms
+[Wed Aug 10 2016 03:07:42 GMT+0300 (Беларусь (зима))] INFO Errors: 348, accumulated errors: 12189, 2.1% of total requests
+[Wed Aug 10 2016 03:07:47 GMT+0300 (Беларусь (зима))] INFO Requests: 600736, requests per second: 1791, mean latency: 550 ms
+[Wed Aug 10 2016 03:07:47 GMT+0300 (Беларусь (зима))] INFO Errors: 189, accumulated errors: 12378, 2.1% of total requests
+[Wed Aug 10 2016 03:07:52 GMT+0300 (Беларусь (зима))] INFO Requests: 611072, requests per second: 2063, mean latency: 500 ms
+[Wed Aug 10 2016 03:07:52 GMT+0300 (Беларусь (зима))] INFO Errors: 66, accumulated errors: 12444, 2% of total requests
+[Wed Aug 10 2016 03:07:57 GMT+0300 (Беларусь (зима))] INFO Requests: 621769, requests per second: 2146, mean latency: 460 ms
+[Wed Aug 10 2016 03:07:57 GMT+0300 (Беларусь (зима))] INFO Errors: 323, accumulated errors: 12767, 2.1% of total requests
+[Wed Aug 10 2016 03:08:02 GMT+0300 (Беларусь (зима))] INFO Requests: 632247, requests per second: 2094, mean latency: 480 ms
+[Wed Aug 10 2016 03:08:02 GMT+0300 (Беларусь (зима))] INFO Errors: 286, accumulated errors: 13053, 2.1% of total requests

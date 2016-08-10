@@ -8,7 +8,6 @@
 
 .input-option {
 	display: inline-block;
-	width: 80%;
 }
 
 .btn-submit-que {
@@ -16,10 +15,6 @@
 	margin-top: 20px;
 }
 
-.add-question img{
-	height: 41px;
-	width: 41px;
-}
 
 .add-question .container-fluid {
 	width: inherit;

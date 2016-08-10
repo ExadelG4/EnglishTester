@@ -1,6 +1,6 @@
 {
   "tests":  [{
-            "question" : "..... Caviar in the fridge.",
+            "question" : "____ Caviar in the fridge.",
             "level" : 1,
             "answers" : [ 
                 2
@@ -162,7 +162,7 @@
         , 
         {
             
-            "question" : "Don't start ..... That's for babies!",
+            "question" : "Don't start _____ That's for babies!",
             "level" : 2,
             "answers" : [ 
                 1
@@ -179,7 +179,7 @@
         , 
         {
             
-            "question" : "Have you finished the shopping ..… ?",
+            "question" : "Have you finished the shopping _____ ?",
             "level" : 2,
             "answers" : [ 
                 0
@@ -196,7 +196,7 @@
         , 
         {
             
-            "question" : "“..... have you been waiting?” “Only a few minutes”",
+            "question" : "- _____ have you been waiting?  -Only a few minutes",
             "level" : 3,
             "answers" : [ 
                 0
@@ -231,7 +231,7 @@
         , 
         {
             
-            "question" : "Thanks for remembering my birthday, but you........bought me a present.",
+            "question" : "Thanks for remembering my birthday, but you _____ bought me a present.",
             "level" : 3,
             "answers" : [ 
                 2
@@ -249,7 +249,7 @@
         , 
         {
             
-            "question" : "The woman.... by the table is his sister, not his mother.",
+            "question" : "The woman _____ by the table is his sister, not his mother.",
             "level" : 3,
             "answers" : [ 
                 3
@@ -267,7 +267,7 @@
         , 
         {
             
-            "question" : "You guys ..... better get a move on if you don't want to miss the film.",
+            "question" : "You guys _____ better get a move on if you don't want to miss the film.",
             "level" : 3,
             "answers" : [ 
                 3
@@ -285,7 +285,7 @@
         , 
         {
             
-            "question" : "It would be lovely to go to Japan, but.................thinking we can",
+            "question" : "It would be lovely to go to Japan, but _____ thinking we can",
             "level" : 4,
             "answers" : [ 
                 2
@@ -303,7 +303,7 @@
         , 
         {
             
-            "question" : "Not mentioning anyone.... , but who left the door open all night?",
+            "question" : "Not mentioning anyone _____ , but who left the door open all night?",
             "level" : 4,
             "answers" : [ 
                 3
@@ -321,7 +321,7 @@
         , 
         {
             
-            "question" : "….. waiting any longer. They are clearly not coming.",
+            "question" : "_____ waiting any longer. They are clearly not coming.",
             "level" : 4,
             "answers" : [ 
                 0
@@ -339,7 +339,7 @@
         , 
         {
             
-            "question" : "“We'll never be able to do it” said the man to nobody ……",
+            "question" : "- We'll never be able to do it. - said the man to nobody _____",
             "level" : 4,
             "answers" : [ 
                 1
@@ -357,7 +357,7 @@
         , 
         {
             
-            "question" : "All my life...",
+            "question" : "All my life _____",
             "level" : 5,
             "answers" : [ 
                 2
@@ -365,7 +365,7 @@
             "options" : [ 
                 "I loved going to the movies", 
                 "I have loved to go to the movies", 
-                "I?ve loved going to the movies"
+                "I've loved going to the movies"
             ],
             "complaint" : false,
             "type" : "manyOfMany"
@@ -374,7 +374,7 @@
         , 
         {
             
-            "question" : "He?s had his car...",
+            "question" : "He's had his car _____",
             "level" : 5,
             "answers" : [ 
                 1
@@ -414,9 +414,9 @@
                 0
             ],
             "options" : [ 
-                "I can?t imagine why he said that", 
+                "I can't imagine why he said that", 
                 "I might imagine why he said that", 
-                "I don?t imagine why he said that"
+                "I don't imagine why he said that"
             ],
             "complaint" : false,
             "type" : "oneOfMany"

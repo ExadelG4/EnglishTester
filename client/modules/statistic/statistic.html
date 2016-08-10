@@ -45,14 +45,17 @@
     <input type="text" size="40" ng-model="tel" ng-value="'Phone number: ' + choosenUser.tel" class="disable" disabled>
     <input type="text" size="40" ng-model="assignTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of assign tests: ' + choosenUser.assignTest" class="disable" disabled>
     <input type="text" size="40" ng-model="totalTest" ng-if="choosenUser.role == 'teacher'" ng-value="'Count of total tests: ' + choosenUser.totalTests" class="disable" disabled>
+
     <div class="wrapperShedule card"  ng-if="choosenUser.role == 'user' || choosenUser.role == 'guest'">
         <div ng-if="myData.length && loaded">
+
             <div class="namesOfShedule">
                 <ul>
                     <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="level in levels"><span>{{level.name}}</span></li>
                 </ul>
             </div>
             <br>
+
 
             <div>
                 <hr>

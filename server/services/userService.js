@@ -435,14 +435,14 @@ function statisticsFind(body){
                 stackService.findResults({ $or:[{'firstName': new RegExp(c, "i")},{'lastName': new RegExp(c, "i")},{'email': new RegExp(c, "i")}] }, { '_id': 0, 'firstName': 1, 'lastName': 1, 'email': 1,'userId':1 }, {}).then(function (data) {
                    var arr = [];
                    data.forEach(function(element){
-                        var user ={};
-                        user.firstName = element.firstName;
-                        user.lastName = element.lastName;
-                        user.email = element.email;
-                        user._id = element.userId;
-                        arr.push(user);
+                        arr.push(element.userId);
                    });
-                   prom.resolve(arr)
+                       find({_id: {$in : arr}},{},{}).then(function(data){
+                            prom.resolve(data);
+                       }).catch(function(err){
+                            prom.reject(err);
+                       })
+                  
                 }).catch(function (err) {
                     prom.reject(err);
                 });

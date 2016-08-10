@@ -84,7 +84,7 @@
 
         $scope.addStudent = function() {
             $scope.needList = true;
-            var newStudent = new stdConstructor($scope.currentStudent._id, $scope.dt3.getTime() + $scope.mytime3.getHours()+$scope.mytime3.getMinutes(), $scope.dt4.getTime() + $scope.mytime4.getHours()+$scope.mytime4.getMinutes());
+            var newStudent = new stdConstructor($scope.currentStudent._id, $scope.mytime3.valueOf(), $scope.mytime4.valueOf());
 
             chooseUserList.push(newStudent);
             $scope.showList.push($scope.currentStudent.fullName + ' (' + $scope.currentStudent.email + ')');
