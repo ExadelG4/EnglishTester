@@ -1,5 +1,5 @@
 (function(){
-    angular.module('admin').config(function($stateProvider, $urlRouterProvider) {
+    angular.module('admin').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('assignStd', {
@@ -20,5 +20,5 @@
                 controller: 'newUserController',
                 role:['admin']
             })
-    });
+    }])
 }());

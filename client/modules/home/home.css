@@ -10,6 +10,7 @@
 	box-shadow: 0 1px 15px rgba(0,0,0,.16),0 1px 6px rgba(0,0,0,.23);
     transition: all 500ms;
     font-family: 'Oxygen', sans-serif;
+    overflow-y: auto;
 }
 
 .card:hover {

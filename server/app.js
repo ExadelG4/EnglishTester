@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use('/../bower_components', express.static(path.normalize(__dirname + '/../client/bower_components')));
 app.use('/media',express.static(path.normalize(__dirname + '/../uploadFiles')));
 app.use(express.static(path.normalize(__dirname + '/../client')));
+app.use(express.static(path.normalize(__dirname + '/../client/dist')));
 
 app.use('/admin',adminRouter);
 app.use('/user',userRouter);
@@ -25,7 +26,8 @@ app.use('/',commonRouter);
 
 
 app.get('*', function(req, res) {  
-	res.sendFile(path.join(__dirname + '/../client/index.html'));
+ res.sendFile(path.join(__dirname + '/../client/index.html'));
+ // res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 });
 
 

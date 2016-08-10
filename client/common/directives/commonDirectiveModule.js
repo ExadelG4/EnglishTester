@@ -1,1 +1,1 @@
-angular.module('directives', []);
+(function(){angular.module('directives', []);})();

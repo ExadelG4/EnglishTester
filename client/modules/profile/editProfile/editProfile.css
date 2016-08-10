@@ -9,15 +9,17 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 5px;
 }
 
     .info > * {
-        margin-bottom: 3%;
+        margin-bottom: 10px;
     }
 
-    .info > input{
-        height: 45px;
+    .profile input{
+        height: 35px;
+        margin-top: 15px;
+        font-size: x-large;
         padding: 5px;
     }
 
@@ -32,11 +34,18 @@
 
     .info img {
         height: 45px;
-        width: 50px;
+        margin-top: 10px;
+        cursor: pointer;
+        vertical-align: bottom;
     }
 
-.wrapperShedule {
-    padding: 10px;
+.input-with-img {
+    width: calc(100% - 80px);
+
+}
+
+.submit {
+    margin-left: 45%;
 }
 
 .namesOfShedule > ul {
@@ -85,7 +94,7 @@ hr {
 
 .chart {
     padding: 5px;
-    margin-bottom: 3%;
+    margin-bottom: 5px;
 }
 
     .chart div {

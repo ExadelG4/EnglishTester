@@ -96,7 +96,7 @@
 	}
 }
 
-@media (max-device-width: 767px) {
+@media (max-device-width: 1024px) {
 	.card-user-home .btn-start {
 		display: block;
 		float: right;

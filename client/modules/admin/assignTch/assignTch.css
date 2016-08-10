@@ -1,25 +1,21 @@
 .formWrapper {
-    padding: 30px;
+    padding: 0;
     position: relative;
 }
 
 .sel1 > *, .sel2 > * {
-    margin-top: 3%;
+    margin-top: 15px;
 }
 
-.sel1Tch, .sel2Tch {
-    padding: 10px;
-    display: inline-block;
-    width: 49%;
-}
-
-.sel1 > input, .sel2 > input {
+.sel1 > div > input, .sel2 > div > input, .disable {
     display: block;
     height: 45px;
     width: 100%;
+    background-color: white;
+    border-color: #66afe9 !important;
 }
 
-.sel1 > ol, .sel2 > ol {
+.sel1 > ol, .sel2  > ol {
     width: 100% !important;
 }
 
@@ -34,11 +30,6 @@
 
 .btn-block {
     text-align: center;
-}
-
-.submit-tch {
-    width: 25%;
-    margin: 10px;
 }
 
 .comment {

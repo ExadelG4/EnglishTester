@@ -13,10 +13,10 @@ angular.module('home').service('adminHomeService', ['userService', function(user
         {
             reqList: userService.newsTypeTwo,
             goTo: 'assignTch',
-            typeFlag: 'finish',
+            typeFlag: ' finish',
             imageLink: 'assets/images/icons/forCheck.png',
             buttonText: 'Assign',
-            messageText: 'finished the test.'
+            messageText: 'have finished the test and waiting teacher check.'
         },
         {
             reqList: userService.newsTypeThree,
@@ -24,7 +24,7 @@ angular.module('home').service('adminHomeService', ['userService', function(user
             typeFlag: 'res',
             imageLink: 'assets/images/icons/checkAll.png',
             buttonText: 'Statistics',
-            messageText: 'ended the test.'
+            messageText: 'have finished the test.'
         }
     ]
 }]);

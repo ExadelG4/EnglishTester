@@ -1,8 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('statistic', []).controller('statisticController', ['$scope', '$state', '$rootScope', 'userService', 'getStatisticsFromNews',
-        function($scope, $state, $rootScope, userService, getStatisticsFromNews) {
+    angular.module('statistic').controller('statisticController', ['$scope', '$state', '$rootScope', 'userService', 'getStatisticsFromNews', function($scope, $state, $rootScope, userService, getStatisticsFromNews) {
 
         $scope.searchList = [];
         $scope.showUInfo = false;
@@ -77,7 +76,6 @@
         }
 
         $scope.searchUser = function() {
-            $scope.searchList = [];
             $scope.showUInfo = false;
             $scope.objFlags.name = $scope.searching;
             showPersonList($scope.objFlags);

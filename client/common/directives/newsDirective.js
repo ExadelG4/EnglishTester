@@ -1,11 +1,11 @@
-angular.module('directives').directive('newsDirective', ['$state', 'getStatisticsFromNews', function($state, getStatisticsFromNews) {
+(function(){angular.module('directives').directive('newsDirective', ['$state', 'getStatisticsFromNews', function($state, getStatisticsFromNews) {
     return {
         restrict: 'E',
         templateUrl: 'common/directives/newsDirective-template.html',
         scope: {
             model: '='
         },
-        controller: function($scope, userService) {
+        controller: ['$scope', 'userService', function($scope, userService) {
            $scope.model.reqList().then(function(result){
                 $scope.model.list = result.data;
             });
@@ -17,6 +17,6 @@ angular.module('directives').directive('newsDirective', ['$state', 'getStatistic
                 $state.go('statistics');
 
             }
-        }
+        }]
     };
-}]);
+}]);})();
