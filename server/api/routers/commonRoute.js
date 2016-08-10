@@ -17,6 +17,20 @@ var key = require('../../config.json');
 router.use(passport.initialize());
 require('../../passport')(passport);
 
+router.get('/stressAllGet',function(req,res){
+	service.find({},{'_id':1},{}).then(function(data){
+		res.send(data);
+	}).catch(function(err){
+		res.status(400).send(err);
+	});
+});
+router.get('/stressAllUpdate',function(req,res){
+	service.update({},{$set: { firstName: 'aaa'}},{multi: true}).then(function(data){
+		res.send(data);
+	}).catch(function(err){
+		res.status(400).send(err);
+	});
+});
 router.post('/login',contracts.login,function (req, res) {
 	service.authenticate(req.body.email, req.body.password).then(function (data) {
 		res.json(data);
