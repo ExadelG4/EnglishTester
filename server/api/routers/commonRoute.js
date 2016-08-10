@@ -79,7 +79,7 @@ router.post('/upload',function(req, res){
 	console.log(host);
 	var ws = req.pipe(fs.createWriteStream(path.join(__dirname +'./../../../uploadFiles/'+uuid+'.mp3')));
 	ws.on('finish', function() {
-		res.send( host+':3000' +'media/'+uuid+'.mp3');
+		res.send( host+':3000/' +'media/'+uuid+'.mp3');
 	});
 });
 
