@@ -7,11 +7,13 @@ var path = require("path");
 var router = express.Router();
 var fs = require('fs');
 var UUID = require('uuid-js');
-var host = require('../../config.json').host;
+// var host = require('../../config.json').host;
 
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 var key = require('../../config.json');
+var os = require( 'os' );
+
 
 
 router.use(passport.initialize());
@@ -45,10 +47,25 @@ router.get('/status', passport.authenticate('jwt', { session: false }),function(
 
 router.post('/upload',function(req, res){
 	var date = new Date().getTime();
-	var uuid = UUID.fromTime(date, false);	
+	var uuid = UUID.fromTime(date, false);
+	// var networkInterfaces = os.networkInterfaces( );
+	// console.log('networkInterfaces');	
+	
+    var ifaces = os.networkInterfaces();
+	var host;
+    for (var dev in ifaces) {
+        for (var i in ifaces[dev]) {
+            var details = ifaces[dev][i];
+
+            if (details.family == 'IPv4' && !details.internal) {
+               host =  details.address;
+            }
+        }
+    }
+	console.log(host);
 	var ws = req.pipe(fs.createWriteStream(path.join(__dirname +'./../../../uploadFiles/'+uuid+'.mp3')));
 	ws.on('finish', function() {
-		res.send(host+'media/'+uuid+'.mp3');
+		res.send( host +'media/'+uuid+'.mp3');
 	});
 });
 
