@@ -182,7 +182,7 @@
         				$scope.qqq = xhr.responseText;
         				$scope.$apply( function() {
         					$timeout(function() {
-        						$scope.song.url = $scope.qqq;
+        						$scope.song.url = 'http://' + $scope.qqq;
         					}, 100);
         				});
     				}
