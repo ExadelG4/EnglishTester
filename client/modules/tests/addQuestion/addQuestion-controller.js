@@ -55,7 +55,7 @@
 			};
 
 			$scope.song = {
-    			id: '',
+    			id: 'abc',
     			title: '',
     			artist: '',
     			url: ''
@@ -125,6 +125,7 @@
 					delete $scope.finalQue.answers;
 					delete $scope.finalQue.options;
 				}
+				delete $scope.finalQue.qqq;
 
 				userService.halfSmoke($scope.finalQue);
 				$scope.selectedQue = '';
@@ -134,7 +135,8 @@
 			$scope.finishUp = function() {
 				$timeout( function() {
 					$scope.finalQue.question = $scope.qqq;
-				}, 100);
+					$scope.song.url = $scope.qqq;
+				}, 1000);
 			}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////

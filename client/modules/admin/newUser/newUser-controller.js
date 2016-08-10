@@ -9,8 +9,8 @@
                 $scope.dt2 = new Date();
 
                 $scope.newUser = function () {
-                    var dateStart = $scope.dt.getTime() + $scope.mytime.getHours() + $scope.mytime.getMinutes();
-                    var dateEnd = $scope.dt2.getTime() + $scope.mytime2.getHours() + $scope.mytime2.getMinutes();
+                    var dateStart = $scope.mytime.valueOf();//$scope.dt.getTime() + $scope.mytime.getHours() + $scope.mytime.getMinutes();
+                    var dateEnd = $scope.mytime2.valueOf();//$scope.dt2.getTime() + $scope.mytime2.getHours() + $scope.mytime2.getMinutes();
                     userService.newUser($scope.firstMd, $scope.secondMd, $scope.emailMd, $scope.phnumberMd, dateStart, dateEnd);
                     $scope.dt = null;
                     $scope.dt2 = null;
