@@ -111,6 +111,7 @@
 
 			$scope.sendQue = function () { 
 				$scope.song.url = '';
+				$scope.isPlayingMy = false;
 				if ($scope.selectedQue === 'listeningWithManyOfMany' || $scope.selectedQue === 'manyOfMany') {
 					var tempNum = angular.copy($scope.finalQue.answers);
 					$scope.finalQue.answers = [];
@@ -186,6 +187,7 @@
         				$scope.$apply( function() {
         					$timeout(function() {
         						$scope.song.url = 'http://' + $scope.qqq;
+        						//$scope.song.id = 'abc' + new Date();
         					}, 100);
         				});
     				}
