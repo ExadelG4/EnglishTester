@@ -66,7 +66,7 @@ router.post('/assignStudents',contracts.assignStudent,passport.authenticate('jwt
 router.post('/addQuestion',contracts.addQuestion,passport.authenticate('jwt', { session: false }),function(req, res) {
 	roleSecurity(req,res,'admin',function(){
 		if (!req.body.finalQue.options) {
-
+				
 				testService.addNewQuestionB(req.body.finalQue).then(function (data) {
 					res.send('ok');
 				}).catch(function (err) {
@@ -74,6 +74,7 @@ router.post('/addQuestion',contracts.addQuestion,passport.authenticate('jwt', { 
 				});
 			}
 			else {
+			
 				testService.addNewQuestion(req.body.finalQue).then(function (data) {
 					res.send('ok');
 				}).catch(function (err) {

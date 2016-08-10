@@ -181,6 +181,6 @@ select {
 }
 
 .disable {
-    background-color: rgba(208, 211, 222, 0.09);
+   margin-top: 10px;
 }
 

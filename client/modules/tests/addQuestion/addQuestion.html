@@ -1,8 +1,8 @@
 <div class="container-fluid add-question">
 	<div class="row-fluid">
 		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-            <img src="assets/images/icons/chooseType.png">
-			<p class="ads">Choose type of question </p>
+            <div><img class="img-new-user" src="assets/images/icons/chooseType.png"></div>
+			<h3 class="h3-block">Choose type of question </h3>
             <select class="form-control input-admin input-option" ng-model="selectedQue" ng-change="changeQue(selectedQue)">
                 <option ng-repeat="que in typeOfQuestion" ng-value="que.type">{{que.text}}</option>
             </select>
@@ -86,6 +86,15 @@
             <input type="submit" value="Upload" class="input-btn btn-admin" ng-click="finishUp()">
             <div id="log">Process of upload</div>
           </form>
+          <sound-manager>
+            <button music-player="play" add-song="song" class="btn-user btn-music btn-music-play" ng-click="startPlay()" ng-if="!isPlayingMy"></button>
+            <button play-music class="btn-user btn-music btn-music-play" ng-if="isPlayingMy"></button>          
+            <button pause-music class="btn-user btn-music btn-music-pause"></button>
+            <button stop-music class="btn-user btn-music btn-music-stop"></button>
+            <div class="seekBase seekBase-user" seek-track>
+                  <div class="seekLoad seekLoad-user" ng-style="{width : ( progress + '%' ) }"></div>
+                </div>
+          </sound-manager>
 
           <form name="main">
             <div>
@@ -154,7 +163,7 @@
         <form name="main">
           <div>
             <p class="ads">Topic for speak</p>
-            <textarea class="textarea-admin" class="sm-textarea" placeholder="Write here.."></textarea>
+            <textarea class="textarea-admin" class="sm-textarea" ng-model="finalQue.question" placeholder="Write here.."></textarea>
           </div>
           <p class="ads">Level of question</p>
           <input type="text" class="input-admin input-option" ng-model="finalQue.level" ng-pattern="'[1-5]{1}'" placeholder="From 1 to 5"  required>
