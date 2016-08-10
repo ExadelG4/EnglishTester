@@ -87,11 +87,11 @@
             <div id="log">Process of upload</div>
           </form>
          <sound-manager>
-            <button music-player="play" add-song="song" class="btn-admin btn-music btn-music-play" ng-click="startPlay()" ng-show="!isPlayingMy && song.url"></button>
-            <button play-music class="btn-admin btn-music btn-music-play" ng-show="isPlayingMy && song.url"></button>          
-            <button pause-music class="btn-admin btn-music btn-music-pause" ng-show="song.url"></button>
-            <button stop-music class="btn-admin btn-music btn-music-stop" ng-show="song.url"></button>
-            <div class="seekBase seekBase-user" ng-show="song.url" seek-track>
+            <button music-player="play" add-song="song" class="btn-admin btn-music btn-music-play" ng-click="startPlay()" ng-if="!isPlayingMy && song.url"></button>
+            <button play-music class="btn-admin btn-music btn-music-play" ng-if="isPlayingMy && song.url"></button>          
+            <button pause-music class="btn-admin btn-music btn-music-pause" ng-if="song.url"></button>
+            <button stop-music class="btn-admin btn-music btn-music-stop" ng-if="song.url"></button>
+            <div class="seekBase seekBase-user" ng-if="song.url" seek-track>
                   <div class="seekLoad seekLoad-admin" ng-style="{width : ( progress + '%' ) }"></div>
                 </div>
           </sound-manager>
@@ -115,11 +115,11 @@
         </form>
 
         <sound-manager>
-            <button music-player="play" add-song="song" class="btn-admin btn-music btn-music-play" ng-click="startPlay()" ng-show="!isPlayingMy && song.url"></button>
-            <button play-music class="btn-admin btn-music btn-music-play" ng-show="isPlayingMy && song.url"></button>          
-            <button pause-music class="btn-admin btn-music btn-music-pause" ng-show="song.url"></button>
-            <button stop-music class="btn-admin btn-music btn-music-stop" ng-show="song.url"></button>
-            <div class="seekBase seekBase-user" ng-show="song.url" seek-track>
+            <button music-player="play" add-song="song" class="btn-admin btn-music btn-music-play" ng-click="startPlay()" ng-if="!isPlayingMy && song.url"></button>
+            <button play-music class="btn-admin btn-music btn-music-play" ng-if="isPlayingMy && song.url"></button>          
+            <button pause-music class="btn-admin btn-music btn-music-pause" ng-if="song.url"></button>
+            <button stop-music class="btn-admin btn-music btn-music-stop" ng-if="song.url"></button>
+            <div class="seekBase seekBase-user" ng-if="song.url" seek-track>
                   <div class="seekLoad seekLoad-admin" ng-style="{width : ( progress + '%' ) }"></div>
                 </div>
           </sound-manager>
@@ -153,11 +153,11 @@
         </form>
 
         <sound-manager>
-            <button music-player="play" add-song="song" class="btn-admin btn-music btn-music-play" ng-click="startPlay()" ng-show="!isPlayingMy && song.url"></button>
-            <button play-music class="btn-admin btn-music btn-music-play" ng-show="isPlayingMy && song.url"></button>          
-            <button pause-music class="btn-admin btn-music btn-music-pause" ng-show="song.url"></button>
-            <button stop-music class="btn-admin btn-music btn-music-stop" ng-show="song.url"></button>
-            <div class="seekBase seekBase-user" ng-show="song.url" seek-track>
+            <button music-player="play" add-song="song" class="btn-admin btn-music btn-music-play" ng-click="startPlay()" ng-if="!isPlayingMy && song.url"></button>
+            <button play-music class="btn-admin btn-music btn-music-play" ng-if="isPlayingMy && song.url"></button>          
+            <button pause-music class="btn-admin btn-music btn-music-pause" ng-if="song.url"></button>
+            <button stop-music class="btn-admin btn-music btn-music-stop" ng-if="song.url"></button>
+            <div class="seekBase seekBase-user" ng-if="song.url" seek-track>
                   <div class="seekLoad seekLoad-admin" ng-style="{width : ( progress + '%' ) }"></div>
                 </div>
           </sound-manager>

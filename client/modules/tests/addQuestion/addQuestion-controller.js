@@ -140,7 +140,10 @@
 					$scope.song.url = $scope.qqq;
 				}, 1000);*/
 			}
-
+			$scope.isPlayingMy = false;
+			$scope.startPlay = function() {
+				$scope.isPlayingMy = true;
+			}
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 			$scope.fileNameChanged = function (ele) {
